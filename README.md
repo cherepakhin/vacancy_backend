@@ -57,6 +57,9 @@ $http http://192.168.1.57:8980/vacancy/api/echo/aaa
 (используется программа httpie)
 
 [TODO](#todo)<br/>
+
+- После отладки JPA, перенести в PostgreSQL на v.perm.ru
+ 
 [Примечания](#tose)<br/>
 [Ссылки](#links)<br/>
 
