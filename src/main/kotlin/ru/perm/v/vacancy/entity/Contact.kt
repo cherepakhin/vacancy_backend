@@ -15,8 +15,8 @@ class Contact {
     @Column(name = "name", nullable = false)
     open var name: String = ""
     @NotNull
-    @Column(name = "company", nullable = false)
-    @ManyToOne
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "company_n", nullable = false)
     open lateinit var company: Company
     @NotNull
     @Column(name = "email", nullable = false)

@@ -15,8 +15,8 @@ open class Vacancy { // "open" needed for JPA
     @JoinColumn(name = "company_n", nullable = false)
     open var company: Company? = null
     @NotNull
-    @Column(name = "description", nullable = false)
-    open var description: String = ""
+    @Column(name = "name", nullable = false)
+    open var name: String = ""
     @NotNull
     @Column(name = "comment", nullable = false)
     open var comment: String = ""
