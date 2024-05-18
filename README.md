@@ -49,6 +49,13 @@ __Отчеты__:
 
 Доступ по :8980/vacancy/api
 
+Тестовый запрос echo:
+
+````java
+$http http://192.168.1.57:8980/vacancy/api/echo/aaa
+````
+(используется программа httpie)
+
 [TODO](#todo)<br/>
 [Примечания](#tose)<br/>
 [Ссылки](#links)<br/>
