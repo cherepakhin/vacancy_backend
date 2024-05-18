@@ -10,6 +10,10 @@ class ContactTest {
 
         assertNotNull(c)
         assertEquals(-1L, c.n)
+        assertEquals("", c.name)
+        assertEquals("", c.email)
+        assertEquals("", c.phone)
+        assertEquals("", c.comment)
     }
     @Test
     fun secondaryConstructor() {

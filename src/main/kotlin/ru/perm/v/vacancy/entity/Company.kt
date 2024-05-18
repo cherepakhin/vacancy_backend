@@ -17,11 +17,6 @@ open class Company { // "open" needed for JPA
     // Empty constructor needed for Hibernate
     constructor()
 
-    constructor(n: Long, name: String) {
-        this.n = n
-        this.name = name
-    }
-
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (other !is Company) return false
@@ -31,16 +26,5 @@ open class Company { // "open" needed for JPA
 
         return true
     }
-
-    override fun hashCode(): Int {
-        var result = n.hashCode()
-        result = 31 * result + name.hashCode()
-        return result
-    }
-
-    override fun toString(): String {
-        return "Company(n=$n, name='$name')"
-    }
-
 
 }
