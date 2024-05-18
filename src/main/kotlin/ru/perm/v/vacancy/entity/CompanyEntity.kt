@@ -5,7 +5,7 @@ import javax.validation.constraints.NotNull
 
 @Entity
 @Table(name = "company")
-open class Company { // "open" needed for JPA
+open class CompanyEntity { // "open" needed for JPA
     @Id
     @NotNull
     @Column(name = "n", nullable = false)
@@ -25,7 +25,7 @@ open class Company { // "open" needed for JPA
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
-        if (other !is Company) return false
+        if (other !is CompanyEntity) return false
 
         if (n != other.n) return false
         if (name != other.name) return false

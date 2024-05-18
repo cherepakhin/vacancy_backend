@@ -3,10 +3,10 @@ package ru.perm.v.vacancy.entity
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 
-class ContactTest {
+class ContactEntityTest {
     @Test
     fun defaultConstructor() {
-        val c = Contact()
+        val c = ContactEntity()
 
         assertNotNull(c)
         assertEquals(-1L, c.n)
@@ -21,14 +21,14 @@ class ContactTest {
         val EMAIL = "EMAIL"
         val PHONE = "PHONE"
         val COMMENT = "COMMENT"
-        val COMPANY = Company()
+        val COMPANY = CompanyEntity()
 
-        val contact = Contact(NAME, COMPANY, EMAIL, PHONE, COMMENT)
+        val contact = ContactEntity(NAME, COMPANY, EMAIL, PHONE, COMMENT)
 
         assertNotNull(contact)
         assertNotNull(contact.n)
         assertEquals(NAME, contact.name)
-        assertEquals(COMPANY, contact.company)
+        assertEquals(COMPANY, contact.companyEntity)
         assertEquals(EMAIL, contact.email)
         assertEquals(PHONE, contact.phone)
         assertEquals(COMMENT, contact.comment)

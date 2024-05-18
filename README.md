@@ -52,7 +52,7 @@ __Отчеты__:
 Тестовый запрос echo:
 
 ````java
-$http http://192.168.1.57:8980/vacancy/api/echo/aaa
+$ http http://192.168.1.57:8980/vacancy/api/echo/aaa
 ````
 (используется программа httpie)
 

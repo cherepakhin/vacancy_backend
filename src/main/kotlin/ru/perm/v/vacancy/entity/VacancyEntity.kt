@@ -5,7 +5,7 @@ import javax.validation.constraints.NotNull
 
 @Entity
 @Table(name = "vacancy")
-open class Vacancy { // "open" needed for JPA
+open class VacancyEntity { // "open" needed for JPA
     @NotNull
     @Id
     @Column(name = "n", nullable = false)
@@ -13,7 +13,7 @@ open class Vacancy { // "open" needed for JPA
     open var n: Long = -1L
     @ManyToOne
     @JoinColumn(name = "company_n", nullable = false)
-    open var company: Company? = null
+    open var companyEntity: CompanyEntity? = null
     @NotNull
     @Column(name = "name", nullable = false)
     open var name: String = ""

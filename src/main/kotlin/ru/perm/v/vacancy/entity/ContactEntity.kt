@@ -5,7 +5,7 @@ import javax.validation.constraints.NotNull
 
 @Entity
 @Table(name = "contact")
-class Contact {
+class ContactEntity {
     @Id
     @NotNull
     @Column(name = "n", nullable = false)
@@ -17,7 +17,7 @@ class Contact {
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "company_n", nullable = false)
-    open lateinit var company: Company
+    open lateinit var companyEntity: CompanyEntity
     @NotNull
     @Column(name = "email", nullable = false)
     open var email: String = ""
@@ -31,9 +31,9 @@ class Contact {
     constructor() {
     }
 
-    constructor(name: String, company: Company, email: String, phone: String, comment: String) {
+    constructor(name: String, companyEntity: CompanyEntity, email: String, phone: String, comment: String) {
         this.name = name
-        this.company = company
+        this.companyEntity = companyEntity
         this.email = email
         this.phone = phone
         this.comment = comment
