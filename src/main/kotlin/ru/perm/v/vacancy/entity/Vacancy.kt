@@ -11,9 +11,12 @@ open class Vacancy { // "open" needed for JPA
     @Column(name = "n", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     open var n: Long = -1L
+    @ManyToOne
+    @JoinColumn(name = "company_n", nullable = false)
+    open var company: Company? = null
     @NotNull
-    @Column(name = "name", nullable = false)
-    open var name: String = ""
+    @Column(name = "description", nullable = false)
+    open var description: String = ""
     @NotNull
     @Column(name = "comment", nullable = false)
     open var comment: String = ""
