@@ -6,7 +6,7 @@ import javax.persistence.Id
 import javax.persistence.Table
 
 @Entity
-@Table(name = "company")
+@Table(name = "contact")
 class Contact {
     @Id
     @Column(name = "n", nullable = false)
