@@ -17,16 +17,15 @@ class ContactTest {
     }
     @Test
     fun secondaryConstructor() {
-        val N = 100L
-        val NAME = "name"
+        val NAME = "NAME"
         val EMAIL = "EMAIL"
         val PHONE = "PHONE"
         val COMMENT = "COMMENT"
 
-        val contact = Contact(N, NAME, EMAIL, PHONE, COMMENT)
+        val contact = Contact(NAME, EMAIL, PHONE, COMMENT)
 
         assertNotNull(contact)
-        assertEquals(N, contact.n)
+        assertNotNull(contact.n)
         assertEquals(NAME, contact.name)
         assertEquals(EMAIL, contact.email)
         assertEquals(PHONE, contact.phone)

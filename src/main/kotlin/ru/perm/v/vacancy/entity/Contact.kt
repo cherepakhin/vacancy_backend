@@ -1,15 +1,13 @@
 package ru.perm.v.vacancy.entity
 
-import javax.persistence.Column
-import javax.persistence.Entity
-import javax.persistence.Id
-import javax.persistence.Table
+import javax.persistence.*
 
 @Entity
 @Table(name = "contact")
 class Contact {
     @Id
     @Column(name = "n", nullable = false)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     open var n: Long = -1L
     @Column(name = "name", nullable = false)
     open var name: String = ""
@@ -23,8 +21,7 @@ class Contact {
     constructor() {
     }
 
-    constructor(n: Long, name: String, email: String, phone: String, comment: String) {
-        this.n = n
+    constructor(name: String, email: String, phone: String, comment: String) {
         this.name = name
         this.email = email
         this.phone = phone
