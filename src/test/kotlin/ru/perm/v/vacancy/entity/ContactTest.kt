@@ -21,12 +21,14 @@ class ContactTest {
         val EMAIL = "EMAIL"
         val PHONE = "PHONE"
         val COMMENT = "COMMENT"
+        val COMPANY = Company()
 
-        val contact = Contact(NAME, EMAIL, PHONE, COMMENT)
+        val contact = Contact(NAME, COMPANY, EMAIL, PHONE, COMMENT)
 
         assertNotNull(contact)
         assertNotNull(contact.n)
         assertEquals(NAME, contact.name)
+        assertEquals(COMPANY, contact.company)
         assertEquals(EMAIL, contact.email)
         assertEquals(PHONE, contact.phone)
         assertEquals(COMMENT, contact.comment)
