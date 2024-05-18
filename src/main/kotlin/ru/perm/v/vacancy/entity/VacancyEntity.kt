@@ -20,7 +20,7 @@ open class VacancyEntity { // "open" needed for JPA
     @NotNull
     @Column(name = "comment", nullable = false)
     open var comment: String = ""
-
+    //TODO: add LIST contacts
     // Empty constructor needed for Hibernate
     constructor()
 
