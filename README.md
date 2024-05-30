@@ -57,7 +57,7 @@ $ ./gradlew test
 В Idea выплнить Run/Show Coverage Data (Ctrl-Alt-6). Отчет:
 ![doc/idea_coverage.png](doc/idea_coverage.png)
 
-или с использованием [https://www.jacoco.org/jacoco/](https://www.jacoco.org/jacoco/). (подключен плагин в build.gradle.kts: id("jacoco"))
+__или__ с использованием [https://www.jacoco.org/jacoco/](https://www.jacoco.org/jacoco/). (подключен плагин в build.gradle.kts: id("jacoco"))
 
 Создание отчета о покрытии тестами:
 ````java
