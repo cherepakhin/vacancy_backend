@@ -4,7 +4,7 @@
 [Цель](#target)<br/>
 [Unit тестирование](unit_test)<br/>
 [Покрытие тестами](#coverage)<br/>
-[Логгирование](#logging)<br/
+[Логгирование](#logging)<br/>
 [Запуск](#run)<br/>
 [Ручное тестирование httpie](#httpie)<br/>
 [TODO](#todo)<br/>
