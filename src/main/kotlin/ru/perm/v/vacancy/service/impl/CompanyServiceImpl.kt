@@ -49,7 +49,11 @@ class CompanyServiceImpl(@Autowired private val repository: CompanyRepository) :
     }
 
     override fun deleteCompany(n: Long): String {
-        repository.deleteById(n)
-        return "Company with N=  $n deleted"
+        if (repository.findById(n).isPresent) {
+            repository.deleteById(n)
+            return "Company with N=  $n deleted"
+        } else {
+            throw Exception("Company with N= $n not found")
+        }
     }
 }

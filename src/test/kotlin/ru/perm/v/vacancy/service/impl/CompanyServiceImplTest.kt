@@ -3,8 +3,8 @@ package ru.perm.v.vacancy.service.impl
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
-import org.mockito.Mockito.mock
-import org.mockito.Mockito.`when`
+import org.mockito.Mockito.*
+import org.mockito.kotlin.doNothing
 import ru.perm.v.vacancy.entity.CompanyEntity
 import ru.perm.v.vacancy.repository.CompanyRepository
 import java.util.*
@@ -83,4 +83,42 @@ class CompanyServiceImplTest {
         assertEquals(NAME_COMPANY, changedCompanyDto.name);
     }
 
+    @Test
+    fun updateNotExistCompany()  {
+        val N  =  100L;
+        val NAME_COMPANY = "company";
+        val repository = mock(CompanyRepository::class.java);
+        val service = CompanyServiceImpl(repository);
+        `when`(repository.findById(N)).thenReturn(Optional.empty());
+
+        assertThrows<Exception>  {
+            service.updateCompany(N, NAME_COMPANY);
+        }
+    }
+
+    @Test
+    fun deleteNotExistCompany()  {
+        val N  =  100L;
+        val repository = mock(CompanyRepository::class.java);
+        val service = CompanyServiceImpl(repository);
+        `when`(repository.findById(N)).thenReturn(Optional.empty());
+
+        assertThrows<Exception>  {
+            service.deleteCompany(N);
+        }
+    }
+
+    @Test
+    fun deleteExistCompany()  {
+        val N  =  100L;
+        val companyEntity  = CompanyEntity(N, "company");
+        val repository = mock(CompanyRepository::class.java);
+        val service = CompanyServiceImpl(repository);
+        `when`(repository.findById(N)).thenReturn(Optional.of(companyEntity));
+        doNothing().`when`(repository).deleteById(N);
+
+        service.deleteCompany(N);
+
+        verify(repository, times(1)).deleteById(N);
+    }
 }
