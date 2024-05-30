@@ -4,6 +4,7 @@
 [Цель](#target)<br/>
 [Unit тестирование](unit_test)<br/>
 [Покрытие тестами](#coverage)<br/>
+[Логгирование](#logging)<br/
 [Запуск](#run)<br/>
 [Ручное тестирование httpie](#httpie)<br/>
 [TODO](#todo)<br/>
@@ -66,6 +67,18 @@ $ ./gradlew jacocoTestReport
 Результат в build/reports/jacoco/test/html/index.html: 
 ![Результат](doc/jacoco_report.png)
 
+<a id="logging"></a>
+### Логгирование
+
+Пример из EchoCtrl.kt:
+
+````shell
+private val logger = LoggerFactory.getLogger(this.javaClass.name)
+...
+        logger.info("$counter GET $mes")
+...
+````
+
 <a id="run"></a>
 ### Запуск
 
@@ -89,6 +102,7 @@ $ http http://192.168.1.57:8980/vacancy/api/echo/aaa
 
 <a id="todo"></a>
 ### TODO
+Логирование<br/>
 Анализ кода Idea Analize<br/>
 Анализ кода SonarCube<br/>
 <br/>
@@ -114,7 +128,6 @@ Docker<br/>
 Кеширование<br/>
 Сборка Jenkins<br/>
 Nexus<br/>
-Логирование<br/>
 
 <a id="links"></a>
 ### Ссылки
