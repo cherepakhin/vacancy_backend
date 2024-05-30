@@ -106,6 +106,7 @@ class CompanyServiceImplTest {
         val thrown = assertThrows<Exception>  {
             service.deleteCompany(N);
         }
+
         assertEquals("Company with N=100 not found", thrown.message);
     }
 
