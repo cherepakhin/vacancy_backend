@@ -120,16 +120,13 @@ $ http http://192.168.1.57:8980/vacancy/api/echo/aaa
 Анализ кода Idea Analize<br/>
 Анализ кода SonarCube<br/>
 <br/>
-Unit тестирование<br/>
 После отладки JPA, перенести в PostgreSQL на v.perm.ru<br/>
 Spring profiles<br/>
-Тестовый запуск<br/>
 <br/>
 Создание запускаемого файла и его запуск<br/>
 Publishing SpringBoot "FAT" jar<br/>
 <br/>
 Интеграционное тестирование<br/>
-Примеры тестов httpie<br/>
 DataJpa tests<br/>
 RestAssured tests<br/>
 Нагрузочное тестирование<br/>
