@@ -67,6 +67,9 @@ $ ./gradlew jacocoTestReport
 Результат в build/reports/jacoco/test/html/index.html: 
 ![Результат](doc/jacoco_report.png)
 
+test coverage для класса:
+![coverage_class.png](doc/coverage_class.png)
+
 <a id="logging"></a>
 ### Логгирование
 
@@ -114,7 +117,6 @@ $ http http://192.168.1.57:8980/vacancy/api/echo/aaa
 
 <a id="todo"></a>
 ### TODO
-Логирование<br/>
 Анализ кода Idea Analize<br/>
 Анализ кода SonarCube<br/>
 <br/>
