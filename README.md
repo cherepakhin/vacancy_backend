@@ -9,8 +9,7 @@
 [Ручное тестирование httpie](#httpie)<br/>
 [Созлание запускаемого файла](#bootJar)<br/>
 [Сборка Jenkins](#jenkins)<br/>
-
-### Сборка Jenkins
+[Publishing SpringBoot "FAT" jar](#fat)<br/>
 
 [TODO](#todo)<br/>
 [Примечания](#tose)<br/>
@@ -135,6 +134,35 @@ $ java -jar build/libs/vacancy_backend-<version>.jar
 
 Сборка происходит в Jenkins, развернутом на домашнем сервере. Pipeline для Jenkins описан в файле [./Jenkinsfile](Jenkinsfile)
 
+<a id="fat"></a>
+###  Publishing SpringBoot "FAT" jar
+
+Настройка:
+
+````yaml
+publishing {
+  repositories {
+      maven {
+          url = uri("http://v.perm.ru:8082/repository/ru.perm.v/")
+          isAllowInsecureProtocol = true
+          //  for publish to nexus "./gradlew publish"
+          // export NEXUS_CRED_USR=admin
+          // echo $NEXUS_CRED_USR
+          credentials {
+              username = System.getenv("NEXUS_CRED_USR")
+              password = System.getenv("NEXUS_CRED_PSW")
+          }
+      }
+  }
+  publications {
+    create<MavenPublication>("maven"){
+      artifact(tasks["bootJar"]) // build and publish bootJar
+    }
+}
+````
+
+[https://stackoverflow.com/questions/64062905/unable-to-publish-jar-to-gitlab-package-registry-with-gradle](https://stackoverflow.com/questions/64062905/unable-to-publish-jar-to-gitlab-package-registry-with-gradle)
+
 [Примечания](#tose)<br/>
 
 <a id="todo"></a>
@@ -145,7 +173,7 @@ $ java -jar build/libs/vacancy_backend-<version>.jar
 После отладки JPA, перенести в PostgreSQL на v.perm.ru<br/>
 Spring profiles<br/>
 <br/>
-Publishing SpringBoot "FAT" jar<br/>
+
 <br/>
 Интеграционное тестирование<br/>
 DataJpa tests<br/>
