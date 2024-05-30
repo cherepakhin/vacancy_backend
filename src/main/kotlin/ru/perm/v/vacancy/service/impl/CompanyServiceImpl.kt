@@ -8,37 +8,48 @@ import ru.perm.v.vacancy.mapper.CompanyMapper
 import ru.perm.v.vacancy.repository.CompanyRepository
 
 @Service
-class CompanyServiceImpl(@Autowired val repository: CompanyRepository) : CompanyService {
+class CompanyServiceImpl(@Autowired private val repository: CompanyRepository) : CompanyService {
 
     override fun createCompany(name: String): CompanyDto {
         val n = getNextN()
         val company = CompanyEntity(n, name = name)
-        val savedCompany= repository.save(company)
-        return CompanyMapper.toDto(savedCompany)
+        val savedCompany = repository.save(company)
+        if (savedCompany != null) {
+            return CompanyMapper.toDto(savedCompany)
+        }
+        throw Exception("Company with N=  $n not created")
     }
 
     private fun getNextN(): Long {
-        return repository.getNextN();
+        return repository.getNextN()
     }
 
-    override fun getCompanyByN(n: Long): CompanyDto  {
-        if (repository.findById(n).isPresent()) {
+    override fun getCompanyByN(n: Long): CompanyDto {
+        if (repository.findById(n).isPresent) {
             val company = repository.findById(n).get()
             return CompanyMapper.toDto(company)
-        } else  {
+        } else {
             throw Exception("Company with N= $n not found")
         }
     }
 
     override fun getCompanies(): List<CompanyDto> {
-        return repository.findAll().sortedBy { it.n }.map  { CompanyMapper.toDto(it)  }
+        return repository.findAll().sortedBy { it.n }.map { CompanyMapper.toDto(it) }
     }
 
     override fun updateCompany(n: Long, name: String): CompanyDto {
-        TODO("Not yet implemented")
+        if (repository.findById(n).isPresent) {
+            val company = repository!!.findById(n).get()
+            company.name = name
+            val savedCompany = repository!!.save(company)
+            return CompanyMapper.toDto(savedCompany)
+        } else {
+            throw Exception("Company with N= $n not found")
+        }
     }
 
     override fun deleteCompany(n: Long): String {
-        TODO("Not yet implemented")
+        repository.deleteById(n)
+        return "Company with N=  $n deleted"
     }
 }

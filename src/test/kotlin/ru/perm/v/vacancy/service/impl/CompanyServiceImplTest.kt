@@ -5,7 +5,6 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.mockito.Mockito.mock
 import org.mockito.Mockito.`when`
-import ru.perm.v.vacancy.dto.CompanyDto
 import ru.perm.v.vacancy.entity.CompanyEntity
 import ru.perm.v.vacancy.repository.CompanyRepository
 import java.util.*
@@ -39,11 +38,12 @@ class CompanyServiceImplTest {
         val service = CompanyServiceImpl(repository);
         `when`(repository.findById(N)).thenReturn(Optional.of(companyEntity));
 
-        val companyDto  = service.getCompanyByN(N);
+        val companyDto = service.getCompanyByN(N);
 
         assertEquals(N, companyDto.n);
         assertEquals(NAME_COMPANY, companyDto.name);
     }
+
     @Test
     fun `getN should throw exception when company not found`() {
         val repository = mock(CompanyRepository::class.java);
@@ -58,12 +58,29 @@ class CompanyServiceImplTest {
     fun getCompanies() {
         val repository = mock(CompanyRepository::class.java);
         val company1 = CompanyEntity(1L, "company1");
-        val company2  = CompanyEntity(2L,  "company2");
+        val company2 = CompanyEntity(2L, "company2");
         `when`(repository.findAll()).thenReturn(listOf(company1, company2));
 
         val service = CompanyServiceImpl(repository);
 
         assertEquals(2, service.getCompanies().size);
+    }
+
+    @Test
+    fun updateCompany() {
+        val N = 100L;
+        val NAME_COMPANY = "company";
+        val companyEntity = CompanyEntity(N, NAME_COMPANY);
+
+        val repository = mock(CompanyRepository::class.java);
+        val service = CompanyServiceImpl(repository);
+        `when`(repository.findById(N)).thenReturn(Optional.of(companyEntity));
+        `when`(repository.save(companyEntity)).thenReturn(companyEntity);
+
+        val changedCompanyDto = service.updateCompany(N, NAME_COMPANY);
+
+        assertEquals(N, changedCompanyDto.n);
+        assertEquals(NAME_COMPANY, changedCompanyDto.name);
     }
 
 }
