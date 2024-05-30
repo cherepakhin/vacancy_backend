@@ -53,7 +53,7 @@ $ ./gradlew test
 
 <a id="coverage"></a>
 ### Покрытие тестами
-В Idea выплнить Run/Show Coverage Data (Ctrl-Alt-6)
+В Idea выплнить Run/Show Coverage Data (Ctrl-Alt-6). Отчет:
 ![doc/idea_coverage.png](doc/idea_coverage.png)
 
 или с использованием [https://www.jacoco.org/jacoco/](https://www.jacoco.org/jacoco/)
