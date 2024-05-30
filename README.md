@@ -2,7 +2,9 @@
 
 ### Оглавление:
 [Цель](#target)<br/>
-
+[Запуск](#run)
+[Ручное тестирование httpie](#httpie)
+[Покрытие тестами](#coverage)
 [TODO](#todo)<br/>
 [Примечания](#tose)<br/>
 [Ссылки](#links)<br/>
@@ -41,11 +43,14 @@ __Отчеты__:
 
 В качестве базы данных использовать PostgreSQL.
 
+<a id="run"></a>
 ### Запуск
 
 ````shell
 ./gradlew bootRun
 ````
+<a id="httpie"></a>
+### Ручное тестирование httpie
 
 Доступ по :8980/vacancy/api
 
@@ -56,21 +61,30 @@ $ http http://192.168.1.57:8980/vacancy/api/echo/aaa
 ````
 (используется программа httpie)
 
-[TODO](#todo)<br/>
+<a id="coverage"></a>
+### Покрытие тестами
+В Idea выплнить Run/Show Coverage Data (Ctrl-Alt-6)
+![doc/idea_coverage.png](doc/idea_coverage.png)
 
-- После отладки JPA, перенести в PostgreSQL на v.perm.ru
- 
+или с использованием [https://www.jacoco.org/jacoco/](https://www.jacoco.org/jacoco/)
+
+````java
+$ ./gradlew jacocoTestReport
+````
+
+![Результат](doc/jacoco_report.png)
+
 [Примечания](#tose)<br/>
 [Ссылки](#links)<br/>
 
 <a id="todo"></a>
-### Использовать и описать
+### TODO
 <br/>
 Анализ кода Idea Analize<br/>
 Анализ кода SonarCube<br/>
 <br/>
 Unit тестирование<br/>
-Покрытие тестами<br/>
+После отладки JPA, перенести в PostgreSQL на v.perm.ru<br/>
 Spring profiles<br/>
 Тестовый запуск<br/>
 <br/>
@@ -93,7 +107,5 @@ Docker<br/>
 Nexus<br/>
 Логирование<br/>
 
-<a id="tose"></a>
-### Разное
 <a id="links"></a>
 ### Ссылки
