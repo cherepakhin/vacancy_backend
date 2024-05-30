@@ -3,8 +3,8 @@
 ### Оглавление:
 [Цель](#target)<br/>
 [Unit тестирование](unit_test)<br/>
-[Запуск](#run)<br/>
 [Покрытие тестами](#coverage)<br/>
+[Запуск](#run)<br/>
 [Ручное тестирование httpie](#httpie)<br/>
 [TODO](#todo)<br/>
 [Примечания](#tose)<br/>
