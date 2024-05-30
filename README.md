@@ -114,10 +114,16 @@ $ http http://192.168.1.57:8980/vacancy/api/echo/aaa
 (используется программа httpie)
 
 <a id="bootJar"></a>
-### Созлание запускаемого файла
+### Создание запускаемого файла и его запуск
 
 ````java
 $ ./gradlew bootJar
+````
+Собранный jar будет в build/libs/vacancy_backend-<version>.jar
+
+Запуск:
+````java
+$ java -jar build/libs/vacancy_backend-<version>.jar
 ````
 
 [Примечания](#tose)<br/>
