@@ -17,7 +17,7 @@ class CompanyServiceImpl(@Autowired private val repository: CompanyRepository) :
         if (savedCompany != null) {
             return CompanyMapper.toDto(savedCompany)
         }
-        throw Exception("Company with N=  $n not created")
+        throw Exception("Company with N=$n not created")
     }
 
     private fun getNextN(): Long {
@@ -29,7 +29,7 @@ class CompanyServiceImpl(@Autowired private val repository: CompanyRepository) :
             val company = repository.findById(n).get()
             return CompanyMapper.toDto(company)
         } else {
-            throw Exception("Company with N= $n not found")
+            throw Exception("Company with N=$n not found")
         }
     }
 
@@ -44,7 +44,7 @@ class CompanyServiceImpl(@Autowired private val repository: CompanyRepository) :
             val savedCompany = repository!!.save(company)
             return CompanyMapper.toDto(savedCompany)
         } else {
-            throw Exception("Company with N= $n not found")
+            throw Exception("Company with N=$n not found")
         }
     }
 

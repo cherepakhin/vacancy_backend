@@ -91,9 +91,11 @@ class CompanyServiceImplTest {
         val service = CompanyServiceImpl(repository);
         `when`(repository.findById(N)).thenReturn(Optional.empty());
 
-        assertThrows<Exception>  {
+        val thrown = assertThrows<Exception>  {
             service.updateCompany(N, NAME_COMPANY);
         }
+
+        assertEquals("Company with N=100 not found", thrown.message);
     }
 
     @Test
@@ -123,5 +125,22 @@ class CompanyServiceImplTest {
 
         verify(repository, times(1)).deleteById(N);
         assertEquals("Company with N=100 deleted", message);
+    }
+
+    @Test
+    fun notCreated() {
+        val N = 100L;
+        val NAME_COMPANY = "company";
+        val companyEntity = CompanyEntity(N, NAME_COMPANY);
+        val repository = mock(CompanyRepository::class.java);
+        `when`(repository.getNextN()).thenReturn(N);
+        `when`(repository.save(companyEntity)).thenReturn(null);
+
+        val service = CompanyServiceImpl(repository);
+
+        val message = assertThrows<Exception> {
+            service.createCompany(NAME_COMPANY)
+        }.message;
+        assertEquals("Company with N=100 not created", message);
     }
 }
