@@ -2,8 +2,10 @@ package ru.perm.v.vacancy.service.impl
 
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 import org.mockito.Mockito.mock
 import org.mockito.Mockito.`when`
+import ru.perm.v.vacancy.dto.CompanyDto
 import ru.perm.v.vacancy.entity.CompanyEntity
 import ru.perm.v.vacancy.repository.CompanyRepository
 import java.util.*
@@ -42,4 +44,14 @@ class CompanyServiceImplTest {
         assertEquals(N, companyDto.n);
         assertEquals(NAME_COMPANY, companyDto.name);
     }
+    @Test
+    fun `getN should throw exception when company not found`() {
+        val repository = mock(CompanyRepository::class.java);
+        `when`(repository.findById(999L)).thenReturn(Optional.empty())
+
+        val service = CompanyServiceImpl(repository);
+
+        assertThrows<Exception> { service.getCompanyByN(999L) }
+    }
+
 }
