@@ -22,6 +22,10 @@ open class CompanyEntity { // "open" needed for JPA
     constructor(name: String) {
         this.name = name
     }
+    constructor(n:Long, name: String) {
+        this.n = n
+        this.name = name
+    }
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
