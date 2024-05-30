@@ -58,10 +58,12 @@ $ ./gradlew test
 
 или с использованием [https://www.jacoco.org/jacoco/](https://www.jacoco.org/jacoco/)
 
+Создание отчета о покрытии тестами:
 ````java
 $ ./gradlew jacocoTestReport
 ````
 
+Результат в build/reports/jacoco/test/html/index.html: 
 ![Результат](doc/jacoco_report.png)
 
 <a id="run"></a>
