@@ -8,6 +8,10 @@
 [Запуск](#run)<br/>
 [Ручное тестирование httpie](#httpie)<br/>
 [Созлание запускаемого файла](#bootJar)<br/>
+[Сборка Jenkins](#jenkins)<br/>
+
+### Сборка Jenkins
+
 [TODO](#todo)<br/>
 [Примечания](#tose)<br/>
 [Ссылки](#links)<br/>
@@ -125,6 +129,11 @@ $ ./gradlew bootJar
 ````java
 $ java -jar build/libs/vacancy_backend-<version>.jar
 ````
+
+<a id="jenkins"></a>
+### Сборка Jenkins
+
+Сборка происходит в Jenkins, развернутом на домашнем сервере. Pipeline для Jenkins описан в файле [./Jenkinsfile](Jenkinsfile)
 
 [Примечания](#tose)<br/>
 

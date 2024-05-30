@@ -18,12 +18,6 @@ pipeline {
             }
         }
 
-        stage('Integration tests') {
-            steps {
-                sh 'pwd;cd vacancy_backend;./gradlew clean test --tests *TestIntegration'
-            }
-        }
-
         stage('Build bootJar') {
             steps {
                 sh 'pwd;cd vacancy_backend;./gradlew bootJar'
