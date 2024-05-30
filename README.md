@@ -1,10 +1,11 @@
 ## Простой проект на kotlin и Spring Boot
 
 ### Оглавление:
-[Цель](#target)<br/>
+[Цель](#target)
+[Unit тестирование](unit_test)
 [Запуск](#run)
-[Ручное тестирование httpie](#httpie)
 [Покрытие тестами](#coverage)
+[Ручное тестирование httpie](#httpie)
 [TODO](#todo)<br/>
 [Примечания](#tose)<br/>
 [Ссылки](#links)<br/>
@@ -43,6 +44,26 @@ __Отчеты__:
 
 В качестве базы данных использовать PostgreSQL.
 
+<a id="unit_test"></a>
+### Unit тестирование
+
+````java
+$ ./gradlew test
+````
+
+<a id="coverage"></a>
+### Покрытие тестами
+В Idea выплнить Run/Show Coverage Data (Ctrl-Alt-6)
+![doc/idea_coverage.png](doc/idea_coverage.png)
+
+или с использованием [https://www.jacoco.org/jacoco/](https://www.jacoco.org/jacoco/)
+
+````java
+$ ./gradlew jacocoTestReport
+````
+
+![Результат](doc/jacoco_report.png)
+
 <a id="run"></a>
 ### Запуск
 
@@ -61,18 +82,6 @@ $ http http://192.168.1.57:8980/vacancy/api/echo/aaa
 ````
 (используется программа httpie)
 
-<a id="coverage"></a>
-### Покрытие тестами
-В Idea выплнить Run/Show Coverage Data (Ctrl-Alt-6)
-![doc/idea_coverage.png](doc/idea_coverage.png)
-
-или с использованием [https://www.jacoco.org/jacoco/](https://www.jacoco.org/jacoco/)
-
-````java
-$ ./gradlew jacocoTestReport
-````
-
-![Результат](doc/jacoco_report.png)
 
 [Примечания](#tose)<br/>
 [Ссылки](#links)<br/>
