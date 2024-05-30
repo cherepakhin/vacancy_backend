@@ -31,7 +31,7 @@ class CompanyServiceImpl(@Autowired val repository: CompanyRepository) : Company
     }
 
     override fun getCompanies(): List<CompanyDto> {
-        TODO("Not yet implemented")
+        return repository.findAll().sortedBy { it.n }.map  { CompanyMapper.toDto(it)  }
     }
 
     override fun updateCompany(n: Long, name: String): CompanyDto {

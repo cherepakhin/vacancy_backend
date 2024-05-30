@@ -54,4 +54,16 @@ class CompanyServiceImplTest {
         assertThrows<Exception> { service.getCompanyByN(999L) }
     }
 
+    @Test
+    fun getCompanies() {
+        val repository = mock(CompanyRepository::class.java);
+        val company1 = CompanyEntity(1L, "company1");
+        val company2  = CompanyEntity(2L,  "company2");
+        `when`(repository.findAll()).thenReturn(listOf(company1, company2));
+
+        val service = CompanyServiceImpl(repository);
+
+        assertEquals(2, service.getCompanies().size);
+    }
+
 }
