@@ -10,7 +10,7 @@ class CompanyMapperTest {
 
     @Test
     fun toDto() {
-        val dto = CompanyMapper().toDto(CompanyEntity(1L, "name"))
+        val dto = CompanyMapper.toDto(CompanyEntity(1L, "name"))
 
         assertEquals(1L, dto.n)
         assertEquals("name", dto.name)
@@ -18,7 +18,7 @@ class CompanyMapperTest {
 
     @Test
     fun toEntity() {
-        val entity = CompanyMapper().toEntity(CompanyDto(1L, "name"))
+        val entity = CompanyMapper.toEntity(CompanyDto(1L, "name"))
 
         assertEquals(1L, entity.n)
         assertEquals("name", entity.name)

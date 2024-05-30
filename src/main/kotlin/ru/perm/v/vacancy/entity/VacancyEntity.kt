@@ -23,6 +23,32 @@ open class VacancyEntity { // "open" needed for JPA
     //TODO: add LIST contacts
     // Empty constructor needed for Hibernate
     constructor()
+    constructor(n: Long, name: String, comment: String , companyEntity: CompanyEntity) {
+        this.n = n
+        this.companyEntity = companyEntity
+        this.name = name
+        this.comment = comment
+    }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other !is VacancyEntity) return false
+
+        if (n != other.n) return false
+        if (companyEntity != other.companyEntity) return false
+        if (name != other.name) return false
+        if (comment != other.comment) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        var result = n.hashCode()
+        result = 31 * result + (companyEntity?.hashCode() ?: 0)
+        result = 31 * result + name.hashCode()
+        result = 31 * result + comment.hashCode()
+        return result
+    }
 
 
 }

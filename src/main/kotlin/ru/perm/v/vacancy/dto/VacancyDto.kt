@@ -14,4 +14,26 @@ open class VacancyDto {
         this.comment = comment
         this.company = company
     }
+
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other !is VacancyDto) return false
+
+        if (n != other.n) return false
+        if (name != other.name) return false
+        if (comment != other.comment) return false
+        if (company != other.company) return false
+
+        return true
+    }
+
+    override fun hashCode(): Int {
+        var result = n.hashCode()
+        result = 31 * result + name.hashCode()
+        result = 31 * result + comment.hashCode()
+        result = 31 * result + company.hashCode()
+        return result
+    }
+
+
 }

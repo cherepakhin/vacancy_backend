@@ -23,7 +23,7 @@ class ContactEntityTest {
         val COMMENT = "COMMENT"
         val COMPANY = CompanyEntity()
 
-        val contact = ContactEntity(NAME, COMPANY, EMAIL, PHONE, COMMENT)
+        val contact = ContactEntity(NAME, EMAIL, PHONE, COMMENT, COMPANY)
 
         assertNotNull(contact)
         assertNotNull(contact.n)

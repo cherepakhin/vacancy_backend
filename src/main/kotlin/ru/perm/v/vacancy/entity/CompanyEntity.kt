@@ -36,4 +36,14 @@ open class CompanyEntity { // "open" needed for JPA
 
         return true
     }
+
+    override fun hashCode(): Int {
+        var result = n.hashCode()
+        result = 31 * result + name.hashCode()
+        return result
+    }
+
+    override fun toString(): String {
+        return "CompanyEntity(n=$n, name='$name')"
+    }
 }
