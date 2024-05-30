@@ -89,7 +89,6 @@ $ http http://192.168.1.57:8980/vacancy/api/echo/aaa
 
 <a id="todo"></a>
 ### TODO
-<br/>
 Анализ кода Idea Analize<br/>
 Анализ кода SonarCube<br/>
 <br/>
