@@ -18,9 +18,14 @@ class CompanyServiceImpl : CompanyService {
     }
 
     override fun createCompany(name: String): CompanyDto {
-        val company = CompanyEntity(name = name)
+        val n = getNextN()
+        val company = CompanyEntity(n, name = name)
         val savedCompany= repository.save(company)
         return CompanyMapper.toDto(savedCompany)
+    }
+
+    private fun getNextN(): Long {
+        return repository.getNextN();
     }
 
     override fun getCompany(id: Int): CompanyDto {
