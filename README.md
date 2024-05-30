@@ -1,11 +1,11 @@
 ## Простой проект на kotlin и Spring Boot
 
 ### Оглавление:
-[Цель](#target)
-[Unit тестирование](unit_test)
-[Запуск](#run)
-[Покрытие тестами](#coverage)
-[Ручное тестирование httpie](#httpie)
+[Цель](#target)<br/>
+[Unit тестирование](unit_test)<br/>
+[Запуск](#run)<br/>
+[Покрытие тестами](#coverage)<br/>
+[Ручное тестирование httpie](#httpie)<br/>
 [TODO](#todo)<br/>
 [Примечания](#tose)<br/>
 [Ссылки](#links)<br/>
