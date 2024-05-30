@@ -8,14 +8,7 @@ import ru.perm.v.vacancy.mapper.CompanyMapper
 import ru.perm.v.vacancy.repository.CompanyRepository
 
 @Service
-class CompanyServiceImpl : CompanyService {
-
-    @Autowired
-    val repository: CompanyRepository;
-
-    constructor(repository: CompanyRepository) {
-        this.repository = repository
-    }
+class CompanyServiceImpl(@Autowired val repository: CompanyRepository) : CompanyService {
 
     override fun createCompany(name: String): CompanyDto {
         val n = getNextN()
@@ -28,19 +21,24 @@ class CompanyServiceImpl : CompanyService {
         return repository.getNextN();
     }
 
-    override fun getCompany(id: Int): CompanyDto {
-        TODO("Not yet implemented")
+    override fun getCompanyByN(n: Long): CompanyDto  {
+        if (repository.findById(n).isPresent()) {
+            val company = repository.findById(n).get()
+            return CompanyMapper.toDto(company)
+        } else  {
+            throw Exception("Company with N= $n not found")
+        }
     }
 
     override fun getCompanies(): List<CompanyDto> {
         TODO("Not yet implemented")
     }
 
-    override fun updateCompany(id: Int, name: String): CompanyDto {
+    override fun updateCompany(n: Long, name: String): CompanyDto {
         TODO("Not yet implemented")
     }
 
-    override fun deleteCompany(id: Int): String {
+    override fun deleteCompany(n: Long): String {
         TODO("Not yet implemented")
     }
 }
