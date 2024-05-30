@@ -7,6 +7,7 @@
 [Логгирование](#logging)<br/>
 [Запуск](#run)<br/>
 [Ручное тестирование httpie](#httpie)<br/>
+[Созлание запускаемого файла](#bootJar)<br/>
 [TODO](#todo)<br/>
 [Примечания](#tose)<br/>
 [Ссылки](#links)<br/>
@@ -112,6 +113,12 @@ $ http http://192.168.1.57:8980/vacancy/api/echo/aaa
 ````
 (используется программа httpie)
 
+<a id="bootJar"></a>
+### Созлание запускаемого файла
+
+````java
+$ ./gradlew bootJar
+````
 
 [Примечания](#tose)<br/>
 
