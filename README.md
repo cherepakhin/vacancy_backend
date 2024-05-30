@@ -70,6 +70,18 @@ $ ./gradlew jacocoTestReport
 <a id="logging"></a>
 ### Логгирование
 
+Настройка в application.yaml
+
+````shell
+...
+logging:
+  level:
+    root: info
+  file:
+    path: log/
+...
+````
+
 Пример из EchoCtrl.kt:
 
 ````shell
