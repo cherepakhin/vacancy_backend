@@ -86,7 +86,6 @@ $ http http://192.168.1.57:8980/vacancy/api/echo/aaa
 
 
 [Примечания](#tose)<br/>
-[Ссылки](#links)<br/>
 
 <a id="todo"></a>
 ### TODO
