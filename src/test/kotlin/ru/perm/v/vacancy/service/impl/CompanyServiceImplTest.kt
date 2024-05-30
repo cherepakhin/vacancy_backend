@@ -103,9 +103,10 @@ class CompanyServiceImplTest {
         val service = CompanyServiceImpl(repository);
         `when`(repository.findById(N)).thenReturn(Optional.empty());
 
-        assertThrows<Exception>  {
+        val thrown = assertThrows<Exception>  {
             service.deleteCompany(N);
         }
+        assertEquals("Company with N=100 not found", thrown.message);
     }
 
     @Test
@@ -117,8 +118,9 @@ class CompanyServiceImplTest {
         `when`(repository.findById(N)).thenReturn(Optional.of(companyEntity));
         doNothing().`when`(repository).deleteById(N);
 
-        service.deleteCompany(N);
+        val message= service.deleteCompany(N);
 
         verify(repository, times(1)).deleteById(N);
+        assertEquals("Company with N=100 deleted", message);
     }
 }
