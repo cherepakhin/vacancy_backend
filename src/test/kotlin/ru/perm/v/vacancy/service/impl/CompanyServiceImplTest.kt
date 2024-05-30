@@ -29,13 +29,12 @@ class CompanyServiceImplTest {
 
     @Test
     fun getCompanyByN() {
-        val repository = mock(CompanyRepository::class.java);
-        val service = CompanyServiceImpl(repository);
-
         val N = 100L;
         val NAME_COMPANY = "company";
         val companyEntity = CompanyEntity(N, NAME_COMPANY);
 
+        val repository = mock(CompanyRepository::class.java);
+        val service = CompanyServiceImpl(repository);
         `when`(repository.findById(N)).thenReturn(Optional.of(companyEntity));
 
         val companyDto  = service.getCompanyByN(N);
