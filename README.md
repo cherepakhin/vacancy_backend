@@ -136,7 +136,6 @@ $ java -jar build/libs/vacancy_backend-<version>.jar
 После отладки JPA, перенести в PostgreSQL на v.perm.ru<br/>
 Spring profiles<br/>
 <br/>
-Создание запускаемого файла и его запуск<br/>
 Publishing SpringBoot "FAT" jar<br/>
 <br/>
 Интеграционное тестирование<br/>
@@ -155,3 +154,6 @@ Nexus<br/>
 
 <a id="links"></a>
 ### Ссылки
+
+[https://github.com/cherepakhin/shop_kotlin](https://github.com/cherepakhin/shop_kotlin)
+[https://github.com/cherepakhin/shop_kotlin_restassured_test](https://github.com/cherepakhin/shop_kotlin_restassured_test)
