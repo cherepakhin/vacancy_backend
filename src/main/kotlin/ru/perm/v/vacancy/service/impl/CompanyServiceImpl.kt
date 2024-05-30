@@ -2,6 +2,7 @@ package ru.perm.v.vacancy.service.impl
 
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
+import ru.perm.v.vacancy.consts.ErrMessage
 import ru.perm.v.vacancy.dto.CompanyDto
 import ru.perm.v.vacancy.entity.CompanyEntity
 import ru.perm.v.vacancy.mapper.CompanyMapper
@@ -17,7 +18,7 @@ class CompanyServiceImpl(@Autowired private val repository: CompanyRepository) :
         if (savedCompany != null) {
             return CompanyMapper.toDto(savedCompany)
         }
-        throw Exception("Company with N=$n not created")
+        throw Exception(String.format(ErrMessage.COMPANY_NOT_CREATED, n))
     }
 
     private fun getNextN(): Long {
@@ -29,7 +30,7 @@ class CompanyServiceImpl(@Autowired private val repository: CompanyRepository) :
             val company = repository.findById(n).get()
             return CompanyMapper.toDto(company)
         } else {
-            throw Exception("Company with N=$n not found")
+            throw Exception(String.format(ErrMessage.COMPANY_NOT_FOUND, n));
         }
     }
 
@@ -44,16 +45,16 @@ class CompanyServiceImpl(@Autowired private val repository: CompanyRepository) :
             val savedCompany = repository!!.save(company)
             return CompanyMapper.toDto(savedCompany)
         } else {
-            throw Exception("Company with N=$n not found")
+            throw Exception(String.format(ErrMessage.COMPANY_NOT_FOUND, n));
         }
     }
 
     override fun deleteCompany(n: Long): String {
         if (repository.findById(n).isPresent) {
             repository.deleteById(n)
-            return "Company with N=$n deleted"
+            return String.format(ErrMessage.COMPANY_N_DELETED, n)
         } else {
-            throw Exception("Company with N=$n not found")
+            throw Exception(String.format(ErrMessage.COMPANY_NOT_FOUND, n));
         }
     }
 }
