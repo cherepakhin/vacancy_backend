@@ -198,6 +198,18 @@ Nexus<br/>
 Camel для интеграции<br/>
 jxls для отчетов<br/>
 
+### Что это было?
+
+Изменения в коде не подхватываются при запуске ./gradlew bootRun. Решилось так:
+
+````shell
+./gradlew clean
+./gradlew build
+./gradlew bootRun
+````
+
+java -verbose:class <other args> - вывод загруженных классов 
+
 <a id="links"></a>
 ### Ссылки
 

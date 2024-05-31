@@ -6,7 +6,7 @@ import ru.perm.v.vacancy.entity.CompanyEntity
 interface CompanyService {
     @Throws(Exception::class)
     fun getCompanyByN(n: Long):  CompanyDto
-    fun getCompanies(): List<CompanyDto>
+    fun getAll(): List<CompanyDto>
     fun createCompany(name: String): CompanyDto
     fun updateCompany(n: Long, name: String): CompanyDto
     fun deleteCompany(n: Long): String // return success ("") or message error

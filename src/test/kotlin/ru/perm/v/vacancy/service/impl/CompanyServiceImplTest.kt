@@ -63,7 +63,7 @@ class CompanyServiceImplTest {
 
         val service = CompanyServiceImpl(repository);
 
-        assertEquals(2, service.getCompanies().size);
+        assertEquals(2, service.getAll().size);
     }
 
     @Test

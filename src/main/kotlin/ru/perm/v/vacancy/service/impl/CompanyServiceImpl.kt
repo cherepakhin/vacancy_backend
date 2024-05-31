@@ -1,6 +1,5 @@
 package ru.perm.v.vacancy.service.impl
 
-import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import ru.perm.v.vacancy.consts.ErrMessage
 import ru.perm.v.vacancy.dto.CompanyDto
@@ -9,7 +8,11 @@ import ru.perm.v.vacancy.mapper.CompanyMapper
 import ru.perm.v.vacancy.repository.CompanyRepository
 
 @Service
-class CompanyServiceImpl(@Autowired private val repository: CompanyRepository) : CompanyService {
+class CompanyServiceImpl(val repository: CompanyRepository) : CompanyService {
+
+    override fun getAll(): List<CompanyDto> {
+        return repository.findAll().sortedBy { it.n }.map { CompanyMapper.toDto(it) }
+    }
 
     override fun createCompany(name: String): CompanyDto {
         val n = getNextN()
@@ -32,10 +35,6 @@ class CompanyServiceImpl(@Autowired private val repository: CompanyRepository) :
         } else {
             throw Exception(String.format(ErrMessage.COMPANY_NOT_FOUND, n))
         }
-    }
-
-    override fun getCompanies(): List<CompanyDto> {
-        return repository.findAll().sortedBy { it.n }.map { CompanyMapper.toDto(it) }
     }
 
     override fun updateCompany(n: Long, name: String): CompanyDto {
