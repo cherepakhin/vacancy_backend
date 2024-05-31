@@ -23,7 +23,6 @@ class CompanyCtrl(val companyService: CompanyService) {
         logger.info("Get all companies")
         logger.info(companyService.toString())
         val companies= companyService.getAll()
-//        return emptyList()
         return companies
     }
 }
