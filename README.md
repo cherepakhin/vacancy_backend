@@ -189,6 +189,9 @@ Docker<br/>
 Сборка Jenkins<br/>
 Nexus<br/>
 
+Camel для интеграции<br/>
+jxls для отчетов<br/>
+
 <a id="links"></a>
 ### Ссылки
 
