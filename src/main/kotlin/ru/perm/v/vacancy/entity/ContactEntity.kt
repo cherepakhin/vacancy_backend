@@ -5,31 +5,30 @@ import javax.validation.constraints.NotNull
 
 @Entity
 @Table(name = "contact")
-class ContactEntity {
+class ContactEntity {  // "open" needed for JPA?
     @Id
     @NotNull
     @Column(name = "n", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    open var n: Long = -1L
+    var n: Long = -1L
     @NotNull
     @Column(name = "name", nullable = false)
-    open var name: String = ""
+    var name: String = ""
     @NotNull
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "company_n", nullable = false)
-    open lateinit var companyEntity: CompanyEntity
+    lateinit var companyEntity: CompanyEntity
     @NotNull
     @Column(name = "email", nullable = false)
-    open var email: String = ""
+    var email: String = ""
     @NotNull
     @Column(name = "phone", nullable = false)
-    open var phone: String = ""
+    var phone: String = ""
     @NotNull
     @Column(name = "comment", nullable = false)
-    open var comment: String = ""
+    var comment: String = ""
 
-    constructor() {
-    }
+    constructor() // need for JPA
 
     constructor(name: String, email: String, phone: String, comment: String, companyEntity: CompanyEntity) {
         this.name = name

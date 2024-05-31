@@ -104,7 +104,7 @@ dependencies {
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
 //TODO: change to postgresql
-    implementation("com.h2database:h2")
+    implementation("com.h2database:h2:2.2.220")
 // validator
     implementation("org.hibernate.validator:hibernate-validator")
 

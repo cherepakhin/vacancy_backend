@@ -5,16 +5,16 @@ import javax.validation.constraints.NotNull
 
 @Entity
 @Table(name = "company")
-open class CompanyEntity { // "open" needed for JPA
+class CompanyEntity { //TODO: "open" needed for JPA??? (open class CompanyEntity)
     @Id
     @NotNull
     @Column(name = "n", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    open var n: Long = -1L
+    var n: Long = -1L
 
     @NotNull
     @Column(name = "name", nullable = false)
-    open var name: String = ""
+    var name: String = ""
 
     // Empty constructor needed for Hibernate
     constructor()

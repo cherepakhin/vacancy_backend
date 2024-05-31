@@ -30,7 +30,7 @@ class CompanyServiceImpl(@Autowired private val repository: CompanyRepository) :
             val company = repository.findById(n).get()
             return CompanyMapper.toDto(company)
         } else {
-            throw Exception(String.format(ErrMessage.COMPANY_NOT_FOUND, n));
+            throw Exception(String.format(ErrMessage.COMPANY_NOT_FOUND, n))
         }
     }
 
@@ -40,12 +40,12 @@ class CompanyServiceImpl(@Autowired private val repository: CompanyRepository) :
 
     override fun updateCompany(n: Long, name: String): CompanyDto {
         if (repository.findById(n).isPresent) {
-            val company = repository!!.findById(n).get()
+            val company = repository.findById(n).get()
             company.name = name
-            val savedCompany = repository!!.save(company)
+            val savedCompany = repository.save(company)
             return CompanyMapper.toDto(savedCompany)
         } else {
-            throw Exception(String.format(ErrMessage.COMPANY_NOT_FOUND, n));
+            throw Exception(String.format(ErrMessage.COMPANY_NOT_FOUND, n))
         }
     }
 
@@ -54,7 +54,7 @@ class CompanyServiceImpl(@Autowired private val repository: CompanyRepository) :
             repository.deleteById(n)
             return String.format(ErrMessage.COMPANY_N_DELETED, n)
         } else {
-            throw Exception(String.format(ErrMessage.COMPANY_NOT_FOUND, n));
+            throw Exception(String.format(ErrMessage.COMPANY_NOT_FOUND, n))
         }
     }
 }

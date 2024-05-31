@@ -5,24 +5,24 @@ import javax.validation.constraints.NotNull
 
 @Entity
 @Table(name = "vacancy")
-open class VacancyEntity { // "open" needed for JPA
+class VacancyEntity {
     @NotNull
     @Id
     @Column(name = "n", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    open var n: Long = -1L
+    var n: Long = -1L
     @ManyToOne
     @JoinColumn(name = "company_n", nullable = false)
-    open var companyEntity: CompanyEntity? = null
+    var companyEntity: CompanyEntity? = null
     @NotNull
     @Column(name = "name", nullable = false)
-    open var name: String = ""
+    var name: String = ""
     @NotNull
     @Column(name = "comment", nullable = false)
-    open var comment: String = ""
+    var comment: String = ""
     // add LIST contacts
-    // Empty constructor needed for Hibernate
-    constructor()
+
+    constructor() // Empty constructor needed for Hibernate
     constructor(n: Long, name: String, comment: String , companyEntity: CompanyEntity) {
         this.n = n
         this.companyEntity = companyEntity

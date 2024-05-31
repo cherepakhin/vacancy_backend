@@ -11,6 +11,9 @@
 [Сборка Jenkins](#jenkins)<br/>
 [Publishing SpringBoot "FAT" jar](#fat)<br/>
 
+[Анализ кода Idea Analize](#idea_analizer)<br/>
+
+
 [TODO](#todo)<br/>
 [Примечания](#tose)<br/>
 [Ссылки](#links)<br/>
@@ -163,11 +166,14 @@ publishing {
 
 [https://stackoverflow.com/questions/64062905/unable-to-publish-jar-to-gitlab-package-registry-with-gradle](https://stackoverflow.com/questions/64062905/unable-to-publish-jar-to-gitlab-package-registry-with-gradle)
 
+[Анализ кода Idea Analize](#idea_analizer)<br/>
+
+В Idea вызывается из Code ->  Inspect Code.
+
 [Примечания](#tose)<br/>
 
 <a id="todo"></a>
 ### TODO
-Анализ кода Idea Analize<br/>
 Анализ кода SonarCube<br/>
 <br/>
 После отладки JPA, перенести в PostgreSQL на v.perm.ru<br/>

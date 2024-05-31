@@ -1,10 +1,10 @@
 package ru.perm.v.vacancy.dto
 
 open class VacancyDto {
-    open var n: Long = -1L
-    open var name: String = "-"
-    open var comment: String = "-"
-    open var company: CompanyDto = CompanyDto(-1L, "-")
+    var n: Long = -1L
+    var name: String = "-"
+    var comment: String = "-"
+    var company: CompanyDto = CompanyDto(-1L, "-")
 
     constructor()
 
