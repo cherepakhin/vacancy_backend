@@ -21,8 +21,9 @@ class CompanyCtrl(val companyService: CompanyService) {
     @ApiOperation("Get all companies")
     fun getAll(): List<CompanyDto> {
         logger.info("Get all companies")
-        logger.info(companyService.toString())
+        logger.info(companyService.getAll().toString())
         val companies= companyService.getAll()
+        logger.info(companies.toString())
         return companies
     }
 }
