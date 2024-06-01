@@ -49,6 +49,4 @@ class VacancyEntity {
         result = 31 * result + comment.hashCode()
         return result
     }
-
-
 }

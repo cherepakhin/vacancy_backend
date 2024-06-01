@@ -9,11 +9,11 @@ import ru.perm.v.vacancy.dto.CompanyDto
 import ru.perm.v.vacancy.dto.VacancyDto
 import ru.perm.v.vacancy.entity.CompanyEntity
 import ru.perm.v.vacancy.entity.VacancyEntity
+import ru.perm.v.vacancy.mapper.VacancyMapper
 import ru.perm.v.vacancy.repository.VacancyRepository
 import java.util.*
 
 class VacancyServiceImplTest {
-
     @Test
     fun getByN() {
         val N = 100L
@@ -25,7 +25,8 @@ class VacancyServiceImplTest {
         val vacancyEntity = VacancyEntity(N, NAME_VACANCY, COMMENT, companyEntity)
 
         val repository = Mockito.mock(VacancyRepository::class.java)
-        val service = VacancyServiceImpl(repository)
+        val companyService = Mockito.mock(CompanyService::class.java)
+        val service = VacancyServiceImpl(repository, companyService, VacancyMapper)
         Mockito.`when`(repository.findById(N)).thenReturn(Optional.of(vacancyEntity))
 
         val vacancyDto = service.getByN(N)
@@ -41,7 +42,8 @@ class VacancyServiceImplTest {
         val N = 100L
         val repository = Mockito.mock(VacancyRepository::class.java)
         Mockito.`when`(repository.findById(N)).thenReturn(Optional.empty())
-        val service = VacancyServiceImpl(repository)
+        val companyService = Mockito.mock(CompanyService::class.java)
+        val service = VacancyServiceImpl(repository, companyService, VacancyMapper)
 
         val thrown = assertThrows<Exception> { service.getByN(N) }
 
@@ -69,12 +71,28 @@ class VacancyServiceImplTest {
         val repository = Mockito.mock(VacancyRepository::class.java)
         Mockito.`when`(repository.findAll()).thenReturn(listOf(vacancyEntity100, vacancyEntity200))
 
-        val service  = VacancyServiceImpl(repository)
+        val companyService = Mockito.mock(CompanyService::class.java)
+        val service = VacancyServiceImpl(repository, companyService, VacancyMapper)
         val vacancyDtos  = service.getAll()
 
         assertEquals(2, vacancyDtos.size)
         assertEquals(VacancyDto(N_100, NAME_VACANCY_100, COMMENT_100, CompanyDto(N_COMPANY_100, NAME_COMPANY_100)),
             vacancyDtos[0]
         )
+    }
+
+    @Test
+    fun createWithNotExistCompany() {
+        val N = 100L
+        val NAME_VACANCY = "vacancy"
+        val COMMENT = "comment"
+        val N_COMPANY = 1L
+        val NAME_COMPANY = "company"
+        val companyEntity = CompanyEntity(N_COMPANY, NAME_COMPANY)
+        val vacancyEntity = VacancyEntity(N, NAME_VACANCY, COMMENT, companyEntity)
+
+        val repository = Mockito.mock(VacancyRepository::class.java)
+        Mockito.`when`(repository.save(vacancyEntity)).thenReturn(vacancyEntity)
+
     }
 }

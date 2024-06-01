@@ -28,6 +28,7 @@ class CompanyServiceImpl(val repository: CompanyRepository) : CompanyService {
         return repository.getNextN()
     }
 
+    @Throws(Exception::class)
     override fun getCompanyByN(n: Long): CompanyDto {
         if (repository.findById(n).isPresent) {
             val company = repository.findById(n).get()

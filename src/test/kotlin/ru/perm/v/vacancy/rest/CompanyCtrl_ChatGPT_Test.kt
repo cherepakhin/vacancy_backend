@@ -12,6 +12,7 @@ import ru.perm.v.vacancy.service.impl.CompanyService
 
 /**
  * Generated ChatGPT
+ * https://openai.com/index/hello-gpt-4o/
  * https://chatgpt.com/c/7d936040-5426-42c4-ba24-8f45347a678e
  */
 @ExtendWith(SpringExtension::class)

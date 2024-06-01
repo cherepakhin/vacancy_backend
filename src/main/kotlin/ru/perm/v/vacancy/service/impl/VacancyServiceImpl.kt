@@ -3,12 +3,18 @@ package ru.perm.v.vacancy.service.impl
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import ru.perm.v.vacancy.consts.ErrMessage
+import ru.perm.v.vacancy.dto.CompanyDto
 import ru.perm.v.vacancy.dto.VacancyDto
 import ru.perm.v.vacancy.mapper.VacancyMapper
 import ru.perm.v.vacancy.repository.VacancyRepository
+import ru.perm.v.vacancy.service.VacancyService
 
 @Service
-class VacancyServiceImpl(@Autowired private val repository: VacancyRepository) : VacancyService {
+class VacancyServiceImpl(
+    @Autowired private val repository: VacancyRepository,
+    @Autowired private val companyService: CompanyService,
+    @Autowired private val mapper: VacancyMapper,
+) : VacancyService {
     override fun getByN(n: Long): VacancyDto {
         if (repository.findById(n).isPresent) {
             val vacancyEntity = repository.findById(n).get()
@@ -22,8 +28,16 @@ class VacancyServiceImpl(@Autowired private val repository: VacancyRepository) :
         return repository.findAll().map { VacancyMapper.toDto(it) }.toList()
     }
 
-    override fun create(name: String): VacancyDto {
-        TODO("Not yet implemented")
+    override fun create(vacancyDto: VacancyDto): VacancyDto {
+        //TODO: check exist company
+        val companyDto: CompanyDto;
+        try {
+            companyDto = companyService.getCompanyByN(vacancyDto.company.n)
+        } catch (e: Exception) {
+            throw Exception(String.format(ErrMessage.COMPANY_NOT_FOUND, vacancyDto.company.n))
+        }
+        val createdVacancy = repository.save(VacancyMapper.toEntity(vacancyDto))
+        return VacancyMapper.toDto(createdVacancy)
     }
 
     override fun update(n: Long, name: String): VacancyDto {
