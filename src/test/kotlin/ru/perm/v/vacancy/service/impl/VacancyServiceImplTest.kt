@@ -177,4 +177,46 @@ class VacancyServiceImplTest {
         verify(mockCompanyService, times(1)).getCompanyByN(N_COMPANY)
         verify(mockVacancyRepository, times(1)).save(vacancyEntity)
     }
+
+    @Test
+    fun delete() {
+        val VACANCY_N = 100L
+        val NAME_VACANCY = "vacancy"
+        val COMMENT = "comment"
+        val N_COMPANY = 1L
+        val NAME_COMPANY = "company"
+
+        val mockVacancyRepository = Mockito.mock(VacancyRepository::class.java)
+        val mockCompanyService = Mockito.mock(CompanyService::class.java)
+        `when`(mockVacancyRepository.findById(VACANCY_N)).thenReturn(
+            Optional.of(
+                VacancyEntity(VACANCY_N, NAME_VACANCY, COMMENT, CompanyEntity(N_COMPANY, NAME_COMPANY))
+            )
+        )
+
+        val vacancyService = VacancyServiceImpl(mockVacancyRepository, mockCompanyService, VacancyMapper)
+
+        vacancyService.delete(VACANCY_N)
+
+        verify(mockVacancyRepository, times(1)).deleteById(VACANCY_N)
+    }
+
+    @Test
+    fun deleteOnNotExistVacancy()  {
+        val VACANCY_N = 100L
+
+        val mockVacancyRepository = Mockito.mock(VacancyRepository::class.java)
+        val mockCompanyService = Mockito.mock(CompanyService::class.java)
+        `when`(mockVacancyRepository.findById(VACANCY_N)).thenReturn(Optional.empty())
+
+        val vacancyService = VacancyServiceImpl(mockVacancyRepository, mockCompanyService, VacancyMapper)
+
+        val thrown   = assertThrows<Exception> {
+            vacancyService.delete(VACANCY_N)
+        }
+
+        verify(mockVacancyRepository, times(0)).deleteById(VACANCY_N)
+        assertEquals("Vacancy with N=100 not found", thrown.message)
+    }
+
 }
