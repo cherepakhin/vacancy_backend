@@ -38,7 +38,7 @@ class VacancyServiceImpl(
     }
 
     override fun update(n: Long, changedVacancyDto: VacancyDto): VacancyDto  {
-        val vacancyInDto= getByN(n) // throw if not exists
+        getByN(n) // throw if not exists
         companyService.getCompanyByN(changedVacancyDto.company.n) // company exist? throw if not exists
         val savedVacancyEntity = repository.save(VacancyMapper.toEntity(changedVacancyDto))
         return VacancyMapper.toDto(savedVacancyEntity)

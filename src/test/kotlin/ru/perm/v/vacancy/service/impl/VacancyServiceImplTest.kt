@@ -5,10 +5,7 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.assertThrows
 import org.mockito.Mockito
-import org.mockito.Mockito.`when`
-import org.mockito.kotlin.doThrow
-import org.mockito.kotlin.given
-import org.mockito.kotlin.whenever
+import org.mockito.Mockito.*
 import ru.perm.v.vacancy.dto.CompanyDto
 import ru.perm.v.vacancy.dto.VacancyDto
 import ru.perm.v.vacancy.entity.CompanyEntity
@@ -144,5 +141,40 @@ class VacancyServiceImplTest {
         }
 
         assertEquals("Vacancy with N=100 not found", thrown.message)
+    }
+
+    @Test
+    fun updateWithExistVacancyAndExistCompany()  {
+        val VACANCY_N = 100L
+        val NAME_VACANCY = "vacancy"
+        val COMMENT = "comment"
+        val N_COMPANY = 1L
+        val NAME_COMPANY = "company"
+
+        val mockVacancyRepository = Mockito.mock(VacancyRepository::class.java)
+        val mockCompanyService = Mockito.mock(CompanyService::class.java)
+
+        val vacancyService = VacancyServiceImpl(mockVacancyRepository, mockCompanyService, VacancyMapper)
+        val vacancyEntity  = VacancyEntity(VACANCY_N, NAME_VACANCY,
+            COMMENT, CompanyEntity(N_COMPANY, NAME_COMPANY))
+        `when`(mockVacancyRepository.findById(VACANCY_N))
+            .thenReturn(Optional.of(vacancyEntity))
+        `when`(mockCompanyService.getCompanyByN(N_COMPANY))
+            .thenReturn(CompanyDto(N_COMPANY, NAME_COMPANY))
+        `when`(mockVacancyRepository.save(vacancyEntity))
+            .thenReturn(vacancyEntity)
+
+        val updatedVacancyDto= vacancyService.update(
+            VACANCY_N,
+            VacancyDto(VACANCY_N, NAME_VACANCY, COMMENT, CompanyDto(N_COMPANY, NAME_COMPANY))
+        )
+
+        assertEquals(
+            VacancyDto(VACANCY_N, NAME_VACANCY, COMMENT, CompanyDto(N_COMPANY, NAME_COMPANY)),
+            updatedVacancyDto
+        )
+
+        verify(mockCompanyService, times(1)).getCompanyByN(N_COMPANY)
+        verify(mockVacancyRepository, times(1)).save(vacancyEntity)
     }
 }
