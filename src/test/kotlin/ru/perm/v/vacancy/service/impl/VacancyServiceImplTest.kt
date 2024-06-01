@@ -6,6 +6,9 @@ import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.assertThrows
 import org.mockito.Mockito
 import org.mockito.Mockito.`when`
+import org.mockito.kotlin.doThrow
+import org.mockito.kotlin.given
+import org.mockito.kotlin.whenever
 import ru.perm.v.vacancy.dto.CompanyDto
 import ru.perm.v.vacancy.dto.VacancyDto
 import ru.perm.v.vacancy.entity.CompanyEntity
@@ -125,4 +128,25 @@ class VacancyServiceImplTest {
             VacancyDto(N, NAME_VACANCY, COMMENT, CompanyDto(N_COMPANY, NAME_COMPANY)), createdVacancyDto)
     }
 
+    @Test
+    fun updateForNotExistVacancy()  {
+        val N = 100L
+        val NAME_VACANCY = "vacancy"
+        val COMMENT = "comment"
+        val N_COMPANY = 1L
+        val NAME_COMPANY = "company"
+
+        val mockRepository = Mockito.mock(VacancyRepository::class.java)
+        val mockCompanyService = Mockito.mock(CompanyService::class.java)
+        val vacancyService = VacancyServiceImpl(mockRepository, mockCompanyService, VacancyMapper)
+
+        `when`(mockRepository.findById(N)).thenReturn(Optional.empty())
+
+        val thrown   = assertThrows<Exception> {
+            vacancyService.update(N,
+                VacancyDto(N, NAME_VACANCY, COMMENT, CompanyDto(N_COMPANY, NAME_COMPANY)))
+        }
+
+        assertEquals("Vacancy with N=100 not found", thrown.message)
+    }
 }
