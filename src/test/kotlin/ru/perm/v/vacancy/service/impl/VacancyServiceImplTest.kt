@@ -130,21 +130,17 @@ class VacancyServiceImplTest {
 
     @Test
     fun updateForNotExistVacancy()  {
-        val N = 100L
-        val NAME_VACANCY = "vacancy"
-        val COMMENT = "comment"
-        val N_COMPANY = 1L
-        val NAME_COMPANY = "company"
+        val VACANCY_N = 100L
 
-        val mockRepository = Mockito.mock(VacancyRepository::class.java)
+        val mockVacancyRepository = Mockito.mock(VacancyRepository::class.java)
         val mockCompanyService = Mockito.mock(CompanyService::class.java)
-        val vacancyService = VacancyServiceImpl(mockRepository, mockCompanyService, VacancyMapper)
+        val vacancyService = VacancyServiceImpl(mockVacancyRepository, mockCompanyService, VacancyMapper)
 
-        `when`(mockRepository.findById(N)).thenReturn(Optional.empty())
+        `when`(mockVacancyRepository.findById(VACANCY_N)).thenReturn(Optional.empty())
 
         val thrown   = assertThrows<Exception> {
-            vacancyService.update(N,
-                VacancyDto(N, NAME_VACANCY, COMMENT, CompanyDto(N_COMPANY, NAME_COMPANY)))
+            vacancyService.update(VACANCY_N,
+                VacancyDto(VACANCY_N, "NAME_VACANCY", "COMMENT", CompanyDto(100L, "NAME_COMPANY")))
         }
 
         assertEquals("Vacancy with N=100 not found", thrown.message)
