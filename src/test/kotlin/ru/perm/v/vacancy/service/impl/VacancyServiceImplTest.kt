@@ -196,9 +196,10 @@ class VacancyServiceImplTest {
 
         val vacancyService = VacancyServiceImpl(mockVacancyRepository, mockCompanyService, VacancyMapper)
 
-        vacancyService.delete(VACANCY_N)
+        val result = vacancyService.delete(VACANCY_N)
 
         verify(mockVacancyRepository, times(1)).deleteById(VACANCY_N)
+        assertEquals("OK", result)
     }
 
     @Test
@@ -217,6 +218,23 @@ class VacancyServiceImplTest {
 
         verify(mockVacancyRepository, times(0)).deleteById(VACANCY_N)
         assertEquals("Vacancy with N=100 not found", thrown.message)
+    }
+
+    @Test
+    fun deleteWithOtherException()  {
+        val VACANCY_N = 100L
+
+        val mockVacancyRepository = Mockito.mock(VacancyRepository::class.java)
+        val mockCompanyService = Mockito.mock(CompanyService::class.java)
+        `when`(mockVacancyRepository.findById(VACANCY_N)).thenReturn(Optional.empty())
+
+        val vacancyService = VacancyServiceImpl(mockVacancyRepository, mockCompanyService, VacancyMapper)
+
+        val excpt = assertThrows<Exception>  {
+            vacancyService.delete(VACANCY_N)
+        }
+
+        assertEquals("Vacancy with N=100 not found", excpt.message)
     }
 
 }
