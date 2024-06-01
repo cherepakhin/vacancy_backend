@@ -93,8 +93,8 @@ class VacancyServiceImplTest {
         val repository = Mockito.mock(VacancyRepository::class.java)
         val companyService = Mockito.mock(CompanyService::class.java)
         val service = VacancyServiceImpl(repository, companyService, VacancyMapper)
-
         `when`(companyService.getCompanyByN(N_COMPANY)).thenThrow(Exception::class.java)
+
         val thrown  = assertThrows<Exception>  {
             service.create(VacancyDto(N, NAME_VACANCY, COMMENT, CompanyDto(N_COMPANY, NAME_COMPANY)))
         }
