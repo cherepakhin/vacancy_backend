@@ -3,7 +3,6 @@ package ru.perm.v.vacancy.service.impl
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import ru.perm.v.vacancy.consts.ErrMessage
-import ru.perm.v.vacancy.dto.CompanyDto
 import ru.perm.v.vacancy.dto.VacancyDto
 import ru.perm.v.vacancy.mapper.VacancyMapper
 import ru.perm.v.vacancy.repository.VacancyRepository
@@ -38,7 +37,7 @@ class VacancyServiceImpl(
         return VacancyMapper.toDto(createdVacancy)
     }
 
-    override fun update(n: Long, name: String): VacancyDto {
+    override fun update(n: Long, chenageddVacancyDto: VacancyDto): VacancyDto  {
         TODO("Not yet implemented")
     }
 

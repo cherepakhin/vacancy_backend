@@ -117,9 +117,12 @@ class VacancyServiceImplTest {
         `when`(repository.save(VacancyEntity(N, NAME_VACANCY, COMMENT, CompanyEntity(N_COMPANY, NAME_COMPANY))))
             .thenReturn(VacancyEntity(N, NAME_VACANCY, COMMENT, CompanyEntity(N_COMPANY, NAME_COMPANY)))
 
-        val createVacancyDto = service.create(VacancyDto(N, NAME_VACANCY, COMMENT, CompanyDto(N_COMPANY, NAME_COMPANY)))
+        val createdVacancyDto = service.create(
+            VacancyDto(N, NAME_VACANCY, COMMENT, CompanyDto(N_COMPANY, NAME_COMPANY))
+        )
 
-        assertEquals(VacancyDto(N, NAME_VACANCY, COMMENT, CompanyDto(N_COMPANY, NAME_COMPANY)), createVacancyDto)
+        assertEquals(
+            VacancyDto(N, NAME_VACANCY, COMMENT, CompanyDto(N_COMPANY, NAME_COMPANY)), createdVacancyDto)
     }
 
 }
