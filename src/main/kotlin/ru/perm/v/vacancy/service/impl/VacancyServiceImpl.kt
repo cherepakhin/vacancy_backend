@@ -29,10 +29,8 @@ class VacancyServiceImpl(
     }
 
     override fun create(vacancyDto: VacancyDto): VacancyDto {
-        //TODO: check exist company
-        val companyDto: CompanyDto;
         try {
-            companyDto = companyService.getCompanyByN(vacancyDto.company.n)
+            companyService.getCompanyByN(vacancyDto.company.n)
         } catch (e: Exception) {
             throw Exception(String.format(ErrMessage.COMPANY_NOT_FOUND, vacancyDto.company.n))
         }

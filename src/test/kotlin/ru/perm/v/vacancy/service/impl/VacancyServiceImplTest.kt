@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.assertThrows
 import org.mockito.Mockito
+import org.mockito.Mockito.`when`
 import ru.perm.v.vacancy.dto.CompanyDto
 import ru.perm.v.vacancy.dto.VacancyDto
 import ru.perm.v.vacancy.entity.CompanyEntity
@@ -88,11 +89,16 @@ class VacancyServiceImplTest {
         val COMMENT = "comment"
         val N_COMPANY = 1L
         val NAME_COMPANY = "company"
-        val companyEntity = CompanyEntity(N_COMPANY, NAME_COMPANY)
-        val vacancyEntity = VacancyEntity(N, NAME_VACANCY, COMMENT, companyEntity)
 
         val repository = Mockito.mock(VacancyRepository::class.java)
-        Mockito.`when`(repository.save(vacancyEntity)).thenReturn(vacancyEntity)
+        val companyService = Mockito.mock(CompanyService::class.java)
+        val service = VacancyServiceImpl(repository, companyService, VacancyMapper)
 
+        `when`(companyService.getCompanyByN(N_COMPANY)).thenThrow(Exception::class.java)
+        val thrown  = assertThrows<Exception>  {
+            service.create(VacancyDto(N, NAME_VACANCY, COMMENT, CompanyDto(N_COMPANY, NAME_COMPANY)))
+        }
+
+        assertEquals("Company with N=1 not found", thrown.message)
     }
 }
