@@ -101,4 +101,25 @@ class VacancyServiceImplTest {
 
         assertEquals("Company with N=1 not found", thrown.message)
     }
+
+    @Test
+    fun createWithExistCompany() {
+        val N = 100L
+        val NAME_VACANCY = "vacancy"
+        val COMMENT = "comment"
+        val N_COMPANY = 1L
+        val NAME_COMPANY = "company"
+
+        val repository = Mockito.mock(VacancyRepository::class.java)
+        val companyService = Mockito.mock(CompanyService::class.java)
+        val service = VacancyServiceImpl(repository, companyService, VacancyMapper)
+        `when`(companyService.getCompanyByN(N_COMPANY)).thenReturn(CompanyDto(N_COMPANY, NAME_COMPANY))
+        `when`(repository.save(VacancyEntity(N, NAME_VACANCY, COMMENT, CompanyEntity(N_COMPANY, NAME_COMPANY))))
+            .thenReturn(VacancyEntity(N, NAME_VACANCY, COMMENT, CompanyEntity(N_COMPANY, NAME_COMPANY)))
+
+        val createVacancyDto = service.create(VacancyDto(N, NAME_VACANCY, COMMENT, CompanyDto(N_COMPANY, NAME_COMPANY)))
+
+        assertEquals(VacancyDto(N, NAME_VACANCY, COMMENT, CompanyDto(N_COMPANY, NAME_COMPANY)), createVacancyDto)
+    }
+
 }
