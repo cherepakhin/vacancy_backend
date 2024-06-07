@@ -1,7 +1,7 @@
 delete from contact;
 delete from company;
 
-insert into company (n,name) values (-1,'-'), (1,'COMPANY_1'), (2,'COMPANY_2'), (3,'COMPANY_3');
+insert into company (n,name) values (-1,'-'), (1,'COMPANY_1'), (2,'COMPANY_2'), (3,'3_COMPANY');
 
 insert into contact (n, company_n, name, email, phone, comment) values (-1, -1, '-', '-', '-', '-');
 insert into contact (n, company_n, name, email, phone, comment) values
