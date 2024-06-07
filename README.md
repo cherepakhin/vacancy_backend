@@ -185,6 +185,7 @@ publishing {
   ....
 }
 ````
+
 [Анализ кода Idea Analize](#idea_analizer)<br/>
 
 В Idea вызывается из Code ->  Inspect Code.
