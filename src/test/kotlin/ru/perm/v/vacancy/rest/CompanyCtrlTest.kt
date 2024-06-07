@@ -2,6 +2,7 @@ package ru.perm.v.vacancy.rest
 
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.InjectMocks
 import org.mockito.Mock
@@ -55,7 +56,7 @@ class CompanyCtrlTest {
             CompanyDto(1L, "test1"),
             CompanyDto(2L, "test2")
         );
-        val SORT_COLUMN = "COLUMN"
+        val SORT_COLUMN = "name"
         `when`(companyService.getAllSortedByField(SORT_COLUMN)).thenReturn(companyDTOs)
 
         val companies = companyCtrl.getAllSortByColumn(SORT_COLUMN)
@@ -63,6 +64,27 @@ class CompanyCtrlTest {
         assertEquals(2, companies.size)
         assertEquals(1L, companies[0].n)
         assertEquals(2L, companies[1].n)
+
+        assertEquals(listOf(1L, 2L) , companies.map { it.n } )
+
+        verify(companyService).getAllSortedByField(SORT_COLUMN)
+    }
+    @Test
+    fun sortByOtherColumn() {
+        val companyDTOs = listOf(
+            CompanyDto(100L, "COMPANY_100"),
+            CompanyDto(200L, "COMPANY_200")
+        );
+        val SORT_COLUMN = "name"
+        `when`(companyService.getAllSortedByField(SORT_COLUMN)).thenReturn(companyDTOs)
+
+        val companies = companyCtrl.getAllSortByColumn(SORT_COLUMN)
+
+        assertEquals(2, companies.size)
+        assertEquals(100L, companies[0].n)
+        assertEquals(200L, companies[1].n)
+
+        assertEquals(listOf(100L, 200L) , companies.map { it.n } )
 
         verify(companyService).getAllSortedByField(SORT_COLUMN)
     }
@@ -86,4 +108,9 @@ class CompanyCtrlTest {
         verify(companyService).getAllSortedByField(DEFAULT_SORT_COLUMN)
     }
 
+    @Test
+    fun sortByErrorColumn()  {
+        val err = assertThrows<Exception>  {   companyCtrl.getAllSortByColumn("1")}
+        assertEquals("Invalid SORT column name", err.message)
+    }
 }

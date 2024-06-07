@@ -19,6 +19,7 @@ import ru.perm.v.vacancy.service.impl.CompanyService
 class CompanyCtrl(val companyService: CompanyService) {
 
     private val logger = LoggerFactory.getLogger(this.javaClass.name)
+    private val validSortColumns = listOf("n", "name")
 
     @GetMapping("/echo/{mes}")
     @ApiOperation("Simple echo test")
@@ -50,7 +51,12 @@ class CompanyCtrl(val companyService: CompanyService) {
         var sortColumn ="n";
         logger.info("Get all companies")
         if (column.isNotEmpty()) {
-            sortColumn=column
+            if (validSortColumns.contains(column)) {
+                sortColumn=column
+            } else  {
+                logger.info("Invalid SORT column name")
+                throw Exception("Invalid SORT column name")
+            }
         }
         val companies= companyService.getAllSortedByField(sortColumn)
         logger.info(companies.toString())
