@@ -37,7 +37,16 @@ class CompanyCtrl(val companyService: CompanyService) {
     @ApiOperation("Get all companies")
     fun getAll(): List<CompanyDto> {
         logger.info("Get all companies")
-        val companies= companyService.getAll()
+        val companies= companyService.getAllSortedByField("n")
+        logger.info(companies.toString())
+        return companies
+    }
+
+    @GetMapping("/sortByColumn/{column}")
+    @ApiOperation("Get all companies")
+    fun getAllSortByColumn(column: String): List<CompanyDto> {
+        logger.info("Get all companies")
+        val companies= companyService.getAllSortedByField(column)
         logger.info(companies.toString())
         return companies
     }

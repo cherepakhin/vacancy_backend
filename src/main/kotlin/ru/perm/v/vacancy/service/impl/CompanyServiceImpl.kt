@@ -1,5 +1,6 @@
 package ru.perm.v.vacancy.service.impl
 
+import org.springframework.data.domain.Sort
 import org.springframework.stereotype.Service
 import ru.perm.v.vacancy.consts.ErrMessage
 import ru.perm.v.vacancy.dto.CompanyDto
@@ -12,6 +13,12 @@ class CompanyServiceImpl(val repository: CompanyRepository) : CompanyService {
 
     override fun getAll(): List<CompanyDto> {
         return repository.findAll().sortedBy { it.n }.map { CompanyMapper.toDto(it) }
+    }
+
+    override fun getAllSortedByField(field: String): List<CompanyDto> {
+        val sorted = Sort.by(Sort.Direction.ASC, field);
+
+        return repository.findAll(sorted).map { CompanyMapper.toDto(it) }
     }
 
     override fun createCompany(name: String): CompanyDto {
