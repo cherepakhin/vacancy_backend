@@ -10,7 +10,6 @@ import ru.perm.v.vacancy.dto.CompanyDto
 import ru.perm.v.vacancy.dto.VacancyDto
 import ru.perm.v.vacancy.entity.CompanyEntity
 import ru.perm.v.vacancy.entity.VacancyEntity
-import ru.perm.v.vacancy.mapper.VacancyMapper
 import ru.perm.v.vacancy.repository.VacancyRepository
 import java.util.*
 
@@ -27,7 +26,7 @@ class VacancyServiceImplTest {
 
         val repository = Mockito.mock(VacancyRepository::class.java)
         val companyService = Mockito.mock(CompanyService::class.java)
-        val service = VacancyServiceImpl(repository, companyService, VacancyMapper)
+        val service = VacancyServiceImpl(repository, companyService)
         Mockito.`when`(repository.findById(N)).thenReturn(Optional.of(vacancyEntity))
 
         val vacancyDto = service.getByN(N)
@@ -44,7 +43,7 @@ class VacancyServiceImplTest {
         val repository = Mockito.mock(VacancyRepository::class.java)
         Mockito.`when`(repository.findById(N)).thenReturn(Optional.empty())
         val companyService = Mockito.mock(CompanyService::class.java)
-        val service = VacancyServiceImpl(repository, companyService, VacancyMapper)
+        val service = VacancyServiceImpl(repository, companyService)
 
         val thrown = assertThrows<Exception> { service.getByN(N) }
 
@@ -73,7 +72,7 @@ class VacancyServiceImplTest {
         Mockito.`when`(repository.findAll()).thenReturn(listOf(vacancyEntity100, vacancyEntity200))
 
         val companyService = Mockito.mock(CompanyService::class.java)
-        val service = VacancyServiceImpl(repository, companyService, VacancyMapper)
+        val service = VacancyServiceImpl(repository, companyService)
         val vacancyDtos  = service.getAll()
 
         assertEquals(2, vacancyDtos.size)
@@ -92,7 +91,7 @@ class VacancyServiceImplTest {
 
         val repository = Mockito.mock(VacancyRepository::class.java)
         val companyService = Mockito.mock(CompanyService::class.java)
-        val service = VacancyServiceImpl(repository, companyService, VacancyMapper)
+        val service = VacancyServiceImpl(repository, companyService)
         `when`(companyService.getCompanyByN(N_COMPANY)).thenThrow(Exception::class.java)
 
         val thrown  = assertThrows<Exception>  {
@@ -112,7 +111,7 @@ class VacancyServiceImplTest {
 
         val repository = Mockito.mock(VacancyRepository::class.java)
         val companyService = Mockito.mock(CompanyService::class.java)
-        val service = VacancyServiceImpl(repository, companyService, VacancyMapper)
+        val service = VacancyServiceImpl(repository, companyService)
         `when`(companyService.getCompanyByN(N_COMPANY)).thenReturn(CompanyDto(N_COMPANY, NAME_COMPANY))
         `when`(repository.save(VacancyEntity(N, NAME_VACANCY, COMMENT, CompanyEntity(N_COMPANY, NAME_COMPANY))))
             .thenReturn(VacancyEntity(N, NAME_VACANCY, COMMENT, CompanyEntity(N_COMPANY, NAME_COMPANY)))
@@ -131,7 +130,7 @@ class VacancyServiceImplTest {
 
         val mockVacancyRepository = Mockito.mock(VacancyRepository::class.java)
         val mockCompanyService = Mockito.mock(CompanyService::class.java)
-        val vacancyService = VacancyServiceImpl(mockVacancyRepository, mockCompanyService, VacancyMapper)
+        val vacancyService = VacancyServiceImpl(mockVacancyRepository, mockCompanyService)
 
         `when`(mockVacancyRepository.findById(VACANCY_N)).thenReturn(Optional.empty())
 
@@ -154,7 +153,7 @@ class VacancyServiceImplTest {
         val mockVacancyRepository = Mockito.mock(VacancyRepository::class.java)
         val mockCompanyService = Mockito.mock(CompanyService::class.java)
 
-        val vacancyService = VacancyServiceImpl(mockVacancyRepository, mockCompanyService, VacancyMapper)
+        val vacancyService = VacancyServiceImpl(mockVacancyRepository, mockCompanyService)
         val vacancyEntity  = VacancyEntity(VACANCY_N, NAME_VACANCY,
             COMMENT, CompanyEntity(N_COMPANY, NAME_COMPANY))
         `when`(mockVacancyRepository.findById(VACANCY_N))
@@ -194,7 +193,7 @@ class VacancyServiceImplTest {
             )
         )
 
-        val vacancyService = VacancyServiceImpl(mockVacancyRepository, mockCompanyService, VacancyMapper)
+        val vacancyService = VacancyServiceImpl(mockVacancyRepository, mockCompanyService)
 
         val result = vacancyService.delete(VACANCY_N)
 
@@ -210,7 +209,7 @@ class VacancyServiceImplTest {
         val mockCompanyService = Mockito.mock(CompanyService::class.java)
         `when`(mockVacancyRepository.findById(VACANCY_N)).thenReturn(Optional.empty())
 
-        val vacancyService = VacancyServiceImpl(mockVacancyRepository, mockCompanyService, VacancyMapper)
+        val vacancyService = VacancyServiceImpl(mockVacancyRepository, mockCompanyService)
 
         val thrown   = assertThrows<Exception> {
             vacancyService.delete(VACANCY_N)
@@ -228,7 +227,7 @@ class VacancyServiceImplTest {
         val mockCompanyService = Mockito.mock(CompanyService::class.java)
         `when`(mockVacancyRepository.findById(VACANCY_N)).thenReturn(Optional.empty())
 
-        val vacancyService = VacancyServiceImpl(mockVacancyRepository, mockCompanyService, VacancyMapper)
+        val vacancyService = VacancyServiceImpl(mockVacancyRepository, mockCompanyService)
 
         val excpt = assertThrows<Exception>  {
             vacancyService.delete(VACANCY_N)

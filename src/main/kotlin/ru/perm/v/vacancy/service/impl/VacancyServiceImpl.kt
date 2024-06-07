@@ -11,9 +11,9 @@ import ru.perm.v.vacancy.service.VacancyService
 @Service
 class VacancyServiceImpl(
     @Autowired private val repository: VacancyRepository,
-    @Autowired private val companyService: CompanyService,
-    @Autowired private val mapper: VacancyMapper,
+    @Autowired private val companyService: CompanyService
 ) : VacancyService {
+
     override fun getByN(n: Long): VacancyDto {
         if (repository.findById(n).isPresent) {
             val vacancyEntity = repository.findById(n).get()

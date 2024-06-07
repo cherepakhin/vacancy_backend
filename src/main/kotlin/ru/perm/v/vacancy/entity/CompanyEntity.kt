@@ -5,7 +5,7 @@ import javax.validation.constraints.NotNull
 
 @Entity
 @Table(name = "company")
-class CompanyEntity { //TODO: "open" needed for JPA??? (open class CompanyEntity)
+class CompanyEntity { //"open" needed for JPA??? (open class CompanyEntity)
     @Id
     @NotNull
     @Column(name = "n", nullable = false)
