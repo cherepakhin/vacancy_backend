@@ -45,8 +45,8 @@ class VacancyServiceImpl(
     }
 
     override fun delete(n: Long): String {
-        getByN(n) // throw if not exists
         try {
+            getByN(n) // throw if not exists
             repository.deleteById(n)
         } catch  (e: Exception)  {
             throw Exception(e.message)

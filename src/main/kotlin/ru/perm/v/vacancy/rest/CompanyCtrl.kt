@@ -41,4 +41,18 @@ class CompanyCtrl(val companyService: CompanyService) {
         logger.info(companies.toString())
         return companies
     }
+
+    @GetMapping("/{n}")
+    @ApiOperation("Get Product by N")
+    @Cacheable("products")
+    fun getByN(
+        @Parameter(
+            description = "N(ID) Product."
+        )
+        @PathVariable
+        n: Long
+    ): CompanyDto  {
+        return companyService.getCompanyByN(n)
+    }
+
 }

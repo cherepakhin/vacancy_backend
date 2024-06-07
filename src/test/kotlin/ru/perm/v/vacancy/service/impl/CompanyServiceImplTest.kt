@@ -143,4 +143,26 @@ class CompanyServiceImplTest {
         }.message;
         assertEquals("Company with N=100 not created", message);
     }
+
+    @Test
+    fun getAll_CheckSort() {
+        val N1 = 1L;
+        val NAME_COMPANY1 = "company1";
+        val companyEntity1 = CompanyEntity(N1, NAME_COMPANY1);
+
+        val N2  =  2L;
+        val NAME_COMPANY2  =  "company2";
+        val companyEntity2  = CompanyEntity(N2, NAME_COMPANY2);
+
+        val repository = mock(CompanyRepository::class.java);
+        `when`(repository.findAll()).thenReturn(listOf(companyEntity2, companyEntity1));
+        val service  = CompanyServiceImpl(repository);
+
+        val companies  = service.getAll();
+        assertEquals(2, companies.size);
+        assertEquals(N1, companies[0].n);
+        assertEquals(NAME_COMPANY1, companies[0].name);
+        assertEquals(N2, companies[1].n);
+        assertEquals(NAME_COMPANY2, companies[1].name);
+    }
 }
