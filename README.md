@@ -166,6 +166,25 @@ publishing {
 
 [https://stackoverflow.com/questions/64062905/unable-to-publish-jar-to-gitlab-package-registry-with-gradle](https://stackoverflow.com/questions/64062905/unable-to-publish-jar-to-gitlab-package-registry-with-gradle)
 
+### Publishing source to Nexus
+
+````yaml
+val sourcesJar by tasks.registering(Jar::class)  {
+  archiveClassifier.set("sources")
+    from(sourceSets.main.get().allSource)
+}
+  
+publishing {
+  ....
+  publications {
+    create<MavenPublication>("maven"){
+      artifact(tasks["bootJar"])
+      artifact(tasks["sourcesJar"])
+    }
+  }
+  ....
+}
+````
 [Анализ кода Idea Analize](#idea_analizer)<br/>
 
 В Idea вызывается из Code ->  Inspect Code.

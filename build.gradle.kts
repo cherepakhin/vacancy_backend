@@ -4,7 +4,7 @@ import org.springframework.boot.gradle.tasks.bundling.BootJar
 
 group = "ru.perm.v"
 // change version on publishing
-version = "0.24.0518.1"
+version = "0.24.0706.1"
 description = "Vacancy backend"
 
 java.sourceCompatibility = JavaVersion.VERSION_11
@@ -178,6 +178,11 @@ val bootJar by tasks.getting(BootJar::class) {
     enabled = true
 }
 
+val sourcesJar by tasks.registering(Jar::class)  {
+   archiveClassifier.set("sources")
+    from(sourceSets.main.get().allSource)
+}
+
 publishing {
     repositories {
         maven {
@@ -195,6 +200,7 @@ publishing {
     publications {
         create<MavenPublication>("maven"){
             artifact(tasks["bootJar"])
+            artifact(tasks["sourcesJar"])
         }
     }
 }
@@ -203,6 +209,7 @@ publishing {
 springBoot {
     mainClass.set("ru.perm.v.vacancy.VacancyKotlinApplication")
 }
+
 
 // DEMO TASKS
 // use ./gradlew myTask1
