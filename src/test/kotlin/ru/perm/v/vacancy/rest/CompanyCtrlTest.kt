@@ -66,4 +66,24 @@ class CompanyCtrlTest {
 
         verify(companyService).getAllSortedByField(SORT_COLUMN)
     }
+
+    @Test
+    fun sortByDefaultColumn() {
+        val companyDTOs = listOf(
+            CompanyDto(1L, "test1"),
+            CompanyDto(2L, "test2")
+        );
+
+        `when`(companyService.getAllSortedByField("n")).thenReturn(companyDTOs)
+
+        val companies = companyCtrl.getAllSortByColumn("")
+
+        assertEquals(2, companies.size)
+        assertEquals(1L, companies[0].n)
+        assertEquals(2L, companies[1].n)
+
+        val DEFAULT_SORT_COLUMN = "n"
+        verify(companyService).getAllSortedByField(DEFAULT_SORT_COLUMN)
+    }
+
 }

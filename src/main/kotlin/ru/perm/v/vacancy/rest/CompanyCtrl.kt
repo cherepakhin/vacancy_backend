@@ -44,9 +44,14 @@ class CompanyCtrl(val companyService: CompanyService) {
 
     @GetMapping("/sortByColumn/{column}")
     @ApiOperation("Get all companies")
-    fun getAllSortByColumn(column: String): List<CompanyDto> {
+    //TODO: add cache, rewrite with criteria search
+    fun getAllSortByColumn(@PathVariable("column") column: String): List<CompanyDto> {
+        var sortColumn ="n";
         logger.info("Get all companies")
-        val companies= companyService.getAllSortedByField(column)
+        if (column.isNotEmpty()) {
+            sortColumn=column
+        }
+        val companies= companyService.getAllSortedByField(sortColumn)
         logger.info(companies.toString())
         return companies
     }
