@@ -44,7 +44,8 @@ class CompanyCtrl(val companyService: CompanyService) {
 
     @GetMapping("/sortByColumn/{column}")
     @ApiOperation("Get all companies")
-    //TODO: add cache, rewrite with criteria search
+    //TODO: add cache
+    // rewrite with criteria search???
     fun getAllSortByColumn(@PathVariable("column") column: String): List<CompanyDto> {
         var sortColumn ="n";
         logger.info("Get all companies")
