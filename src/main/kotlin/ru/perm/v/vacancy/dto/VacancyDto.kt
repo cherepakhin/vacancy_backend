@@ -37,5 +37,9 @@ open class VacancyDto {
         return result
     }
 
+    override fun toString(): String {
+        return "VacancyDto(n=$n, name='$name', comment='$comment', company=$company)"
+    }
+
 
 }

@@ -1,4 +1,4 @@
-package ru.perm.v.vacancy.rest
+package ru.perm.v.vacancy.validators
 
 import org.junit.jupiter.api.Test
 
