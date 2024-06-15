@@ -1,4 +1,4 @@
-package ru.perm.v.vacancy.rest
+package ru.perm.v.vacancy.validators
 
 import ru.perm.v.vacancy.dto.CompanyDto
 import javax.validation.ConstraintViolation

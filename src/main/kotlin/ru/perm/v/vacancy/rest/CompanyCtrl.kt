@@ -8,8 +8,7 @@ import org.springframework.cache.annotation.Cacheable
 import org.springframework.web.bind.annotation.*
 import ru.perm.v.vacancy.dto.CompanyDto
 import ru.perm.v.vacancy.service.impl.CompanyService
-import javax.validation.ConstraintViolation
-import javax.validation.Validation
+import ru.perm.v.vacancy.validators.ValidatorCompanyDto
 
 @RestController
 @RequestMapping("/company")

@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test
 
 import org.junit.jupiter.api.Assertions.*
 import ru.perm.v.vacancy.dto.CompanyDto
+import ru.perm.v.vacancy.validators.ValidatorCompanyDto
 
 class ValidatorCompanyDtoTest {
 
