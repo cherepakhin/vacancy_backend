@@ -21,9 +21,9 @@ class CompanyServiceImpl(val repository: CompanyRepository) : CompanyService {
         return repository.findAll(sorted).map { CompanyMapper.toDto(it) }
     }
 
-    override fun createCompany(name: String): CompanyDto {
+    override fun createCompany(companyDto: CompanyDto): CompanyDto {
         val n = getNextN()
-        val company = CompanyEntity(n, name = name)
+        val company = CompanyEntity(n, name = companyDto.name)
         val savedCompany = repository.save(company)
         if (savedCompany != null) {
             return CompanyMapper.toDto(savedCompany)

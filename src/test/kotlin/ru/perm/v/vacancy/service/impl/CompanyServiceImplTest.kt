@@ -5,6 +5,7 @@ import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.mockito.Mockito.*
 import org.mockito.kotlin.doNothing
+import ru.perm.v.vacancy.dto.CompanyDto
 import ru.perm.v.vacancy.entity.CompanyEntity
 import ru.perm.v.vacancy.repository.CompanyRepository
 import java.util.*
@@ -22,7 +23,7 @@ class CompanyServiceImplTest {
 
         val service = CompanyServiceImpl(repository);
 
-        val savedCompany = service.createCompany(NAME_COMPANY);
+        val savedCompany = service.createCompany(CompanyDto(N, NAME_COMPANY));
 
         assertEquals(N, savedCompany.n);
         assertEquals(NAME_COMPANY, savedCompany.name);
@@ -137,9 +138,9 @@ class CompanyServiceImplTest {
         `when`(repository.save(companyEntity)).thenReturn(null);
 
         val service = CompanyServiceImpl(repository);
-
+        val companyDto  = CompanyDto(N, NAME_COMPANY);
         val message = assertThrows<Exception> {
-            service.createCompany(NAME_COMPANY)
+            service.createCompany(companyDto);
         }.message;
         assertEquals("Company with N=100 not created", message);
     }

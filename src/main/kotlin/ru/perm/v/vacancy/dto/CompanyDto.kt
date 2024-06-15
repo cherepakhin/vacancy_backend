@@ -1,6 +1,8 @@
 package ru.perm.v.vacancy.dto
 
-class CompanyDto(val n: Long, val name: String) {
+import javax.validation.constraints.Size
+
+class CompanyDto(val n: Long, @field:Size(min=5, max=50) val name: String) {
     override fun toString(): String {
         return "CompanyDto(n=$n, name='$name')"
     }
