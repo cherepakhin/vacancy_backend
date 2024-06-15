@@ -9,7 +9,7 @@ class ValidatorCompanyDtoTest {
 
     @Test
     fun validateOk()  {
-        val companyDto = CompanyDto(1L,  "test")
+        val companyDto = CompanyDto(1L,  "test1")
 
         assertDoesNotThrow {
             ValidatorCompanyDto.validate(companyDto)
