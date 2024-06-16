@@ -4,6 +4,7 @@ import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
 import io.swagger.v3.oas.annotations.Parameter
 import org.slf4j.LoggerFactory
+import org.springframework.cache.annotation.CacheEvict
 import org.springframework.cache.annotation.Cacheable
 import org.springframework.web.bind.annotation.*
 import ru.perm.v.vacancy.dto.CompanyDto
@@ -20,7 +21,7 @@ class CompanyCtrl(val companyService: CompanyService) {
 
     @GetMapping("/echo/{mes}")
     @ApiOperation("Simple echo test")
-    @Cacheable("product_echo")
+    @Cacheable("company_echo")
     fun echoMessage(
         @Parameter(
             description = "Any string. will be returned in response."
@@ -42,7 +43,6 @@ class CompanyCtrl(val companyService: CompanyService) {
 
     @GetMapping("/sortByColumn/{column}")
     @ApiOperation("Get all companies")
-    //TODO: add cache
     // rewrite with criteria search???
     fun getAllSortByColumn(@PathVariable("column") column: String): List<CompanyDto> {
         var sortColumn = "n";
@@ -62,7 +62,7 @@ class CompanyCtrl(val companyService: CompanyService) {
 
     @GetMapping("/{n}")
     @ApiOperation("Get Product by N")
-    @Cacheable("products")
+    @Cacheable("companies")
     fun getByN(
         @Parameter(
             description = "N(ID) Product."
@@ -75,6 +75,7 @@ class CompanyCtrl(val companyService: CompanyService) {
 
     @PostMapping
     @ApiOperation("Create Company from DTO")
+    @CacheEvict(value = ["companies"], allEntries = true)
     fun create(
         @Parameter(
             description = "DTO of Company."
@@ -84,4 +85,5 @@ class CompanyCtrl(val companyService: CompanyService) {
         ValidatorCompanyDto.validate(companyDto)
         return companyService.createCompany(companyDto)
     }
+    //TODO: delete by id
 }
