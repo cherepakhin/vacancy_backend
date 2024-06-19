@@ -132,7 +132,7 @@ $ ./gradlew bootJar
 $ java -jar build/libs/vacancy_backend-<version>.jar
 ````
 
-Получение jar файла из Nexus через командную строку (или в скрипте):
+Получение jar файла из Nexus через командную строку (или в скрипте для развертывания на сервере):
 
 ````shell
 $ wget http://192.168.1.20:8082/repository/ru.perm.v/ru/perm/v/vacancy_backend/0.24.0706.1/vacancy_backend-0.24.0706.1.jar
