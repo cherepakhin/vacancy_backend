@@ -8,9 +8,11 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.cache.annotation.Cacheable
 import org.springframework.web.bind.annotation.*
 import ru.perm.v.vacancy.dto.VacancyDto
+import ru.perm.v.vacancy.dto.VacancyDtoForCreate
 import ru.perm.v.vacancy.service.VacancyService
 import ru.perm.v.vacancy.service.impl.CompanyService
 import ru.perm.v.vacancy.validators.ValidatorVacancyDto
+import ru.perm.v.vacancy.validators.ValidatorVacancyDtoForCreate
 
 @RestController
 @RequestMapping("/vacancy")
@@ -77,9 +79,10 @@ class VacancyCtrl() {
         @Parameter(
             description = "DTO of Vacancy"
         )
-        @RequestBody vacancyDto: VacancyDto,
+        @RequestBody vacancyDto: VacancyDtoForCreate,
     ): VacancyDto {
-        ValidatorVacancyDto.validate(vacancyDto)
+        ValidatorVacancyDtoForCreate.validate(vacancyDto)
+        companyService.getCompanyByN(vacancyDto.company_n) // throw is company not exists
         return vacancyService.create(vacancyDto)
     }
     //TODO: delete by id

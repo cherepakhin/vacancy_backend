@@ -4,7 +4,8 @@ import javax.validation.constraints.Size
 
 open class VacancyDto {
     var n: Long = -1L
-    @field:Size(min=5, max=50) var name: String = "-"
+    @field:Size(min=5, max=50)
+    var name: String = "-"
     var comment: String = "-"
     var company: CompanyDto = CompanyDto(-1L, "-")
 

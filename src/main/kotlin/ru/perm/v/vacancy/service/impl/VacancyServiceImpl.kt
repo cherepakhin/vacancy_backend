@@ -3,7 +3,12 @@ package ru.perm.v.vacancy.service.impl
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 import ru.perm.v.vacancy.consts.ErrMessage
+import ru.perm.v.vacancy.dto.CompanyDto
 import ru.perm.v.vacancy.dto.VacancyDto
+import ru.perm.v.vacancy.dto.VacancyDtoForCreate
+import ru.perm.v.vacancy.entity.CompanyEntity
+import ru.perm.v.vacancy.entity.VacancyEntity
+import ru.perm.v.vacancy.mapper.CompanyMapper
 import ru.perm.v.vacancy.mapper.VacancyMapper
 import ru.perm.v.vacancy.repository.VacancyRepository
 import ru.perm.v.vacancy.service.VacancyService
@@ -27,13 +32,19 @@ class VacancyServiceImpl(
         return repository.findAll().map { VacancyMapper.toDto(it) }.toList()
     }
 
-    override fun create(vacancyDto: VacancyDto): VacancyDto {
+    override fun create(vacancyDtoForCreate: VacancyDtoForCreate): VacancyDto {
+        val companyDto: CompanyDto
         try {
-            companyService.getCompanyByN(vacancyDto.company.n)
+            companyDto = companyService.getCompanyByN(vacancyDtoForCreate.company_n)
         } catch (e: Exception) {
-            throw Exception(String.format(ErrMessage.COMPANY_NOT_FOUND, vacancyDto.company.n))
+            throw Exception(String.format(ErrMessage.COMPANY_NOT_FOUND, vacancyDtoForCreate.company_n))
         }
-        val createdVacancy = repository.save(VacancyMapper.toEntity(vacancyDto))
+        val companyEntity= CompanyMapper.toEntity(companyDto)
+        println(companyEntity)
+        val n = repository.getNextN()
+        println(n)
+        val vacancyEntity  = VacancyEntity(n, vacancyDtoForCreate.name, vacancyDtoForCreate.comment, companyEntity)
+        val createdVacancy = repository.save(vacancyEntity)
         return VacancyMapper.toDto(createdVacancy)
     }
 

@@ -8,6 +8,7 @@ import org.mockito.Mockito
 import org.mockito.Mockito.*
 import ru.perm.v.vacancy.dto.CompanyDto
 import ru.perm.v.vacancy.dto.VacancyDto
+import ru.perm.v.vacancy.dto.VacancyDtoForCreate
 import ru.perm.v.vacancy.entity.CompanyEntity
 import ru.perm.v.vacancy.entity.VacancyEntity
 import ru.perm.v.vacancy.repository.VacancyRepository
@@ -95,7 +96,7 @@ class VacancyServiceImplTest {
         `when`(companyService.getCompanyByN(N_COMPANY)).thenThrow(Exception::class.java)
 
         val thrown  = assertThrows<Exception>  {
-            service.create(VacancyDto(N, NAME_VACANCY, COMMENT, CompanyDto(N_COMPANY, NAME_COMPANY)))
+            service.create(VacancyDtoForCreate(NAME_VACANCY, COMMENT, N_COMPANY))
         }
 
         assertEquals("Company with N=1 not found", thrown.message)
@@ -103,7 +104,6 @@ class VacancyServiceImplTest {
 
     @Test
     fun createWithExistCompany() {
-        val N = 100L
         val NAME_VACANCY = "vacancy"
         val COMMENT = "comment"
         val N_COMPANY = 1L
@@ -113,15 +113,17 @@ class VacancyServiceImplTest {
         val companyService = Mockito.mock(CompanyService::class.java)
         val service = VacancyServiceImpl(repository, companyService)
         `when`(companyService.getCompanyByN(N_COMPANY)).thenReturn(CompanyDto(N_COMPANY, NAME_COMPANY))
-        `when`(repository.save(VacancyEntity(N, NAME_VACANCY, COMMENT, CompanyEntity(N_COMPANY, NAME_COMPANY))))
-            .thenReturn(VacancyEntity(N, NAME_VACANCY, COMMENT, CompanyEntity(N_COMPANY, NAME_COMPANY)))
+        val VACANCY_NEXT_N  =  101L
+        `when`(repository.getNextN()).thenReturn(VACANCY_NEXT_N)
+        `when`(repository.save(VacancyEntity(VACANCY_NEXT_N, NAME_VACANCY, COMMENT, CompanyEntity(N_COMPANY, NAME_COMPANY))))
+            .thenReturn(VacancyEntity(VACANCY_NEXT_N, NAME_VACANCY, COMMENT, CompanyEntity(N_COMPANY, NAME_COMPANY)))
 
         val createdVacancyDto = service.create(
-            VacancyDto(N, NAME_VACANCY, COMMENT, CompanyDto(N_COMPANY, NAME_COMPANY))
+            VacancyDtoForCreate(NAME_VACANCY, COMMENT, N_COMPANY)
         )
 
         assertEquals(
-            VacancyDto(N, NAME_VACANCY, COMMENT, CompanyDto(N_COMPANY, NAME_COMPANY)), createdVacancyDto)
+            VacancyDto(VACANCY_NEXT_N, NAME_VACANCY, COMMENT, CompanyDto(N_COMPANY, NAME_COMPANY)), createdVacancyDto)
     }
 
     @Test
