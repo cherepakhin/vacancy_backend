@@ -33,4 +33,21 @@ class ContactEntityTest {
         assertEquals(PHONE, contact.phone)
         assertEquals(COMMENT, contact.comment)
     }
+
+    @Test
+    fun testEquals()  {
+        val companyEntity = CompanyEntity()
+
+        val contactEntity1 = ContactEntity()
+        contactEntity1.n  = 1L
+        contactEntity1.name  = "NAME"
+        contactEntity1.companyEntity  = companyEntity
+
+        val contactEntity2 = ContactEntity()
+        contactEntity2.n  = 1L
+        contactEntity2.name  = "NAME"
+        contactEntity2.companyEntity  = companyEntity
+
+        assertEquals(contactEntity1, contactEntity2)
+    }
 }
