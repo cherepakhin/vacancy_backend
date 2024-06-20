@@ -44,7 +44,7 @@ class VacancyCtrl(val vacancyService: VacancyService) {
     //TODO: add cache
     // rewrite with criteria search???
     fun getAllSortByColumn(@PathVariable("column") column: String): List<VacancyDto> {
-        //TODO: write code
+        //TODO: write code getAllSortByColumn(column)
         return listOf()
     }
 
@@ -58,8 +58,7 @@ class VacancyCtrl(val vacancyService: VacancyService) {
         @PathVariable
         n: Long,
     ): VacancyDto {
-//        return companyService.getCompanyByN(n)
-        return VacancyDto()
+        return vacancyService.getByN(n)
     }
 
     @PostMapping
@@ -74,4 +73,5 @@ class VacancyCtrl(val vacancyService: VacancyService) {
 //        return companyService.createCompany(companyDto)
         return VacancyDto()
     }
+    //TODO: delete by id
 }
