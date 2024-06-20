@@ -24,6 +24,24 @@ class VacancyMapperTest {
     }
 
     @Test
+    fun toDtoForEmptyCompany() {
+        val N = 100L
+        val NAME = "name"
+        val COMMENT = "comment"
+
+
+        val entity = VacancyEntity()
+        entity.n =N
+        entity.name  = NAME
+        entity.comment   = COMMENT
+        // company NOT DEFINED!
+        val dto = VacancyMapper.toDto(entity)
+
+        val EMPTY_COMPANY_DTO = CompanyDto(-1, "")
+        assertEquals(VacancyDto(N, NAME, COMMENT, EMPTY_COMPANY_DTO), dto)
+    }
+
+    @Test
     fun toEntity() {
         val N = 100L
         val NAME = "name"
