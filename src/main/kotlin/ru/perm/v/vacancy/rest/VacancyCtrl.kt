@@ -4,17 +4,27 @@ import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
 import io.swagger.v3.oas.annotations.Parameter
 import org.slf4j.LoggerFactory
+import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.cache.annotation.Cacheable
 import org.springframework.web.bind.annotation.*
 import ru.perm.v.vacancy.dto.VacancyDto
 import ru.perm.v.vacancy.service.VacancyService
+import ru.perm.v.vacancy.service.impl.CompanyService
+import ru.perm.v.vacancy.validators.ValidatorVacancyDto
 
 @RestController
 @RequestMapping("/vacancy")
 @Api(tags = ["Rest Vacancy"])
-class VacancyCtrl(val vacancyService: VacancyService) {
+class VacancyCtrl() {
 
     private val logger = LoggerFactory.getLogger(this.javaClass.name)
+
+    @Autowired
+    lateinit var vacancyService: VacancyService
+
+    @Autowired
+    lateinit var companyService: CompanyService
+
     private val validSortColumns = listOf("n", "name")
 
     @GetMapping("/echo/{mes}")
@@ -69,9 +79,8 @@ class VacancyCtrl(val vacancyService: VacancyService) {
         )
         @RequestBody vacancyDto: VacancyDto,
     ): VacancyDto {
-//        ValidatorCompanyDto.validate(companyDto)
-//        return companyService.createCompany(companyDto)
-        return VacancyDto()
+        ValidatorVacancyDto.validate(vacancyDto)
+        return vacancyService.create(vacancyDto)
     }
     //TODO: delete by id
 }

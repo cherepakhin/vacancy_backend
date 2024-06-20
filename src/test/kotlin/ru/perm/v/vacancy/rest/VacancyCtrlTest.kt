@@ -3,6 +3,7 @@ package ru.perm.v.vacancy.rest
 import org.junit.jupiter.api.Test
 
 import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.InjectMocks
 import org.mockito.Mock
@@ -47,4 +48,27 @@ class VacancyCtrlTest {
 
         assertEquals(vacancy1, receivedVacancy)
     }
+
+    @Test
+    fun createForValidDto() {
+        val companyDto = CompanyDto(1L, "COMPANY_1")
+        val vacancy1 = VacancyDto(1L, "VACANCY_1", "COMMENT_1", companyDto)
+
+        `when`(mockVacancyService.create(vacancy1)).thenReturn(vacancy1)
+
+        val createdVacancy = vacancyCtrl.create(vacancy1)
+
+        assertEquals(vacancy1, createdVacancy)
+    }
+
+    @Test
+    fun createForNotValidDto() {
+        val companyDto = CompanyDto(1L, "COMPANY_1")
+        val vacancy1 = VacancyDto(1L, "", "", companyDto)
+
+        val err = assertThrows<Exception> {vacancyCtrl.create(vacancy1)}
+
+        assertEquals("VacancyDto(n=1, name='', comment='', company=CompanyDto(n=1, name='COMPANY_1')) has errors: размер должен находиться в диапазоне от 5 до 50\n", err.message)
+    }
+
 }
