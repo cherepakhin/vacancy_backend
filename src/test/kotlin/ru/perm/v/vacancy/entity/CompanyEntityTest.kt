@@ -53,4 +53,13 @@ class CompanyEntityTest {
 
         assertNotEquals(company1, company2)
     }
+
+    @Test
+    fun hashcodeTest() {
+        val company1 = CompanyEntity(100L, "test")
+        val company2 = CompanyEntity(100L, "test")
+
+        assertEquals(company1.hashCode(), company2.hashCode())
+    }
+
 }
