@@ -33,6 +33,22 @@ class VacancyEntityTest {
     }
 
     @Test
+    fun equalstWithCompaniesTest() {
+        val companyEntity10 = CompanyEntity()
+        companyEntity10.n=10L
+        companyEntity10.name= "COMPANY"
+
+        val companyEntity20 = CompanyEntity()
+        companyEntity20.n=10L
+        companyEntity20.name= "COMPANY"
+
+        val vacancy1 = VacancyEntity( 100L, "NAME", "COMMENT", companyEntity10)
+        val vacancy2 = VacancyEntity( 100L, "NAME", "COMMENT", companyEntity20)
+
+        assertEquals(vacancy1, vacancy2)
+    }
+
+    @Test
     fun notEqualstByN_Test() {
         val companyEntity = CompanyEntity()
         companyEntity.n=10L
