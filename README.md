@@ -14,8 +14,8 @@
 [Анализ кода Idea Analize](#idea_analizer)<br/>
 [Интеграционное тестирование RestAssured](#rest_assured_tests)<br/>
 
-[Swagger](#swagger)
-[Spring Actuator](#actuator)
+[Swagger](#swagger)<br/>
+[Spring Actuator](#actuator)<br/>
 
 [TODO](#todo)<br/>
 [Примечания](#tose)<br/>
