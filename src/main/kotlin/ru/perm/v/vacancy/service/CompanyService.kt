@@ -1,7 +1,6 @@
 package ru.perm.v.vacancy.service.impl
 
 import ru.perm.v.vacancy.dto.CompanyDto
-import ru.perm.v.vacancy.entity.CompanyEntity
 
 interface CompanyService {
     fun createCompany(companyDto: CompanyDto): CompanyDto

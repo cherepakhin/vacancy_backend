@@ -11,7 +11,6 @@ import ru.perm.v.vacancy.dto.VacancyDto
 import ru.perm.v.vacancy.dto.VacancyDtoForCreate
 import ru.perm.v.vacancy.service.VacancyService
 import ru.perm.v.vacancy.service.impl.CompanyService
-import ru.perm.v.vacancy.validators.ValidatorVacancyDto
 import ru.perm.v.vacancy.validators.ValidatorVacancyDtoForCreate
 
 @RestController
