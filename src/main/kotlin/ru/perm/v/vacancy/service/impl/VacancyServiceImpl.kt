@@ -6,7 +6,6 @@ import ru.perm.v.vacancy.consts.ErrMessage
 import ru.perm.v.vacancy.dto.CompanyDto
 import ru.perm.v.vacancy.dto.VacancyDto
 import ru.perm.v.vacancy.dto.VacancyDtoForCreate
-import ru.perm.v.vacancy.entity.CompanyEntity
 import ru.perm.v.vacancy.entity.VacancyEntity
 import ru.perm.v.vacancy.mapper.CompanyMapper
 import ru.perm.v.vacancy.mapper.VacancyMapper

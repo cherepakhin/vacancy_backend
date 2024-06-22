@@ -1,7 +1,6 @@
 package ru.perm.v.vacancy.validators
 
 import ru.perm.v.vacancy.dto.VacancyDto
-import ru.perm.v.vacancy.dto.VacancyDtoForCreate
 import javax.validation.ConstraintViolation
 import javax.validation.Validation
 

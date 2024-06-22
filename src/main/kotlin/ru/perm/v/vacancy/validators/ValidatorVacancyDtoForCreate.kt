@@ -8,7 +8,7 @@ object ValidatorVacancyDtoForCreate {
 
     fun validate(vacancyDtoForCreate: VacancyDtoForCreate) {
         val violations = validator.validate(vacancyDtoForCreate).toList()
-        if (violations.size > 0) {
+        if (violations.isNotEmpty()) {
             var messageError = ""
 // OLD STYLE
 //            for(violation in violations) {
