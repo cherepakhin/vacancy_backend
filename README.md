@@ -218,6 +218,8 @@ publishing {
 
 После запуска доступен по адресу [http://127.0.0.1:8980/vacancy/api/swagger-ui/](http://127.0.0.1:8980/vacancy/api/swagger-ui/)
 
+![doc/swagger.png](doc/swagger.png)
+
 <a id="tose"></a>
 ### Примечания
 
@@ -265,7 +267,6 @@ Spring profiles<br/>
 DataJpa tests<br/>
 Нагрузочное тестирование<br/>
 <br/>
-Swagger<br/>
 Spring Actuator<br/>
 
 Prometheus<br/><br/>
