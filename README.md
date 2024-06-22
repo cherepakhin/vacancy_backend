@@ -372,16 +372,13 @@ java -verbose:class <other args> - вывод загруженных класс�
 После отладки JPA, перенести в PostgreSQL на v.perm.ru<br/>
 Spring profiles<br/>
 <br/>
-<br/>
 DataJpa tests<br/>
 Нагрузочное тестирование<br/>
 <br/>
-Spring Actuator<br/>
-
 Prometheus<br/><br/>
 Docker<br/>
 Кеширование<br/>
-
+<br/>
 Camel для интеграции<br/>
 jxls для отчетов<br/>
 
