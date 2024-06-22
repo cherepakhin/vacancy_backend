@@ -234,13 +234,11 @@ class VacancyServiceImpl(
 После отладки JPA, перенести в PostgreSQL на v.perm.ru<br/>
 Spring profiles<br/>
 <br/>
-
-<br/>
 Интеграционное тестирование<br/>
 DataJpa tests<br/>
 RestAssured tests<br/>
 Нагрузочное тестирование<br/>
-
+<br/>
 Swagger<br/>
 Spring Actuator<br/>
 
