@@ -15,6 +15,7 @@
 [Интеграционное тестирование RestAssured](#rest_assured_tests)<br/>
 
 [Swagger](#swagger)
+[Spring Actuator](#actuator)
 
 [TODO](#todo)<br/>
 [Примечания](#tose)<br/>
@@ -219,6 +220,114 @@ publishing {
 После запуска доступен по адресу [http://127.0.0.1:8980/vacancy/api/swagger-ui/](http://127.0.0.1:8980/vacancy/api/swagger-ui/)
 
 ![doc/swagger.png](doc/swagger.png)
+
+<a id="actuator"></a>
+### Spring Actuator
+
+После запуска доступен по адресу [http://127.0.0.1:8988/vacancy/api/actuator](http://127.0.0.1:8988/vacancy/api/actuator)
+
+````java
+$ http http://127.0.0.1:8988/vacancy/api/actuator
+HTTP/1.1 200 
+Connection: keep-alive
+Content-Type: application/vnd.spring-boot.actuator.v3+json
+Date: Sat, 22 Jun 2024 16:02:17 GMT
+Keep-Alive: timeout=60
+Transfer-Encoding: chunked
+
+{
+    "_links": {
+        "beans": {
+            "href": "http://127.0.0.1:8988/vacancy/api/actuator/beans",
+            "templated": false
+        },
+        "caches": {
+            "href": "http://127.0.0.1:8988/vacancy/api/actuator/caches",
+            "templated": false
+        },
+        "caches-cache": {
+            "href": "http://127.0.0.1:8988/vacancy/api/actuator/caches/{cache}",
+            "templated": true
+        },
+        "conditions": {
+            "href": "http://127.0.0.1:8988/vacancy/api/actuator/conditions",
+            "templated": false
+        },
+        "configprops": {
+            "href": "http://127.0.0.1:8988/vacancy/api/actuator/configprops",
+            "templated": false
+        },
+        "configprops-prefix": {
+            "href": "http://127.0.0.1:8988/vacancy/api/actuator/configprops/{prefix}",
+            "templated": true
+        },
+        "env": {
+            "href": "http://127.0.0.1:8988/vacancy/api/actuator/env",
+            "templated": false
+        },
+        "env-toMatch": {
+            "href": "http://127.0.0.1:8988/vacancy/api/actuator/env/{toMatch}",
+            "templated": true
+        },
+        "health": {
+            "href": "http://127.0.0.1:8988/vacancy/api/actuator/health",
+            "templated": false
+        },
+        "health-path": {
+            "href": "http://127.0.0.1:8988/vacancy/api/actuator/health/{*path}",
+            "templated": true
+        },
+        "heapdump": {
+            "href": "http://127.0.0.1:8988/vacancy/api/actuator/heapdump",
+            "templated": false
+        },
+        "info": {
+            "href": "http://127.0.0.1:8988/vacancy/api/actuator/info",
+            "templated": false
+        },
+        "logfile": {
+            "href": "http://127.0.0.1:8988/vacancy/api/actuator/logfile",
+            "templated": false
+        },
+        "loggers": {
+            "href": "http://127.0.0.1:8988/vacancy/api/actuator/loggers",
+            "templated": false
+        },
+        "loggers-name": {
+            "href": "http://127.0.0.1:8988/vacancy/api/actuator/loggers/{name}",
+            "templated": true
+        },
+        "mappings": {
+            "href": "http://127.0.0.1:8988/vacancy/api/actuator/mappings",
+            "templated": false
+        },
+        "metrics": {
+            "href": "http://127.0.0.1:8988/vacancy/api/actuator/metrics",
+            "templated": false
+        },
+        "metrics-requiredMetricName": {
+            "href": "http://127.0.0.1:8988/vacancy/api/actuator/metrics/{requiredMetricName}",
+            "templated": true
+        },
+        "prometheus": {
+            "href": "http://127.0.0.1:8988/vacancy/api/actuator/prometheus",
+            "templated": false
+        },
+        "scheduledtasks": {
+            "href": "http://127.0.0.1:8988/vacancy/api/actuator/scheduledtasks",
+            "templated": false
+        },
+        "self": {
+            "href": "http://127.0.0.1:8988/vacancy/api/actuator",
+            "templated": false
+        },
+        "threaddump": {
+            "href": "http://127.0.0.1:8988/vacancy/api/actuator/threaddump",
+            "templated": false
+        }
+    }
+}
+````
 
 <a id="tose"></a>
 ### Примечания
