@@ -25,6 +25,7 @@ object ValidatorVacancyDto {
         }
     }
 
+// Don`t delete comment
 //    fun validateForCreate(vacancyDto: VacancyDtoForCreate) {
 //        val violations: MutableSet<ConstraintViolation<VacancyDto>> = validator.validate(vacancyDto)
 //
