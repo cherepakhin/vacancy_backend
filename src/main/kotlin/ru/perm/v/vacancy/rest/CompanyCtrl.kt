@@ -85,5 +85,30 @@ class CompanyCtrl(val companyService: CompanyService) {
         ValidatorCompanyDto.validate(companyDto)
         return companyService.createCompany(companyDto)
     }
-    //TODO: delete by id
+
+    @DeleteMapping("/{n}")
+    @ApiOperation("Delete Company by N")
+    @CacheEvict(value = ["companies"], allEntries = true)
+    fun delete(
+        @Parameter(
+            description = "N(ID) Company."
+        )
+        @PathVariable
+        n: Long,
+    ): String {
+        return companyService.deleteCompany(n)
+    }
+
+    @PostMapping("/{n}")
+    @ApiOperation("Update Company by N")
+    @CacheEvict(value = ["companies"], allEntries = true)
+    fun update(
+        @Parameter(description = "N(ID) Company.")
+        @PathVariable
+        n: Long,
+        @Parameter(description = "DTO of Company.")
+        @RequestBody changedCompanyDto: CompanyDto,
+    ): CompanyDto {
+        return companyService.updateCompany(n, changedCompanyDto.name)
+    }
 }

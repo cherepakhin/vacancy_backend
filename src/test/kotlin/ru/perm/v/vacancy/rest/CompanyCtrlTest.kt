@@ -115,4 +115,17 @@ class CompanyCtrlTest {
         val err = assertThrows<Exception>  {   companyCtrl.getAllSortByColumn("1")}
         assertEquals("Invalid SORT column name", err.message)
     }
+
+    @Test
+    fun update() {
+        val N = 1L
+        val NEW_NAME = "new_name"
+        val companyDto = CompanyDto(1L, NEW_NAME)
+        val changedCompanyDto  = CompanyDto(1L, NEW_NAME+"_from_service")
+        `when` (companyService.updateCompany(N, NEW_NAME)).thenReturn(changedCompanyDto)
+
+        val company  = companyCtrl.update(N, companyDto)
+
+        assertEquals(changedCompanyDto, company)
+    }
 }
