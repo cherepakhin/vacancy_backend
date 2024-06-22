@@ -128,4 +128,17 @@ class CompanyCtrlTest {
 
         assertEquals(changedCompanyDto, company)
     }
+
+    @Test
+    fun delete() {
+        val N = 100L
+        `when` (companyService.deleteCompany(N)).thenReturn("OK")
+
+        val resultStrng  = companyCtrl.delete(N)
+
+        assertEquals("OK", resultStrng)
+
+        verify(companyService).deleteCompany(N)
+    }
+
 }
