@@ -1,5 +1,6 @@
 package ru.perm.v.vacancy.service.impl
 
+import org.springframework.context.annotation.Lazy
 import org.springframework.data.domain.Sort
 import org.springframework.stereotype.Service
 import ru.perm.v.vacancy.consts.ErrMessage
@@ -9,7 +10,7 @@ import ru.perm.v.vacancy.mapper.CompanyMapper
 import ru.perm.v.vacancy.repository.CompanyRepository
 
 @Service
-class CompanyServiceImpl(val repository: CompanyRepository) : CompanyService {
+class CompanyServiceImpl(val repository: CompanyRepository, @Lazy val vacancyService: VacancyServiceImpl) : CompanyService {
 
     override fun getAll(): List<CompanyDto> {
         return repository.findAll().sortedBy { it.n }.map { CompanyMapper.toDto(it) }
@@ -57,6 +58,7 @@ class CompanyServiceImpl(val repository: CompanyRepository) : CompanyService {
     }
 
     override fun deleteCompany(n: Long): String {
+
         if (repository.findById(n).isPresent) {
             repository.deleteById(n)
             return String.format(ErrMessage.COMPANY_N_DELETED, n)

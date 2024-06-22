@@ -204,6 +204,27 @@ publishing {
 
 [Примечания](#tose)<br/>
 
+Решение проблемы циклических зависимостей Spring. CompanyService зависит от VacancyService, а VacancyService зависит от CompanyServiceImpl. При поднятии сервиса возникнет ошибка. Решение: 
+
+Определение CompanyServiceImpl: 
+
+````java
+@Service
+class CompanyServiceImpl(val repository: CompanyRepository, @Lazy val vacancyService: VacancyServiceImpl) : CompanyService {...}
+````
+
+Определение VacancyServiceImpl:
+
+````java
+@Service
+class VacancyServiceImpl(
+    @Autowired private val repository: VacancyRepository,
+    @Autowired private val companyService: CompanyService
+) : VacancyService {...}
+````
+
+В CompanyService использована аннотация @Lazy для vacancyService. 
+
 <a id="todo"></a>
 ### TODO
 Анализ кода SonarCube<br/>

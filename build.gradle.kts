@@ -17,7 +17,7 @@ var mockitoKotlinVersion = "4.0.0"
 configurations.create("querydsl")
 
 buildscript {
-    var kotlinVersion: String? by extra; kotlinVersion = "1.1.51"
+    var kotlinVersion: String? by extra; kotlinVersion = "1.3.3"
 
     repositories {
         mavenCentral()
