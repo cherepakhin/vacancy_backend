@@ -263,6 +263,10 @@ jxls для отчетов<br/>
 
 java -verbose:class <other args> - вывод загруженных классов 
 
+#### Просмотр commits в github
+
+[https://github.com/cherepakhin/vacancy_backend_rest_test/commits](https://github.com/cherepakhin/vacancy_backend_rest_test/commits)
+
 <a id="links"></a>
 ### Ссылки
 
