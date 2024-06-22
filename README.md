@@ -14,6 +14,8 @@
 [Анализ кода Idea Analize](#idea_analizer)<br/>
 [Интеграционное тестирование RestAssured](#rest_assured_tests)<br/>
 
+[Swagger](#swagger)
+
 [TODO](#todo)<br/>
 [Примечания](#tose)<br/>
 [Просмотр commits в github](#commits_github)<br/>
@@ -211,6 +213,11 @@ publishing {
 
 [https://github.com/cherepakhin/vacancy_backend_rest_test](https://github.com/cherepakhin/vacancy_backend_rest_test)
 
+<a id="swagger"></a>
+### Swagger
+
+После запуска доступен по адресу [http://127.0.0.1:8980/vacancy/api/swagger-ui/](http://127.0.0.1:8980/vacancy/api/swagger-ui/)
+
 <a id="tose"></a>
 ### Примечания
 
@@ -264,8 +271,6 @@ Spring Actuator<br/>
 Prometheus<br/><br/>
 Docker<br/>
 Кеширование<br/>
-Сборка Jenkins<br/>
-Nexus<br/>
 
 Camel для интеграции<br/>
 jxls для отчетов<br/>
