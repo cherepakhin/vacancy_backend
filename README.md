@@ -177,6 +177,8 @@ publishing {
 }
 ````
 
+При выполнении ./gradlew publish собранный jar будет опубликован в nexus.
+
 [https://stackoverflow.com/questions/64062905/unable-to-publish-jar-to-gitlab-package-registry-with-gradle](https://stackoverflow.com/questions/64062905/unable-to-publish-jar-to-gitlab-package-registry-with-gradle)
 
 ### Publishing source to Nexus
@@ -233,6 +235,18 @@ class VacancyServiceImpl(
 
 В CompanyService использована аннотация @Lazy для vacancyService. 
 
+#### Что это было?
+
+Изменения в коде не подхватываются при запуске ./gradlew bootRun. Решилось так:
+
+````shell
+./gradlew clean
+./gradlew build
+./gradlew bootRun
+````
+
+java -verbose:class <other args> - вывод загруженных классов
+
 <a id="todo"></a>
 ### TODO
 Анализ кода SonarCube<br/>
@@ -255,18 +269,6 @@ Nexus<br/>
 
 Camel для интеграции<br/>
 jxls для отчетов<br/>
-
-### Что это было?
-
-Изменения в коде не подхватываются при запуске ./gradlew bootRun. Решилось так:
-
-````shell
-./gradlew clean
-./gradlew build
-./gradlew bootRun
-````
-
-java -verbose:class <other args> - вывод загруженных классов 
 
 <a id="commits_github"></a>
 ### Просмотр commits в github
