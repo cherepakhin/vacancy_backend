@@ -8,8 +8,7 @@ import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.InjectMocks
 import org.mockito.Mock
-import org.mockito.Mockito.verify
-import org.mockito.Mockito.`when`
+import org.mockito.Mockito.*
 import org.mockito.junit.jupiter.MockitoExtension
 import ru.perm.v.vacancy.dto.CompanyDto
 import ru.perm.v.vacancy.service.impl.CompanyService
@@ -127,6 +126,8 @@ class CompanyCtrlTest {
         val company  = companyCtrl.update(N, companyDto)
 
         assertEquals(changedCompanyDto, company)
+
+        verify(companyService, times(1)).updateCompany(N, NEW_NAME)
     }
 
     @Test
@@ -138,7 +139,19 @@ class CompanyCtrlTest {
 
         assertEquals("OK", resultStrng)
 
-        verify(companyService).deleteCompany(N)
+        verify(companyService, times(1)).deleteCompany(N)
     }
 
+    @Test
+    fun create() {
+        val N = 100L
+        val NEW_NAME = "NEW_NAME"
+        val companyDto = CompanyDto(N, NEW_NAME)
+        `when` (companyService.createCompany(companyDto)).thenReturn(companyDto)
+
+        val receivedDto  = companyCtrl.create(companyDto)
+
+        assertEquals(companyDto, receivedDto)
+        verify(companyService, times(1)).createCompany(companyDto)
+    }
 }
