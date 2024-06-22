@@ -12,6 +12,7 @@
 [Publishing SpringBoot "FAT" jar](#fat)<br/>
 
 [Анализ кода Idea Analize](#idea_analizer)<br/>
+[Интеграционное тестирование RestAssured](#rest_assured_tests)<br/>
 
 [TODO](#todo)<br/>
 [Примечания](#tose)<br/>
@@ -203,6 +204,11 @@ publishing {
 
 В Idea вызывается из Code ->  Inspect Code.
 
+<a id="rest_assured_tests"></a>
+### RestAssured tests<br/>
+
+[https://github.com/cherepakhin/vacancy_backend_rest_test](https://github.com/cherepakhin/vacancy_backend_rest_test)
+
 <a id="tose"></a>
 ### Примечания
 
@@ -234,9 +240,8 @@ class VacancyServiceImpl(
 После отладки JPA, перенести в PostgreSQL на v.perm.ru<br/>
 Spring profiles<br/>
 <br/>
-Интеграционное тестирование<br/>
+<br/>
 DataJpa tests<br/>
-RestAssured tests<br/>
 Нагрузочное тестирование<br/>
 <br/>
 Swagger<br/>
