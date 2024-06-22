@@ -2,7 +2,7 @@
 
 ### Оглавление:
 [Цель](#target)<br/>
-[Unit тестирование](unit_test)<br/>
+[Unit тестирование](#unit_test)<br/>
 [Покрытие тестами](#coverage)<br/>
 [Логгирование](#logging)<br/>
 [Запуск](#run)<br/>
@@ -13,9 +13,9 @@
 
 [Анализ кода Idea Analize](#idea_analizer)<br/>
 
-
 [TODO](#todo)<br/>
 [Примечания](#tose)<br/>
+[Просмотр commits в github](#commits_github)<br/>
 [Ссылки](#links)<br/>
 
 <a id="target"></a>
@@ -199,11 +199,12 @@ publishing {
 ````
 
 <a id="idea_analizer"></a>
-[Анализ кода Idea Analize]<br/>
+### Анализ кода Idea Analize
 
 В Idea вызывается из Code ->  Inspect Code.
 
-[Примечания](#tose)<br/>
+<a id="tose"></a>
+### Примечания
 
 Решение проблемы циклических зависимостей Spring. CompanyService зависит от VacancyService, а VacancyService зависит от CompanyServiceImpl. При поднятии сервиса возникнет ошибка. Решение: 
 
@@ -264,7 +265,8 @@ jxls для отчетов<br/>
 
 java -verbose:class <other args> - вывод загруженных классов 
 
-#### Просмотр commits в github
+<a id="commits_github"></a>
+### Просмотр commits в github
 
 [https://github.com/cherepakhin/vacancy_backend_rest_test/commits](https://github.com/cherepakhin/vacancy_backend_rest_test/commits)
 
