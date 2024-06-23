@@ -10,13 +10,17 @@ class VacancyColumnsTest {
     fun valueOfN() {
         assertEquals("n", VacancyColumns.N.value)
     }
+
+    @Test
     fun valueOfNValue() {
         assertEquals("N", VacancyColumns.N.name)
     }
+
     @Test
     fun valueOfName() {
         assertEquals("NAME", VacancyColumns.NAME.name)
     }
+
     @Test
     fun valueOfNameValue() {
         assertEquals("name", VacancyColumns.NAME.value)
