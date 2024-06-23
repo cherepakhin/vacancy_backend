@@ -14,6 +14,8 @@ import ru.perm.v.vacancy.entity.CompanyEntity
 import ru.perm.v.vacancy.entity.VacancyEntity
 import ru.perm.v.vacancy.repository.VacancyRepository
 import java.util.*
+import kotlin.reflect.full.declaredMemberProperties
+import kotlin.reflect.full.memberProperties
 
 class VacancyServiceImplTest {
     @Test
@@ -26,8 +28,8 @@ class VacancyServiceImplTest {
         val companyEntity = CompanyEntity(N_COMPANY, NAME_COMPANY)
         val vacancyEntity = VacancyEntity(N, NAME_VACANCY, COMMENT, companyEntity)
 
-        val repository = Mockito.mock(VacancyRepository::class.java)
-        val companyService = Mockito.mock(CompanyService::class.java)
+        val repository = mock(VacancyRepository::class.java)
+        val companyService = mock(CompanyService::class.java)
         val service = VacancyServiceImpl(repository, companyService)
         Mockito.`when`(repository.findById(N)).thenReturn(Optional.of(vacancyEntity))
 
@@ -42,9 +44,9 @@ class VacancyServiceImplTest {
     @Test
     fun getNoFoundByN() {
         val N = 100L
-        val repository = Mockito.mock(VacancyRepository::class.java)
+        val repository = mock(VacancyRepository::class.java)
         Mockito.`when`(repository.findById(N)).thenReturn(Optional.empty())
-        val companyService = Mockito.mock(CompanyService::class.java)
+        val companyService = mock(CompanyService::class.java)
         val service = VacancyServiceImpl(repository, companyService)
 
         val thrown = assertThrows<Exception> { service.getByN(N) }
@@ -70,10 +72,10 @@ class VacancyServiceImplTest {
         val companyEntity200 = CompanyEntity(N_COMPANY_200, NAME_COMPANY_200)
         val vacancyEntity200 = VacancyEntity(N_200, NAME_VACANCY_200, COMMENT_200, companyEntity200)
 
-        val repository = Mockito.mock(VacancyRepository::class.java)
+        val repository = mock(VacancyRepository::class.java)
         `when`(repository.findAll(Sort.by("n"))).thenReturn(listOf(vacancyEntity100, vacancyEntity200))
 
-        val companyService = Mockito.mock(CompanyService::class.java)
+        val companyService = mock(CompanyService::class.java)
         val service = VacancyServiceImpl(repository, companyService)
         val vacancyDtos  = service.getAll()
 
@@ -92,10 +94,9 @@ class VacancyServiceImplTest {
         val NAME_VACANCY = "vacancy"
         val COMMENT = "comment"
         val N_COMPANY = 1L
-        val NAME_COMPANY = "company"
 
-        val repository = Mockito.mock(VacancyRepository::class.java)
-        val companyService = Mockito.mock(CompanyService::class.java)
+        val repository = mock(VacancyRepository::class.java)
+        val companyService = mock(CompanyService::class.java)
         val service = VacancyServiceImpl(repository, companyService)
         `when`(companyService.getCompanyByN(N_COMPANY)).thenThrow(Exception::class.java)
 
@@ -113,8 +114,8 @@ class VacancyServiceImplTest {
         val N_COMPANY = 1L
         val NAME_COMPANY = "company"
 
-        val repository = Mockito.mock(VacancyRepository::class.java)
-        val companyService = Mockito.mock(CompanyService::class.java)
+        val repository = mock(VacancyRepository::class.java)
+        val companyService = mock(CompanyService::class.java)
         val service = VacancyServiceImpl(repository, companyService)
         `when`(companyService.getCompanyByN(N_COMPANY)).thenReturn(CompanyDto(N_COMPANY, NAME_COMPANY))
         val VACANCY_NEXT_N  =  101L
@@ -134,8 +135,8 @@ class VacancyServiceImplTest {
     fun updateForNotExistVacancy()  {
         val VACANCY_N = 100L
 
-        val mockVacancyRepository = Mockito.mock(VacancyRepository::class.java)
-        val mockCompanyService = Mockito.mock(CompanyService::class.java)
+        val mockVacancyRepository = mock(VacancyRepository::class.java)
+        val mockCompanyService = mock(CompanyService::class.java)
         val vacancyService = VacancyServiceImpl(mockVacancyRepository, mockCompanyService)
 
         `when`(mockVacancyRepository.findById(VACANCY_N)).thenReturn(Optional.empty())
@@ -156,8 +157,8 @@ class VacancyServiceImplTest {
         val N_COMPANY = 1L
         val NAME_COMPANY = "company"
 
-        val mockVacancyRepository = Mockito.mock(VacancyRepository::class.java)
-        val mockCompanyService = Mockito.mock(CompanyService::class.java)
+        val mockVacancyRepository = mock(VacancyRepository::class.java)
+        val mockCompanyService = mock(CompanyService::class.java)
 
         val vacancyService = VacancyServiceImpl(mockVacancyRepository, mockCompanyService)
         val vacancyEntity  = VacancyEntity(VACANCY_N, NAME_VACANCY,
@@ -191,8 +192,8 @@ class VacancyServiceImplTest {
         val N_COMPANY = 1L
         val NAME_COMPANY = "company"
 
-        val mockVacancyRepository = Mockito.mock(VacancyRepository::class.java)
-        val mockCompanyService = Mockito.mock(CompanyService::class.java)
+        val mockVacancyRepository = mock(VacancyRepository::class.java)
+        val mockCompanyService = mock(CompanyService::class.java)
         `when`(mockVacancyRepository.findById(VACANCY_N)).thenReturn(
             Optional.of(
                 VacancyEntity(VACANCY_N, NAME_VACANCY, COMMENT, CompanyEntity(N_COMPANY, NAME_COMPANY))
@@ -211,8 +212,8 @@ class VacancyServiceImplTest {
     fun deleteOnNotExistVacancy()  {
         val VACANCY_N = 100L
 
-        val mockVacancyRepository = Mockito.mock(VacancyRepository::class.java)
-        val mockCompanyService = Mockito.mock(CompanyService::class.java)
+        val mockVacancyRepository = mock(VacancyRepository::class.java)
+        val mockCompanyService = mock(CompanyService::class.java)
         `when`(mockVacancyRepository.findById(VACANCY_N)).thenReturn(Optional.empty())
 
         val vacancyService = VacancyServiceImpl(mockVacancyRepository, mockCompanyService)
@@ -229,8 +230,8 @@ class VacancyServiceImplTest {
     fun deleteWithOtherException()  {
         val VACANCY_N = 100L
 
-        val mockVacancyRepository = Mockito.mock(VacancyRepository::class.java)
-        val mockCompanyService = Mockito.mock(CompanyService::class.java)
+        val mockVacancyRepository = mock(VacancyRepository::class.java)
+        val mockCompanyService = mock(CompanyService::class.java)
         `when`(mockVacancyRepository.findById(VACANCY_N)).thenReturn(Optional.empty())
 
         val vacancyService = VacancyServiceImpl(mockVacancyRepository, mockCompanyService)
@@ -260,10 +261,10 @@ class VacancyServiceImplTest {
         val companyEntity200 = CompanyEntity(N_COMPANY_200, NAME_COMPANY_200)
         val vacancyEntity200 = VacancyEntity(N_200, NAME_VACANCY_200, COMMENT_200, companyEntity200)
 
-        val repository = Mockito.mock(VacancyRepository::class.java)
+        val repository = mock(VacancyRepository::class.java)
         `when`(repository.findAll(Sort.by("n"))).thenReturn(listOf(vacancyEntity100, vacancyEntity200))
 
-        val companyService = Mockito.mock(CompanyService::class.java)
+        val companyService = mock(CompanyService::class.java)
         val service = VacancyServiceImpl(repository, companyService)
 
         val vacancyDtos  = service.getAllSortedByField("n")
@@ -295,10 +296,10 @@ class VacancyServiceImplTest {
         val companyEntity200 = CompanyEntity(N_COMPANY_200, NAME_COMPANY_200)
         val vacancyEntity200 = VacancyEntity(N_200, NAME_VACANCY_200, COMMENT_200, companyEntity200)
 
-        val repository = Mockito.mock(VacancyRepository::class.java)
+        val repository = mock(VacancyRepository::class.java)
         `when`(repository.findAll(Sort.by("name"))).thenReturn(listOf(vacancyEntity100, vacancyEntity200))
 
-        val companyService = Mockito.mock(CompanyService::class.java)
+        val companyService = mock(CompanyService::class.java)
         val service = VacancyServiceImpl(repository, companyService)
 
         val vacancyDtos  = service.getAllSortedByField("name")
@@ -311,6 +312,47 @@ class VacancyServiceImplTest {
             vacancyDtos[1]
         )
         verify(repository, times(1)).findAll(Sort.by("name"))
+    }
+
+    @Test
+    fun listFields()  {
+        val props = VacancyEntity::class.declaredMemberProperties
+
+        assertEquals(listOf("comment", "companyEntity", "n", "name") ,props.map { it.name }.toList())
+    }
+
+    @Test
+    fun existColumnName() {
+        val repository = mock(VacancyRepository::class.java)
+        val companyService = mock(CompanyService::class.java)
+
+        val service = VacancyServiceImpl(repository, companyService)
+
+        assertTrue(service.existColumn("name"))
+    }
+
+    @Test
+    fun notExistColumnName() {
+        val repository = mock(VacancyRepository::class.java)
+        val companyService = mock(CompanyService::class.java)
+
+        val service = VacancyServiceImpl(repository, companyService)
+
+        assertFalse(service.existColumn("fake_column"))
+    }
+
+    @Test
+    fun getAllSortedByFAKE_COLUMN() {
+        val repository = mock(VacancyRepository::class.java)
+
+        val companyService = mock(CompanyService::class.java)
+        val service = VacancyServiceImpl(repository, companyService)
+
+        val thrown   = assertThrows<Exception> {
+            service.getAllSortedByField("FAKE_COLUMN")
+        }
+
+        assertEquals("Sort column \"FAKE_COLUMN\" not found", thrown.message)
     }
 
 }

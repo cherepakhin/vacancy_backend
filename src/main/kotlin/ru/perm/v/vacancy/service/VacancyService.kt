@@ -7,7 +7,7 @@ interface VacancyService {
     @Throws(Exception::class)
     fun getByN(n: Long): VacancyDto
     fun getAll(): List<VacancyDto>
-    fun getAllSortedByField(sortColimn: String): List<VacancyDto>
+    fun getAllSortedByField(sortColumn: String): List<VacancyDto>
     fun create(vacancyDtoForCreate: VacancyDtoForCreate): VacancyDto
 
     /**

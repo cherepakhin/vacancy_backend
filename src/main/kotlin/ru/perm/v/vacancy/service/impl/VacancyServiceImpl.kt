@@ -12,11 +12,12 @@ import ru.perm.v.vacancy.mapper.CompanyMapper
 import ru.perm.v.vacancy.mapper.VacancyMapper
 import ru.perm.v.vacancy.repository.VacancyRepository
 import ru.perm.v.vacancy.service.VacancyService
+import kotlin.reflect.full.declaredMemberProperties
 
 @Service
 class VacancyServiceImpl(
     @Autowired private val repository: VacancyRepository,
-    @Autowired private val companyService: CompanyService
+    @Autowired private val companyService: CompanyService,
 ) : VacancyService {
 
     override fun getByN(n: Long): VacancyDto {
@@ -32,9 +33,16 @@ class VacancyServiceImpl(
         return this.getAllSortedByField("n")
     }
 
-    override fun getAllSortedByField(sortColimn: String ): List<VacancyDto> {
-        //TODO: check valid name sort column
-        return repository.findAll(Sort.by(sortColimn)).map { VacancyMapper.toDto(it) }.toList()
+    override fun getAllSortedByField(sortColumn: String ): List<VacancyDto> {
+        if(!existColumn(sortColumn)) {
+            throw Exception(String.format(ErrMessage.SORT_COLUMN_NOT_FOUND, sortColumn))
+        }
+        return repository.findAll(Sort.by(sortColumn)).map { VacancyMapper.toDto(it) }.toList()
+    }
+
+    fun existColumn(name: String): Boolean  {
+        val fields = VacancyEntity::class.declaredMemberProperties
+        return fields.filter { it.name == name}.isNotEmpty()
     }
 
     override fun create(vacancyDtoForCreate: VacancyDtoForCreate): VacancyDto {
