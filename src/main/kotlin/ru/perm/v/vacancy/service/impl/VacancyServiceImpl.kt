@@ -35,7 +35,7 @@ class VacancyServiceImpl(
     }
 
     override fun getAllSortedByField(sortColumn: VacancyColumns): List<VacancyDto> {
-        return repository.findAll(Sort.by(sortColumn.columnName)).map { VacancyMapper.toDto(it) }.toList()
+        return repository.findAll(Sort.by(sortColumn.value)).map { VacancyMapper.toDto(it) }.toList()
     }
 
     override fun create(vacancyDtoForCreate: VacancyDtoForCreate): VacancyDto {
