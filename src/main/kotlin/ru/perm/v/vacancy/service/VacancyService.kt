@@ -1,5 +1,6 @@
 package ru.perm.v.vacancy.service
 
+import ru.perm.v.vacancy.consts.VacancyColumns
 import ru.perm.v.vacancy.dto.VacancyDto
 import ru.perm.v.vacancy.dto.VacancyDtoForCreate
 
@@ -7,7 +8,7 @@ interface VacancyService {
     @Throws(Exception::class)
     fun getByN(n: Long): VacancyDto
     fun getAll(): List<VacancyDto>
-    fun getAllSortedByField(sortColumn: String): List<VacancyDto>
+    fun getAllSortedByField(sortColumn: VacancyColumns): List<VacancyDto>
     fun create(vacancyDtoForCreate: VacancyDtoForCreate): VacancyDto
 
     /**

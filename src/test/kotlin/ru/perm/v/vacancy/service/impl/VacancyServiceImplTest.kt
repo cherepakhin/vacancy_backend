@@ -7,6 +7,7 @@ import org.junit.jupiter.api.assertThrows
 import org.mockito.Mockito
 import org.mockito.Mockito.*
 import org.springframework.data.domain.Sort
+import ru.perm.v.vacancy.consts.VacancyColumns
 import ru.perm.v.vacancy.dto.CompanyDto
 import ru.perm.v.vacancy.dto.VacancyDto
 import ru.perm.v.vacancy.dto.VacancyDtoForCreate
@@ -267,7 +268,7 @@ class VacancyServiceImplTest {
         val companyService = mock(CompanyService::class.java)
         val service = VacancyServiceImpl(repository, companyService)
 
-        val vacancyDtos  = service.getAllSortedByField("n")
+        val vacancyDtos  = service.getAllSortedByField(VacancyColumns.N)
 
         assertEquals(2, vacancyDtos.size)
         assertEquals(VacancyDto(N_100, NAME_VACANCY_100, COMMENT_100, CompanyDto(N_COMPANY_100, NAME_COMPANY_100)),
@@ -302,7 +303,7 @@ class VacancyServiceImplTest {
         val companyService = mock(CompanyService::class.java)
         val service = VacancyServiceImpl(repository, companyService)
 
-        val vacancyDtos  = service.getAllSortedByField("name")
+        val vacancyDtos  = service.getAllSortedByField(VacancyColumns.NAME)
 
         assertEquals(2, vacancyDtos.size)
         assertEquals(VacancyDto(N_100, NAME_VACANCY_100, COMMENT_100, CompanyDto(N_COMPANY_100, NAME_COMPANY_100)),
@@ -319,40 +320,6 @@ class VacancyServiceImplTest {
         val props = VacancyEntity::class.declaredMemberProperties
 
         assertEquals(listOf("comment", "companyEntity", "n", "name") ,props.map { it.name }.toList())
-    }
-
-    @Test
-    fun existColumnName() {
-        val repository = mock(VacancyRepository::class.java)
-        val companyService = mock(CompanyService::class.java)
-
-        val service = VacancyServiceImpl(repository, companyService)
-
-        assertTrue(service.existColumn("name"))
-    }
-
-    @Test
-    fun notExistColumnName() {
-        val repository = mock(VacancyRepository::class.java)
-        val companyService = mock(CompanyService::class.java)
-
-        val service = VacancyServiceImpl(repository, companyService)
-
-        assertFalse(service.existColumn("fake_column"))
-    }
-
-    @Test
-    fun getAllSortedByFAKE_COLUMN() {
-        val repository = mock(VacancyRepository::class.java)
-
-        val companyService = mock(CompanyService::class.java)
-        val service = VacancyServiceImpl(repository, companyService)
-
-        val thrown   = assertThrows<Exception> {
-            service.getAllSortedByField("FAKE_COLUMN")
-        }
-
-        assertEquals("Sort column \"FAKE_COLUMN\" not found", thrown.message)
     }
 
 }

@@ -4,6 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.Sort
 import org.springframework.stereotype.Service
 import ru.perm.v.vacancy.consts.ErrMessage
+import ru.perm.v.vacancy.consts.VacancyColumns
 import ru.perm.v.vacancy.dto.CompanyDto
 import ru.perm.v.vacancy.dto.VacancyDto
 import ru.perm.v.vacancy.dto.VacancyDtoForCreate
@@ -30,19 +31,11 @@ class VacancyServiceImpl(
     }
 
     override fun getAll(): List<VacancyDto> {
-        return this.getAllSortedByField("n")
+        return this.getAllSortedByField(VacancyColumns.N)
     }
 
-    override fun getAllSortedByField(sortColumn: String ): List<VacancyDto> {
-        if(!existColumn(sortColumn)) {
-            throw Exception(String.format(ErrMessage.SORT_COLUMN_NOT_FOUND, sortColumn))
-        }
-        return repository.findAll(Sort.by(sortColumn)).map { VacancyMapper.toDto(it) }.toList()
-    }
-
-    fun existColumn(name: String): Boolean  {
-        val fields = VacancyEntity::class.declaredMemberProperties
-        return fields.filter { it.name == name}.isNotEmpty()
+    override fun getAllSortedByField(sortColumn: VacancyColumns): List<VacancyDto> {
+        return repository.findAll(Sort.by(sortColumn.columnName)).map { VacancyMapper.toDto(it) }.toList()
     }
 
     override fun create(vacancyDtoForCreate: VacancyDtoForCreate): VacancyDto {
