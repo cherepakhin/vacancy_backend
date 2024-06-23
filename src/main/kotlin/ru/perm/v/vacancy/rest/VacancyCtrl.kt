@@ -7,6 +7,7 @@ import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.cache.annotation.Cacheable
 import org.springframework.web.bind.annotation.*
+import ru.perm.v.vacancy.consts.VacancyColumns
 import ru.perm.v.vacancy.dto.VacancyDto
 import ru.perm.v.vacancy.dto.VacancyDtoForCreate
 import ru.perm.v.vacancy.service.VacancyService
@@ -25,8 +26,6 @@ class VacancyCtrl() {
 
     @Autowired
     lateinit var companyService: CompanyService
-
-    private val validSortColumns = listOf("n", "name")
 
     @GetMapping("/echo/{mes}")
     @ApiOperation("Simple echo test")
@@ -55,8 +54,12 @@ class VacancyCtrl() {
     //TODO: add cache
     // rewrite with criteria search???
     fun getAllSortByColumn(@PathVariable("column") column: String): List<VacancyDto> {
-        //TODO: write code getAllSortByColumn(column)
-        return listOf()
+        //TODO: realize
+        return vacancyService.getAll()
+//        if (!VacancyColumns.values().contains(column)) {
+//            throw IllegalArgumentException("Invalid column name")
+//        }
+//        return vacancyService.getAllSortedByField()
     }
 
     @GetMapping("/{n}")

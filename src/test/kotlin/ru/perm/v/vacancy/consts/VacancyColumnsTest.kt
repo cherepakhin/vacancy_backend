@@ -1,8 +1,8 @@
 package ru.perm.v.vacancy.consts
 
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
-
-import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.assertThrows
 
 class VacancyColumnsTest {
 
@@ -44,5 +44,18 @@ class VacancyColumnsTest {
     @Test
     fun ordinalOfCompany() {
         assertEquals(2, VacancyColumns.COMPANY.ordinal)
+    }
+
+    @Test
+    fun existByString() {
+        val column = "NAME"
+        assertEquals("name", VacancyColumns.valueOf(column).value)
+        assertEquals("name", VacancyColumns.values().filter { it.name == column }.get(0).value)
+    }
+
+    @Test
+    fun notExistByString() {
+        val column = "FAKE"
+        assertThrows<IllegalArgumentException> { VacancyColumns.valueOf(column) }
     }
 }
