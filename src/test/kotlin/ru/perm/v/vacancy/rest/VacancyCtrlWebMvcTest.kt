@@ -7,6 +7,7 @@ import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.http.MediaType
 import org.springframework.test.web.servlet.MockMvc
+import org.springframework.test.web.servlet.get
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers
 import ru.perm.v.vacancy.dto.CompanyDto
@@ -26,7 +27,7 @@ class VacancyCtrlWebMvcTest {
     private lateinit var companyService: CompanyService
 
     @Test
-    fun vacancy() {
+    fun vacancy_echo() {
         val companyDto = CompanyDto(1L, "COMPANY_1")
         val vacancyDto = VacancyDto(1L, "title", "text", companyDto)
         `when`(vacancyService.getByN(1L)).thenReturn(vacancyDto)
@@ -40,5 +41,22 @@ class VacancyCtrlWebMvcTest {
             .andExpect(MockMvcResultMatchers.status().isOk)
             .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
             .andExpect(MockMvcResultMatchers.content().string("ECHO_MESSAGE"))
+    }
+
+    @Test
+    fun vacancyGetAll() {
+        val companyDto = CompanyDto(1L, "COMPANY_1")
+        val vacancyDto1 = VacancyDto(1L, "title", "text", companyDto)
+        val vacancyDto2 = VacancyDto(2L, "title", "text", companyDto)
+        `when`(vacancyService.getAll()).thenReturn(listOf(vacancyDto1, vacancyDto2))
+
+        mockMvc.get("/vacancy/") {
+            contentType = MediaType.APPLICATION_JSON
+            accept = MediaType.APPLICATION_JSON
+        }.andExpect {
+            status { isOk() }
+            content { contentType(MediaType.APPLICATION_JSON) }
+            content { json("[{\"n\":1,\"name\":\"title\",\"comment\":\"text\",\"company\":{\"n\":1,\"name\":\"COMPANY_1\"}},{\"n\":2,\"name\":\"title\",\"comment\":\"text\",\"company\":{\"n\":1,\"name\":\"COMPANY_1\"}}]") }
+        }
     }
 }
