@@ -105,7 +105,8 @@ class VacancyCtrlTest {
         assertEquals(listOf(VacancyDto(1L,  "",  "", CompanyDto(1L,  "COMPANY_1"))), receivedDTO)
         verify(mockVacancyService, times(1)).getAllSortedByField(VacancyColumn.NAME)
     }
-    //    @Test
+
+//    @Test
 //    fun createForNotExistCompany() {
 //        val COMPANY_N = 1L
 ////        val companyDto = CompanyDto(COMPANY_N, "COMPANY_1")

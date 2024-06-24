@@ -126,6 +126,7 @@ dependencies {
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit")
     testImplementation("org.mockito.kotlin:mockito-kotlin:$mockitoKotlinVersion")
+
     compileOnly("org.springframework.boot:spring-boot-starter-actuator")
 
     annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
