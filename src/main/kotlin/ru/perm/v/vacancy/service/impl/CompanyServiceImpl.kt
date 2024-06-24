@@ -35,9 +35,8 @@ class CompanyServiceImpl(val repository: CompanyRepository, @Lazy val vacancySer
         val company = CompanyEntity(n = n, name = companyDto.name)
         logger.info(company.toString())
         repository.createNew(company.n, companyDto.name)
-        val createdCompany = getCompanyByN(n)
-        logger.info(format("will returned: %s", createdCompany.toString()))
-        return createdCompany
+
+        return CompanyMapper.toDto(company)
     }
 
     public fun getNextN(): Long {

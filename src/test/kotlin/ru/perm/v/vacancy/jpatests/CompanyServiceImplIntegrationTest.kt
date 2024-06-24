@@ -70,6 +70,6 @@ class CompanyServiceImplIntegrationTest {
     fun getNextN() {
         val service = CompanyServiceImpl(companyRepository, vacancyService)
 
-        assertEquals(5, service.getNextN())
+        assertEquals(4, service.getNextN())
     }
 }

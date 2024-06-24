@@ -4,17 +4,20 @@ import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.mockito.Mockito.*
+import org.mockito.kotlin.doAnswer
 import org.mockito.kotlin.doNothing
+import org.springframework.transaction.annotation.Transactional
 import ru.perm.v.vacancy.dto.CompanyDto
 import ru.perm.v.vacancy.entity.CompanyEntity
 import ru.perm.v.vacancy.repository.CompanyRepository
 import java.util.*
 
+@Suppress("UNREACHABLE_CODE")
 class CompanyServiceImplTest {
 
     @Test
     fun createCompany() {
-        val N = 100L;
+        val N = 1L;
         val NAME_COMPANY = "company";
         val companyEntity = CompanyEntity(N, NAME_COMPANY);
         val repository = mock(CompanyRepository::class.java);
@@ -140,10 +143,9 @@ class CompanyServiceImplTest {
     fun notCreated() {
         val N = 100L;
         val NAME_COMPANY = "company";
-        val companyEntity = CompanyEntity(N, NAME_COMPANY);
         val repository = mock(CompanyRepository::class.java);
         `when`(repository.getNextN()).thenReturn(N);
-        `when`(repository.save(companyEntity)).thenReturn(null);
+        `when`(repository.createNew(N, NAME_COMPANY)).doAnswer{ throw Exception("Company with N=100 not created") };
 
         val vacancyService  = mock(VacancyServiceImpl::class.java);
         val service = CompanyServiceImpl(repository, vacancyService);
@@ -151,6 +153,7 @@ class CompanyServiceImplTest {
         val message = assertThrows<Exception> {
             service.createCompany(companyDto);
         }.message;
+
         assertEquals("Company with N=100 not created", message);
     }
 
