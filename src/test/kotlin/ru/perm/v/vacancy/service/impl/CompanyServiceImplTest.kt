@@ -6,7 +6,6 @@ import org.junit.jupiter.api.assertThrows
 import org.mockito.Mockito.*
 import org.mockito.kotlin.doAnswer
 import org.mockito.kotlin.doNothing
-import org.springframework.transaction.annotation.Transactional
 import ru.perm.v.vacancy.dto.CompanyDto
 import ru.perm.v.vacancy.entity.CompanyEntity
 import ru.perm.v.vacancy.repository.CompanyRepository
@@ -21,7 +20,7 @@ class CompanyServiceImplTest {
         val NAME_COMPANY = "company";
         val companyEntity = CompanyEntity(N, NAME_COMPANY);
         val repository = mock(CompanyRepository::class.java);
-        val vacancyService  = mock(VacancyServiceImpl::class.java);
+        val vacancyService = mock(VacancyServiceImpl::class.java);
         `when`(repository.getNextN()).thenReturn(N);
         `when`(repository.save(companyEntity)).thenReturn(companyEntity);
 
@@ -40,7 +39,7 @@ class CompanyServiceImplTest {
         val companyEntity = CompanyEntity(N, NAME_COMPANY);
 
         val repository = mock(CompanyRepository::class.java);
-        val vacancyService  = mock(VacancyServiceImpl::class.java);
+        val vacancyService = mock(VacancyServiceImpl::class.java);
         val service = CompanyServiceImpl(repository, vacancyService);
         `when`(repository.findById(N)).thenReturn(Optional.of(companyEntity));
 
@@ -55,7 +54,7 @@ class CompanyServiceImplTest {
         val repository = mock(CompanyRepository::class.java);
         `when`(repository.findById(999L)).thenReturn(Optional.empty())
 
-        val vacancyService  = mock(VacancyServiceImpl::class.java);
+        val vacancyService = mock(VacancyServiceImpl::class.java);
         val service = CompanyServiceImpl(repository, vacancyService);
 
         assertThrows<Exception> { service.getCompanyByN(999L) }
@@ -68,8 +67,8 @@ class CompanyServiceImplTest {
         val company2 = CompanyEntity(2L, "company2");
         `when`(repository.findAll()).thenReturn(listOf(company1, company2));
 
-        val vacancyService  = mock(VacancyServiceImpl::class.java);
-        val service = CompanyServiceImpl(repository , vacancyService);
+        val vacancyService = mock(VacancyServiceImpl::class.java);
+        val service = CompanyServiceImpl(repository, vacancyService);
 
         assertEquals(2, service.getAll().size);
     }
@@ -81,7 +80,7 @@ class CompanyServiceImplTest {
         val companyEntity = CompanyEntity(N, NAME_COMPANY);
 
         val repository = mock(CompanyRepository::class.java);
-        val vacancyService  = mock(VacancyServiceImpl::class.java);
+        val vacancyService = mock(VacancyServiceImpl::class.java);
         val service = CompanyServiceImpl(repository, vacancyService);
         `when`(repository.findById(N)).thenReturn(Optional.of(companyEntity));
         `when`(repository.save(companyEntity)).thenReturn(companyEntity);
@@ -93,15 +92,15 @@ class CompanyServiceImplTest {
     }
 
     @Test
-    fun updateNotExistCompany()  {
-        val N  =  100L;
+    fun updateNotExistCompany() {
+        val N = 100L;
         val NAME_COMPANY = "company";
         val repository = mock(CompanyRepository::class.java);
-        val vacancyService  = mock(VacancyServiceImpl::class.java);
+        val vacancyService = mock(VacancyServiceImpl::class.java);
         val service = CompanyServiceImpl(repository, vacancyService);
         `when`(repository.findById(N)).thenReturn(Optional.empty());
 
-        val thrown = assertThrows<Exception>  {
+        val thrown = assertThrows<Exception> {
             service.updateCompany(N, NAME_COMPANY);
         }
 
@@ -109,14 +108,14 @@ class CompanyServiceImplTest {
     }
 
     @Test
-    fun deleteNotExistCompany()  {
-        val N  =  100L;
+    fun deleteNotExistCompany() {
+        val N = 100L;
         val repository = mock(CompanyRepository::class.java);
-        val vacancyService  = mock(VacancyServiceImpl::class.java);
+        val vacancyService = mock(VacancyServiceImpl::class.java);
         val service = CompanyServiceImpl(repository, vacancyService);
         `when`(repository.findById(N)).thenReturn(Optional.empty());
 
-        val thrown = assertThrows<Exception>  {
+        val thrown = assertThrows<Exception> {
             service.deleteCompany(N);
         }
 
@@ -124,16 +123,16 @@ class CompanyServiceImplTest {
     }
 
     @Test
-    fun deleteExistCompany()  {
-        val N  =  100L;
-        val companyEntity  = CompanyEntity(N, "company");
+    fun deleteExistCompany() {
+        val N = 100L;
+        val companyEntity = CompanyEntity(N, "company");
         val repository = mock(CompanyRepository::class.java);
-        val vacancyService  = mock(VacancyServiceImpl::class.java);
+        val vacancyService = mock(VacancyServiceImpl::class.java);
         val service = CompanyServiceImpl(repository, vacancyService);
         `when`(repository.findById(N)).thenReturn(Optional.of(companyEntity));
         doNothing().`when`(repository).deleteById(N);
 
-        val message= service.deleteCompany(N);
+        val message = service.deleteCompany(N);
 
         verify(repository, times(1)).deleteById(N);
         assertEquals("Company with N=100 deleted", message);
@@ -145,11 +144,11 @@ class CompanyServiceImplTest {
         val NAME_COMPANY = "company";
         val repository = mock(CompanyRepository::class.java);
         `when`(repository.getNextN()).thenReturn(N);
-        `when`(repository.createNew(N, NAME_COMPANY)).doAnswer{ throw Exception("Company with N=100 not created") };
+        `when`(repository.createNew(N, NAME_COMPANY)).doAnswer { throw Exception("Company with N=100 not created") };
 
-        val vacancyService  = mock(VacancyServiceImpl::class.java);
+        val vacancyService = mock(VacancyServiceImpl::class.java);
         val service = CompanyServiceImpl(repository, vacancyService);
-        val companyDto  = CompanyDto(N, NAME_COMPANY);
+        val companyDto = CompanyDto(N, NAME_COMPANY);
         val message = assertThrows<Exception> {
             service.createCompany(companyDto);
         }.message;
@@ -163,16 +162,16 @@ class CompanyServiceImplTest {
         val NAME_COMPANY1 = "company1";
         val companyEntity1 = CompanyEntity(N1, NAME_COMPANY1);
 
-        val N2  =  2L;
-        val NAME_COMPANY2  =  "company2";
-        val companyEntity2  = CompanyEntity(N2, NAME_COMPANY2);
+        val N2 = 2L;
+        val NAME_COMPANY2 = "company2";
+        val companyEntity2 = CompanyEntity(N2, NAME_COMPANY2);
 
         val repository = mock(CompanyRepository::class.java);
         `when`(repository.findAll()).thenReturn(listOf(companyEntity2, companyEntity1));
-        val vacancyService  = mock(VacancyServiceImpl::class.java);
-        val service  = CompanyServiceImpl(repository, vacancyService);
+        val vacancyService = mock(VacancyServiceImpl::class.java);
+        val service = CompanyServiceImpl(repository, vacancyService);
 
-        val companies  = service.getAll();
+        val companies = service.getAll();
         assertEquals(2, companies.size);
         assertEquals(N1, companies[0].n);
         assertEquals(NAME_COMPANY1, companies[0].name);

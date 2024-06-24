@@ -18,7 +18,7 @@ class VacancyDtoTest {
 
 
     @Test
-    fun equalsTest()  {
+    fun equalsTest() {
         val companyDto = CompanyDto(10, "COMPANY_10")
         val vacancyDto1 = VacancyDto(10, "VACANCY_10", "COMMENT_10", companyDto)
         val vacancyDto2 = VacancyDto(10, "VACANCY_10", "COMMENT_10", companyDto)
@@ -27,15 +27,16 @@ class VacancyDtoTest {
     }
 
     @Test
-    fun notEqualsByNameTest()  {
+    fun notEqualsByNameTest() {
         val companyDto = CompanyDto(10, "COMPANY_10")
         val vacancyDto1 = VacancyDto(10, "VACANCY_10", "COMMENT_10", companyDto)
         val vacancyDto2 = VacancyDto(10, "VACANCY_20", "COMMENT_10", companyDto)
 
         assertNotEquals(vacancyDto1, vacancyDto2)
     }
+
     @Test
-    fun notEqualsByN_Test()  {
+    fun notEqualsByN_Test() {
         val companyDto = CompanyDto(10, "COMPANY_10")
         val vacancyDto1 = VacancyDto(10, "VACANCY_10", "COMMENT_10", companyDto)
         val vacancyDto2 = VacancyDto(20, "VACANCY_10", "COMMENT_10", companyDto)
@@ -44,7 +45,7 @@ class VacancyDtoTest {
     }
 
     @Test
-    fun notEqualsByNAME_Test()  {
+    fun notEqualsByNAME_Test() {
         val companyDto = CompanyDto(10, "COMPANY_10")
         val vacancyDto1 = VacancyDto(10, "VACANCY_10", "COMMENT_10", companyDto)
         val vacancyDto2 = VacancyDto(10, "VACANCY_20", "COMMENT_10", companyDto)
@@ -53,7 +54,7 @@ class VacancyDtoTest {
     }
 
     @Test
-    fun notEqualsByCOMMENT_Test()  {
+    fun notEqualsByCOMMENT_Test() {
         val companyDto = CompanyDto(10, "COMPANY_10")
         val vacancyDto1 = VacancyDto(10, "VACANCY_10", "COMMENT_10", companyDto)
         val vacancyDto2 = VacancyDto(10, "VACANCY_10", "COMMENT_20", companyDto)
@@ -62,7 +63,7 @@ class VacancyDtoTest {
     }
 
     @Test
-    fun notEqualsByCOMPANY_Test()  {
+    fun notEqualsByCOMPANY_Test() {
         val companyDto10 = CompanyDto(10, "COMPANY_10")
         val companyDto20 = CompanyDto(20, "COMPANY_20")
         val vacancyDto1 = VacancyDto(10, "VACANCY_10", "COMMENT_10", companyDto10)

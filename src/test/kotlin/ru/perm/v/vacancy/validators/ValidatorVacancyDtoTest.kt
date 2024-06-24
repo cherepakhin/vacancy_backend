@@ -9,9 +9,9 @@ class ValidatorVacancyDtoTest {
 
     @Test
     fun validateOk() {
-        val companyDto = CompanyDto(100L,"testCompany")
+        val companyDto = CompanyDto(100L, "testCompany")
         val vacancyDto = VacancyDto(1L, "test1", "comment", companyDto)
-        
+
         assertDoesNotThrow {
             ValidatorVacancyDto.validate(vacancyDto)
         }
@@ -19,7 +19,7 @@ class ValidatorVacancyDtoTest {
 
     @Test
     fun checkValidateMessageFor_EmptyName() {
-        val companyDto = CompanyDto(100L,"testCompany")
+        val companyDto = CompanyDto(100L, "testCompany")
         val vacancyDto = VacancyDto(1L, "", "comment", companyDto)
 
         val excpt = assertThrows(Exception::class.java) {

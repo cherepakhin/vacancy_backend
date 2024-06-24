@@ -1,8 +1,7 @@
 package ru.perm.v.vacancy.mapper
 
+import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
-
-import org.junit.jupiter.api.Assertions.*
 import ru.perm.v.vacancy.dto.CompanyDto
 import ru.perm.v.vacancy.entity.CompanyEntity
 

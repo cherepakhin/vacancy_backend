@@ -58,7 +58,7 @@ class CompanyServiceImplIntegrationTest {
     }
 
     @Test
-    fun create()  {
+    fun create() {
         val service = CompanyServiceImpl(companyRepository, vacancyService)
 
         val company = service.createCompany(CompanyDto(5, "COMPANY_4"))

@@ -31,9 +31,9 @@ class VacancyMapperTest {
 
 
         val entity = VacancyEntity()
-        entity.n =N
-        entity.name  = NAME
-        entity.comment   = COMMENT
+        entity.n = N
+        entity.name = NAME
+        entity.comment = COMMENT
         // company NOT DEFINED!
         val dto = VacancyMapper.toDto(entity)
 
@@ -47,8 +47,8 @@ class VacancyMapperTest {
         val NAME = "name"
         val COMMENT = "comment"
         val COMPANY_DTO = CompanyDto(10L, "COMPANY")
-        val vacancyDTO  = VacancyDto(N, NAME, COMMENT, COMPANY_DTO)
-        val vacancyEntity  = VacancyMapper.toEntity(vacancyDTO)
+        val vacancyDTO = VacancyDto(N, NAME, COMMENT, COMPANY_DTO)
+        val vacancyEntity = VacancyMapper.toEntity(vacancyDTO)
 
         assertEquals(CompanyEntity(10L, "COMPANY"), vacancyEntity.companyEntity)
         assertEquals(VacancyEntity(N, NAME, COMMENT, CompanyEntity(10L, "COMPANY")), vacancyEntity)

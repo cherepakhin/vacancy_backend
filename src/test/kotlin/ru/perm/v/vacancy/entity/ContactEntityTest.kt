@@ -1,6 +1,7 @@
 package ru.perm.v.vacancy.entity
 
-import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Assertions.assertEquals
+import org.junit.jupiter.api.Assertions.assertNotNull
 import org.junit.jupiter.api.Test
 
 class ContactEntityTest {
@@ -15,6 +16,7 @@ class ContactEntityTest {
         assertEquals("", c.phone)
         assertEquals("", c.comment)
     }
+
     @Test
     fun secondaryConstructor() {
         val NAME = "NAME"
@@ -35,18 +37,18 @@ class ContactEntityTest {
     }
 
     @Test
-    fun testEquals()  {
+    fun testEquals() {
         val companyEntity = CompanyEntity()
 
         val contactEntity1 = ContactEntity()
-        contactEntity1.n  = 1L
-        contactEntity1.name  = "NAME"
-        contactEntity1.companyEntity  = companyEntity
+        contactEntity1.n = 1L
+        contactEntity1.name = "NAME"
+        contactEntity1.companyEntity = companyEntity
 
         val contactEntity2 = ContactEntity()
-        contactEntity2.n  = 1L
-        contactEntity2.name  = "NAME"
-        contactEntity2.companyEntity  = companyEntity
+        contactEntity2.n = 1L
+        contactEntity2.name = "NAME"
+        contactEntity2.companyEntity = companyEntity
 
         assertEquals(contactEntity1, contactEntity2)
     }

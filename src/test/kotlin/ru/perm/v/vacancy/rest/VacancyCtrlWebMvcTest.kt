@@ -60,6 +60,7 @@ class VacancyCtrlWebMvcTest {
             content { json("[{\"n\":1,\"name\":\"title\",\"comment\":\"text\",\"company\":{\"n\":1,\"name\":\"COMPANY_1\"}},{\"n\":2,\"name\":\"title\",\"comment\":\"text\",\"company\":{\"n\":1,\"name\":\"COMPANY_1\"}}]") }
         }
     }
+
     @Test
     fun getAllSortByColumnNAME() {
         val companyDto = CompanyDto(1L, "COMPANY_1")

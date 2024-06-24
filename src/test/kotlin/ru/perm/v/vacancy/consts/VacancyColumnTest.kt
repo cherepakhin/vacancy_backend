@@ -60,7 +60,7 @@ class VacancyColumnTest {
     }
 
     @Test
-    fun toUpperCase()  {
+    fun toUpperCase() {
         val column = "company_n"
         val upperColumn = column.uppercase()
 

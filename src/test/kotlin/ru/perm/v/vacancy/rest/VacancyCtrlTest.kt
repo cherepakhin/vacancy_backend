@@ -58,20 +58,20 @@ class VacancyCtrlTest {
     fun createForValidDto() {
         val COMPANY_N = 1L
         val VACANCY_N = 100L
-        val vacancyDtoForCreate = VacancyDtoForCreate( "VACANCY_1", "COMMENT_1", COMPANY_N)
+        val vacancyDtoForCreate = VacancyDtoForCreate("VACANCY_1", "COMMENT_1", COMPANY_N)
         val companyDto = CompanyDto(1L, "COMPANY_1")
-        val vacancyCreated = VacancyDto( VACANCY_N, "VACANCY_1", "COMMENT_1", companyDto)
+        val vacancyCreated = VacancyDto(VACANCY_N, "VACANCY_1", "COMMENT_1", companyDto)
 
         `when`(mockVacancyService.create(vacancyDtoForCreate)).thenReturn(vacancyCreated)
 
         val createdVacancy = vacancyCtrl.create(vacancyDtoForCreate)
 
-        assertEquals(VacancyDto( VACANCY_N, "VACANCY_1", "COMMENT_1", companyDto), createdVacancy)
+        assertEquals(VacancyDto(VACANCY_N, "VACANCY_1", "COMMENT_1", companyDto), createdVacancy)
     }
 
     @Test
     fun createForNotValidDto() {
-        val COMPANY_N  =  1L
+        val COMPANY_N = 1L
         val vacancy1 = VacancyDtoForCreate("", "", COMPANY_N)
 
         val err = assertThrows<Exception> { vacancyCtrl.create(vacancy1) }
@@ -84,7 +84,7 @@ class VacancyCtrlTest {
 
     @Test
     fun getAllWithErrorSortColumn() {
-        val FAKE_COLUMN  =  "FAKE_COLUMN"
+        val FAKE_COLUMN = "FAKE_COLUMN"
         val err = assertThrows<Exception> { vacancyCtrl.getAllSortByColumn(FAKE_COLUMN) }
 
         assertEquals("Invalid sort column: FAKE_COLUMN", err.message)
@@ -92,17 +92,17 @@ class VacancyCtrlTest {
 
     @Test
     fun getAllWithSortColumnName() {
-        val sort_column  =  "NAME"
+        val sort_column = "NAME"
         `when`(mockVacancyService.getAllSortedByField(VacancyColumn.NAME))
             .thenReturn(
                 listOf(
-                    VacancyDto(1L,  "",  "", CompanyDto(1L,  "COMPANY_1"))
+                    VacancyDto(1L, "", "", CompanyDto(1L, "COMPANY_1"))
                 )
             )
 
-        val receivedDTO= vacancyCtrl.getAllSortByColumn(sort_column)
+        val receivedDTO = vacancyCtrl.getAllSortByColumn(sort_column)
 
-        assertEquals(listOf(VacancyDto(1L,  "",  "", CompanyDto(1L,  "COMPANY_1"))), receivedDTO)
+        assertEquals(listOf(VacancyDto(1L, "", "", CompanyDto(1L, "COMPANY_1"))), receivedDTO)
         verify(mockVacancyService, times(1)).getAllSortedByField(VacancyColumn.NAME)
     }
 
