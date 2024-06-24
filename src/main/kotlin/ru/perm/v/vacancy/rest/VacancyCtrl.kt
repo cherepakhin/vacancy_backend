@@ -7,11 +7,13 @@ import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.cache.annotation.Cacheable
 import org.springframework.web.bind.annotation.*
+import ru.perm.v.vacancy.consts.VacancyColumn
 import ru.perm.v.vacancy.dto.VacancyDto
 import ru.perm.v.vacancy.dto.VacancyDtoForCreate
 import ru.perm.v.vacancy.service.VacancyService
 import ru.perm.v.vacancy.service.impl.CompanyService
 import ru.perm.v.vacancy.validators.ValidatorVacancyDtoForCreate
+import java.lang.String.format
 
 @RestController
 @RequestMapping("/vacancy")
@@ -53,12 +55,12 @@ class VacancyCtrl() {
     //TODO: 1. add criteria search or use current criteria
     //TODO: 2. add cache
     fun getAllSortByColumn(@PathVariable("column") column: String): List<VacancyDto> {
-        //TODO: realize
-        return vacancyService.getAll()
-//        if (!VacancyColumns.values().contains(column)) {
-//            throw IllegalArgumentException("Invalid column name")
-//        }
-//        return vacancyService.getAllSortedByField()
+        try {
+            VacancyColumn.valueOf(column).value
+        } catch(e: IllegalArgumentException)  {
+            throw IllegalArgumentException(format("Invalid sort column: %s", column))
+        }
+        return vacancyService.getAllSortedByField(VacancyColumn.valueOf(column))
     }
 
     @GetMapping("/{n}")

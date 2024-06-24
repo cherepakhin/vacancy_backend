@@ -8,6 +8,7 @@ import org.mockito.InjectMocks
 import org.mockito.Mock
 import org.mockito.Mockito.`when`
 import org.mockito.junit.jupiter.MockitoExtension
+import ru.perm.v.vacancy.consts.VacancyColumn
 import ru.perm.v.vacancy.dto.CompanyDto
 import ru.perm.v.vacancy.dto.VacancyDto
 import ru.perm.v.vacancy.dto.VacancyDtoForCreate
@@ -81,7 +82,29 @@ class VacancyCtrlTest {
         )
     }
 
-//    @Test
+    @Test
+    fun getAllWithErrorSortColumn() {
+        val FAKE_COLUMN  =  "FAKE_COLUMN"
+        val err = assertThrows<Exception> { vacancyCtrl.getAllSortByColumn(FAKE_COLUMN) }
+
+        assertEquals("Invalid sort column: FAKE_COLUMN", err.message)
+    }
+
+    @Test
+    fun getAllWithSortColumnName() {
+        val sort_column  =  "NAME"
+        `when`(mockVacancyService.getAllSortedByField(VacancyColumn.NAME))
+            .thenReturn(
+                listOf(
+                    VacancyDto(1L,  "",  "", CompanyDto(1L,  "COMPANY_1"))
+                )
+            )
+
+        val receivedDTO= vacancyCtrl.getAllSortByColumn(sort_column)
+
+        assertEquals(listOf(VacancyDto(1L,  "",  "", CompanyDto(1L,  "COMPANY_1"))), receivedDTO)
+    }
+    //    @Test
 //    fun createForNotExistCompany() {
 //        val COMPANY_N = 1L
 ////        val companyDto = CompanyDto(COMPANY_N, "COMPANY_1")
