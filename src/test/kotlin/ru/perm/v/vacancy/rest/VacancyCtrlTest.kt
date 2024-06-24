@@ -6,7 +6,7 @@ import org.junit.jupiter.api.assertThrows
 import org.junit.jupiter.api.extension.ExtendWith
 import org.mockito.InjectMocks
 import org.mockito.Mock
-import org.mockito.Mockito.`when`
+import org.mockito.Mockito.*
 import org.mockito.junit.jupiter.MockitoExtension
 import ru.perm.v.vacancy.consts.VacancyColumn
 import ru.perm.v.vacancy.dto.CompanyDto
@@ -103,6 +103,7 @@ class VacancyCtrlTest {
         val receivedDTO= vacancyCtrl.getAllSortByColumn(sort_column)
 
         assertEquals(listOf(VacancyDto(1L,  "",  "", CompanyDto(1L,  "COMPANY_1"))), receivedDTO)
+        verify(mockVacancyService, times(1)).getAllSortedByField(VacancyColumn.NAME)
     }
     //    @Test
 //    fun createForNotExistCompany() {
