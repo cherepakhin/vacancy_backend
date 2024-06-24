@@ -59,4 +59,19 @@ class VacancyCtrlWebMvcTest {
             content { json("[{\"n\":1,\"name\":\"title\",\"comment\":\"text\",\"company\":{\"n\":1,\"name\":\"COMPANY_1\"}},{\"n\":2,\"name\":\"title\",\"comment\":\"text\",\"company\":{\"n\":1,\"name\":\"COMPANY_1\"}}]") }
         }
     }
+    @Test
+    fun vacancyGetByN() {
+        val companyDto = CompanyDto(1L, "COMPANY_1")
+        val vacancyDto1 = VacancyDto(1L, "title", "text", companyDto)
+        `when`(vacancyService.getByN(1L)).thenReturn(vacancyDto1)
+
+        mockMvc.get("/vacancy/1") {
+            contentType = MediaType.APPLICATION_JSON
+            accept = MediaType.APPLICATION_JSON
+        }.andExpect {
+            status { isOk() }
+            content { contentType(MediaType.APPLICATION_JSON) }
+            content { json("{\"n\":1,\"name\":\"title\",\"comment\":\"text\",\"company\":{\"n\":1,\"name\":\"COMPANY_1\"}}") }
+        }
+    }
 }
