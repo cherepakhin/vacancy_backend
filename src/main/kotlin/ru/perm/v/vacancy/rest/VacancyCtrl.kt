@@ -7,7 +7,6 @@ import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.cache.annotation.Cacheable
 import org.springframework.web.bind.annotation.*
-import ru.perm.v.vacancy.consts.VacancyColumns
 import ru.perm.v.vacancy.dto.VacancyDto
 import ru.perm.v.vacancy.dto.VacancyDtoForCreate
 import ru.perm.v.vacancy.service.VacancyService
@@ -51,8 +50,8 @@ class VacancyCtrl() {
 
     @GetMapping("/sortByColumn/{column}")
     @ApiOperation("Get all companies")
-    //TODO: add cache
-    // rewrite with criteria search???
+    //TODO: 1. add criteria search or use current criteria
+    //TODO: 2. add cache
     fun getAllSortByColumn(@PathVariable("column") column: String): List<VacancyDto> {
         //TODO: realize
         return vacancyService.getAll()

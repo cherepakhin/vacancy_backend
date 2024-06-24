@@ -7,7 +7,7 @@ import org.junit.jupiter.api.assertThrows
 import org.mockito.Mockito
 import org.mockito.Mockito.*
 import org.springframework.data.domain.Sort
-import ru.perm.v.vacancy.consts.VacancyColumns
+import ru.perm.v.vacancy.consts.VacancyColumn
 import ru.perm.v.vacancy.dto.CompanyDto
 import ru.perm.v.vacancy.dto.VacancyDto
 import ru.perm.v.vacancy.dto.VacancyDtoForCreate
@@ -16,7 +16,6 @@ import ru.perm.v.vacancy.entity.VacancyEntity
 import ru.perm.v.vacancy.repository.VacancyRepository
 import java.util.*
 import kotlin.reflect.full.declaredMemberProperties
-import kotlin.reflect.full.memberProperties
 
 class VacancyServiceImplTest {
     @Test
@@ -268,7 +267,7 @@ class VacancyServiceImplTest {
         val companyService = mock(CompanyService::class.java)
         val service = VacancyServiceImpl(repository, companyService)
 
-        val vacancyDtos  = service.getAllSortedByField(VacancyColumns.N)
+        val vacancyDtos  = service.getAllSortedByField(VacancyColumn.N)
 
         assertEquals(2, vacancyDtos.size)
         assertEquals(VacancyDto(N_100, NAME_VACANCY_100, COMMENT_100, CompanyDto(N_COMPANY_100, NAME_COMPANY_100)),
@@ -303,7 +302,7 @@ class VacancyServiceImplTest {
         val companyService = mock(CompanyService::class.java)
         val service = VacancyServiceImpl(repository, companyService)
 
-        val vacancyDtos  = service.getAllSortedByField(VacancyColumns.NAME)
+        val vacancyDtos  = service.getAllSortedByField(VacancyColumn.NAME)
 
         assertEquals(2, vacancyDtos.size)
         assertEquals(VacancyDto(N_100, NAME_VACANCY_100, COMMENT_100, CompanyDto(N_COMPANY_100, NAME_COMPANY_100)),

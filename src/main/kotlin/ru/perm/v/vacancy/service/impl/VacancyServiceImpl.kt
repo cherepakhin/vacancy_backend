@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.Sort
 import org.springframework.stereotype.Service
 import ru.perm.v.vacancy.consts.ErrMessage
-import ru.perm.v.vacancy.consts.VacancyColumns
+import ru.perm.v.vacancy.consts.VacancyColumn
 import ru.perm.v.vacancy.dto.CompanyDto
 import ru.perm.v.vacancy.dto.VacancyDto
 import ru.perm.v.vacancy.dto.VacancyDtoForCreate
@@ -13,7 +13,6 @@ import ru.perm.v.vacancy.mapper.CompanyMapper
 import ru.perm.v.vacancy.mapper.VacancyMapper
 import ru.perm.v.vacancy.repository.VacancyRepository
 import ru.perm.v.vacancy.service.VacancyService
-import kotlin.reflect.full.declaredMemberProperties
 
 @Service
 class VacancyServiceImpl(
@@ -31,10 +30,10 @@ class VacancyServiceImpl(
     }
 
     override fun getAll(): List<VacancyDto> {
-        return this.getAllSortedByField(VacancyColumns.N)
+        return this.getAllSortedByField(VacancyColumn.N)
     }
 
-    override fun getAllSortedByField(sortColumn: VacancyColumns): List<VacancyDto> {
+    override fun getAllSortedByField(sortColumn: VacancyColumn): List<VacancyDto> {
         return repository.findAll(Sort.by(sortColumn.value)).map { VacancyMapper.toDto(it) }.toList()
     }
 
