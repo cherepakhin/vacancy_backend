@@ -1,5 +1,6 @@
 package ru.perm.v.vacancy.service.impl
 
+import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.Sort
 import org.springframework.stereotype.Service
@@ -13,12 +14,14 @@ import ru.perm.v.vacancy.mapper.CompanyMapper
 import ru.perm.v.vacancy.mapper.VacancyMapper
 import ru.perm.v.vacancy.repository.VacancyRepository
 import ru.perm.v.vacancy.service.VacancyService
+import java.lang.String.format
 
 @Service
 class VacancyServiceImpl(
     @Autowired private val repository: VacancyRepository,
     @Autowired private val companyService: CompanyService,
 ) : VacancyService {
+    private val logger = LoggerFactory.getLogger(this.javaClass.name)
 
     override fun getByN(n: Long): VacancyDto {
         if (repository.findById(n).isPresent) {
@@ -34,6 +37,11 @@ class VacancyServiceImpl(
     }
 
     override fun getAllSortedByField(sortColumn: VacancyColumn): List<VacancyDto> {
+        logger.info("sortColumn: $sortColumn")
+        logger.info(format("sortColumn: %s", sortColumn))
+        logger.info(format("sortColumn.value: %s", sortColumn.value))
+
+//        return repository.findAll(Sort.by(sortColumn.value)).map { VacancyMapper.toDto(it) }.toList()
         return repository.findAll(Sort.by(sortColumn.value)).map { VacancyMapper.toDto(it) }.toList()
     }
 

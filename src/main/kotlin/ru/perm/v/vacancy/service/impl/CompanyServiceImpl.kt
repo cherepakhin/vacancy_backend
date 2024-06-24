@@ -1,5 +1,6 @@
 package ru.perm.v.vacancy.service.impl
 
+import org.slf4j.LoggerFactory
 import org.springframework.context.annotation.Lazy
 import org.springframework.data.domain.Sort
 import org.springframework.stereotype.Service
@@ -8,9 +9,12 @@ import ru.perm.v.vacancy.dto.CompanyDto
 import ru.perm.v.vacancy.entity.CompanyEntity
 import ru.perm.v.vacancy.mapper.CompanyMapper
 import ru.perm.v.vacancy.repository.CompanyRepository
+import java.lang.String.format
 
 @Service
-class CompanyServiceImpl(val repository: CompanyRepository, @Lazy val vacancyService: VacancyServiceImpl) : CompanyService {
+class CompanyServiceImpl(val repository: CompanyRepository, @Lazy val vacancyService: VacancyServiceImpl) :
+    CompanyService {
+    private val logger = LoggerFactory.getLogger(this.javaClass.name)
 
     override fun getAll(): List<CompanyDto> {
         return repository.findAll().sortedBy { it.n }.map { CompanyMapper.toDto(it) }
@@ -23,16 +27,20 @@ class CompanyServiceImpl(val repository: CompanyRepository, @Lazy val vacancySer
     }
 
     override fun createCompany(companyDto: CompanyDto): CompanyDto {
-        val n = getNextN()
-        val company = CompanyEntity(n, name = companyDto.name)
-        val savedCompany = repository.save(company)
-        if (savedCompany != null) {
-            return CompanyMapper.toDto(savedCompany)
+        var n = getNextN()
+        if (n == null) {
+            n = 1L
         }
-        throw Exception(String.format(ErrMessage.COMPANY_NOT_CREATED, n))
+        logger.info(String.format("getNextN(): %s", n))
+        val company = CompanyEntity(n = n, name = companyDto.name)
+        logger.info(company.toString())
+        repository.createNew(company.n, companyDto.name)
+        val createdCompany = getCompanyByN(n)
+        logger.info(format("will returned: %s", createdCompany.toString()))
+        return createdCompany
     }
 
-    private fun getNextN(): Long {
+    public fun getNextN(): Long {
         return repository.getNextN()
     }
 
@@ -58,7 +66,6 @@ class CompanyServiceImpl(val repository: CompanyRepository, @Lazy val vacancySer
     }
 
     override fun deleteCompany(n: Long): String {
-
         if (repository.findById(n).isPresent) {
             repository.deleteById(n)
             return String.format(ErrMessage.COMPANY_N_DELETED, n)

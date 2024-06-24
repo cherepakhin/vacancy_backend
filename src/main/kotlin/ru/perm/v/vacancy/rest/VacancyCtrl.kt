@@ -2,6 +2,7 @@ package ru.perm.v.vacancy.rest
 
 import io.swagger.annotations.Api
 import io.swagger.annotations.ApiOperation
+import io.swagger.annotations.ApiParam
 import io.swagger.v3.oas.annotations.Parameter
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
@@ -52,10 +53,10 @@ class VacancyCtrl() {
     }
 
     @GetMapping("/sortByColumn/{column}")
-    @ApiOperation("Get all companies")
+    @ApiOperation("Get all vacancies sorted by column")
     //TODO: 1. add criteria search or use current criteria
     //TODO: 2. add cache
-    fun getAllSortByColumn(@PathVariable("column") column: String): List<VacancyDto> {
+    fun getAllSortByColumn(@ApiParam("Sort column") @PathVariable("column") column: String): List<VacancyDto> {
         val sortColumn = column.uppercase()
         try {
             VacancyColumn.valueOf(sortColumn).value
