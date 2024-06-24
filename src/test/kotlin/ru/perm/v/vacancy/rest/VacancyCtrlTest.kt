@@ -106,6 +106,28 @@ class VacancyCtrlTest {
         verify(mockVacancyService, times(1)).getAllSortedByField(VacancyColumn.NAME)
     }
 
+    @Test
+    fun deleteOk() {
+        val VACANCY_N = 1L
+        `when`(mockVacancyService.delete(VACANCY_N)).thenReturn("OK")
+        `when`(mockVacancyService.getByN(VACANCY_N))
+            .thenReturn(VacancyDto(VACANCY_N, "", "", CompanyDto(1L, "")))
+
+        val result = vacancyCtrl.delete(VACANCY_N)
+
+        assertEquals("OK", result)
+    }
+
+    @Test
+    fun deleteNotExist() {
+        val VACANCY_N = 1L
+        `when`(mockVacancyService.getByN(VACANCY_N)).thenReturn(null)
+
+        val excpt = assertThrows<Exception>  { vacancyCtrl.delete(VACANCY_N) }
+
+        assertEquals("Vacancy with N=1 not found", excpt.message)
+    }
+
 //    @Test
 //    fun createForNotExistCompany() {
 //        val COMPANY_N = 1L
@@ -121,5 +143,4 @@ class VacancyCtrlTest {
 //            err.message
 //        )
 //    }
-
 }
