@@ -12,5 +12,5 @@ package ru.perm.v.vacancy.consts
 enum class VacancyColumn(val value: String) {
     N("n"),
     NAME("name"),
-    COMPANY("company_n")
+    COMPANY_N("company_n")
 }

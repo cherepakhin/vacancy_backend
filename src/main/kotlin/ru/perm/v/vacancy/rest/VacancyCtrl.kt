@@ -14,6 +14,7 @@ import ru.perm.v.vacancy.service.VacancyService
 import ru.perm.v.vacancy.service.impl.CompanyService
 import ru.perm.v.vacancy.validators.ValidatorVacancyDtoForCreate
 import java.lang.String.format
+import java.util.*
 
 @RestController
 @RequestMapping("/vacancy")
@@ -55,12 +56,13 @@ class VacancyCtrl() {
     //TODO: 1. add criteria search or use current criteria
     //TODO: 2. add cache
     fun getAllSortByColumn(@PathVariable("column") column: String): List<VacancyDto> {
+        val sortColumn = column.uppercase()
         try {
-            VacancyColumn.valueOf(column).value
+            VacancyColumn.valueOf(sortColumn).value
         } catch(e: IllegalArgumentException)  {
             throw IllegalArgumentException(format("Invalid sort column: %s", column))
         }
-        return vacancyService.getAllSortedByField(VacancyColumn.valueOf(column))
+        return vacancyService.getAllSortedByField(VacancyColumn.valueOf(sortColumn))
     }
 
     @GetMapping("/{n}")

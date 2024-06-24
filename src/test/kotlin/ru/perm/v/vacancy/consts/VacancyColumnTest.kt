@@ -28,7 +28,7 @@ class VacancyColumnTest {
 
     @Test
     fun companyValue() {
-        assertEquals("company_n", VacancyColumn.COMPANY.value)
+        assertEquals("company_n", VacancyColumn.COMPANY_N.value)
     }
 
     @Test
@@ -43,7 +43,7 @@ class VacancyColumnTest {
 
     @Test
     fun ordinalOfCompany() {
-        assertEquals(2, VacancyColumn.COMPANY.ordinal)
+        assertEquals(2, VacancyColumn.COMPANY_N.ordinal)
     }
 
     @Test
@@ -57,5 +57,14 @@ class VacancyColumnTest {
     fun notExistByString() {
         val column = "FAKE"
         assertThrows<IllegalArgumentException> { VacancyColumn.valueOf(column) }
+    }
+
+    @Test
+    fun toUpperCase()  {
+        val column = "company_n"
+        val upperColumn = column.uppercase()
+
+        assertEquals("COMPANY_N", upperColumn)
+        assertEquals("company_n", VacancyColumn.valueOf(upperColumn).value)
     }
 }
