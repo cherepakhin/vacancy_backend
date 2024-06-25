@@ -107,6 +107,45 @@ class VacancyCtrlTest {
     }
 
     @Test
+    fun getAllWithSortColumnN() {
+        val sort_column = "N"
+        `when`(mockVacancyService.getAllSortedByField(VacancyColumn.N))
+            .thenReturn(
+                listOf(
+                    VacancyDto(1L, "", "", CompanyDto(1L, "COMPANY_1")),
+                    VacancyDto(2L, "", "", CompanyDto(1L, "COMPANY_1"))
+                )
+            )
+
+        val receivedDTO = vacancyCtrl.getAllSortByColumn(sort_column)
+
+        assertEquals(listOf(
+            VacancyDto(1L, "", "", CompanyDto(1L, "COMPANY_1")),
+            VacancyDto(2L, "", "", CompanyDto(1L, "COMPANY_1"))
+        ), receivedDTO)
+        verify(mockVacancyService, times(1)).getAllSortedByField(VacancyColumn.N)
+    }
+
+    @Test
+    fun getAllWithSortColumnCOMPANY_N() {
+        `when`(mockVacancyService.getAllSortedByField(VacancyColumn.COMPANY_N))
+            .thenReturn(
+                listOf(
+                    VacancyDto(1L, "", "", CompanyDto(1L, "COMPANY_1")),
+                    VacancyDto(2L, "", "", CompanyDto(2L, "COMPANY_2"))
+                )
+            )
+
+        val receivedDTO = vacancyCtrl.getAllSortByColumn("COMPANY_N")
+
+        assertEquals(listOf(
+            VacancyDto(1L, "", "", CompanyDto(1L, "COMPANY_1")),
+            VacancyDto(2L, "", "", CompanyDto(2L, "COMPANY_2"))
+        ), receivedDTO)
+        verify(mockVacancyService, times(1)).getAllSortedByField(VacancyColumn.COMPANY_N)
+    }
+
+    @Test
     fun deleteOk() {
         val VACANCY_N = 1L
         `when`(mockVacancyService.delete(VACANCY_N)).thenReturn("OK")
