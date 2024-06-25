@@ -91,7 +91,7 @@ class VacancyCtrlTest {
     }
 
     @Test
-    fun getAllWithSortColumnName() {
+    fun getAllWithSortColumnNAME() {
         val sort_column = "NAME"
         `when`(mockVacancyService.getAllSortedByField(VacancyColumn.NAME))
             .thenReturn(
