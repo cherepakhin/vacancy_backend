@@ -100,6 +100,7 @@ class VacancyCtrl() {
 
     @DeleteMapping("/{n}")
     @ApiOperation("Delete Vacancy by N")
+    @Throws(Exception::class)
     fun delete(n: Long): String {
         if(vacancyService.getByN(n) == null)  {
             throw IllegalArgumentException(format("Vacancy with N=%s not found", n))

@@ -68,6 +68,7 @@ class VacancyServiceImpl(
         return VacancyMapper.toDto(savedVacancyEntity)
     }
 
+    @Throws(Exception::class)
     override fun delete(n: Long): String {
         try {
             getByN(n) // throw if not exists

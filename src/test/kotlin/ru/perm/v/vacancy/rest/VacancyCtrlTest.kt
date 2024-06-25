@@ -8,6 +8,7 @@ import org.mockito.InjectMocks
 import org.mockito.Mock
 import org.mockito.Mockito.*
 import org.mockito.junit.jupiter.MockitoExtension
+import org.mockito.kotlin.doAnswer
 import ru.perm.v.vacancy.consts.VacancyColumn
 import ru.perm.v.vacancy.dto.CompanyDto
 import ru.perm.v.vacancy.dto.VacancyDto
@@ -165,6 +166,27 @@ class VacancyCtrlTest {
         val excpt = assertThrows<Exception>  { vacancyCtrl.delete(VACANCY_N) }
 
         assertEquals("Vacancy with N=1 not found", excpt.message)
+    }
+
+    @Test
+    fun deleteWithExceptionNotfound() {
+        val VACANCY_N = 1L
+        `when`(mockVacancyService.getByN(VACANCY_N)).thenReturn(null)
+
+        val excpt = assertThrows<Exception>  { vacancyCtrl.delete(VACANCY_N) }
+
+        assertEquals("Vacancy with N=1 not found", excpt.message)
+    }
+
+    @Test
+    fun deleteWithOtherException() {
+        val VACANCY_N = 1L
+        `when`(mockVacancyService.getByN(VACANCY_N)).thenReturn(VacancyDto(VACANCY_N, "",  "", CompanyDto(1L, "")))
+        `when`(mockVacancyService.delete(VACANCY_N)).doAnswer({ throw Exception("ANY ERROR") })
+
+        val err = vacancyCtrl.delete(VACANCY_N)
+
+        assertEquals("ANY ERROR", err)
     }
 
     @Test
