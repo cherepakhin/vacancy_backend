@@ -84,7 +84,6 @@ class CompanyServiceImpl(val repository: CompanyRepository, @Lazy val vacancySer
         logger.info(exampleDto.toString())
         val exampleCompanyEntity  =  CompanyEntity()
         exampleCompanyEntity.n = exampleDto.n
-//        exampleCompanyEntity.name  = exampleDto.name
         val example =  Example.of(exampleCompanyEntity)
         val foundCompanies= repository.findAll(example)
         return foundCompanies.map  { CompanyMapper.toDto(it)  }.toList()

@@ -75,7 +75,7 @@ class CompanyServiceImplIntegrationTest {
     }
 
     @Test
-    fun getByExample() {
+    fun getByExampleEq() {
         val qbe: QCompanyEntity = QCompanyEntity.companyEntity
         val preicate = qbe.name.eq("COMPANY_1")
         val service  = CompanyServiceImpl(companyRepository, vacancyService)
@@ -83,5 +83,15 @@ class CompanyServiceImplIntegrationTest {
         val companies  = service.findAll(preicate)
 
         assertEquals(1, companies.size)
+    }
+    @Test
+    fun getByExampleLikeIgnoreCase() {
+        val qbe: QCompanyEntity = QCompanyEntity.companyEntity
+        val preicate = qbe.name.likeIgnoreCase("%company%")
+        val service  = CompanyServiceImpl(companyRepository, vacancyService)
+
+        val companies  = service.findAll(preicate)
+
+        assertEquals(3, companies.size)
     }
 }
