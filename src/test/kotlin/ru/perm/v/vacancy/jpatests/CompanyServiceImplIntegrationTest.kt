@@ -4,8 +4,10 @@ import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
 import org.springframework.boot.test.mock.mockito.MockBean
+import org.springframework.data.domain.Sort
 import ru.perm.v.vacancy.dto.CompanyDto
 import ru.perm.v.vacancy.entity.QCompanyEntity
+import ru.perm.v.vacancy.filter.CompanyExample
 import ru.perm.v.vacancy.repository.CompanyRepository
 import ru.perm.v.vacancy.service.impl.CompanyServiceImpl
 import ru.perm.v.vacancy.service.impl.VacancyServiceImpl
@@ -93,5 +95,26 @@ class CompanyServiceImplIntegrationTest {
         val companies  = service.findAll(preicate)
 
         assertEquals(3, companies.size)
+    }
+    @Test
+    fun getByExampleLikeIgnoreCaseAndSort() {
+        val service  = CompanyServiceImpl(companyRepository, vacancyService)
+        val example = CompanyExample()
+        example.name = "COMPANY_1"
+        val companies  = service.getByExampleAndSort(
+            example, Sort.by(Sort.Order.desc("n")))
+
+        assertEquals(1, companies.size)
+        assertEquals(CompanyDto(1,"COMPANY_1"), companies.get(0))
+    }
+    @Test
+    fun getByNExampleLikeIgnoreCaseAndSort() {
+        val service  = CompanyServiceImpl(companyRepository, vacancyService)
+        val example = CompanyExample()
+        example.n = 1L
+        val companies  = service.getByExampleAndSort(
+            example, Sort.by(Sort.Order.desc("n")))
+
+        assertEquals(1, companies.size)
     }
 }

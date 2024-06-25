@@ -1,7 +1,6 @@
 package ru.perm.v.vacancy.service.impl
 
 import com.querydsl.core.types.Predicate
-import com.querydsl.core.types.dsl.BooleanExpression
 import org.slf4j.LoggerFactory
 import org.springframework.context.annotation.Lazy
 import org.springframework.data.domain.Example
@@ -10,6 +9,8 @@ import org.springframework.stereotype.Service
 import ru.perm.v.vacancy.consts.ErrMessage
 import ru.perm.v.vacancy.dto.CompanyDto
 import ru.perm.v.vacancy.entity.CompanyEntity
+import ru.perm.v.vacancy.entity.QCompanyEntity
+import ru.perm.v.vacancy.filter.CompanyExample
 import ru.perm.v.vacancy.mapper.CompanyMapper
 import ru.perm.v.vacancy.repository.CompanyRepository
 
@@ -82,11 +83,26 @@ class CompanyServiceImpl(val repository: CompanyRepository, @Lazy val vacancySer
 
     override fun getByExample(exampleDto: CompanyDto): List<CompanyDto> {
         logger.info(exampleDto.toString())
-        val exampleCompanyEntity  =  CompanyEntity()
+        val exampleCompanyEntity = CompanyEntity()
         exampleCompanyEntity.n = exampleDto.n
-        val example =  Example.of(exampleCompanyEntity)
-        val foundCompanies= repository.findAll(example)
-        return foundCompanies.map  { CompanyMapper.toDto(it)  }.toList()
+        val example = Example.of(exampleCompanyEntity)
+        val foundCompanies = repository.findAll(example)
+        return foundCompanies.map { CompanyMapper.toDto(it) }.toList()
+    }
+
+    override fun getByExampleAndSort(companyExample: CompanyExample, sort: Sort): List<CompanyDto> {
+        logger.info(companyExample.toString())
+        val qCompany = QCompanyEntity.companyEntity
+        var predicate = qCompany.n.goe(-1)
+        if (companyExample.n != null) {
+            predicate = predicate.and(qCompany.n.eq(companyExample.n))
+        }
+        if (!companyExample.name.isNullOrEmpty()) {
+            predicate = predicate.and(qCompany.name.like("%"+companyExample.name+"%"))
+        }
+
+        val foundCompanies = repository.findAll(predicate)
+        return foundCompanies.map { CompanyMapper.toDto(it) }.toList()
     }
 
 }

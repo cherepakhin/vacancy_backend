@@ -2,7 +2,9 @@ package ru.perm.v.vacancy.service.impl
 
 import com.querydsl.core.types.Predicate
 import com.querydsl.core.types.dsl.BooleanExpression
+import org.springframework.data.domain.Sort
 import ru.perm.v.vacancy.dto.CompanyDto
+import ru.perm.v.vacancy.filter.CompanyExample
 
 interface CompanyService {
     fun createCompany(companyDto: CompanyDto): CompanyDto
@@ -14,4 +16,5 @@ interface CompanyService {
     fun getAllSortedByField(field: String): List<CompanyDto>
     fun getByExample(example: CompanyDto): List<CompanyDto>
     fun findAll(predicate: Predicate): List<CompanyDto>
+    fun getByExampleAndSort(exampleDto: CompanyExample, sort: Sort): List<CompanyDto>
 }
