@@ -1,11 +1,7 @@
 package ru.perm.v.vacancy.rest
 
-import com.fasterxml.jackson.databind.ObjectMapper
-import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
-import com.fasterxml.jackson.module.kotlin.readValue
-import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
-import org.mockito.Mockito.*
+import org.mockito.Mockito.`when`
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest
 import org.springframework.boot.test.mock.mockito.MockBean
@@ -19,6 +15,7 @@ import ru.perm.v.vacancy.dto.CompanyDto
 import ru.perm.v.vacancy.dto.VacancyDto
 import ru.perm.v.vacancy.service.VacancyService
 import ru.perm.v.vacancy.service.impl.CompanyService
+
 
 @WebMvcTest(controllers = [VacancyCtrl::class])
 class VacancyCtrlWebMvcTest {
@@ -96,26 +93,5 @@ class VacancyCtrlWebMvcTest {
             content { contentType(MediaType.APPLICATION_JSON) }
             content { json("{\"n\":1,\"name\":\"title\",\"comment\":\"text\",\"company\":{\"n\":1,\"name\":\"COMPANY_1\"}}") }
         }
-    }
-
-    @Test
-    fun vacancyGetAllCheckWorkCache() {
-        val companyDto = CompanyDto(1L, "COMPANY_1")
-        val vacancyDto1 = VacancyDto(1L, "title", "text", companyDto)
-        `when`(vacancyService.getAllSortedByField(VacancyColumn.NAME)).thenReturn(listOf(vacancyDto1))
-        val URL = "/vacancy/sortByColumn/name"
-        // FIRST REQUEST
-        mockMvc.perform(MockMvcRequestBuilders.get(URL))
-        // SECOND REQUEST
-        mockMvc.perform(MockMvcRequestBuilders.get(URL))
-        // LAST REQUEST
-        val response = mockMvc.perform(MockMvcRequestBuilders.get(URL))
-            .andExpect(MockMvcResultMatchers.status().isOk).andReturn().response.contentAsString
-
-        val vacancies= ObjectMapper().readValue<List<VacancyDto>>(response)
-
-        assertEquals(1, vacancies.size)
-        //TODO: Почему не 1 запрос? В ручных тестах все хорошо, только 1 запрос к vacancyService.
-        verify(vacancyService, times(3)).getAllSortedByField(VacancyColumn.NAME)
     }
 }

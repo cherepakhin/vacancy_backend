@@ -59,7 +59,7 @@ class VacancyCtrl() {
 
     @GetMapping("/sortByColumn/{column}")
     @ApiOperation("Get all vacancies sorted by column")
-    @Cacheable("vacancies_by_column")
+    @Cacheable(value = ["column"], key = "#column")
     //TODO: 1. add criteria search or use current criteria
     //TODO: 2. add cache
     fun getAllSortByColumn(@ApiParam("Sort column") @PathVariable("column") column: String): List<VacancyDto> {
