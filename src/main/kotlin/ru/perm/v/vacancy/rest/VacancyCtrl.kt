@@ -7,6 +7,7 @@ import io.swagger.v3.oas.annotations.Parameter
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.cache.annotation.Cacheable
+import org.springframework.http.CacheControl
 import org.springframework.web.bind.annotation.*
 import ru.perm.v.vacancy.consts.VacancyColumn
 import ru.perm.v.vacancy.dto.VacancyDto
@@ -15,12 +16,16 @@ import ru.perm.v.vacancy.service.VacancyService
 import ru.perm.v.vacancy.service.impl.CompanyService
 import ru.perm.v.vacancy.validators.ValidatorVacancyDtoForCreate
 import java.lang.String.format
-import java.util.*
+import java.util.concurrent.TimeUnit
+
 
 @RestController
 @RequestMapping("/vacancy")
 @Api(tags = ["Rest Vacancy"])
 class VacancyCtrl() {
+    var cacheControl: CacheControl = CacheControl.maxAge(60, TimeUnit.SECONDS)
+        .noTransform()
+        .mustRevalidate()
 
     private val logger = LoggerFactory.getLogger(this.javaClass.name)
 
@@ -54,6 +59,7 @@ class VacancyCtrl() {
 
     @GetMapping("/sortByColumn/{column}")
     @ApiOperation("Get all vacancies sorted by column")
+    @Cacheable("vacancies_by_column")
     //TODO: 1. add criteria search or use current criteria
     //TODO: 2. add cache
     fun getAllSortByColumn(@ApiParam("Sort column") @PathVariable("column") column: String): List<VacancyDto> {

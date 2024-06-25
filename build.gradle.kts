@@ -61,6 +61,7 @@ plugins {
     id("jacoco")
     id("io.spring.dependency-management") version "1.0.9.RELEASE"
     kotlin("kapt") version "1.7.0"
+    kotlin("plugin.serialization") version "2.0.0" //JSON serialization, deserialization
     java
     idea
     application
