@@ -167,19 +167,18 @@ class VacancyCtrlTest {
         assertEquals("Vacancy with N=1 not found", excpt.message)
     }
 
-//    @Test
-//    fun createForNotExistCompany() {
-//        val COMPANY_N = 1L
-////        val companyDto = CompanyDto(COMPANY_N, "COMPANY_1")
-//        val vacancy1 = VacancyDto(1L, "", "")
-//
-//        `when`(mockCompanyService.getCompanyByN(COMPANY_N)).thenThrow(Exception("NOT EXIST"))
-//
-//        val err = assertThrows<Exception> { vacancyCtrl.create(vacancy1) }
-//
-//        assertEquals(
-//            "VacancyDto(n=1, name='', comment='', company=CompanyDto(n=1, name='COMPANY_1')) has errors: размер должен находиться в диапазоне от 5 до 50\n",
-//            err.message
-//        )
-//    }
+    @Test
+    fun createForNotExistCompany() {
+        val COMPANY_N = 1L
+        val vacancyDTO = VacancyDtoForCreate("NAME_1245", "", COMPANY_N) // length name must be greater or equal to 5
+
+        `when`(mockCompanyService.getCompanyByN(COMPANY_N)).thenThrow(Exception("NOT EXIST COMPANY"))
+
+        val err = assertThrows<Exception> { vacancyCtrl.create(vacancyDTO) }
+
+        assertEquals(
+            "NOT EXIST COMPANY",
+            err.message
+        )
+    }
 }
