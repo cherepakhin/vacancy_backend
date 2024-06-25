@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
 import org.springframework.boot.test.mock.mockito.MockBean
 import ru.perm.v.vacancy.dto.CompanyDto
+import ru.perm.v.vacancy.entity.QCompanyEntity
 import ru.perm.v.vacancy.repository.CompanyRepository
 import ru.perm.v.vacancy.service.impl.CompanyServiceImpl
 import ru.perm.v.vacancy.service.impl.VacancyServiceImpl
@@ -71,5 +72,16 @@ class CompanyServiceImplIntegrationTest {
         val service = CompanyServiceImpl(companyRepository, vacancyService)
 
         assertEquals(4, service.getNextN())
+    }
+
+    @Test
+    fun getByExample() {
+        val qbe: QCompanyEntity = QCompanyEntity.companyEntity
+        val preicate = qbe.name.eq("COMPANY_1")
+        val service  = CompanyServiceImpl(companyRepository, vacancyService)
+
+        val companies  = service.findAll(preicate)
+
+        assertEquals(1, companies.size)
     }
 }

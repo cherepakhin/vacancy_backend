@@ -1,5 +1,6 @@
 package ru.perm.v.vacancy.repository
 
+import org.springframework.data.domain.Example
 import org.springframework.data.jpa.repository.JpaRepository
 import org.springframework.data.jpa.repository.JpaSpecificationExecutor
 import org.springframework.data.jpa.repository.Modifying
@@ -20,5 +21,4 @@ interface CompanyRepository: JpaRepository<CompanyEntity, Long>,
     @Modifying
     @Query(value = "insert into company (n,name) values (:n,:name)", nativeQuery = true)
     fun createNew(n: Long, name: String): Unit
-
 }

@@ -71,6 +71,13 @@ class VacancyCtrl() {
         return vacancyService.getAllSortedByField(VacancyColumn.valueOf(sortColumn))
     }
 
+    @GetMapping("/byQuery")
+    @ApiOperation("Get all vacancies sorted by column (n, name, company_n)")
+    fun getByQuery(): List<VacancyDto> {
+        //TODO:  1. add criteria search
+        return emptyList()
+    }
+
     @GetMapping("/{n}")
     @ApiOperation("Get Vacancy by N")
     @Cacheable("vacancies")

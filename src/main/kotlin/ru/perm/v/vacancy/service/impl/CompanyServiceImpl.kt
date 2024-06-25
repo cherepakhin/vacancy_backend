@@ -1,7 +1,10 @@
 package ru.perm.v.vacancy.service.impl
 
+import com.querydsl.core.types.Predicate
+import com.querydsl.core.types.dsl.BooleanExpression
 import org.slf4j.LoggerFactory
 import org.springframework.context.annotation.Lazy
+import org.springframework.data.domain.Example
 import org.springframework.data.domain.Sort
 import org.springframework.stereotype.Service
 import ru.perm.v.vacancy.consts.ErrMessage
@@ -9,7 +12,6 @@ import ru.perm.v.vacancy.dto.CompanyDto
 import ru.perm.v.vacancy.entity.CompanyEntity
 import ru.perm.v.vacancy.mapper.CompanyMapper
 import ru.perm.v.vacancy.repository.CompanyRepository
-import java.lang.String.format
 
 @Service
 class CompanyServiceImpl(val repository: CompanyRepository, @Lazy val vacancyService: VacancyServiceImpl) :
@@ -24,6 +26,11 @@ class CompanyServiceImpl(val repository: CompanyRepository, @Lazy val vacancySer
         val sorted = Sort.by(Sort.Direction.ASC, field);
 
         return repository.findAll(sorted).map { CompanyMapper.toDto(it) }
+    }
+
+    override fun findAll(predicate: Predicate): List<CompanyDto> {
+        val companies = repository.findAll(predicate)
+        return companies.map { CompanyMapper.toDto(it) }.toList()
     }
 
     override fun createCompany(companyDto: CompanyDto): CompanyDto {
@@ -72,4 +79,15 @@ class CompanyServiceImpl(val repository: CompanyRepository, @Lazy val vacancySer
             throw Exception(String.format(ErrMessage.COMPANY_NOT_FOUND, n))
         }
     }
+
+    override fun getByExample(exampleDto: CompanyDto): List<CompanyDto> {
+        logger.info(exampleDto.toString())
+        val exampleCompanyEntity  =  CompanyEntity()
+        exampleCompanyEntity.n = exampleDto.n
+//        exampleCompanyEntity.name  = exampleDto.name
+        val example =  Example.of(exampleCompanyEntity)
+        val foundCompanies= repository.findAll(example)
+        return foundCompanies.map  { CompanyMapper.toDto(it)  }.toList()
+    }
+
 }

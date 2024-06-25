@@ -1,5 +1,7 @@
 package ru.perm.v.vacancy.service.impl
 
+import com.querydsl.core.types.Predicate
+import com.querydsl.core.types.dsl.BooleanExpression
 import ru.perm.v.vacancy.dto.CompanyDto
 
 interface CompanyService {
@@ -10,4 +12,6 @@ interface CompanyService {
     fun getCompanyByN(n: Long):  CompanyDto
     fun getAll(): List<CompanyDto>
     fun getAllSortedByField(field: String): List<CompanyDto>
+    fun getByExample(example: CompanyDto): List<CompanyDto>
+    fun findAll(predicate: Predicate): List<CompanyDto>
 }
