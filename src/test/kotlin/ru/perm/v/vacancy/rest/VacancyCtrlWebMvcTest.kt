@@ -1,5 +1,8 @@
 package ru.perm.v.vacancy.rest
 
+import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.module.kotlin.readValue
+import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import org.junit.jupiter.api.Test
 import org.mockito.Mockito.`when`
 import org.springframework.beans.factory.annotation.Autowired
@@ -15,6 +18,7 @@ import ru.perm.v.vacancy.dto.CompanyDto
 import ru.perm.v.vacancy.dto.VacancyDto
 import ru.perm.v.vacancy.service.VacancyService
 import ru.perm.v.vacancy.service.impl.CompanyService
+import kotlin.test.assertEquals
 
 
 @WebMvcTest(controllers = [VacancyCtrl::class])
@@ -77,6 +81,38 @@ class VacancyCtrlWebMvcTest {
             content { contentType(MediaType.APPLICATION_JSON) }
             content { json("[{\"n\":1,\"name\":\"title\",\"comment\":\"text\",\"company\":{\"n\":1,\"name\":\"COMPANY_1\"}},{\"n\":2,\"name\":\"title\",\"comment\":\"text\",\"company\":{\"n\":1,\"name\":\"COMPANY_1\"}}]") }
         }
+    }
+
+    @Test
+    fun getAllSortByColumnCOMPANY_N() {
+        val companyDto1 = CompanyDto(1L, "COMPANY_1")
+        val companyDto2 = CompanyDto(2L, "COMPANY_2")
+        val vacancyDto1 = VacancyDto(1L, "title", "text", companyDto1)
+        val vacancyDto2 = VacancyDto(2L, "title", "text", companyDto2)
+        `when`(vacancyService.getAllSortedByField(VacancyColumn.COMPANY_N)).thenReturn(listOf(vacancyDto1, vacancyDto2))
+
+        // BAD variant. Compare with string
+        mockMvc.get("/vacancy/sortByColumn/company_n") {
+            contentType = MediaType.APPLICATION_JSON
+            accept = MediaType.APPLICATION_JSON
+        }.andExpect {
+            status { isOk() }
+            content { contentType(MediaType.APPLICATION_JSON) }
+            content { json("[{\"n\":1,\"name\":\"title\",\"comment\":\"text\",\"company\":{\"n\":1,\"name\":\"COMPANY_1\"}},{\"n\":2,\"name\":\"title\",\"comment\":\"text\",\"company\":{\"n\":2,\"name\":\"COMPANY_2\"}}]") }
+        }
+
+        // GOOD variant. Compare with object
+        val json = mockMvc.get("/vacancy/sortByColumn/company_n") {
+            contentType = MediaType.APPLICATION_JSON
+            accept = MediaType.APPLICATION_JSON
+        }.andReturn().response.contentAsString
+
+        val mapper = jacksonObjectMapper()
+        val vacancies:List<VacancyDto> = mapper.readValue(json)
+
+        assertEquals(2, vacancies.size)
+        assertEquals(vacancyDto1, vacancies[0])
+        assertEquals(vacancyDto2, vacancies[1])
     }
 
     @Test
