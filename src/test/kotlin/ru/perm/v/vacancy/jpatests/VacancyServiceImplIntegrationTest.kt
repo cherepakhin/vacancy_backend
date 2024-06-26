@@ -20,6 +20,8 @@ class VacancyServiceImplIntegrationTest {
     @Autowired
     lateinit var vacancyRepository: VacancyRepository
 
+    // Почему @Mockbean? Значение берется из Spring context,
+    // но можно замокать нектр. методы. Если не замоканы, то будут работать исходные методы.
     @MockBean
     lateinit var companyService: CompanyService
 
