@@ -14,7 +14,7 @@ interface CompanyService {
     fun getCompanyByN(n: Long):  CompanyDto
     fun getAll(): List<CompanyDto>
     fun getAllSortedByField(field: String): List<CompanyDto>
-    fun getByExample(example: CompanyDto): List<CompanyDto>
+    fun getByExample(example: CompanyExample): List<CompanyDto>
     fun findAll(predicate: Predicate): List<CompanyDto>
     fun getByExampleAndSort(exampleDto: CompanyExample, sort: Sort): List<CompanyDto>
 }

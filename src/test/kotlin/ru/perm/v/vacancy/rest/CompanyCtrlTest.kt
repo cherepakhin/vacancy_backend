@@ -9,6 +9,7 @@ import org.mockito.Mock
 import org.mockito.Mockito.*
 import org.mockito.junit.jupiter.MockitoExtension
 import ru.perm.v.vacancy.dto.CompanyDto
+import ru.perm.v.vacancy.filter.CompanyExample
 import ru.perm.v.vacancy.service.impl.CompanyService
 
 @ExtendWith(MockitoExtension::class)
@@ -159,13 +160,16 @@ class CompanyCtrlTest {
     fun getByExample() {
         val N = 100L
         val NEW_NAME = "NEW_NAME"
-        val companyDto = CompanyDto(N, NEW_NAME)
-        `when`(companyService.getByExample(companyDto)).thenReturn(listOf(companyDto))
 
-        val receivedDto = companyCtrl.getByExample(companyDto)
+        val companyExample = CompanyExample(N, NEW_NAME)
+
+        val companyDto  = CompanyDto(N, NEW_NAME)
+        `when`(companyService.getByExample(companyExample)).thenReturn(listOf(companyDto))
+
+        val receivedDto = companyCtrl.getByExample(companyExample)
 
         assertEquals(1, receivedDto.size)
         assertEquals(companyDto, receivedDto.get(0))
-        verify(companyService, times(1)).getByExample(companyDto)
+        verify(companyService, times(1)).getByExample(companyExample)
     }
 }

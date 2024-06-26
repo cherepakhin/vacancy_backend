@@ -64,7 +64,7 @@ class CompanyCtrl(val companyService: CompanyService) {
     @GetMapping("/find/")
     @ApiOperation("Get Product by ")
     fun getByExample(
-        companyExample: CompanyDto
+        companyExample: CompanyExample
     ): List<CompanyDto> {
         return companyService.getByExample(companyExample)
     }

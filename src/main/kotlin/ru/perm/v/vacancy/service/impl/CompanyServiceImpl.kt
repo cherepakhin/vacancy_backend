@@ -81,13 +81,10 @@ class CompanyServiceImpl(val repository: CompanyRepository, @Lazy val vacancySer
         }
     }
 
-    override fun getByExample(exampleDto: CompanyDto): List<CompanyDto> {
-        logger.info(exampleDto.toString())
-        val exampleCompanyEntity = CompanyEntity()
-        exampleCompanyEntity.n = exampleDto.n
-        val example = Example.of(exampleCompanyEntity)
-        val foundCompanies = repository.findAll(example)
-        return foundCompanies.map { CompanyMapper.toDto(it) }.toList()
+    override fun getByExample(example: CompanyExample): List<CompanyDto> {
+        logger.info(example.toString())
+        val foundCompanies = this.getByExampleAndSort(example, Sort.by(Sort.Direction.ASC, "n"))
+        return foundCompanies
     }
 
     override fun getByExampleAndSort(companyExample: CompanyExample, sort: Sort): List<CompanyDto> {
@@ -101,7 +98,7 @@ class CompanyServiceImpl(val repository: CompanyRepository, @Lazy val vacancySer
             predicate = predicate.and(qCompany.name.like("%"+companyExample.name+"%"))
         }
 
-        val foundCompanies = repository.findAll(predicate)
+        val foundCompanies = repository.findAll(predicate, sort)
         return foundCompanies.map { CompanyMapper.toDto(it) }.toList()
     }
 
