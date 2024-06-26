@@ -50,7 +50,7 @@ class VacancyMapperTest {
         val vacancyDTO = VacancyDto(N, NAME, COMMENT, COMPANY_DTO)
         val vacancyEntity = VacancyMapper.toEntity(vacancyDTO)
 
-        assertEquals(CompanyEntity(10L, "COMPANY"), vacancyEntity.companyEntity)
+        assertEquals(CompanyEntity(10L, "COMPANY"), vacancyEntity.company)
         assertEquals(VacancyEntity(N, NAME, COMMENT, CompanyEntity(10L, "COMPANY")), vacancyEntity)
     }
 }

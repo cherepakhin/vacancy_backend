@@ -337,7 +337,7 @@ class VacancyServiceImplTest {
     fun listFields() {
         val props = VacancyEntity::class.declaredMemberProperties
 
-        assertEquals(listOf("comment", "companyEntity", "n", "name"), props.map { it.name }.toList())
+        assertEquals(listOf("comment", "company", "n", "name"), props.map { it.name }.toList())
     }
 
 }

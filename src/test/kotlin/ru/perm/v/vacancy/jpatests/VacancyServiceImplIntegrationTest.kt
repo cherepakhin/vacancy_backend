@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Test
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
 import org.springframework.boot.test.mock.mockito.MockBean
+import ru.perm.v.vacancy.consts.VacancyColumn
 import ru.perm.v.vacancy.dto.CompanyDto
 import ru.perm.v.vacancy.dto.VacancyDto
 import ru.perm.v.vacancy.repository.VacancyRepository
@@ -123,4 +124,13 @@ class VacancyServiceImplIntegrationTest {
         )
     }
 
+    @Test
+    fun getAllSortedByField()  {
+        val service = VacancyServiceImpl(vacancyRepository, companyService)
+
+        val vacancies = service.getAllSortedByField(VacancyColumn.COMPANY_N)
+
+        assertEquals(4, vacancies.size)
+
+    }
 }

@@ -13,7 +13,7 @@ class VacancyEntity {
     var n: Long = -1L
     @ManyToOne
     @JoinColumn(name = "company_n", nullable = false)
-    var companyEntity: CompanyEntity? = null
+    var company: CompanyEntity? = null
     @NotNull
     @Column(name = "name", nullable = false)
     var name: String = ""
@@ -25,7 +25,7 @@ class VacancyEntity {
     constructor() // Empty constructor needed for Hibernate
     constructor(n: Long, name: String, comment: String , companyEntity: CompanyEntity) {
         this.n = n
-        this.companyEntity = companyEntity
+        this.company = companyEntity
         this.name = name
         this.comment = comment
     }
@@ -35,7 +35,7 @@ class VacancyEntity {
         if (other !is VacancyEntity) return false
 
         if (n != other.n) return false
-        if (companyEntity != other.companyEntity) return false
+        if (company != other.company) return false
         if (name != other.name) return false
         if (comment != other.comment) return false
 
@@ -44,7 +44,7 @@ class VacancyEntity {
 
     override fun hashCode(): Int {
         var result = n.hashCode()
-        result = 31 * result + (companyEntity?.hashCode() ?: 0)
+        result = 31 * result + (company?.hashCode() ?: 0)
         result = 31 * result + name.hashCode()
         result = 31 * result + comment.hashCode()
         return result

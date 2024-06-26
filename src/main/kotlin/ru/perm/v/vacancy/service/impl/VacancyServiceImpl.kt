@@ -41,7 +41,6 @@ class VacancyServiceImpl(
         logger.info(format("sortColumn: %s", sortColumn))
         logger.info(format("sortColumn.value: %s", sortColumn.value))
 
-//        return repository.findAll(Sort.by(sortColumn.value)).map { VacancyMapper.toDto(it) }.toList()
         return repository.findAll(Sort.by(sortColumn.value)).map { VacancyMapper.toDto(it) }.toList()
     }
 

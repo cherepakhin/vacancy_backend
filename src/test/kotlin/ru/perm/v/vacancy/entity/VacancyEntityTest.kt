@@ -17,7 +17,7 @@ class VacancyEntityTest {
         assertEquals(100L, vacancy.n)
         assertEquals("NAME", vacancy.name)
         assertEquals("COMMENT", vacancy.comment)
-        assertEquals(companyEntity, vacancy.companyEntity)
+        assertEquals(companyEntity, vacancy.company)
     }
 
     @Test
