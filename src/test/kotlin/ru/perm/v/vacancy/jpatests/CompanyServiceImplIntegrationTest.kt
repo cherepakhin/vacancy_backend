@@ -14,6 +14,9 @@ import ru.perm.v.vacancy.service.impl.VacancyServiceImpl
 import kotlin.test.assertEquals
 
 @DataJpaTest
+/**
+ * Testing methods CompanyRepository
+ */
 class CompanyServiceImplIntegrationTest {
     @Autowired
     lateinit var companyRepository: CompanyRepository
@@ -97,7 +100,7 @@ class CompanyServiceImplIntegrationTest {
         assertEquals(3, companies.size)
     }
     @Test
-    fun getByExampleLikeIgnoreCaseAndSort() {
+    fun getByExampleNameIgnoreCaseAndSort() {
         val service  = CompanyServiceImpl(companyRepository, vacancyService)
         val example = CompanyExample()
         example.name = "COMPANY_1"
@@ -108,7 +111,7 @@ class CompanyServiceImplIntegrationTest {
         assertEquals(CompanyDto(1,"COMPANY_1"), companies.get(0))
     }
     @Test
-    fun getByNExampleLikeIgnoreCaseAndSort() {
+    fun getByExampleNIgnoreCaseAndSort() {
         val service  = CompanyServiceImpl(companyRepository, vacancyService)
         val example = CompanyExample()
         example.n = 1L
