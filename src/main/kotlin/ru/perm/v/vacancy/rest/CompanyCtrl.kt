@@ -8,6 +8,7 @@ import org.springframework.cache.annotation.CacheEvict
 import org.springframework.cache.annotation.Cacheable
 import org.springframework.web.bind.annotation.*
 import ru.perm.v.vacancy.dto.CompanyDto
+import ru.perm.v.vacancy.filter.CompanyExample
 import ru.perm.v.vacancy.service.impl.CompanyService
 import ru.perm.v.vacancy.validators.ValidatorCompanyDto
 
@@ -58,6 +59,14 @@ class CompanyCtrl(val companyService: CompanyService) {
         val companies = companyService.getAllSortedByField(sortColumn)
         logger.info(companies.toString())
         return companies
+    }
+
+    @GetMapping("/find/")
+    @ApiOperation("Get Product by ")
+    fun getByExample(
+        companyExample: CompanyDto
+    ): List<CompanyDto> {
+        return companyService.getByExample(companyExample)
     }
 
     @GetMapping("/{n}")

@@ -154,4 +154,18 @@ class CompanyCtrlTest {
         assertEquals(companyDto, receivedDto)
         verify(companyService, times(1)).createCompany(companyDto)
     }
+
+    @Test
+    fun getByExample() {
+        val N = 100L
+        val NEW_NAME = "NEW_NAME"
+        val companyDto = CompanyDto(N, NEW_NAME)
+        `when`(companyService.getByExample(companyDto)).thenReturn(listOf(companyDto))
+
+        val receivedDto = companyCtrl.getByExample(companyDto)
+
+        assertEquals(1, receivedDto.size)
+        assertEquals(companyDto, receivedDto.get(0))
+        verify(companyService, times(1)).getByExample(companyDto)
+    }
 }

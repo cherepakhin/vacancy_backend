@@ -60,7 +60,6 @@ class VacancyCtrl() {
     @GetMapping("/sortByColumn/{column}")
     @ApiOperation("Get all vacancies sorted by column (n, name, company_n)")
     @Cacheable(value = ["column"], key = "#column")
-    //TODO: 1. add criteria search or use current criteria
     fun getAllSortByColumn(@ApiParam("Sort column") @PathVariable("column") column: String): List<VacancyDto> {
         val sortColumn = column.uppercase()
         try {
