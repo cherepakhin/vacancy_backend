@@ -3,6 +3,7 @@
 ### Оглавление:
 [Цель](#target)<br/>
 [Unit тестирование](#unit_test)<br/>
+[Интеграционное тестирование](#integration_test)<br/>
 [Покрытие тестами](#coverage)<br/>
 [Логгирование](#logging)<br/>
 [Запуск](#run)<br/>
@@ -62,6 +63,14 @@ __Отчеты__:
 ````java
 $ ./gradlew test
 ````
+
+<a id="integration_test"></a>
+### Интеграционное тестирование
+
+````java
+$ ./gradlew test --tests '*Integration*'
+````
+
 
 <a id="coverage"></a>
 ### Покрытие тестами

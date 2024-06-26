@@ -15,7 +15,7 @@ import kotlin.test.assertEquals
 
 @DataJpaTest
 /**
- * Testing methods CompanyRepository
+ * Testing integration with CompanyRepository
  */
 class CompanyServiceImplIntegrationTest {
     @Autowired
