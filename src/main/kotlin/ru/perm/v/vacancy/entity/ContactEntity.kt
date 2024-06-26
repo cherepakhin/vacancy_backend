@@ -9,7 +9,6 @@ class ContactEntity {  // "open" needed for JPA?
     @Id
     @NotNull
     @Column(name = "n", nullable = false)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     var n: Long = -1L
     @NotNull
     @Column(name = "name", nullable = false)

@@ -9,7 +9,7 @@ class VacancyEntity {
     @NotNull
     @Id
     @Column(name = "n", nullable = false)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+//    @GeneratedValue(strategy = GenerationType.AUTO, generator  = "native")
     var n: Long = -1L
     @ManyToOne
     @JoinColumn(name = "company_n", nullable = false)
@@ -49,4 +49,10 @@ class VacancyEntity {
         result = 31 * result + comment.hashCode()
         return result
     }
+
+    override fun toString(): String {
+        return "VacancyEntity(n=$n, company=$company, name='$name', comment='$comment')"
+    }
+
+
 }
