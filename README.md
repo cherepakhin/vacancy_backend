@@ -401,3 +401,4 @@ jxls для отчетов<br/>
 
 [https://github.com/cherepakhin/shop_kotlin](https://github.com/cherepakhin/shop_kotlin)
 [https://github.com/cherepakhin/shop_kotlin_restassured_test](https://github.com/cherepakhin/shop_kotlin_restassured_test)
+[Kotlin + Hibernate: всё сложно](https://habr.com/ru/companies/haulmont/articles/572574/)

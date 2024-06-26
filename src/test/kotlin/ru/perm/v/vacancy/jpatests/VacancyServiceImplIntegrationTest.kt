@@ -7,6 +7,7 @@ import org.springframework.boot.test.mock.mockito.MockBean
 import ru.perm.v.vacancy.consts.VacancyColumn
 import ru.perm.v.vacancy.dto.CompanyDto
 import ru.perm.v.vacancy.dto.VacancyDto
+import ru.perm.v.vacancy.dto.VacancyDtoForCreate
 import ru.perm.v.vacancy.repository.VacancyRepository
 import ru.perm.v.vacancy.service.impl.CompanyService
 import ru.perm.v.vacancy.service.impl.VacancyServiceImpl
@@ -132,5 +133,14 @@ class VacancyServiceImplIntegrationTest {
 
         assertEquals(4, vacancies.size)
 
+    }
+    @Test
+    fun create()  {
+        val service = VacancyServiceImpl(vacancyRepository, companyService)
+        val vacancyDtoForCreate = VacancyDtoForCreate("NAME","COMMENT",1L)
+
+        val vacancy = service.create(vacancyDtoForCreate)
+
+        assertEquals("NAME", vacancy.name)
     }
 }

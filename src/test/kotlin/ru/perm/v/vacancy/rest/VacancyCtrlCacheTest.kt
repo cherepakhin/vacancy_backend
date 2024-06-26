@@ -4,7 +4,6 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
-import org.junit.runner.RunWith
 import org.mockito.Mockito
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
@@ -18,7 +17,6 @@ import ru.perm.v.vacancy.dto.VacancyDto
 import ru.perm.v.vacancy.service.VacancyService
 import ru.perm.v.vacancy.service.impl.CompanyService
 
-@RunWith(SpringRunner::class)
 @SpringBootTest(classes = arrayOf(VacancyKotlinApplication::class),
     webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 class VacancyCtrlCacheTest {
