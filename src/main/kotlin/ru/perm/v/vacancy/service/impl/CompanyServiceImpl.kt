@@ -3,7 +3,6 @@ package ru.perm.v.vacancy.service.impl
 import com.querydsl.core.types.Predicate
 import org.slf4j.LoggerFactory
 import org.springframework.context.annotation.Lazy
-import org.springframework.data.domain.Example
 import org.springframework.data.domain.Sort
 import org.springframework.stereotype.Service
 import ru.perm.v.vacancy.consts.ErrMessage
@@ -95,7 +94,7 @@ class CompanyServiceImpl(val repository: CompanyRepository, @Lazy val vacancySer
             predicate = predicate.and(qCompany.n.eq(companyExample.n))
         }
         if (!companyExample.name.isNullOrEmpty()) {
-            predicate = predicate.and(qCompany.name.like("%"+companyExample.name+"%"))
+            predicate = predicate.and(qCompany.name.like("%" + companyExample.name + "%"))
         }
 
         val foundCompanies = repository.findAll(predicate, sort)

@@ -83,40 +83,45 @@ class CompanyServiceImplIntegrationTest {
     fun getByExampleEq() {
         val qbe: QCompanyEntity = QCompanyEntity.companyEntity
         val preicate = qbe.name.eq("COMPANY_1")
-        val service  = CompanyServiceImpl(companyRepository, vacancyService)
+        val service = CompanyServiceImpl(companyRepository, vacancyService)
 
-        val companies  = service.findAll(preicate)
+        val companies = service.findAll(preicate)
 
         assertEquals(1, companies.size)
     }
+
     @Test
     fun getByExampleLikeIgnoreCase() {
         val qbe: QCompanyEntity = QCompanyEntity.companyEntity
         val preicate = qbe.name.likeIgnoreCase("%company%")
-        val service  = CompanyServiceImpl(companyRepository, vacancyService)
+        val service = CompanyServiceImpl(companyRepository, vacancyService)
 
-        val companies  = service.findAll(preicate)
+        val companies = service.findAll(preicate)
 
         assertEquals(3, companies.size)
     }
+
     @Test
     fun getByExampleNameIgnoreCaseAndSort() {
-        val service  = CompanyServiceImpl(companyRepository, vacancyService)
+        val service = CompanyServiceImpl(companyRepository, vacancyService)
         val example = CompanyExample()
         example.name = "COMPANY_1"
-        val companies  = service.getByExampleAndSort(
-            example, Sort.by(Sort.Order.desc("n")))
+        val companies = service.getByExampleAndSort(
+            example, Sort.by(Sort.Order.desc("n"))
+        )
 
         assertEquals(1, companies.size)
-        assertEquals(CompanyDto(1,"COMPANY_1"), companies.get(0))
+        assertEquals(CompanyDto(1, "COMPANY_1"), companies.get(0))
     }
+
     @Test
     fun getByExampleNIgnoreCaseAndSort() {
-        val service  = CompanyServiceImpl(companyRepository, vacancyService)
+        val service = CompanyServiceImpl(companyRepository, vacancyService)
         val example = CompanyExample()
         example.n = 1L
-        val companies  = service.getByExampleAndSort(
-            example, Sort.by(Sort.Order.desc("n")))
+        val companies = service.getByExampleAndSort(
+            example, Sort.by(Sort.Order.desc("n"))
+        )
 
         assertEquals(1, companies.size)
     }

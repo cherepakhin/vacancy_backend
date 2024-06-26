@@ -163,7 +163,7 @@ class CompanyCtrlTest {
 
         val companyExample = CompanyExample(N, NEW_NAME)
 
-        val companyDto  = CompanyDto(N, NEW_NAME)
+        val companyDto = CompanyDto(N, NEW_NAME)
         `when`(companyService.getByExample(companyExample)).thenReturn(listOf(companyDto))
 
         val receivedDto = companyCtrl.getByExample(companyExample)

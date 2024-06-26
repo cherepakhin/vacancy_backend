@@ -120,10 +120,12 @@ class VacancyCtrlTest {
 
         val receivedDTO = vacancyCtrl.getAllSortByColumn(sort_column)
 
-        assertEquals(listOf(
-            VacancyDto(1L, "", "", CompanyDto(1L, "COMPANY_1")),
-            VacancyDto(2L, "", "", CompanyDto(1L, "COMPANY_1"))
-        ), receivedDTO)
+        assertEquals(
+            listOf(
+                VacancyDto(1L, "", "", CompanyDto(1L, "COMPANY_1")),
+                VacancyDto(2L, "", "", CompanyDto(1L, "COMPANY_1"))
+            ), receivedDTO
+        )
         verify(mockVacancyService, times(1)).getAllSortedByField(VacancyColumn.N)
     }
 
@@ -139,10 +141,12 @@ class VacancyCtrlTest {
 
         val receivedDTO = vacancyCtrl.getAllSortByColumn("COMPANY_N")
 
-        assertEquals(listOf(
-            VacancyDto(1L, "", "", CompanyDto(1L, "COMPANY_1")),
-            VacancyDto(2L, "", "", CompanyDto(2L, "COMPANY_2"))
-        ), receivedDTO)
+        assertEquals(
+            listOf(
+                VacancyDto(1L, "", "", CompanyDto(1L, "COMPANY_1")),
+                VacancyDto(2L, "", "", CompanyDto(2L, "COMPANY_2"))
+            ), receivedDTO
+        )
         verify(mockVacancyService, times(1)).getAllSortedByField(VacancyColumn.COMPANY_N)
     }
 
@@ -163,7 +167,7 @@ class VacancyCtrlTest {
         val VACANCY_N = 1L
         `when`(mockVacancyService.getByN(VACANCY_N)).thenReturn(null)
 
-        val excpt = assertThrows<Exception>  { vacancyCtrl.delete(VACANCY_N) }
+        val excpt = assertThrows<Exception> { vacancyCtrl.delete(VACANCY_N) }
 
         assertEquals("Vacancy with N=1 not found", excpt.message)
     }
@@ -173,7 +177,7 @@ class VacancyCtrlTest {
         val VACANCY_N = 1L
         `when`(mockVacancyService.getByN(VACANCY_N)).thenReturn(null)
 
-        val excpt = assertThrows<Exception>  { vacancyCtrl.delete(VACANCY_N) }
+        val excpt = assertThrows<Exception> { vacancyCtrl.delete(VACANCY_N) }
 
         assertEquals("Vacancy with N=1 not found", excpt.message)
     }
@@ -181,7 +185,7 @@ class VacancyCtrlTest {
     @Test
     fun deleteWithOtherException() {
         val VACANCY_N = 1L
-        `when`(mockVacancyService.getByN(VACANCY_N)).thenReturn(VacancyDto(VACANCY_N, "",  "", CompanyDto(1L, "")))
+        `when`(mockVacancyService.getByN(VACANCY_N)).thenReturn(VacancyDto(VACANCY_N, "", "", CompanyDto(1L, "")))
         `when`(mockVacancyService.delete(VACANCY_N)).doAnswer({ throw Exception("ANY ERROR") })
 
         val err = vacancyCtrl.delete(VACANCY_N)

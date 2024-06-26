@@ -102,7 +102,7 @@ class VacancyServiceImplTest {
 
         val service = VacancyServiceImpl(repository, companyService)
 
-        val excpt = assertThrows<Exception>  {
+        val excpt = assertThrows<Exception> {
             service.create(VacancyDtoForCreate(NAME_VACANCY, COMMENT, COMPANY_N))
         }
 

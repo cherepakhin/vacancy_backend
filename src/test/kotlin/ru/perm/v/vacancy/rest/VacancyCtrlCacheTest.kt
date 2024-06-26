@@ -9,7 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
 import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.boot.test.web.client.TestRestTemplate
-import org.springframework.test.context.junit4.SpringRunner
 import ru.perm.v.vacancy.VacancyKotlinApplication
 import ru.perm.v.vacancy.consts.VacancyColumn
 import ru.perm.v.vacancy.dto.CompanyDto
@@ -17,8 +16,10 @@ import ru.perm.v.vacancy.dto.VacancyDto
 import ru.perm.v.vacancy.service.VacancyService
 import ru.perm.v.vacancy.service.impl.CompanyService
 
-@SpringBootTest(classes = arrayOf(VacancyKotlinApplication::class),
-    webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
+@SpringBootTest(
+    classes = arrayOf(VacancyKotlinApplication::class),
+    webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT
+)
 class VacancyCtrlCacheTest {
     @Autowired
     lateinit var testRestTemplate: TestRestTemplate

@@ -126,7 +126,7 @@ class VacancyServiceImplIntegrationTest {
     }
 
     @Test
-    fun getAllSortedByField()  {
+    fun getAllSortedByField() {
         val service = VacancyServiceImpl(vacancyRepository, companyService)
 
         val vacancies = service.getAllSortedByField(VacancyColumn.COMPANY_N)
@@ -134,10 +134,11 @@ class VacancyServiceImplIntegrationTest {
         assertEquals(4, vacancies.size)
 
     }
+
     @Test
-    fun create()  {
+    fun create() {
         val service = VacancyServiceImpl(vacancyRepository, companyService)
-        val vacancyDtoForCreate = VacancyDtoForCreate("NAME","COMMENT",1L)
+        val vacancyDtoForCreate = VacancyDtoForCreate("NAME", "COMMENT", 1L)
 
         val vacancy = service.create(vacancyDtoForCreate)
 

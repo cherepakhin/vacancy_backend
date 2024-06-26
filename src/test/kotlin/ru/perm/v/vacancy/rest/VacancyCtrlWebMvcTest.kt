@@ -1,8 +1,7 @@
 package ru.perm.v.vacancy.rest
 
-import com.fasterxml.jackson.databind.ObjectMapper
-import com.fasterxml.jackson.module.kotlin.readValue
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
+import com.fasterxml.jackson.module.kotlin.readValue
 import org.junit.jupiter.api.Test
 import org.mockito.Mockito.`when`
 import org.springframework.beans.factory.annotation.Autowired
@@ -108,7 +107,7 @@ class VacancyCtrlWebMvcTest {
         }.andReturn().response.contentAsString
 
         val mapper = jacksonObjectMapper()
-        val vacancies:List<VacancyDto> = mapper.readValue(json)
+        val vacancies: List<VacancyDto> = mapper.readValue(json)
 
         assertEquals(2, vacancies.size)
         assertEquals(vacancyDto1, vacancies[0])
