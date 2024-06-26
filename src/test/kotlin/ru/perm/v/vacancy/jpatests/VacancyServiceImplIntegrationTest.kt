@@ -60,14 +60,6 @@ class VacancyServiceImplIntegrationTest {
                 "NAME_VACANCY_1_COMPANY_3",
                 "COMMENT_VACANCY_1_COMPANY_3",
                 companyDto3)))
-//        assertEquals(VacancyDto(1L, "NAME_VACANCY_1_COMPANY_1", "COMMENT_VACANCY_1_COMPANY_1",
-//            companyDto1), vacancies[0])
-//        assertEquals(VacancyDto(2L, "NAME_VACANCY_2_COMPANY_1", "COMMENT_VACANCY_2_COMPANY_1",
-//            companyDto1), vacancies[1])
-//        assertEquals(VacancyDto(3L, "NAME_VACANCY_1_COMPANY_2", "COMMENT_VACANCY_1_COMPANY_2",
-//            companyDto2), vacancies[2])
-//        assertEquals(VacancyDto(4L, "NAME_VACANCY_2_COMPANY_2", "COMMENT_VACANCY_2_COMPANY_2",
-//            companyDto2), vacancies[3])
     }
 
     @Test
