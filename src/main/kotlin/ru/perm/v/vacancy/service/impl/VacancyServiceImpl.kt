@@ -6,11 +6,10 @@ import org.springframework.data.domain.Sort
 import org.springframework.stereotype.Service
 import ru.perm.v.vacancy.consts.ErrMessage
 import ru.perm.v.vacancy.consts.VacancyColumn
-import ru.perm.v.vacancy.dto.CompanyDto
 import ru.perm.v.vacancy.dto.VacancyDto
 import ru.perm.v.vacancy.dto.VacancyDtoForCreate
+import ru.perm.v.vacancy.entity.CompanyEntity
 import ru.perm.v.vacancy.entity.VacancyEntity
-import ru.perm.v.vacancy.mapper.CompanyMapper
 import ru.perm.v.vacancy.mapper.VacancyMapper
 import ru.perm.v.vacancy.repository.VacancyRepository
 import ru.perm.v.vacancy.service.VacancyService
@@ -44,23 +43,32 @@ class VacancyServiceImpl(
         return repository.findAll(Sort.by(sortColumn.value)).map { VacancyMapper.toDto(it) }.toList()
     }
 
+    @Throws(Exception::class)
     override fun create(vacancyDtoForCreate: VacancyDtoForCreate): VacancyDto {
-        val companyDto: CompanyDto
-        try {
-            companyDto = companyService.getCompanyByN(vacancyDtoForCreate.company_n)
-        } catch (e: Exception) {
-            throw Exception(String.format(ErrMessage.COMPANY_NOT_FOUND, vacancyDtoForCreate.company_n))
+        logger.info("create vacancy $vacancyDtoForCreate")
+        try  {
+            val temp= companyService.getCompanyByN(vacancyDtoForCreate.company_n)
+            logger.info(format("temp: %s", temp))
+        } catch  (e: Exception)  {
+            logger.error(e.message)
+            throw Exception(e.message)
         }
-        val companyEntity= CompanyMapper.toEntity(companyDto)
-        println(companyEntity)
-        val n = repository.getNextN()
-        println(n)
-        val vacancyEntity  = VacancyEntity(n, vacancyDtoForCreate.name, vacancyDtoForCreate.comment, companyEntity)
-        val createdVacancy = repository.save(vacancyEntity)
-        return VacancyMapper.toDto(createdVacancy)
+        val n = repository.getNextN()?:1L
+
+        logger.info("Next n vacancy $n")
+
+        val companyEntity = CompanyEntity()
+        companyEntity.n = vacancyDtoForCreate.company_n
+
+        val vacancyEntity = VacancyEntity(n, vacancyDtoForCreate.name, vacancyDtoForCreate.comment, companyEntity)
+        logger.info(format("vacancyEntity: %s", vacancyEntity))
+        repository.save(vacancyEntity)
+        val checkVacancy= repository.getById(n)
+        logger.info("created vacancy getById $checkVacancy")
+        return VacancyMapper.toDto(checkVacancy)
     }
 
-    override fun update(n: Long, changedVacancyDto: VacancyDto): VacancyDto  {
+    override fun update(n: Long, changedVacancyDto: VacancyDto): VacancyDto {
         getByN(n) // throw if not exists
         companyService.getCompanyByN(changedVacancyDto.company.n) // company exist? throw if not exists
         val savedVacancyEntity = repository.save(VacancyMapper.toEntity(changedVacancyDto))
@@ -72,7 +80,7 @@ class VacancyServiceImpl(
         try {
             getByN(n) // throw if not exists
             repository.deleteById(n)
-        } catch  (e: Exception)  {
+        } catch (e: Exception) {
             throw Exception(e.message)
         }
         return "OK"
