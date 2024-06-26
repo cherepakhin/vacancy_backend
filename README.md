@@ -3,7 +3,7 @@
 ### Оглавление:
 [Цель](#target)<br/>
 [Unit тестирование](#unit_test)<br/>
-[Интеграционное тестирование](#integration_test)<br/>
+[Интеграционное тестирование работы с БД](#integration_test_database)<br/>
 [Покрытие тестами](#coverage)<br/>
 [Логгирование](#logging)<br/>
 [Запуск](#run)<br/>
@@ -64,8 +64,8 @@ __Отчеты__:
 $ ./gradlew test
 ````
 
-<a id="integration_test"></a>
-### Интеграционное тестирование
+<a id="integration_test_database"></a>
+### Интеграционное тестирование работы с БД
 
 ````java
 $ ./gradlew test --tests '*Integration*'
