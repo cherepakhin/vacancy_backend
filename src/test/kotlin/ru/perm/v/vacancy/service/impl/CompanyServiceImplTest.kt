@@ -6,8 +6,11 @@ import org.junit.jupiter.api.assertThrows
 import org.mockito.Mockito.*
 import org.mockito.kotlin.doAnswer
 import org.mockito.kotlin.doNothing
+import org.springframework.data.domain.Sort
 import ru.perm.v.vacancy.dto.CompanyDto
 import ru.perm.v.vacancy.entity.CompanyEntity
+import ru.perm.v.vacancy.entity.QCompanyEntity
+import ru.perm.v.vacancy.filter.CompanyExample
 import ru.perm.v.vacancy.repository.CompanyRepository
 import java.util.*
 
@@ -177,5 +180,31 @@ class CompanyServiceImplTest {
         assertEquals(NAME_COMPANY1, companies[0].name);
         assertEquals(N2, companies[1].n);
         assertEquals(NAME_COMPANY2, companies[1].name);
+    }
+
+    @Test
+    fun getByExampleAndSort_CheckFilterByN() {
+        val companyExample= CompanyExample()
+        val N = 1L;
+        companyExample.n = N;
+        val repository = mock(CompanyRepository::class.java);
+        val vacancyService = mock(VacancyServiceImpl::class.java);
+        val service = CompanyServiceImpl(repository, vacancyService);
+        val qCompany = QCompanyEntity.companyEntity
+        var predicate = qCompany.n.goe(-1)
+        predicate = predicate.and(qCompany.n.eq(N))
+
+        val companyEntites = listOf(
+            CompanyEntity(1L, "NAME_1"),
+            CompanyEntity(2L, "NAME_2"),
+            )
+        `when`(repository.findAll(predicate, Sort.by(Sort.Direction.ASC,"n"))).thenReturn(companyEntites)
+
+        val companies=
+            service.getByExampleAndSort(companyExample, Sort.by(Sort.Direction.ASC,"n"))
+
+        assertEquals(2, companies.size)
+        assertEquals(CompanyDto(1L, "NAME_1"), companies[0])
+        assertEquals(CompanyDto(2L, "NAME_2"), companies[1])
     }
 }
