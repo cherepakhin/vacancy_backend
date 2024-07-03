@@ -4,20 +4,22 @@ package ru.perm.v.vacancy.filter
  * Фильтр для запросов к репозиторию
  * Значение null означает пропустить при отборе
  */
-class CompanyExample {
+class VacancyExample {
     var n: Long? = null
     var name: String? = null
+    var companyExample: CompanyExample? = null
 
     constructor()
 
-    constructor(n: Long, name: String) {
+    constructor(n: Long?, name: String?, companyExample: CompanyExample?) {
         this.n = n
         this.name = name
+        this.companyExample =companyExample
     }
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
-        if (other !is CompanyExample) return false
+        if (other !is VacancyExample) return false
 
         if (n != other.n) return false
         if (name != other.name) return false
@@ -32,8 +34,6 @@ class CompanyExample {
     }
 
     override fun toString(): String {
-        return "CompanyExample(n=$n, name=$name)"
+        return "VacancyExample(n=$n, name=$name, companyExample=$companyExample)"
     }
-
-
 }

@@ -41,3 +41,4 @@ log/
 gradle.zip
 /start_gradle/
 htmlReport/
+.kotlin/

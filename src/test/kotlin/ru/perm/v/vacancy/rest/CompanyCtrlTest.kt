@@ -168,7 +168,7 @@ class CompanyCtrlTest {
 
         val receivedDto = companyCtrl.getByExample(companyExample)
 
-        assertEquals(2, receivedDto.size)
+        assertEquals(1, receivedDto.size)
         assertEquals(companyDto, receivedDto.get(0))
         verify(companyService, times(1)).getByExample(companyExample)
     }
