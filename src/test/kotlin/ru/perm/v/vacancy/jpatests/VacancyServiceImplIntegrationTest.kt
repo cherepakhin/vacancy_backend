@@ -8,12 +8,9 @@ import ru.perm.v.vacancy.consts.VacancyColumn
 import ru.perm.v.vacancy.dto.CompanyDto
 import ru.perm.v.vacancy.dto.VacancyDto
 import ru.perm.v.vacancy.dto.VacancyDtoForCreate
-import ru.perm.v.vacancy.entity.QCompanyEntity
-import ru.perm.v.vacancy.entity.QVacancyEntity
 import ru.perm.v.vacancy.filter.VacancyExample
 import ru.perm.v.vacancy.repository.VacancyRepository
 import ru.perm.v.vacancy.service.impl.CompanyService
-import ru.perm.v.vacancy.service.impl.CompanyServiceImpl
 import ru.perm.v.vacancy.service.impl.VacancyServiceImpl
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
@@ -153,7 +150,7 @@ class VacancyServiceImplIntegrationTest {
     fun getByExample_NAME_VACANCY() {
         val service = VacancyServiceImpl(vacancyRepository, companyService)
 
-        val vacancyExample =  VacancyExample()
+        val vacancyExample = VacancyExample()
         vacancyExample.name = "VACANCY_1"
 
         val vacancies = service.getByExample(vacancyExample)
@@ -168,7 +165,7 @@ class VacancyServiceImplIntegrationTest {
     fun getByExample_N_VACANCY() {
         val service = VacancyServiceImpl(vacancyRepository, companyService)
 
-        val vacancyExample =  VacancyExample()
+        val vacancyExample = VacancyExample()
         vacancyExample.n = 2L
 
         val vacancies = service.getByExample(vacancyExample)
@@ -181,7 +178,7 @@ class VacancyServiceImplIntegrationTest {
     fun getByExample_N_and_NAME() {
         val service = VacancyServiceImpl(vacancyRepository, companyService)
 
-        val vacancyExample =  VacancyExample()
+        val vacancyExample = VacancyExample()
         vacancyExample.n = 2L
         vacancyExample.name = "VACANCY_2"
 
@@ -189,7 +186,11 @@ class VacancyServiceImplIntegrationTest {
 
         assertEquals(1, vacancies.size)
         val companyDTO = CompanyDto(1L, "COMPANY_1")
-        assertEquals(VacancyDto(2L, "NAME_VACANCY_2_COMPANY_1", "COMMENT_VACANCY_2_COMPANY_1",
-            companyDTO), vacancies[0])
+        assertEquals(
+            VacancyDto(
+                2L, "NAME_VACANCY_2_COMPANY_1", "COMMENT_VACANCY_2_COMPANY_1",
+                companyDTO
+            ), vacancies[0]
+        )
     }
 }
