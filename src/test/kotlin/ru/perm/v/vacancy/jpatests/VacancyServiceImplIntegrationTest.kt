@@ -8,8 +8,12 @@ import ru.perm.v.vacancy.consts.VacancyColumn
 import ru.perm.v.vacancy.dto.CompanyDto
 import ru.perm.v.vacancy.dto.VacancyDto
 import ru.perm.v.vacancy.dto.VacancyDtoForCreate
+import ru.perm.v.vacancy.entity.QCompanyEntity
+import ru.perm.v.vacancy.entity.QVacancyEntity
+import ru.perm.v.vacancy.filter.VacancyExample
 import ru.perm.v.vacancy.repository.VacancyRepository
 import ru.perm.v.vacancy.service.impl.CompanyService
+import ru.perm.v.vacancy.service.impl.CompanyServiceImpl
 import ru.perm.v.vacancy.service.impl.VacancyServiceImpl
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
@@ -143,5 +147,49 @@ class VacancyServiceImplIntegrationTest {
         val vacancy = service.create(vacancyDtoForCreate)
 
         assertEquals("NAME", vacancy.name)
+    }
+
+    @Test
+    fun getByExample_NAME_VACANCY() {
+        val service = VacancyServiceImpl(vacancyRepository, companyService)
+
+        val vacancyExample =  VacancyExample()
+        vacancyExample.name = "VACANCY_1"
+
+        val vacancies = service.getByExample(vacancyExample)
+
+        assertEquals(3, vacancies.size)
+        assertEquals("NAME_VACANCY_1_COMPANY_1", vacancies.get(0).name)
+        assertEquals("NAME_VACANCY_1_COMPANY_2", vacancies.get(1).name)
+        assertEquals("NAME_VACANCY_1_COMPANY_3", vacancies.get(2).name)
+    }
+
+    @Test
+    fun getByExample_N_VACANCY() {
+        val service = VacancyServiceImpl(vacancyRepository, companyService)
+
+        val vacancyExample =  VacancyExample()
+        vacancyExample.n = 2L
+
+        val vacancies = service.getByExample(vacancyExample)
+
+        assertEquals(1, vacancies.size)
+        assertEquals(2L, vacancies[0].n)
+    }
+
+    @Test
+    fun getByExample_N_and_NAME() {
+        val service = VacancyServiceImpl(vacancyRepository, companyService)
+
+        val vacancyExample =  VacancyExample()
+        vacancyExample.n = 2L
+        vacancyExample.name = "VACANCY_2"
+
+        val vacancies = service.getByExample(vacancyExample)
+
+        assertEquals(1, vacancies.size)
+        val companyDTO = CompanyDto(1L, "COMPANY_1")
+        assertEquals(VacancyDto(2L, "NAME_VACANCY_2_COMPANY_1", "COMMENT_VACANCY_2_COMPANY_1",
+            companyDTO), vacancies[0])
     }
 }

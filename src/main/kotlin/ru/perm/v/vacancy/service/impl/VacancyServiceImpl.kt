@@ -1,5 +1,6 @@
 package ru.perm.v.vacancy.service.impl
 
+import com.querydsl.core.types.Predicate
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.Sort
@@ -9,7 +10,11 @@ import ru.perm.v.vacancy.consts.VacancyColumn
 import ru.perm.v.vacancy.dto.VacancyDto
 import ru.perm.v.vacancy.dto.VacancyDtoForCreate
 import ru.perm.v.vacancy.entity.CompanyEntity
+import ru.perm.v.vacancy.entity.QCompanyEntity
+import ru.perm.v.vacancy.entity.QVacancyEntity
 import ru.perm.v.vacancy.entity.VacancyEntity
+import ru.perm.v.vacancy.filter.VacancyExample
+import ru.perm.v.vacancy.mapper.CompanyMapper
 import ru.perm.v.vacancy.mapper.VacancyMapper
 import ru.perm.v.vacancy.repository.VacancyRepository
 import ru.perm.v.vacancy.service.VacancyService
@@ -84,5 +89,21 @@ class VacancyServiceImpl(
             throw Exception(e.message)
         }
         return "OK"
+    }
+
+    override fun getByExample(vacancyExample: VacancyExample): List<VacancyDto> {
+        logger.info(vacancyExample.toString())
+        val qVacancy = QVacancyEntity.vacancyEntity
+        var predicate = qVacancy.n.goe(-1) // start query
+        if (vacancyExample.n != null) {
+            predicate = predicate.and(qVacancy.n.eq(vacancyExample.n))
+        }
+        if (!vacancyExample.name.isNullOrEmpty()) {
+            predicate = predicate.and(qVacancy.name.like("%" + vacancyExample.name + "%"))
+        }
+
+        val sort= Sort.by(Sort.Direction.ASC, "n")
+        val foundVacancies = repository.findAll(predicate, sort)
+        return foundVacancies.map { VacancyMapper.toDto(it) }.toList()
     }
 }

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.*
 import ru.perm.v.vacancy.consts.VacancyColumn
 import ru.perm.v.vacancy.dto.VacancyDto
 import ru.perm.v.vacancy.dto.VacancyDtoForCreate
+import ru.perm.v.vacancy.filter.VacancyExample
 import ru.perm.v.vacancy.service.VacancyService
 import ru.perm.v.vacancy.service.impl.CompanyService
 import ru.perm.v.vacancy.validators.ValidatorVacancyDtoForCreate
@@ -70,10 +71,9 @@ class VacancyCtrl() {
         return vacancyService.getAllSortedByField(VacancyColumn.valueOf(sortColumn))
     }
 
-    @GetMapping("/byQuery")
+    @GetMapping("/find/")
     @ApiOperation("Get all vacancies sorted by column (n, name, company_n)")
-    fun getByQuery(): List<VacancyDto> {
-        //TODO:  1. add criteria search
+    fun getByExample(vacancyExample: VacancyExample): List<VacancyDto> {
         return emptyList()
     }
 

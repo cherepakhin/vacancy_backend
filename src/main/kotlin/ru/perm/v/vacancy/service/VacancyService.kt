@@ -1,8 +1,10 @@
 package ru.perm.v.vacancy.service
 
+import com.querydsl.core.types.Predicate
 import ru.perm.v.vacancy.consts.VacancyColumn
 import ru.perm.v.vacancy.dto.VacancyDto
 import ru.perm.v.vacancy.dto.VacancyDtoForCreate
+import ru.perm.v.vacancy.filter.VacancyExample
 
 interface VacancyService {
     @Throws(Exception::class)
@@ -19,4 +21,6 @@ interface VacancyService {
      */
     fun update(n: Long, changedVacancyDto: VacancyDto): VacancyDto
     fun delete(n: Long): String // return "" if success or return message error
+
+    fun getByExample(example: VacancyExample): List<VacancyDto>
 }

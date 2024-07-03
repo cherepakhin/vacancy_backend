@@ -5,8 +5,8 @@ package ru.perm.v.vacancy.filter
  * Значение null означает пропустить при отборе
  */
 class VacancyExample {
-    var n: Long? = null
-    var name: String? = null
+    var n: Long? = null // query equal
+    var name: String? = null // will query: LIKE name
     var companyExample: CompanyExample? = null
 
     constructor()
