@@ -95,8 +95,8 @@ class VacancyServiceImpl(
         logger.info(vacancyExample.toString())
         val qVacancy = QVacancyEntity.vacancyEntity
         var predicate = qVacancy.n.goe(-1) // start query
-        if (vacancyExample.n != null) {
-            predicate = predicate.and(qVacancy.n.eq(vacancyExample.n))
+        if (vacancyExample.nn.size > 0) {
+            predicate = predicate.and(qVacancy.n.`in`(vacancyExample.nn))
         }
         if (!vacancyExample.name.isNullOrEmpty()) {
             predicate = predicate.and(qVacancy.name.like("%" + vacancyExample.name + "%"))

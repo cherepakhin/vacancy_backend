@@ -341,29 +341,30 @@ class VacancyServiceImplTest {
         assertEquals(listOf("comment", "company", "n", "name"), props.map { it.name }.toList())
     }
 
-//TODO: fix
-//    @Test
-//    fun getByExampleForVacancyId() {
-//        val ID = 100L;
-//        val repository = mock(VacancyRepository::class.java)
-//        val qVacancy = QVacancyEntity.vacancyEntity
-//        var predicate = qVacancy.n.goe(-1) // start query
-//        if (vacancyExample.n != null) {
-//            predicate = predicate.and(qVacancy.n.eq(vacancyExample.n))
-//        }
-//        if (!vacancyExample.name.isNullOrEmpty()) {
-//            predicate = predicate.and(qVacancy.name.like("%" + vacancyExample.name + "%"))
-//        }
-//
-//        val sort= Sort.by(Sort.Direction.ASC, "n")
-//        val vacancyEntity100 = VacancyEntity(100L)
-//        `when`(repository.findAll(predicate, Sort.by("name"))).thenReturn(listOf(vacancyEntity100, vacancyEntity200))
-//
-//        val companyService = mock(CompanyService::class.java)
-//        val service = VacancyServiceImpl(repository, companyService)
-//
-//        val vacancyExample = VacancyExample(100L, null, null)
-//
-//    }
+    @Test
+    fun getByExampleForVacancyId() {
+        val vacancyExample = VacancyExample();
+        vacancyExample.nn = listOf(100L, 200L)
+        val repository = mock(VacancyRepository::class.java)
+        val qVacancy = QVacancyEntity.vacancyEntity
+        var predicate = qVacancy.n.goe(-1) // start query
+        predicate = predicate.and(qVacancy.n.`in`(vacancyExample.nn))
+
+        val vacancyEntity100 = VacancyEntity(100L)
+        val vacancyEntity200 = VacancyEntity(200L)
+        val sort= Sort.by(Sort.Direction.ASC, "n")
+
+        `when`(repository.findAll(predicate, sort))
+            .thenReturn(listOf(vacancyEntity100, vacancyEntity200))
+
+        val companyService = mock(CompanyService::class.java)
+        val service = VacancyServiceImpl(repository, companyService)
+
+        val vacancies = service.getByExample(vacancyExample)
+
+        assertEquals(2, vacancies.size)
+        assertEquals(VacancyDto(100L,"","", CompanyDto(-1L, "")), vacancies.get(0))
+        assertEquals(VacancyDto(200L,"","",CompanyDto(-1L, "")), vacancies.get(1))
+    }
 
 }

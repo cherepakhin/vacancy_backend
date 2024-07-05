@@ -155,6 +155,9 @@ class VacancyServiceImplIntegrationTest {
 
         val vacancies = service.getByExample(vacancyExample)
 
+        for(v in vacancies) {
+            println(v)
+        }
         assertEquals(3, vacancies.size)
         assertEquals("NAME_VACANCY_1_COMPANY_1", vacancies.get(0).name)
         assertEquals("NAME_VACANCY_1_COMPANY_2", vacancies.get(1).name)
@@ -166,7 +169,7 @@ class VacancyServiceImplIntegrationTest {
         val service = VacancyServiceImpl(vacancyRepository, companyService)
 
         val vacancyExample = VacancyExample()
-        vacancyExample.n = 2L
+        vacancyExample.nn = listOf(2L)
 
         val vacancies = service.getByExample(vacancyExample)
 
@@ -179,7 +182,7 @@ class VacancyServiceImplIntegrationTest {
         val service = VacancyServiceImpl(vacancyRepository, companyService)
 
         val vacancyExample = VacancyExample()
-        vacancyExample.n = 2L
+        vacancyExample.nn = listOf(2L)
         vacancyExample.name = "VACANCY_2"
 
         val vacancies = service.getByExample(vacancyExample)

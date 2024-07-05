@@ -9,7 +9,7 @@ class VacancyExampleTest {
     fun onCreate_N_isNull() {
         val vacancyExample1 = VacancyExample()
 
-        assertNull(vacancyExample1.n)
+        assertEquals(listOf<Long>(), vacancyExample1.nn)
     }
 
     @Test
@@ -21,18 +21,20 @@ class VacancyExampleTest {
 
     @Test
     fun constructorWithCompanyNullTest() {
-        val vacancyExample1 = VacancyExample(1L, "NAME", null)
+        val nn = listOf(1L)
+        val vacancyExample1 = VacancyExample(nn, "NAME", null)
 
-        assertEquals(1L, vacancyExample1.n)
+        assertEquals(listOf(1L), vacancyExample1.nn)
         assertEquals("NAME", vacancyExample1.name)
         assertNull(vacancyExample1.companyExample)
     }
 
     @Test
     fun constructorTest() {
-        val vacancyExample1 = VacancyExample(1L, "NAME", CompanyExample(10L,"COMPANY_10"))
+        val nn = listOf(1L)
+        val vacancyExample1 = VacancyExample(nn, "NAME", CompanyExample(10L,"COMPANY_10"))
 
-        assertEquals(1L, vacancyExample1.n)
+        assertEquals(listOf(1L), vacancyExample1.nn)
         assertEquals("NAME", vacancyExample1.name)
         assertEquals(CompanyExample(10L,"COMPANY_10"), vacancyExample1.companyExample)
     }
