@@ -1,7 +1,6 @@
 package ru.perm.v.vacancy.entity
 
-import org.junit.jupiter.api.Assertions.assertEquals
-import org.junit.jupiter.api.Assertions.assertNotEquals
+import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Test
 
 class VacancyEntityTest {
@@ -24,9 +23,9 @@ class VacancyEntityTest {
         val vacancy = VacancyEntity(100L)
 
         assertEquals(100L, vacancy.n)
-//        assertEquals("NAME", vacancy.name)
-//        assertEquals("COMMENT", vacancy.comment)
-//        assertEquals(companyEntity, vacancy.company)
+        assertEquals("", vacancy.name)
+        assertEquals("", vacancy.comment)
+        assertNull(vacancy.company)
     }
 
     @Test
