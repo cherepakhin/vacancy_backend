@@ -207,4 +207,17 @@ class VacancyCtrlTest {
             err.message
         )
     }
+    @Test
+    fun update() {
+        val VACANCY_N = 10L
+        val COMPANY_N = 100L
+        val companyDto = CompanyDto(COMPANY_N, "COMPANY_100")
+        val vacancyDTO = VacancyDto(VACANCY_N, "VACANCY_1", "", companyDto)
+
+        `when`(mockVacancyService.update(VACANCY_N, vacancyDTO)).thenReturn(vacancyDTO)
+
+        val updatedVacancy = vacancyCtrl.update(VACANCY_N, vacancyDTO)
+
+        assertEquals(vacancyDTO, updatedVacancy)
+    }
 }

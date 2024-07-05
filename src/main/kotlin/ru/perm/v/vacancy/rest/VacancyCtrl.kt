@@ -78,7 +78,7 @@ class VacancyCtrl() {
         val sortColumn = column.uppercase()
         try {
             VacancyColumn.valueOf(sortColumn).value
-        } catch(e: IllegalArgumentException)  {
+        } catch (e: IllegalArgumentException) {
             throw IllegalArgumentException(format("Invalid sort column: %s", column))
         }
         return vacancyService.getAllSortedByField(VacancyColumn.valueOf(sortColumn))
@@ -103,19 +103,31 @@ class VacancyCtrl() {
         return vacancyService.create(vacancyDto)
     }
 
-    //TODO: update vacancy
-
     @DeleteMapping("/{n}")
     @ApiOperation("Delete Vacancy by N")
     @Throws(Exception::class)
     fun delete(n: Long): String {
         requireNotNull(vacancyService.getByN(n)) { format("Vacancy with N=%s not found", n) }
-        try  {
+        try {
             vacancyService.delete(n)
             return "OK"
-        } catch(e: Exception)   {
+        } catch (e: Exception) {
             logger.error(e.message)
             return e.message.toString()
         }
     }
+
+    @PostMapping("/{n}")
+    @ApiOperation("Update Company by N")
+//TODO:    @CacheEvict(value = ["vacancies"], allEntries = true)
+    fun update(
+        @Parameter(description = "N(ID) Vacancy.")
+        @PathVariable
+        n: Long,
+        @Parameter(description = "DTO of Vacancy.")
+        @RequestBody changedVacancyDto: VacancyDto,
+    ): VacancyDto {
+        return vacancyService.update(n, changedVacancyDto)
+    }
+
 }
