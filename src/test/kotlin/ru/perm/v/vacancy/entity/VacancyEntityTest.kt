@@ -19,6 +19,15 @@ class VacancyEntityTest {
         assertEquals("COMMENT", vacancy.comment)
         assertEquals(companyEntity, vacancy.company)
     }
+    @Test
+    fun constructorWithN_Test() {
+        val vacancy = VacancyEntity(100L)
+
+        assertEquals(100L, vacancy.n)
+//        assertEquals("NAME", vacancy.name)
+//        assertEquals("COMMENT", vacancy.comment)
+//        assertEquals(companyEntity, vacancy.company)
+    }
 
     @Test
     fun equalstTest() {

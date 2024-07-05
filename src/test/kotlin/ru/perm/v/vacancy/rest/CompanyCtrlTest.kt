@@ -172,4 +172,10 @@ class CompanyCtrlTest {
         assertEquals(companyDto, receivedDto.get(0))
         verify(companyService, times(1)).getByExample(companyExample)
     }
+
+    @Test
+    fun getByN() {
+        val N = 100L
+    }
+
 }

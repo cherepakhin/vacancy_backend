@@ -49,6 +49,19 @@ class VacancyCtrl() {
         return mes
     }
 
+    @GetMapping("/{n}")
+    @ApiOperation("Get Vacancy by N")
+    @Cacheable("vacancies")
+    fun getByN(
+        @Parameter(
+            description = "N(ID) Vacancy."
+        )
+        @PathVariable
+        n: Long,
+    ): VacancyDto {
+        return vacancyService.getByN(n)
+    }
+
     @GetMapping("/")
     @ApiOperation("Get all vacancies")
     fun getAll(): List<VacancyDto> {
@@ -74,20 +87,7 @@ class VacancyCtrl() {
     @GetMapping("/find/")
     @ApiOperation("Get all vacancies sorted by column (n, name, company_n)")
     fun getByExample(vacancyExample: VacancyExample): List<VacancyDto> {
-        return emptyList()
-    }
-
-    @GetMapping("/{n}")
-    @ApiOperation("Get Vacancy by N")
-    @Cacheable("vacancies")
-    fun getByN(
-        @Parameter(
-            description = "N(ID) Vacancy."
-        )
-        @PathVariable
-        n: Long,
-    ): VacancyDto {
-        return vacancyService.getByN(n)
+        return vacancyService.getByExample(vacancyExample)
     }
 
     @PostMapping
@@ -102,6 +102,8 @@ class VacancyCtrl() {
         companyService.getCompanyByN(vacancyDto.company_n) // throw is company not exists
         return vacancyService.create(vacancyDto)
     }
+
+    //TODO: update vacancy
 
     @DeleteMapping("/{n}")
     @ApiOperation("Delete Vacancy by N")

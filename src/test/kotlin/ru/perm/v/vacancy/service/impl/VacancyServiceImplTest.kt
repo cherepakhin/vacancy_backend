@@ -11,7 +11,9 @@ import ru.perm.v.vacancy.dto.CompanyDto
 import ru.perm.v.vacancy.dto.VacancyDto
 import ru.perm.v.vacancy.dto.VacancyDtoForCreate
 import ru.perm.v.vacancy.entity.CompanyEntity
+import ru.perm.v.vacancy.entity.QVacancyEntity
 import ru.perm.v.vacancy.entity.VacancyEntity
+import ru.perm.v.vacancy.filter.VacancyExample
 import ru.perm.v.vacancy.repository.VacancyRepository
 import java.util.*
 import kotlin.reflect.full.declaredMemberProperties
@@ -338,5 +340,30 @@ class VacancyServiceImplTest {
 
         assertEquals(listOf("comment", "company", "n", "name"), props.map { it.name }.toList())
     }
+
+//TODO: fix
+//    @Test
+//    fun getByExampleForVacancyId() {
+//        val ID = 100L;
+//        val repository = mock(VacancyRepository::class.java)
+//        val qVacancy = QVacancyEntity.vacancyEntity
+//        var predicate = qVacancy.n.goe(-1) // start query
+//        if (vacancyExample.n != null) {
+//            predicate = predicate.and(qVacancy.n.eq(vacancyExample.n))
+//        }
+//        if (!vacancyExample.name.isNullOrEmpty()) {
+//            predicate = predicate.and(qVacancy.name.like("%" + vacancyExample.name + "%"))
+//        }
+//
+//        val sort= Sort.by(Sort.Direction.ASC, "n")
+//        val vacancyEntity100 = VacancyEntity(100L)
+//        `when`(repository.findAll(predicate, Sort.by("name"))).thenReturn(listOf(vacancyEntity100, vacancyEntity200))
+//
+//        val companyService = mock(CompanyService::class.java)
+//        val service = VacancyServiceImpl(repository, companyService)
+//
+//        val vacancyExample = VacancyExample(100L, null, null)
+//
+//    }
 
 }

@@ -23,11 +23,14 @@ class VacancyEntity {
     // add LIST contacts
 
     constructor() // Empty constructor needed for Hibernate
-    constructor(n: Long, name: String, comment: String , companyEntity: CompanyEntity) {
-        this.n = n
+    constructor(n: Long, name: String, comment: String , companyEntity: CompanyEntity): this(n) {
         this.company = companyEntity
         this.name = name
         this.comment = comment
+    }
+
+    constructor(n: Long): this() {
+        this.n = n
     }
 
     override fun equals(other: Any?): Boolean {
