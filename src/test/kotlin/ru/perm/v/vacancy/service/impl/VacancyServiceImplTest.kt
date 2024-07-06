@@ -99,15 +99,14 @@ class VacancyServiceImplTest {
 
         val repository = mock(VacancyRepository::class.java)
         val companyService = mock(CompanyService::class.java)
-        `when`(companyService.getCompanyByN(COMPANY_N)).thenThrow(Exception::class.java)
+        `when`(companyService.getCompanyByN(COMPANY_N)).thenThrow(Exception("NOT FOUND"))
 
         val service = VacancyServiceImpl(repository, companyService)
 
         val excpt = assertThrows<Exception> {
             service.create(VacancyDtoForCreate(NAME_VACANCY, COMMENT, COMPANY_N))
         }
-//TODO: assert
-//        assertEquals("Company with N=1 not found", excpt.message)
+        assertEquals("NOT FOUND", excpt.message)
     }
 
     @Test
