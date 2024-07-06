@@ -32,7 +32,7 @@ class VacancyServiceImplTest {
         val repository = mock(VacancyRepository::class.java)
         val companyService = mock(CompanyService::class.java)
         val service = VacancyServiceImpl(repository, companyService)
-        Mockito.`when`(repository.findById(N)).thenReturn(Optional.of(vacancyEntity))
+        `when`(repository.findById(N)).thenReturn(Optional.of(vacancyEntity))
 
         val vacancyDto = service.getByN(N)
 
@@ -46,7 +46,7 @@ class VacancyServiceImplTest {
     fun getNoFoundByN() {
         val N = 100L
         val repository = mock(VacancyRepository::class.java)
-        Mockito.`when`(repository.findById(N)).thenReturn(Optional.empty())
+        `when`(repository.findById(N)).thenReturn(Optional.empty())
         val companyService = mock(CompanyService::class.java)
         val service = VacancyServiceImpl(repository, companyService)
 
@@ -93,7 +93,6 @@ class VacancyServiceImplTest {
 
     @Test
     fun createWithNotExistCompany() {
-        val N = 100L
         val NAME_VACANCY = "vacancy"
         val COMMENT = "comment"
         val COMPANY_N = 1L
@@ -107,7 +106,7 @@ class VacancyServiceImplTest {
         val excpt = assertThrows<Exception> {
             service.create(VacancyDtoForCreate(NAME_VACANCY, COMMENT, COMPANY_N))
         }
-
+//TODO: assert
 //        assertEquals("Company with N=1 not found", excpt.message)
     }
 
@@ -198,6 +197,34 @@ class VacancyServiceImplTest {
 
         verify(mockCompanyService, times(1)).getCompanyByN(N_COMPANY)
         verify(mockVacancyRepository, times(1)).save(vacancyEntity)
+    }
+
+    @Test
+    fun updateWithExistVacancyAndNotExistCompany() {
+        val VACANCY_N = 100L
+        val NAME_VACANCY = "vacancy"
+        val COMMENT = "comment"
+        val N_COMPANY = 1L
+        val NAME_COMPANY = "company"
+
+        val mockVacancyRepository = mock(VacancyRepository::class.java)
+        val mockCompanyService = mock(CompanyService::class.java)
+        `when`(mockVacancyRepository.findById(VACANCY_N)).thenReturn(
+            Optional.of(
+                VacancyEntity(VACANCY_N, NAME_VACANCY, COMMENT, CompanyEntity(N_COMPANY, NAME_COMPANY))
+            )
+        )
+
+        val vacancyService = VacancyServiceImpl(mockVacancyRepository, mockCompanyService)
+        `when`(mockCompanyService.getCompanyByN(N_COMPANY)).thenThrow(Exception("Company with N=1 not found"))
+
+        val thrown = assertThrows<Exception> {
+            vacancyService.update(
+                VACANCY_N, VacancyDto(VACANCY_N, NAME_VACANCY, COMMENT, CompanyDto(N_COMPANY, NAME_COMPANY))
+            )
+        }
+
+        assertEquals("Company with N=1 not found", thrown.message) // message from ErrMessage.COMPANY_NOT_FOUND
     }
 
     @Test
