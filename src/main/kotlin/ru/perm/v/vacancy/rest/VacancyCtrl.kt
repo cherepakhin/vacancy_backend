@@ -38,7 +38,7 @@ class VacancyCtrl() {
 
     @GetMapping("/echo/{mes}")
     @ApiOperation("Simple echo test")
-    @Cacheable("product_echo")
+    @Cacheable("vacancy_echo") // for example and simple test
     fun echoMessage(
         @Parameter(
             description = "Any string. will be returned in response."
@@ -106,6 +106,7 @@ class VacancyCtrl() {
     @DeleteMapping("/{n}")
     @ApiOperation("Delete Vacancy by N")
     @Throws(Exception::class)
+    //TODO: cache evict
     fun delete(n: Long): String {
         requireNotNull(vacancyService.getByN(n)) { format("Vacancy with N=%s not found", n) }
         try {
