@@ -127,14 +127,14 @@ private val logger = LoggerFactory.getLogger(this.javaClass.name)
 
 Тестовый запрос echo:
 
-````java
+````shell
 $ http :8980/vacancy/api/vacancy/echo/aaa
 ````
 (используется программа httpie)
 
 Другие прримеры запросов:
 
-````java
+````shell
 // get all vacancies
 $ http :8980/vacancy/api/vacancy/
 //get vacancy id=1
@@ -161,13 +161,13 @@ $ http POST :8980/vacancy/api/company/ < src/test/test_jsons/company_10.json
 <a id="bootJar"></a>
 ### Создание запускаемого файла и его запуск
 
-````java
+````shell
 $ ./gradlew bootJar
 ````
 Собранный jar будет в build/libs/vacancy_backend-<version>.jar
 
 Запуск:
-````java
+````shell
 $ java -jar build/libs/vacancy_backend-<version>.jar
 ````
 
@@ -261,7 +261,7 @@ publishing {
 
 После запуска доступен по адресу [http://127.0.0.1:8988/vacancy/api/actuator](http://127.0.0.1:8988/vacancy/api/actuator)
 
-````java
+````shell
 $ http http://127.0.0.1:8988/vacancy/api/actuator
 HTTP/1.1 200 
 Connection: keep-alive
