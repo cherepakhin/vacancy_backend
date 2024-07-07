@@ -128,7 +128,7 @@ private val logger = LoggerFactory.getLogger(this.javaClass.name)
 Тестовый запрос echo:
 
 ````java
-$ http http://192.168.1.57:8980/vacancy/api/echo/aaa
+$ http :8980/vacancy/api/vacancy/echo/aaa
 ````
 (используется программа httpie)
 
