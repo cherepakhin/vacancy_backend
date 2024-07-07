@@ -48,7 +48,7 @@ class VacancyCtrlCacheTest {
         val result = testRestTemplate
             .getForEntity(URL, String::class.java)
         assertEquals(200, result.statusCode.value())
-        val vacancies = ObjectMapper().readValue<List<VacancyDto>>(result.body)
+        val vacancies = ObjectMapper().readValue<List<VacancyDto>>(result.body!!)
 
         assertEquals(1, vacancies.size)
         // main test. 3 REST REQUESTS, but only 1 call VacancyService
