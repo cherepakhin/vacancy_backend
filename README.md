@@ -132,6 +132,32 @@ $ http :8980/vacancy/api/vacancy/echo/aaa
 ````
 (используется программа httpie)
 
+Другие прримеры запросов:
+
+````java
+// get all vacancies
+$ http :8980/vacancy/api/vacancy/
+//get vacancy id=1
+$ http :8980/vacancy/api/vacancy/1
+// get all vacancies sorted by column 'n'
+$ http :8980/vacancy/api/vacancy/sortByColumn/n
+// get all vacancies sorted by column 'name'
+$ http :8980/vacancy/api/vacancy/sortByColumn/name
+// get all vacancies sorted by column 'company_n'
+$ http :8980/vacancy/api/vacancy/sortByColumn/company_n
+
+// get all companies
+$ http :8980/vacancy/api/company/
+// get company with id=1
+$ http :8980/vacancy/api/company/1
+// add new company from company_10.json
+// {
+//   "n": 10,
+//   "name": "COMPANY_10"
+// }
+//
+$ http POST :8980/vacancy/api/company/ < src/test/test_jsons/company_10.json
+````
 <a id="bootJar"></a>
 ### Создание запускаемого файла и его запуск
 

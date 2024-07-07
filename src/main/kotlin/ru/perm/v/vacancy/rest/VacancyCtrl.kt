@@ -85,7 +85,7 @@ class VacancyCtrl() {
     }
 
     @GetMapping("/find/")
-    @ApiOperation("Get all vacancies sorted by column (n, name, company_n)")
+    @ApiOperation("Get vacancies by example VacancyExample")
     fun getByExample(vacancyExample: VacancyExample): List<VacancyDto> {
         return vacancyService.getByExample(vacancyExample)
     }
