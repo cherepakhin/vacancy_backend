@@ -121,7 +121,7 @@ class VacancyCtrl() {
 
     @PostMapping("/{n}")
     @ApiOperation("Update Company by N")
-//TODO:    @CacheEvict(value = ["vacancies"], allEntries = true)
+    @CacheEvict(value = ["vacancies"], allEntries = true)
     fun update(
         @Parameter(description = "N(ID) Vacancy.")
         @PathVariable
