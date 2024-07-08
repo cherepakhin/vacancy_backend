@@ -54,4 +54,30 @@ class VacancyCtrlCacheTest {
         // main test. 3 REST REQUESTS, but only 1 call VacancyService
         Mockito.verify(vacancyService, Mockito.times(1)).getAllSortedByField(VacancyColumn.NAME)
     }
+
+    @Test
+    fun getByN() {
+        val companyDto = CompanyDto(1L, "COMPANY_1")
+        val N = 1L
+        val vacancyDto = VacancyDto(N, "title", "text", companyDto)
+        Mockito.`when`(vacancyService.getByN(N)).thenReturn(vacancyDto)
+
+        val URL = "/vacancy/" + N
+        // FIRST REQUEST
+        testRestTemplate
+            .getForEntity(URL, String::class.java)
+        // SECOND REQUEST
+        testRestTemplate
+            .getForEntity(URL, String::class.java)
+        // LAST REQUEST
+        val result = testRestTemplate
+            .getForEntity(URL, String::class.java)
+        assertEquals(200, result.statusCode.value())
+        val resultVacancyDto = ObjectMapper().readValue<VacancyDto>(result.body!!)
+
+        assertEquals(N, resultVacancyDto.n)
+        // main test. 3 REST REQUESTS, but only 1 call VacancyService
+        Mockito.verify(vacancyService, Mockito.times(1)).getByN(N)
+    }
+
 }

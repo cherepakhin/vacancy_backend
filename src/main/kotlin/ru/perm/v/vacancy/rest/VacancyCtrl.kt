@@ -6,6 +6,7 @@ import io.swagger.annotations.ApiParam
 import io.swagger.v3.oas.annotations.Parameter
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.cache.annotation.CacheEvict
 import org.springframework.cache.annotation.Cacheable
 import org.springframework.http.CacheControl
 import org.springframework.web.bind.annotation.*
@@ -106,7 +107,7 @@ class VacancyCtrl() {
     @DeleteMapping("/{n}")
     @ApiOperation("Delete Vacancy by N")
     @Throws(Exception::class)
-    //TODO: cache evict
+    @CacheEvict(value = ["vacancies"], key = "#id")
     fun delete(n: Long): String {
         requireNotNull(vacancyService.getByN(n)) { format("Vacancy with N=%s not found", n) }
         try {
