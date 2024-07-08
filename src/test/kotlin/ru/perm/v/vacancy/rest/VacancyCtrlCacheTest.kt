@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 import org.mockito.Mockito
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.context.SpringBootTest
@@ -79,5 +80,4 @@ class VacancyCtrlCacheTest {
         // main test. 3 REST REQUESTS, but only 1 call VacancyService
         Mockito.verify(vacancyService, Mockito.times(1)).getByN(N)
     }
-
 }

@@ -1,6 +1,7 @@
 package ru.perm.v.vacancy.jpatests
 
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
 import org.springframework.boot.test.mock.mockito.MockBean
@@ -195,5 +196,41 @@ class VacancyServiceImplIntegrationTest {
                 companyDTO
             ), vacancies[0]
         )
+    }
+
+    @Test
+    fun deleteByN() {
+        val service = VacancyServiceImpl(vacancyRepository, companyService)
+
+        val vacancyExample = VacancyExample()
+        val N = 2L
+        vacancyExample.nn = listOf(N)
+
+        val vacanciesBeforeDelete = service.getByExample(vacancyExample)
+
+        assertEquals(1, vacanciesBeforeDelete.size)
+        val companyDTO = CompanyDto(1L, "COMPANY_1")
+        // check, what vacancy exist, before delete
+        assertEquals(
+            VacancyDto(
+                2L, "NAME_VACANCY_2_COMPANY_1", "COMMENT_VACANCY_2_COMPANY_1",
+                companyDTO
+            ), vacanciesBeforeDelete[0]
+        )
+
+        service.delete(N)
+
+        val vacanciesAfterDelete = service.getByExample(vacancyExample)
+        assertEquals(0, vacanciesAfterDelete.size)
+    }
+
+    @Test
+    fun getNotExistVacancy() {
+        val service = VacancyServiceImpl(vacancyRepository, companyService)
+        val N = 10000L
+
+        val err = assertThrows<Exception> { service.getByN(N) }
+
+        assertEquals("Vacancy with N=10000 not found", err.message)
     }
 }

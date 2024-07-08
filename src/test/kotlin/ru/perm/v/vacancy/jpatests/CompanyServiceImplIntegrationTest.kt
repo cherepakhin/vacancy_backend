@@ -1,6 +1,7 @@
 package ru.perm.v.vacancy.jpatests
 
 import org.junit.jupiter.api.Test
+import org.junit.jupiter.api.assertThrows
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
 import org.springframework.boot.test.mock.mockito.MockBean
@@ -125,4 +126,15 @@ class CompanyServiceImplIntegrationTest {
 
         assertEquals(1, companies.size)
     }
+
+    @Test
+    fun getNotExistCompany() {
+        val service = CompanyServiceImpl(companyRepository, vacancyService)
+        val N = 10000L
+
+        val err = assertThrows<Exception> { service.getCompanyByN(N) }
+
+        assertEquals("Company with N=10000 not found", err.message)
+    }
+
 }
