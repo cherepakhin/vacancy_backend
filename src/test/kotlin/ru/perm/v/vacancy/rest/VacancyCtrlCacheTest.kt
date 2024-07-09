@@ -40,14 +40,11 @@ class VacancyCtrlCacheTest {
 
         val URL = "/vacancy/sortByColumn/name"
         // FIRST REQUEST
-        testRestTemplate
-            .getForEntity(URL, String::class.java)
+        testRestTemplate.getForEntity(URL, String::class.java)
         // SECOND REQUEST
-        testRestTemplate
-            .getForEntity(URL, String::class.java)
+        testRestTemplate.getForEntity(URL, String::class.java)
         // LAST REQUEST
-        val result = testRestTemplate
-            .getForEntity(URL, String::class.java)
+        val result = testRestTemplate.getForEntity(URL, String::class.java)
         assertEquals(200, result.statusCode.value())
         val vacancies = ObjectMapper().readValue<List<VacancyDto>>(result.body!!)
 
@@ -65,14 +62,12 @@ class VacancyCtrlCacheTest {
 
         val URL = "/vacancy/" + N
         // FIRST REQUEST
-        testRestTemplate
-            .getForEntity(URL, String::class.java)
+        testRestTemplate.getForEntity(URL, String::class.java)
         // SECOND REQUEST
-        testRestTemplate
-            .getForEntity(URL, String::class.java)
+        testRestTemplate.getForEntity(URL, String::class.java)
         // LAST REQUEST
-        val result = testRestTemplate
-            .getForEntity(URL, String::class.java)
+        val result = testRestTemplate.getForEntity(URL, String::class.java)
+
         assertEquals(200, result.statusCode.value())
         val resultVacancyDto = ObjectMapper().readValue<VacancyDto>(result.body!!)
 

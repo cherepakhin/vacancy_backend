@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Assertions.assertNull
 import org.junit.jupiter.api.Test
 
-class VacancyExampleTest {
+class VacancyQueryByExampleTest {
     @Test
     fun onCreate_N_isNull() {
         val vacancyExample1 = VacancyExample()

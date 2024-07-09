@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test
 
 import org.junit.jupiter.api.Assertions.*
 
-class CompanyExampleTest {
+class CompanyQueryByExampleTest {
 
     @Test
     fun onCreate_N_isNull() {
