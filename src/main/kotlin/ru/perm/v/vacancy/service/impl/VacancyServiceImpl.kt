@@ -1,6 +1,5 @@
 package ru.perm.v.vacancy.service.impl
 
-import com.querydsl.core.types.Predicate
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.data.domain.Sort
@@ -10,11 +9,9 @@ import ru.perm.v.vacancy.consts.VacancyColumn
 import ru.perm.v.vacancy.dto.VacancyDto
 import ru.perm.v.vacancy.dto.VacancyDtoForCreate
 import ru.perm.v.vacancy.entity.CompanyEntity
-import ru.perm.v.vacancy.entity.QCompanyEntity
 import ru.perm.v.vacancy.entity.QVacancyEntity
 import ru.perm.v.vacancy.entity.VacancyEntity
 import ru.perm.v.vacancy.filter.VacancyExample
-import ru.perm.v.vacancy.mapper.CompanyMapper
 import ru.perm.v.vacancy.mapper.VacancyMapper
 import ru.perm.v.vacancy.repository.VacancyRepository
 import ru.perm.v.vacancy.service.VacancyService
@@ -58,7 +55,7 @@ class VacancyServiceImpl(
             logger.error(e.message)
             throw Exception(e.message)
         }
-        val n = repository.getNextN()?:1L
+        val n = repository.getNextN()
 
         logger.info("Next n vacancy $n")
 
@@ -95,7 +92,7 @@ class VacancyServiceImpl(
         logger.info(vacancyExample.toString())
         val qVacancy = QVacancyEntity.vacancyEntity
         var predicate = qVacancy.n.goe(-1) // start query
-        if (vacancyExample.nn.size > 0) {
+        if (vacancyExample.nn.isNotEmpty()) {
             predicate = predicate.and(qVacancy.n.`in`(vacancyExample.nn))
         }
         if (!vacancyExample.name.isNullOrEmpty()) {

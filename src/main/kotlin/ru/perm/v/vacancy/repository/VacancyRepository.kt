@@ -15,5 +15,4 @@ interface VacancyRepository: JpaRepository<VacancyEntity, Long>,
     fun findAllByOrderByNAsc(): List<VacancyEntity>
     @Query(value = "SELECT max(n)+1 FROM VacancyEntity")
     fun getNextN(): Long
-
 }

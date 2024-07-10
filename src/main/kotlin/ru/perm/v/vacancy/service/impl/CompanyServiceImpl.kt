@@ -34,10 +34,7 @@ class CompanyServiceImpl(val repository: CompanyRepository, @Lazy val vacancySer
     }
 
     override fun createCompany(companyDto: CompanyDto): CompanyDto {
-        var n = getNextN()
-        if (n == null) {
-            n = 1L
-        }
+        val n = getNextN()
         logger.info(String.format("getNextN(): %s", n))
         val company = CompanyEntity(n = n, name = companyDto.name)
         logger.info(company.toString())

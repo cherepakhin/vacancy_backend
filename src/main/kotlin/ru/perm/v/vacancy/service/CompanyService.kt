@@ -1,7 +1,6 @@
 package ru.perm.v.vacancy.service.impl
 
 import com.querydsl.core.types.Predicate
-import com.querydsl.core.types.dsl.BooleanExpression
 import org.springframework.data.domain.Sort
 import ru.perm.v.vacancy.dto.CompanyDto
 import ru.perm.v.vacancy.filter.CompanyExample

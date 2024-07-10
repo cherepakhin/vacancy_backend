@@ -1,6 +1,5 @@
 package ru.perm.v.vacancy.service
 
-import com.querydsl.core.types.Predicate
 import ru.perm.v.vacancy.consts.VacancyColumn
 import ru.perm.v.vacancy.dto.VacancyDto
 import ru.perm.v.vacancy.dto.VacancyDtoForCreate
