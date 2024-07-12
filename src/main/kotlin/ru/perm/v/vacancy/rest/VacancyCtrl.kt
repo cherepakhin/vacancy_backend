@@ -99,7 +99,8 @@ class VacancyCtrl() {
         )
         @RequestBody vacancyDto: VacancyDtoForCreate,
     ): VacancyDto {
-        ValidatorVacancyDtoForCreate.validate(vacancyDto)
+        logger.info(format("Create VacancyDTO: %s", vacancyDto))
+        ValidatorVacancyDtoForCreate.validate(vacancyDto) // throw Exception("$vacancyDtoForCreate has errors: $messageError")
         companyService.getCompanyByN(vacancyDto.company_n) // throw is company not exists
         return vacancyService.create(vacancyDto)
     }
