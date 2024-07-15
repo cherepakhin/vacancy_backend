@@ -158,6 +158,10 @@ $ http :8980/vacancy/api/company/1
 //
 $ http POST :8980/vacancy/api/company/ < src/test/test_jsons/company_10.json
 ````
+
+Для интеграционных тестов сделан служебный REST сервис по URL __:8980/vacancy/api/utils/reset__. При отправке GET запроса на этот URL данные устанавливаются в начальное состояние определенное в [./test/resources/import.sql](./test/resources/import.sql).
+
+
 <a id="bootJar"></a>
 ### Создание запускаемого файла и его запуск
 
