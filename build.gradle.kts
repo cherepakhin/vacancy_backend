@@ -68,6 +68,7 @@ plugins {
 //    kotlin("plugin.allopen")
 //    kotlin("plugin.noarg")
 //	id 'io.qameta.allure' version '2.11.2' // version 2.10.0 WORK! NO WARNINGS for generate allure report
+    id("org.flywaydb.flyway") version "9.21.1"
 }
 
 //Note that this is a BootJar plugin used in org.springframework.boot
@@ -104,8 +105,9 @@ dependencies {
     implementation("io.springfox:springfox-boot-starter:$springFoxVersion")
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
-//TODO: change to postgresql?
-    implementation("com.h2database:h2:2.2.220")
+//for postgresql
+    implementation("org.postgresql:postgresql:42.3.3")
+// form h2 base    implementation("com.h2database:h2:2.2.220")
 // validator
     implementation("org.hibernate.validator:hibernate-validator")
 
@@ -240,6 +242,15 @@ tasks.register("exampleTask") {
     enabled = false
 }
 
+tasks.withType<org.flywaydb.gradle.task.FlywayMigrateTask> {
+//    url = System.getenv ("PG_VACANCY")
+//    user = System.getenv ("PG_LOGIN")
+//    password = System.getenv ("PG_PASSWORD")
+    url = "jdbc:postgresql://192.168.1.20:5432/vacancy"
+    user = "vasi"
+    password = "pass"
+    baselineOnMigrate = true
+}
 //tasks.named<BootJar>("bootJar") {
 //    archiveClassifier.set("")
 //}

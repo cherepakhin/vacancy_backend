@@ -56,6 +56,44 @@ __Отчеты__:
 ???
 
 В качестве базы данных использовать PostgreSQL.
+Настройки базы данных:
+
+````shell
+$ export DB_VACANCY=jdbc:postgresql://192.168.1.20:5432/vacancy
+````
+
+проверка:
+
+````shell
+$ echo $DB_VACANCY
+jdbc:postgresql://192.168.1.20:5432/vacancy
+````
+
+настройка user/password для базы данных:
+
+````shell
+$ export PG_USER=vasi
+$ export PG_PASSWORD=pass
+````
+
+Для версионирования БД используется [flyway](https://flywaydb.org/). Автообновление БД отключено. В application.yaml установлен флаг:
+
+````yaml
+flyway:
+    enabled: false
+````
+
+Миграции в src/resources/migration. При изменении структуры вручную выполнить:
+
+````shell
+./gradlew flywayMigrate
+````
+
+или 
+
+````shell
+$ ./gradlew flywayMigrate -Dflyway.user=postgres -Dflyway.password=postgres -Dflyway.url=jdbc:postgresql://127.0.0.1:5432/vacancy
+````
 
 <a id="unit_test"></a>
 ### Unit тестирование
