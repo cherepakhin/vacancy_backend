@@ -15,7 +15,6 @@ import ru.perm.v.vacancy.service.impl.CompanyServiceImpl
 import ru.perm.v.vacancy.service.impl.VacancyServiceImpl
 import kotlin.test.assertEquals
 
-//@DataJpaTest
 /**
  * Testing integration with CompanyRepository
  */
