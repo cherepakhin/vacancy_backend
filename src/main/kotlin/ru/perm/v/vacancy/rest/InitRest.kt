@@ -22,6 +22,7 @@ import ru.perm.v.vacancy.consts.SqlScripts
 /**
  * Controller for use with integration tests
  */
+//TODO: check work
 @RestController
 @RequestMapping("/init")
 @Api(tags = ["Controller for use with integration tests."])
