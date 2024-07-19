@@ -7,7 +7,6 @@ import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabas
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
 import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.data.domain.Sort
-import org.springframework.test.context.junit4.SpringRunner
 import ru.perm.v.vacancy.dto.CompanyDto
 import ru.perm.v.vacancy.entity.QCompanyEntity
 import ru.perm.v.vacancy.filter.CompanyExample
@@ -20,8 +19,6 @@ import kotlin.test.assertEquals
 /**
  * Testing integration with CompanyRepository
  */
-//@RunWith(SpringRunner::class)
-//@RunWith(SpringRunner::class)
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 class CompanyServiceImplIntegrationTest {

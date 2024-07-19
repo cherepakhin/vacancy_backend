@@ -3,6 +3,7 @@ package ru.perm.v.vacancy.jpatests
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
 import org.springframework.boot.test.mock.mockito.MockBean
 import ru.perm.v.vacancy.consts.VacancyColumn
@@ -16,10 +17,11 @@ import ru.perm.v.vacancy.service.impl.VacancyServiceImpl
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
-@DataJpaTest
 /**
  * Testing integration with VacancyRepository
  */
+@DataJpaTest
+@AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
 class VacancyServiceImplIntegrationTest {
     @Autowired
     lateinit var vacancyRepository: VacancyRepository
