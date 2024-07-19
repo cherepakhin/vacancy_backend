@@ -106,7 +106,7 @@ dependencies {
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin")
     implementation("org.jetbrains.kotlin:kotlin-reflect")
 //for postgresql
-    implementation("org.postgresql:postgresql:42.3.3")
+    implementation("org.postgresql:postgresql:42.7.2")
 // form h2 base    implementation("com.h2database:h2:2.2.220")
 // validator
     implementation("org.hibernate.validator:hibernate-validator")

@@ -6,23 +6,23 @@ server:
     include-message: always
 
 spring:
-  h2:
-    console:
-      enabled: true
-      path: /h2
-      settings:
-        web-allow-others: true
+  # for h2 database
+  #  h2:
+  #    console:
+  #      enabled: true
+  #      path: /h2
+  #      settings:
+  #        web-allow-others: true
   dataSource:
     #  Для интеграционных тестов не отключаю
     #  База данных уже закрыта (чтобы отключить автоматическое закрытие базы данных при останове JVM,
     #  добавьте ";DB_CLOSE_ON_EXIT=FALSE" в URL)
-    url: jdbc:h2:mem:shop_db;DB_CLOSE_ON_EXIT=FALSE;MODE=MYSQL
-    driverClassName: org.h2.Driver
-    username: sa
-    password:
-  hibernate:
-    ddl-auto: create-drop
-    dialect: org.hibernate.dialect.MySQL57Dialect
+    url: jdbc:postgresql://192.168.1.20:5432/vacancy
+    username: ${PG_USER:vasi}
+    password: ${PG_PASSWORD:pass}
+    #  hibernate:
+    #    ddl-auto: create-drop
+    #    dialect: org.hibernate.dialect.MySQL57Dialect
     #        generate_statistics: true
   jpa:
     # show SQL statements in console.
@@ -36,6 +36,13 @@ spring:
   flyway:
     enabled: true
     generate_statistics: true
+    url: jdbc:postgresql://192.168.1.20:5432/vacancy
+    user: ${PG_USER:vasi}
+    password: ${PG_PASSWORD:pass}
+  hibernate:
+    ddl-auto: create-drop
+    dialect: org.hibernate.dialect.MySQL57Dialect
+    #        generate_statistics: true
 #  cache:
 #    type: caffeine
 #    cache-names: allGroupProductDTO

@@ -95,6 +95,15 @@ flyway:
 $ ./gradlew flywayMigrate -Dflyway.user=postgres -Dflyway.password=postgres -Dflyway.url=jdbc:postgresql://127.0.0.1:5432/vacancy
 ````
 
+Для полной очистки (на пример при полной переинизиализации) выполнить:
+
+````sql
+delete from vacancy;
+delete from contact;
+delete from company;
+delete from flyway_schema_history fsh
+````
+
 <a id="unit_test"></a>
 ### Unit тестирование
 
