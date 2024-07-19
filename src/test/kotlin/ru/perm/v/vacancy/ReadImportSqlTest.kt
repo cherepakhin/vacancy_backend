@@ -7,7 +7,9 @@ import java.io.InputStream
 import java.io.InputStreamReader
 import kotlin.test.assertTrue
 
-
+/**
+ * Тесты чтения sql-файла из "resources"
+ */
 class ReadImportSqlTest {
     @Test
     fun read() {
@@ -41,8 +43,10 @@ class ReadImportSqlTest {
     @Test
     fun readWithObject() {
         val fileContent = object {}.javaClass.getResource("/import.sql")?.readText()
-        println(fileContent)
 
-        assertTrue((fileContent?.length ?: 0) > 0)
+        println(fileContent)
+        val text = fileContent?:""
+        assertTrue(text.length > 0)
+        assertTrue(text.startsWith("delete"))
     }
 }
