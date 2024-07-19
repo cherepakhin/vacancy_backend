@@ -18,7 +18,7 @@ class ReadImportSqlTest {
     }
 
     @Test
-    fun testForKotlin() {
+    fun testReadForKotlin() {
         val fileContent = this::class.java.getResource("/import.sql").readText()
 
         assertTrue(fileContent.length > 0)
@@ -36,5 +36,12 @@ class ReadImportSqlTest {
             }
         }
         return resultStringBuilder.toString()
+    }
+
+    @Test
+    fun readWithObject() {
+        val fileContent = object {}.javaClass.getResource("/import.sql")?.readText()
+
+        assertTrue(fileContent?.length ?: 0 > 0)
     }
 }
