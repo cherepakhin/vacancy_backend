@@ -128,6 +128,7 @@ dependencies {
     }
     testImplementation("org.springframework.boot:spring-boot-starter-test")
     testImplementation("org.jetbrains.kotlin:kotlin-test-junit5")
+    testImplementation("org.jetbrains.kotlin:kotlin-reflect:1.2.71")
     testImplementation("org.mockito.kotlin:mockito-kotlin:$mockitoKotlinVersion")
 
     compileOnly("org.springframework.boot:spring-boot-starter-actuator")
