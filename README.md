@@ -103,6 +103,11 @@ delete from contact;
 delete from company;
 delete from flyway_schema_history fsh
 ````
+и 
+
+````shell
+./gradlew flywayMigrate
+````
 
 <a id="unit_test"></a>
 ### Unit тестирование
