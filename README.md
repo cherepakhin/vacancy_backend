@@ -115,6 +115,44 @@ delete from flyway_schema_history fsh
 ./gradlew flywayMigrate
 ````
 
+Или через служебный сервис REST :8980/vacancy/api/init/empty_db:
+
+Очистка:
+````shell
+$ http :8980/vacancy/api/init/empty_db
+Ok
+````
+
+Проверка:
+
+````shell
+$ http :8980/vacancy/api/company/
+[]
+
+$ http :8980/vacancy/api/init/reimport_db
+Ok
+
+$ http :8980/vacancy/api/company/
+[
+    {
+        "n": -1,
+        "name": "-"
+    },
+    {
+        "n": 1,
+        "name": "COMPANY_1"
+    },
+    {
+        "n": 2,
+        "name": "COMPANY_2"
+    },
+    {
+        "n": 3,
+        "name": "3_COMPANY"
+    }
+]
+````
+
 <a id="unit_test"></a>
 ### Unit тестирование
 
