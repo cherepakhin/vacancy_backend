@@ -76,6 +76,12 @@ $ export PG_USER=vasi
 $ export PG_PASSWORD=pass
 ````
 
+Подключение с psql:
+
+````shell
+$ psql -Uvasi -dvacancy -hv
+````
+
 Для версионирования БД используется [flyway](https://flywaydb.org/). Автообновление БД отключено. В application.yaml установлен флаг:
 
 ````yaml
