@@ -42,6 +42,6 @@ class ReadImportSqlTest {
     fun readWithObject() {
         val fileContent = object {}.javaClass.getResource("/import.sql")?.readText()
 
-        assertTrue(fileContent?.length ?: 0 > 0)
+        assertTrue((fileContent?.length ?: 0) > 0)
     }
 }
