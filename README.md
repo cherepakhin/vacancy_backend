@@ -124,6 +124,8 @@ $ http :8980/vacancy/api/init/empty_db
 Ok
 ````
 
+Проверка:
+
 ````shell
 $ http :8980/vacancy/api/company/
 []
