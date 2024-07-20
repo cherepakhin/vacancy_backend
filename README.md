@@ -119,8 +119,6 @@ delete from flyway_schema_history fsh
 
 Очистка БД:
 
-REST :8980/vacancy/api/init/empty_db:
-
 ````shell
 $ http :8980/vacancy/api/init/empty_db
 Ok
