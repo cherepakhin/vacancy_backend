@@ -33,7 +33,7 @@ class InitRest {
     var entityManager: EntityManager? = null
 
     @GetMapping("/echo/{mes}")
-    @ApiOperation("echo message")
+    @ApiOperation("Simple echo test")
     fun echoStr(
         @PathVariable("mes")
         @ApiParam(name = "mes", value = "any string") mes: String,
@@ -43,7 +43,7 @@ class InitRest {
     }
 
     @GetMapping("/reimport_db")
-    @ApiOperation("Clear database WITH import.sql")
+    @ApiOperation("Clear database and load test data with import.sql")
     @Transactional
     fun reInitDB(): String {
         logger.info("Init database")
@@ -70,6 +70,9 @@ class InitRest {
         return "Ok"
     }
 
+    /**
+     * Чтение содержимого InputStream в строку
+     */
     @Throws(IOException::class)
     private fun readFromInputStream(inputStream: InputStream): String {
         val resultStringBuilder = StringBuilder()
