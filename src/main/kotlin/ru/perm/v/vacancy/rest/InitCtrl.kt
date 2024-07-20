@@ -26,7 +26,7 @@ import ru.perm.v.vacancy.consts.SqlScripts
 @RestController
 @RequestMapping("/init")
 @Api(tags = ["Controller for use with integration tests."])
-class InitRest {
+class InitCtrl {
     private val logger = LoggerFactory.getLogger(this.javaClass.name)
 
     @Autowired
