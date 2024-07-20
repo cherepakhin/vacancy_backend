@@ -115,23 +115,34 @@ delete from flyway_schema_history fsh
 ./gradlew flywayMigrate
 ````
 
-Или через служебный сервис REST :8980/vacancy/api/init/empty_db:
+#### Служебные сервисы
 
-Очистка:
+Очистка БД:
+
+REST :8980/vacancy/api/init/empty_db:
+
 ````shell
 $ http :8980/vacancy/api/init/empty_db
 Ok
 ````
 
-Проверка:
-
 ````shell
 $ http :8980/vacancy/api/company/
 []
+````
 
+Импорт начального состояния БД:
+
+````shell
+// тест, что база пустая
+$ http :8980/vacancy/api/company/
+[]
+
+// импорт начального состояния
 $ http :8980/vacancy/api/init/reimport_db
 Ok
 
+// проверка, что тестовые данные импортированы в базу
 $ http :8980/vacancy/api/company/
 [
     {
@@ -152,6 +163,7 @@ $ http :8980/vacancy/api/company/
     }
 ]
 ````
+
 
 <a id="unit_test"></a>
 ### Unit тестирование
