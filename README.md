@@ -124,7 +124,7 @@ $ http :8980/vacancy/api/init/empty_db
 Ok
 ````
 
-Проверка:
+Проверка, что таблица _company_ пустая:
 
 ````shell
 $ http :8980/vacancy/api/company/
@@ -134,7 +134,7 @@ $ http :8980/vacancy/api/company/
 Импорт начального состояния БД:
 
 ````shell
-// тест, что база пустая
+// тест, таблица "company" пустая
 $ http :8980/vacancy/api/company/
 []
 
