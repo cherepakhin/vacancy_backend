@@ -51,7 +51,14 @@ spring:
 #      - org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration
 logging:
   level:
-    root: info
+    root: INFO
+    sql: debug
+    org.hibernate.orm.jdbc.bind: trace
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql: TRACE
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+    org.hibernate.type.descriptor.sql.BasicExtractor: TRACE
+    org.springframework.jdbc.core: DEBUG
   file:
     path: log/
   pattern: "%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n"
