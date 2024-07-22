@@ -81,6 +81,7 @@ $ export PG_PASSWORD=pass
 ````shell
 $ psql -Uvasi -dvacancy -hv
 ````
+-hv означает host v.perm.ru (v - это алиас для v.perm.ru)
 
 Для версионирования БД используется [flyway](https://flywaydb.org/). Автообновление БД отключено. В application.yaml установлен флаг:
 
