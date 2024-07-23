@@ -178,6 +178,15 @@ class CompanyCtrlTest {
     @Test
     fun getByN() {
         val N = 100L
+        val NAME = "NAME"
+
+        `when`(companyService.getCompanyByN(N)).thenReturn(CompanyDto(N, NAME))
+        val companyDto = CompanyDto(N, NAME)
+
+        val receivedDto = companyCtrl.getByN(N)
+
+        assertEquals(companyDto, receivedDto)
+        verify(companyService, times(1)).getCompanyByN(N)
     }
 
 }
