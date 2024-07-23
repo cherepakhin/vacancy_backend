@@ -28,6 +28,37 @@ class CompanyCtrlTest {
     }
 
     @Test
+    fun getByExample() {
+        val N = 100L
+        val NEW_NAME = "NEW_NAME"
+
+        val companyExample = CompanyExample(N, NEW_NAME)
+
+        val companyDto = CompanyDto(N, NEW_NAME)
+        `when`(companyService.getByExample(companyExample)).thenReturn(listOf(companyDto))
+
+        val receivedDto = companyCtrl.getByExample(companyExample)
+
+        assertEquals(1, receivedDto.size)
+        assertEquals(companyDto, receivedDto.get(0))
+        verify(companyService, times(1)).getByExample(companyExample)
+    }
+
+    @Test
+    fun getByN() {
+        val N = 100L
+        val NAME = "NAME"
+
+        `when`(companyService.getCompanyByN(N)).thenReturn(CompanyDto(N, NAME))
+        val companyDto = CompanyDto(N, NAME)
+
+        val receivedDto = companyCtrl.getByN(N)
+
+        assertEquals(companyDto, receivedDto)
+        verify(companyService, times(1)).getCompanyByN(N)
+    }
+
+    @Test
     fun getAll() {
         val companyDTOs = listOf(
             CompanyDto(1L, "test1"),
@@ -157,36 +188,4 @@ class CompanyCtrlTest {
         assertEquals(createdCompanyDto, receivedDto)
         verify(companyService, times(1)).createCompany(companyDtoForCreate)
     }
-
-    @Test
-    fun getByExample() {
-        val N = 100L
-        val NEW_NAME = "NEW_NAME"
-
-        val companyExample = CompanyExample(N, NEW_NAME)
-
-        val companyDto = CompanyDto(N, NEW_NAME)
-        `when`(companyService.getByExample(companyExample)).thenReturn(listOf(companyDto))
-
-        val receivedDto = companyCtrl.getByExample(companyExample)
-
-        assertEquals(1, receivedDto.size)
-        assertEquals(companyDto, receivedDto.get(0))
-        verify(companyService, times(1)).getByExample(companyExample)
-    }
-
-    @Test
-    fun getByN() {
-        val N = 100L
-        val NAME = "NAME"
-
-        `when`(companyService.getCompanyByN(N)).thenReturn(CompanyDto(N, NAME))
-        val companyDto = CompanyDto(N, NAME)
-
-        val receivedDto = companyCtrl.getByN(N)
-
-        assertEquals(companyDto, receivedDto)
-        verify(companyService, times(1)).getCompanyByN(N)
-    }
-
 }
