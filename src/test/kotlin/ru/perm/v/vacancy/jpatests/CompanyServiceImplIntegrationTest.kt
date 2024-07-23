@@ -8,6 +8,7 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
 import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.data.domain.Sort
 import ru.perm.v.vacancy.dto.CompanyDto
+import ru.perm.v.vacancy.dto.CompanyDtoForCreate
 import ru.perm.v.vacancy.entity.QCompanyEntity
 import ru.perm.v.vacancy.filter.CompanyExample
 import ru.perm.v.vacancy.repository.CompanyRepository
@@ -70,7 +71,7 @@ class CompanyServiceImplIntegrationTest {
     fun create() {
         val service = CompanyServiceImpl(companyRepository, vacancyService)
 
-        val company = service.createCompany(CompanyDto(5, "COMPANY_4"))
+        val company = service.createCompany(CompanyDtoForCreate( "COMPANY_4"))
 
         assertEquals("COMPANY_4", company.name)
     }

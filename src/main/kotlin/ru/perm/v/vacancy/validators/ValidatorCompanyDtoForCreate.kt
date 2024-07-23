@@ -1,15 +1,14 @@
 package ru.perm.v.vacancy.validators
 
-import ru.perm.v.vacancy.dto.CompanyDto
 import ru.perm.v.vacancy.dto.CompanyDtoForCreate
 import javax.validation.ConstraintViolation
 import javax.validation.Validation
 
-object ValidatorCompanyDto {
+object ValidatorCompanyDtoForCreate {
     val validator: javax.validation.Validator = Validation.buildDefaultValidatorFactory().validator
 
-    fun validate(companyDto: CompanyDto) {
-        val violations: MutableSet<ConstraintViolation<CompanyDto>> = validator.validate(companyDto)
+    fun validate(companyDto: CompanyDtoForCreate) {
+        val violations: MutableSet<ConstraintViolation<CompanyDtoForCreate>> = validator.validate(companyDto)
 
         if (violations.isNotEmpty()) {
             var messageError = ""

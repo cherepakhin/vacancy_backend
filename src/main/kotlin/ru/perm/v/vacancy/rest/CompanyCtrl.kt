@@ -8,9 +8,11 @@ import org.springframework.cache.annotation.CacheEvict
 import org.springframework.cache.annotation.Cacheable
 import org.springframework.web.bind.annotation.*
 import ru.perm.v.vacancy.dto.CompanyDto
+import ru.perm.v.vacancy.dto.CompanyDtoForCreate
 import ru.perm.v.vacancy.filter.CompanyExample
 import ru.perm.v.vacancy.service.impl.CompanyService
 import ru.perm.v.vacancy.validators.ValidatorCompanyDto
+import ru.perm.v.vacancy.validators.ValidatorCompanyDtoForCreate
 
 @RestController
 @RequestMapping("/company")
@@ -89,10 +91,10 @@ class CompanyCtrl(val companyService: CompanyService) {
         @Parameter(
             description = "DTO of Company."
         )
-        @RequestBody companyDto: CompanyDto,
+        @RequestBody companyDtoForCreate: CompanyDtoForCreate
     ): CompanyDto {
-        ValidatorCompanyDto.validate(companyDto)
-        return companyService.createCompany(companyDto)
+        ValidatorCompanyDtoForCreate.validate(companyDtoForCreate)
+        return companyService.createCompany(companyDtoForCreate)
     }
 
     @DeleteMapping("/{n}")

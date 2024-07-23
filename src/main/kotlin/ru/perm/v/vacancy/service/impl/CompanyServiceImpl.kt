@@ -7,6 +7,7 @@ import org.springframework.data.domain.Sort
 import org.springframework.stereotype.Service
 import ru.perm.v.vacancy.consts.ErrMessage
 import ru.perm.v.vacancy.dto.CompanyDto
+import ru.perm.v.vacancy.dto.CompanyDtoForCreate
 import ru.perm.v.vacancy.entity.CompanyEntity
 import ru.perm.v.vacancy.entity.QCompanyEntity
 import ru.perm.v.vacancy.filter.CompanyExample
@@ -33,12 +34,12 @@ class CompanyServiceImpl(val repository: CompanyRepository, @Lazy val vacancySer
         return companies.map { CompanyMapper.toDto(it) }.toList()
     }
 
-    override fun createCompany(companyDto: CompanyDto): CompanyDto {
+    override fun createCompany(companyDtoForCreate: CompanyDtoForCreate): CompanyDto {
         val n = getNextN()
         logger.info(String.format("getNextN(): %s", n))
-        val company = CompanyEntity(n = n, name = companyDto.name)
+        val company = CompanyEntity(n = n, name = companyDtoForCreate.name)
         logger.info(company.toString())
-        repository.createNew(company.n, companyDto.name)
+        repository.createNew(company.n, company.name)
 
         return CompanyMapper.toDto(company)
     }

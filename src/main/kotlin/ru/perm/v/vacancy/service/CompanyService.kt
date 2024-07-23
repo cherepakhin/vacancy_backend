@@ -3,10 +3,11 @@ package ru.perm.v.vacancy.service.impl
 import com.querydsl.core.types.Predicate
 import org.springframework.data.domain.Sort
 import ru.perm.v.vacancy.dto.CompanyDto
+import ru.perm.v.vacancy.dto.CompanyDtoForCreate
 import ru.perm.v.vacancy.filter.CompanyExample
 
 interface CompanyService {
-    fun createCompany(companyDto: CompanyDto): CompanyDto
+    fun createCompany(companyDtoForCreate: CompanyDtoForCreate): CompanyDto
     fun updateCompany(n: Long, name: String): CompanyDto
     fun deleteCompany(n: Long): String // return success ("") or message error
     @Throws(Exception::class)

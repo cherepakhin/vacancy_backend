@@ -9,6 +9,7 @@ import org.mockito.Mock
 import org.mockito.Mockito.*
 import org.mockito.junit.jupiter.MockitoExtension
 import ru.perm.v.vacancy.dto.CompanyDto
+import ru.perm.v.vacancy.dto.CompanyDtoForCreate
 import ru.perm.v.vacancy.filter.CompanyExample
 import ru.perm.v.vacancy.service.impl.CompanyService
 
@@ -147,13 +148,14 @@ class CompanyCtrlTest {
     fun create() {
         val N = 100L
         val NEW_NAME = "NEW_NAME"
-        val companyDto = CompanyDto(N, NEW_NAME)
-        `when`(companyService.createCompany(companyDto)).thenReturn(companyDto)
+        val companyDtoForCreate = CompanyDtoForCreate(NEW_NAME)
+        val createdCompanyDto = CompanyDto(N, NEW_NAME)
+        `when`(companyService.createCompany(companyDtoForCreate)).thenReturn(createdCompanyDto)
 
-        val receivedDto = companyCtrl.create(companyDto)
+        val receivedDto = companyCtrl.create(companyDtoForCreate)
 
-        assertEquals(companyDto, receivedDto)
-        verify(companyService, times(1)).createCompany(companyDto)
+        assertEquals(createdCompanyDto, receivedDto)
+        verify(companyService, times(1)).createCompany(companyDtoForCreate)
     }
 
     @Test

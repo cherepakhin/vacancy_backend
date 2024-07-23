@@ -8,6 +8,7 @@ import org.mockito.kotlin.doAnswer
 import org.mockito.kotlin.doNothing
 import org.springframework.data.domain.Sort
 import ru.perm.v.vacancy.dto.CompanyDto
+import ru.perm.v.vacancy.dto.CompanyDtoForCreate
 import ru.perm.v.vacancy.entity.CompanyEntity
 import ru.perm.v.vacancy.entity.QCompanyEntity
 import ru.perm.v.vacancy.filter.CompanyExample
@@ -29,7 +30,7 @@ class CompanyServiceImplTest {
 
         val service = CompanyServiceImpl(repository, vacancyService);
 
-        val savedCompany = service.createCompany(CompanyDto(N, NAME_COMPANY));
+        val savedCompany = service.createCompany(CompanyDtoForCreate(NAME_COMPANY));
 
         assertEquals(N, savedCompany.n);
         assertEquals(NAME_COMPANY, savedCompany.name);
@@ -151,7 +152,7 @@ class CompanyServiceImplTest {
 
         val vacancyService = mock(VacancyServiceImpl::class.java);
         val service = CompanyServiceImpl(repository, vacancyService);
-        val companyDto = CompanyDto(N, NAME_COMPANY);
+        val companyDto = CompanyDtoForCreate(NAME_COMPANY);
         val message = assertThrows<Exception> {
             service.createCompany(companyDto);
         }.message;
