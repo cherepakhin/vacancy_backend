@@ -17,6 +17,18 @@ class VacancyExample {
         this.companyExample =companyExample
     }
 
+    constructor(nn: List<Long>) {
+        this.nn = nn
+    }
+
+    constructor(name: String) {
+        this.name = name
+    }
+
+    constructor(companyExample: CompanyExample) {
+        this.companyExample = companyExample
+    }
+
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (other !is VacancyExample) return false

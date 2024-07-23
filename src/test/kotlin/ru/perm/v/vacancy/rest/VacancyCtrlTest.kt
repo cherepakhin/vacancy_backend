@@ -238,5 +238,6 @@ class VacancyCtrlTest {
         val vacancies = vacancyCtrl.getByExample(vacancyExample)
 
         assertEquals(listOf(vacancyDTO10, vacancyDTO20), vacancies)
+        verify(mockVacancyService, times(1)).getByExample(vacancyExample)
     }
 }

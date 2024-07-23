@@ -1,5 +1,6 @@
 package ru.perm.v.vacancy.rest
 
+import com.fasterxml.jackson.databind.ObjectMapper
 import com.fasterxml.jackson.module.kotlin.jacksonObjectMapper
 import com.fasterxml.jackson.module.kotlin.readValue
 import org.junit.jupiter.api.Test
@@ -10,11 +11,13 @@ import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.http.MediaType
 import org.springframework.test.web.servlet.MockMvc
 import org.springframework.test.web.servlet.get
+import org.springframework.test.web.servlet.post
 import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers
 import ru.perm.v.vacancy.consts.VacancyColumn
 import ru.perm.v.vacancy.dto.CompanyDto
 import ru.perm.v.vacancy.dto.VacancyDto
+import ru.perm.v.vacancy.filter.VacancyExample
 import ru.perm.v.vacancy.service.VacancyService
 import ru.perm.v.vacancy.service.impl.CompanyService
 import kotlin.test.assertEquals
@@ -127,6 +130,25 @@ class VacancyCtrlWebMvcTest {
             status { isOk() }
             content { contentType(MediaType.APPLICATION_JSON) }
             content { json("{\"n\":1,\"name\":\"title\",\"comment\":\"text\",\"company\":{\"n\":1,\"name\":\"COMPANY_1\"}}") }
+        }
+    }
+
+    @Test
+    fun vacancyGetByExample() {
+        val companyDto = CompanyDto(1L, "COMPANY_1")
+        val vacancyDto1 = VacancyDto(1L, "title", "text", companyDto)
+        val vacancyExample = VacancyExample(listOf(1L))
+        val mapper = ObjectMapper()
+        `when`(vacancyService.getByExample(vacancyExample)).thenReturn(listOf( vacancyDto1))
+
+        mockMvc.post("/vacancy/find/") {
+            contentType = MediaType.APPLICATION_JSON
+            accept = MediaType.APPLICATION_JSON
+            content = mapper.writeValueAsString(vacancyExample)
+        }.andExpect {
+            status { isOk() }
+            content { contentType(MediaType.APPLICATION_JSON) }
+            content { json("[{\"n\":1,\"name\":\"title\",\"comment\":\"text\",\"company\":{\"n\":1,\"name\":\"COMPANY_1\"}}]") }
         }
     }
 }

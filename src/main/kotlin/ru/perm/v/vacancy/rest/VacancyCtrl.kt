@@ -85,9 +85,10 @@ class VacancyCtrl() {
         return vacancyService.getAllSortedByField(VacancyColumn.valueOf(sortColumn))
     }
 
-    @GetMapping("/find/")
+    @PostMapping("/find/")
     @ApiOperation("Get vacancies by example VacancyExample")
-    fun getByExample(vacancyExample: VacancyExample): List<VacancyDto> {
+    fun getByExample(@RequestBody vacancyExample: VacancyExample): List<VacancyDto> {
+        logger.info(format("VacancyExample: %s", vacancyExample))
         return vacancyService.getByExample(vacancyExample)
     }
 
