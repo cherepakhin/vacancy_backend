@@ -13,6 +13,8 @@ import ru.perm.v.vacancy.consts.VacancyColumn
 import ru.perm.v.vacancy.dto.CompanyDto
 import ru.perm.v.vacancy.dto.VacancyDto
 import ru.perm.v.vacancy.dto.VacancyDtoForCreate
+import ru.perm.v.vacancy.filter.CompanyExample
+import ru.perm.v.vacancy.filter.VacancyExample
 import ru.perm.v.vacancy.service.VacancyService
 import ru.perm.v.vacancy.service.impl.CompanyService
 
@@ -219,5 +221,22 @@ class VacancyCtrlTest {
         val updatedVacancy = vacancyCtrl.update(VACANCY_N, vacancyDTO)
 
         assertEquals(vacancyDTO, updatedVacancy)
+    }
+    @Test
+    fun getByExampleForNN() {
+        val VACANCY_N_10 = 10L
+        val VACANCY_N_20 = 20L
+        val vacancyExample = VacancyExample(listOf(VACANCY_N_10, VACANCY_N_20),"", CompanyExample())
+
+        val COMPANY_N = 100L
+        val companyDto = CompanyDto(COMPANY_N, "COMPANY_100")
+
+        val vacancyDTO10 = VacancyDto(VACANCY_N_10, "VACANCY_10", "", companyDto)
+        val vacancyDTO20 = VacancyDto(VACANCY_N_20, "VACANCY_20", "", companyDto)
+        `when`(mockVacancyService.getByExample(vacancyExample)).thenReturn(listOf(vacancyDTO10, vacancyDTO20))
+
+        val vacancies = vacancyCtrl.getByExample(vacancyExample)
+
+        assertEquals(listOf(vacancyDTO10, vacancyDTO20), vacancies)
     }
 }
