@@ -83,6 +83,13 @@ $ psql -Uvasi -dvacancy -hv
 ````
 -hv означает host v.perm.ru (v - это алиас для v.perm.ru)
 
+или
+
+````shell
+psql -h192.168.1.20 -Uvasi --dbname=vacancy
+````
+
+
 Для версионирования БД используется [flyway](https://flywaydb.org/). Автообновление БД отключено. В application.yaml установлен флаг:
 
 ````yaml
