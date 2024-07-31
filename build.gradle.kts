@@ -247,9 +247,9 @@ tasks.withType<org.flywaydb.gradle.task.FlywayMigrateTask> {
 //    url = System.getenv ("PG_VACANCY")
 //    user = System.getenv ("PG_LOGIN")
 //    password = System.getenv ("PG_PASSWORD")
-    url = "jdbc:postgresql://192.168.1.20:5432/vacancy"
-    user = "vasi"
-    password = "pass"
+    url = "jdbc:postgresql://127.0.0.1:5432/vacancy"
+    user = "postgres"
+    password = "postgres"
     baselineOnMigrate = true
 }
 //tasks.named<BootJar>("bootJar") {
