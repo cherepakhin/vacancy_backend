@@ -136,7 +136,6 @@ class VacancyServiceImplIntegrationTest {
         val vacancies = service.getAllSortedByField(VacancyColumn.COMPANY_N)
 
         assertEquals(4, vacancies.size)
-
     }
 
     @Test
@@ -157,13 +156,15 @@ class VacancyServiceImplIntegrationTest {
         vacancyExample.name = "VACANCY_1"
 
         val vacancies = service.getByExample(vacancyExample)
-
-        for(v in vacancies) {
+        println("----------------------")
+        for (v in vacancies) {
             println(v)
         }
+        println("----------------------")
         assertEquals(3, vacancies.size)
         assertEquals("NAME_VACANCY_1_COMPANY_1", vacancies.get(0).name)
         assertEquals("NAME_VACANCY_1_COMPANY_2", vacancies.get(1).name)
+//
         assertEquals("NAME_VACANCY_1_COMPANY_3", vacancies.get(2).name)
     }
 

@@ -109,11 +109,13 @@ class VacancyCtrl() {
     @DeleteMapping("/{n}")
     @ApiOperation("Delete Vacancy by N")
     @Throws(Exception::class)
-    @CacheEvict(value = ["vacancies"], key = "#id")
-    fun delete(n: Long): String {
-        requireNotNull(vacancyService.getByN(n)) { format("Vacancy with N=%s not found", n) }
+//    @CacheEvict(value = ["vacancies"], key = "#id")
+    fun delete(@PathVariable n: String): String {
+        logger.info("Delete vacancy id=" + n)
+        val id = n.toLong()
+        requireNotNull(vacancyService.getByN(id)) { format("Vacancy with N=%s not found", n) }
         try {
-            vacancyService.delete(n)
+            vacancyService.delete(id)
             return "OK"
         } catch (e: Exception) {
             logger.error(e.message)
@@ -122,7 +124,7 @@ class VacancyCtrl() {
     }
 
     @PostMapping("/{n}")
-    @ApiOperation("Update Company by N")
+    @ApiOperation("Update vacancy by N")
     @CacheEvict(value = ["vacancies"], allEntries = true)
     fun update(
         @Parameter(description = "N(ID) Vacancy.")
