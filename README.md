@@ -281,8 +281,8 @@ $ http POST :8980/vacancy/api/company/ < src/test/test_jsons/company_10.json
 <a id="bootJar"></a>
 ### Создание запускаемого файла и его запуск
 
-````shell
-$ ./gradlew bootJar
+
+ ./gradlew bootJar
 ````
 Собранный jar будет в build/libs/vacancy_backend-<version>.jar
 
@@ -487,7 +487,7 @@ Transfer-Encoding: chunked
 <a id="tose"></a>
 ### Примечания
 
-Решение проблемы циклических зависимостей Spring. CompanyService зависит от VacancyService, а VacancyService зависит от CompanyServiceImpl. При поднятии сервиса возникнет ошибка. Решение: 
+Решение проблемы циклических зависимостей Spring. CompanyService зависит от VacancyService, а VacancyService зависит от CompanyServiceImpl. При поднятии сервиса возникнет ошибка. Аннотация @Lazy решает проблему: 
 
 Определение CompanyServiceImpl: 
 
