@@ -193,7 +193,7 @@ val sourcesJar by tasks.registering(Jar::class)  {
 publishing {
     repositories {
         maven {
-            url = uri("http://v.perm.ru:8082/repository/ru.perm.v/")
+            url = uri("http://v.perm.ru:8081/repository/ru.perm.v/")
             isAllowInsecureProtocol = true
             //  publish в nexus "./gradlew publish" из ноута и Jenkins проходит
             // export NEXUS_CRED_USR=admin
