@@ -1,0 +1,1 @@
+./gradlew --offline jacocoTestReport

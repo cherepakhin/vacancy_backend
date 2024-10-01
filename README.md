@@ -17,6 +17,7 @@
 
 [Swagger](#swagger)<br/>
 [Spring Actuator](#actuator)<br/>
+[Prometheus](#prometheus)<br/>
 
 [TODO](#todo)<br/>
 [Примечания](#tose)<br/>
@@ -491,6 +492,11 @@ Transfer-Encoding: chunked
     }
 }
 ````
+
+<a id="prometheus"></a>
+### Prometheus
+
+Досту по адресу: http://127.0.0.1:8988/vacancy/api/actuator/prometheus
 
 <a id="tose"></a>
 ### Примечания

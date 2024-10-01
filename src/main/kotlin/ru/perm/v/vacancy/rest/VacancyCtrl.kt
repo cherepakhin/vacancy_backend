@@ -39,7 +39,7 @@ class VacancyCtrl() {
 
     @GetMapping("/echo/{mes}")
     @ApiOperation("Simple echo test")
-    @Cacheable("vacancy_echo") // for example and simple test
+//    @Cacheable("vacancy_echo") // for example and simple test
     fun echoMessage(
         @Parameter(
             description = "Any string. will be returned in response."
@@ -52,7 +52,7 @@ class VacancyCtrl() {
 
     @GetMapping("/{n}")
     @ApiOperation("Get Vacancy by N")
-    @Cacheable("vacancies")
+//    @Cacheable("vacancies")
     fun getByN(
         @Parameter(
             description = "N(ID) Vacancy."
@@ -74,7 +74,7 @@ class VacancyCtrl() {
 
     @GetMapping("/sortByColumn/{column}")
     @ApiOperation("Get all vacancies sorted by column (n, name, company_n)")
-    @Cacheable(value = ["column"], key = "#column")
+//    @Cacheable(value = ["column"], key = "#column")
     fun getAllSortByColumn(@ApiParam("Sort column") @PathVariable("column") column: String): List<VacancyDto> {
         val sortColumn = column.uppercase()
         try {
@@ -125,7 +125,7 @@ class VacancyCtrl() {
 
     @PostMapping("/{n}")
     @ApiOperation("Update vacancy by N")
-    @CacheEvict(value = ["vacancies"], allEntries = true)
+//    @CacheEvict(value = ["vacancies"], allEntries = true)
     fun update(
         @Parameter(description = "N(ID) Vacancy.")
         @PathVariable
@@ -133,6 +133,7 @@ class VacancyCtrl() {
         @Parameter(description = "DTO of Vacancy.")
         @RequestBody changedVacancyDto: VacancyDto,
     ): VacancyDto {
+        logger.info("Update vacancy n=$n")
         return vacancyService.update(n, changedVacancyDto)
     }
 
