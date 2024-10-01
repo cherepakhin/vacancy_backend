@@ -234,8 +234,16 @@ private val logger = LoggerFactory.getLogger(this.javaClass.name)
 ### Запуск
 
 ````shell
-./gradlew bootRun
+$ ./gradlew bootRun
 ````
+
+Запуск в режиме offline, без интернета (./run_tests_offline.sh):
+
+````shell
+$ export VACANCY_KOTLIN_IP=127.0.0.1:8980
+$ ./gradlew --offline bootRun
+````
+
 <a id="httpie"></a>
 ### Ручное тестирование httpie
 
