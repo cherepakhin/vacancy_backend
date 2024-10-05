@@ -19,7 +19,7 @@ import ru.perm.v.vacancy.dto.CompanyDto
 import ru.perm.v.vacancy.dto.VacancyDto
 import ru.perm.v.vacancy.filter.VacancyExample
 import ru.perm.v.vacancy.service.VacancyService
-import ru.perm.v.vacancy.service.impl.CompanyService
+import ru.perm.v.vacancy.service.CompanyService
 import kotlin.test.assertEquals
 
 

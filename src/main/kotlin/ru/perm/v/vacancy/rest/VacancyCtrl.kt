@@ -6,7 +6,6 @@ import io.swagger.annotations.ApiParam
 import io.swagger.v3.oas.annotations.Parameter
 import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
-import org.springframework.cache.annotation.CacheEvict
 import org.springframework.cache.annotation.Cacheable
 import org.springframework.http.CacheControl
 import org.springframework.web.bind.annotation.*
@@ -15,7 +14,7 @@ import ru.perm.v.vacancy.dto.VacancyDto
 import ru.perm.v.vacancy.dto.VacancyDtoForCreate
 import ru.perm.v.vacancy.filter.VacancyExample
 import ru.perm.v.vacancy.service.VacancyService
-import ru.perm.v.vacancy.service.impl.CompanyService
+import ru.perm.v.vacancy.service.CompanyService
 import ru.perm.v.vacancy.validators.ValidatorVacancyDtoForCreate
 import java.lang.String.format
 import java.util.concurrent.TimeUnit
@@ -74,7 +73,7 @@ class VacancyCtrl() {
 
     @GetMapping("/sortByColumn/{column}")
     @ApiOperation("Get all vacancies sorted by column (n, name, company_n)")
-//    @Cacheable(value = ["column"], key = "#column")
+    @Cacheable(value = ["column"], key = "#column")
     fun getAllSortByColumn(@ApiParam("Sort column") @PathVariable("column") column: String): List<VacancyDto> {
         val sortColumn = column.uppercase()
         try {

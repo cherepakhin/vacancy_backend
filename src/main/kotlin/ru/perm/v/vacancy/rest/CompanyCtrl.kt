@@ -10,8 +10,7 @@ import org.springframework.web.bind.annotation.*
 import ru.perm.v.vacancy.dto.CompanyDto
 import ru.perm.v.vacancy.dto.CompanyDtoForCreate
 import ru.perm.v.vacancy.filter.CompanyExample
-import ru.perm.v.vacancy.service.impl.CompanyService
-import ru.perm.v.vacancy.validators.ValidatorCompanyDto
+import ru.perm.v.vacancy.service.CompanyService
 import ru.perm.v.vacancy.validators.ValidatorCompanyDtoForCreate
 
 @RestController

@@ -69,6 +69,8 @@ plugins {
 //    kotlin("plugin.noarg")
 //	id 'io.qameta.allure' version '2.11.2' // version 2.10.0 WORK! NO WARNINGS for generate allure report
     id("org.flywaydb.flyway") version "9.21.1"
+
+    id("org.sonarqube") version "5.1.0.4882"
 }
 
 //Note that this is a BootJar plugin used in org.springframework.boot

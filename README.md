@@ -18,6 +18,7 @@
 [Swagger](#swagger)<br/>
 [Spring Actuator](#actuator)<br/>
 [Prometheus](#prometheus)<br/>
+[Docker](#docker)<br/>
 
 [TODO](#todo)<br/>
 [Примечания](#tose)<br/>
@@ -187,6 +188,7 @@ $ ./gradlew test
 ````java
 $ ./gradlew test --tests '*Integration*'
 ````
+в [run_integr_test.sh](./run_integr_test.sh).
 
 
 <a id="coverage"></a>
@@ -504,6 +506,21 @@ Transfer-Encoding: chunked
 ### Prometheus
 
 Досту по адресу: http://127.0.0.1:8988/vacancy/api/actuator/prometheus
+
+<a id="docker"></a>
+### Docker
+
+Создание Docker
+[./docker_build.sh](./docker_build.sh)
+
+Запуск образа:
+
+````shell
+$ docker run -p 8980:8980 v/vacancy_backend
+````
+
+
+docker ps
 
 <a id="tose"></a>
 ### Примечания

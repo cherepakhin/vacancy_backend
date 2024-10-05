@@ -14,6 +14,7 @@ import ru.perm.v.vacancy.entity.VacancyEntity
 import ru.perm.v.vacancy.filter.VacancyExample
 import ru.perm.v.vacancy.mapper.VacancyMapper
 import ru.perm.v.vacancy.repository.VacancyRepository
+import ru.perm.v.vacancy.service.CompanyService
 import ru.perm.v.vacancy.service.VacancyService
 import java.lang.String.format
 

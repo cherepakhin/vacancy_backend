@@ -3,7 +3,6 @@ package ru.perm.v.vacancy.service.impl
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
-import org.mockito.Mockito
 import org.mockito.Mockito.*
 import org.springframework.data.domain.Sort
 import ru.perm.v.vacancy.consts.VacancyColumn
@@ -15,6 +14,7 @@ import ru.perm.v.vacancy.entity.QVacancyEntity
 import ru.perm.v.vacancy.entity.VacancyEntity
 import ru.perm.v.vacancy.filter.VacancyExample
 import ru.perm.v.vacancy.repository.VacancyRepository
+import ru.perm.v.vacancy.service.CompanyService
 import java.util.*
 import kotlin.reflect.full.declaredMemberProperties
 

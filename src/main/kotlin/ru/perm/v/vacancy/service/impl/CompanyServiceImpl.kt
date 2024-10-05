@@ -13,6 +13,7 @@ import ru.perm.v.vacancy.entity.QCompanyEntity
 import ru.perm.v.vacancy.filter.CompanyExample
 import ru.perm.v.vacancy.mapper.CompanyMapper
 import ru.perm.v.vacancy.repository.CompanyRepository
+import ru.perm.v.vacancy.service.CompanyService
 
 @Service
 class CompanyServiceImpl(val repository: CompanyRepository, @Lazy val vacancyService: VacancyServiceImpl) :

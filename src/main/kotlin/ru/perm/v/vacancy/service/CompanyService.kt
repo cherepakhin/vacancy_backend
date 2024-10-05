@@ -1,4 +1,4 @@
-package ru.perm.v.vacancy.service.impl
+package ru.perm.v.vacancy.service
 
 import com.querydsl.core.types.Predicate
 import org.springframework.data.domain.Sort

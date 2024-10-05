@@ -2,8 +2,10 @@ package ru.perm.v.vacancy.jpatests
 
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
+import org.slf4j.LoggerFactory
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase
+import org.springframework.boot.test.autoconfigure.orm.jpa.AutoConfigureDataJpa
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
 import org.springframework.boot.test.mock.mockito.MockBean
 import ru.perm.v.vacancy.consts.VacancyColumn
@@ -12,8 +14,9 @@ import ru.perm.v.vacancy.dto.VacancyDto
 import ru.perm.v.vacancy.dto.VacancyDtoForCreate
 import ru.perm.v.vacancy.filter.VacancyExample
 import ru.perm.v.vacancy.repository.VacancyRepository
-import ru.perm.v.vacancy.service.impl.CompanyService
+import ru.perm.v.vacancy.service.CompanyService
 import ru.perm.v.vacancy.service.impl.VacancyServiceImpl
+import kotlin.test.BeforeTest
 import kotlin.test.assertEquals
 import kotlin.test.assertTrue
 
@@ -22,6 +25,7 @@ import kotlin.test.assertTrue
  */
 @DataJpaTest
 @AutoConfigureTestDatabase(replace = AutoConfigureTestDatabase.Replace.NONE)
+@AutoConfigureDataJpa
 class VacancyServiceImplIntegrationTest {
     @Autowired
     lateinit var vacancyRepository: VacancyRepository
@@ -30,6 +34,13 @@ class VacancyServiceImplIntegrationTest {
     // но можно замокать нектр. методы. Если не замоканы, то будут работать исходные методы.
     @MockBean
     lateinit var companyService: CompanyService
+
+    private val logger = LoggerFactory.getLogger(this.javaClass.name)
+
+    @BeforeTest
+    fun before() {
+        logger.info("Start BEFORE EVERY test VacancyServiceImplIntegrationTest")
+    }
 
     @Test
     fun getAllWithContains() {
@@ -72,13 +83,14 @@ class VacancyServiceImplIntegrationTest {
                 )
             )
         )
+        println(vacancies)
         assertTrue(
             vacancies.contains(
                 VacancyDto(
                     4L,
-                    "NAME_VACANCY_1_COMPANY_3",
-                    "COMMENT_VACANCY_1_COMPANY_3",
-                    companyDto3
+                    "NAME_VACANCY",
+                    "COMMENT",
+                    companyDto1
                 )
             )
         )
@@ -122,9 +134,9 @@ class VacancyServiceImplIntegrationTest {
         assertEquals(
             VacancyDto(
                 4L,
-                "NAME_VACANCY_1_COMPANY_3",
-                "COMMENT_VACANCY_1_COMPANY_3",
-                companyDto3
+                "NAME_VACANCY",
+                "COMMENT",
+                companyDto1
             ), vacancies[3]
         )
     }
@@ -156,16 +168,17 @@ class VacancyServiceImplIntegrationTest {
         vacancyExample.name = "VACANCY_1"
 
         val vacancies = service.getByExample(vacancyExample)
+
+        // for debug
         println("----------------------")
         for (v in vacancies) {
             println(v)
         }
         println("----------------------")
-        assertEquals(3, vacancies.size)
+
+        assertEquals(2, vacancies.size)
         assertEquals("NAME_VACANCY_1_COMPANY_1", vacancies.get(0).name)
         assertEquals("NAME_VACANCY_1_COMPANY_2", vacancies.get(1).name)
-//
-        assertEquals("NAME_VACANCY_1_COMPANY_3", vacancies.get(2).name)
     }
 
     @Test

@@ -17,7 +17,7 @@ spring:
     #  Для интеграционных тестов не отключаю
     #  База данных уже закрыта (чтобы отключить автоматическое закрытие базы данных при останове JVM,
     #  добавьте ";DB_CLOSE_ON_EXIT=FALSE" в URL)
-    url: jdbc:postgresql://127.0.0.1:5432/vacancy
+    url: jdbc:postgresql://192.168.1.57:5432/vacancy
     username: ${PG_USER:postgres}
     password: ${PG_PASSWORD:postgres}
     #  hibernate:

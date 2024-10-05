@@ -11,7 +11,7 @@ import org.mockito.junit.jupiter.MockitoExtension
 import ru.perm.v.vacancy.dto.CompanyDto
 import ru.perm.v.vacancy.dto.CompanyDtoForCreate
 import ru.perm.v.vacancy.filter.CompanyExample
-import ru.perm.v.vacancy.service.impl.CompanyService
+import ru.perm.v.vacancy.service.CompanyService
 
 @ExtendWith(MockitoExtension::class)
 class CompanyCtrlTest {
