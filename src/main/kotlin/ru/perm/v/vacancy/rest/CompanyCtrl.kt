@@ -44,7 +44,7 @@ class CompanyCtrl(val companyService: CompanyService) {
     }
 
     @GetMapping("/sortByColumn/{column}")
-    @ApiOperation("Get all companies")
+    @ApiOperation("Get all companies sort by column")
     // rewrite with criteria search???
     fun getAllSortByColumn(@PathVariable("column") column: String): List<CompanyDto> {
         var sortColumn = "n";
@@ -62,11 +62,12 @@ class CompanyCtrl(val companyService: CompanyService) {
         return companies
     }
 
-    @GetMapping("/find/")
+    @PutMapping("/find/")
     @ApiOperation("Get Product by ")
     fun getByExample(
-        companyExample: CompanyExample
+        @RequestBody companyExample: CompanyExample
     ): List<CompanyDto> {
+        logger.info("Get companies by example" + companyExample)
         return companyService.getByExample(companyExample)
     }
 
