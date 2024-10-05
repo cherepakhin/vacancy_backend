@@ -36,7 +36,4 @@ echo -e "\n"
 # get ALL companies sorted by column name
 echo 'GET http://127.0.0.1:8980/vacancy/api/company/sortByColumn/name'
 curl --request GET 'http://127.0.0.1:8980/vacancy/api/company/sortByColumn/name' | jq
-
-## VERBOSE
-#curl -v GET  'http://127.0.0.1:8980/vacancy/api/company/sortByColumn/name' | jq
 echo -e "\n"
