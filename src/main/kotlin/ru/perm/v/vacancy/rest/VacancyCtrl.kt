@@ -51,7 +51,7 @@ class VacancyCtrl() {
 
     @GetMapping("/{n}")
     @ApiOperation("Get Vacancy by N")
-//    @Cacheable("vacancies")
+    @Cacheable("vacancies")
     fun getByN(
         @Parameter(
             description = "N(ID) Vacancy."
