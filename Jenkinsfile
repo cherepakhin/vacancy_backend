@@ -29,7 +29,7 @@ pipeline {
                 NEXUS_CRED = credentials('vasi')
             }
             steps {
-                sh 'export NEXUS_CI_USER=admin; export NEXUS_CI_PASS=pass;cd vacancy_backend;./gradlew publish'
+                sh 'export NEXUS_CI_USER=admin; export NEXUS_CI_PASS=pass;echo $NEXUS_CI_USER;cd vacancy_backend;ls;./gradlew publish'
             }
         }
     }
