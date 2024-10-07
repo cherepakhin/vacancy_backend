@@ -189,6 +189,7 @@ val bootJar by tasks.getting(BootJar::class) {
     enabled = true
 }
 
+
 //val sourcesJar by tasks.registering(Jar::class)  {
 //   archiveClassifier.set("sources")
 //    from(sourceSets.main.get().allSource)
@@ -200,6 +201,7 @@ publishing {
             url = uri("http://192.168.1.20:8081/repository/ru.perm.v/")
             isAllowInsecureProtocol = true
             //  publish в nexus "./gradlew publish" из ноута и Jenkins проходит
+            // из jenkins тоже
             // export NEXUS_CRED_USR=admin
             // echo $NEXUS_CRED_USR
             credentials {
@@ -209,9 +211,8 @@ publishing {
         }
     }
     publications {
-        create("mavenJava", MavenPublication::class) {
-            from(components["java"])
-//            artifact(sourcesJar.get())
+        create<MavenPublication>("maven"){
+            artifact(tasks["bootJar"])
         }
     }
 }
