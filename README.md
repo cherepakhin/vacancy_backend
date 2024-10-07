@@ -299,7 +299,6 @@ $ http POST :8980/vacancy/api/company/ < src/test/test_jsons/company_10.json
 <a id="bootJar"></a>
 ### Создание запускаемого файла и его запуск
 
-
  ./gradlew bootJar
 ````
 Собранный jar будет в build/libs/vacancy_backend-<version>.jar
@@ -319,6 +318,36 @@ $ wget http://192.168.1.20:8082/repository/ru.perm.v/ru/perm/v/vacancy_backend/0
 
 ````shell
 $ wget http://v.perm.ru:8082/repository/ru.perm.v/ru/perm/v/vacancy_backend/0.24.0706.1/vacancy_backend-0.24.0706.1.jar
+````
+
+Настроена публикации в Nexus fat jar: 
+
+````shell
+publishing {
+    repositories {
+        maven {
+            url = uri("http://192.168.1.20:8081/repository/ru.perm.v/")
+            isAllowInsecureProtocol = true
+            // export NEXUS_CRED_USR=admin
+            // echo $NEXUS_CRED_USR
+            credentials {
+                username = "admin"
+                password = "pass"
+            }
+        }
+    }
+    publications {
+        create<MavenPublication>("maven"){
+            artifact(tasks["bootJar"])
+        }
+    }
+}
+````
+
+Для deploy fat jar файла выполнить:
+
+````shell
+./gradlew publish
 ````
 
 <a id="jenkins"></a>
