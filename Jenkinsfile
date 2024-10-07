@@ -26,7 +26,7 @@ pipeline {
 
         stage('Publish to Nexus') {
             environment {
-                NEXUS_CRED = credentials('nexus_admin')
+                NEXUS_CRED = credentials('vasi')
             }
             steps {
                 sh 'cd vacancy_backend;./gradlew publish'
