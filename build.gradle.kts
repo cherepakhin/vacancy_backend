@@ -189,10 +189,10 @@ val bootJar by tasks.getting(BootJar::class) {
     enabled = true
 }
 
-val sourcesJar by tasks.registering(Jar::class)  {
-   archiveClassifier.set("sources")
-    from(sourceSets.main.get().allSource)
-}
+//val sourcesJar by tasks.registering(Jar::class)  {
+//   archiveClassifier.set("sources")
+//    from(sourceSets.main.get().allSource)
+//}
 
 publishing {
     repositories {
@@ -203,15 +203,15 @@ publishing {
             // export NEXUS_CRED_USR=admin
             // echo $NEXUS_CRED_USR
             credentials {
-                username = System.getenv("NEXUS_CRED_USR")
-                password = System.getenv("NEXUS_CRED_PSW")
+                username = "admin"
+                password = "pass"
             }
         }
     }
     publications {
-        register("mavenJava", MavenPublication::class) {
+        create("mavenJava", MavenPublication::class) {
             from(components["java"])
-            artifact(sourcesJar.get())
+//            artifact(sourcesJar.get())
         }
     }
 }
