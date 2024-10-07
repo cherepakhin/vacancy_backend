@@ -8,19 +8,19 @@ pipeline {
     stages {
         stage('Checkout') {
             steps {
-                sh 'rm -rf vacancy_kotlin; git clone https://github.com/cherepakhin/vacancy_kotlin'
+                sh 'rm -rf vacancy_backend; git clone https://github.com/cherepakhin/vacancy_backend'
             }
         }
 
         stage('Unit tests') {
             steps {
-                sh 'pwd;cd vacancy_kotlin;./gradlew clean test --tests *Test'
+                sh 'pwd;cd vacancy_backend;./gradlew clean test --tests *Test'
             }
         }
 
         stage('Build bootJar') {
             steps {
-                sh 'pwd;cd vacancy_kotlin;./gradlew bootJar'
+                sh 'pwd;cd vacancy_backend;./gradlew bootJar'
             }
         }
 
@@ -29,7 +29,7 @@ pipeline {
                 NEXUS_CRED = credentials('nexus_admin')
             }
             steps {
-                sh 'cd vacancy_kotlin;./gradlew publish'
+                sh 'cd vacancy_backend;./gradlew publish'
             }
         }
     }
