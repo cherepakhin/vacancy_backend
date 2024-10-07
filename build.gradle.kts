@@ -71,6 +71,8 @@ plugins {
     id("org.flywaydb.flyway") version "9.21.1"
 
     id("org.sonarqube") version "5.1.0.4882"
+
+
 }
 
 //Note that this is a BootJar plugin used in org.springframework.boot
@@ -207,10 +209,9 @@ publishing {
         }
     }
     publications {
-        create<MavenPublication>("maven"){
-            artifact(tasks["bootJar"])
-// Jenkins error not published to nexus?
-//            artifact(tasks["sourcesJar"])
+        register("mavenJava", MavenPublication::class) {
+            from(components["java"])
+            artifact(sourcesJar.get())
         }
     }
 }
