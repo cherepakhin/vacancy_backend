@@ -333,22 +333,24 @@ $ wget http://v.perm.ru:8082/repository/ru.perm.v/ru/perm/v/vacancy_backend/0.24
 
 ````yaml
 publishing {
-  repositories {
-      maven {
-          url = uri("http://v.perm.ru:8082/repository/ru.perm.v/")
-          isAllowInsecureProtocol = true
-          //  for publish to nexus "./gradlew publish"
-          // export NEXUS_CRED_USR=admin
-          // echo $NEXUS_CRED_USR
-          credentials {
-              username = System.getenv("NEXUS_CRED_USR")
-              password = System.getenv("NEXUS_CRED_PSW")
-          }
-      }
-  }
-  publications {
-    create<MavenPublication>("maven"){
-      artifact(tasks["bootJar"]) // build and publish bootJar
+    repositories {
+        maven {
+            url = uri("http://192.168.1.20:8081/repository/ru.perm.v/")
+            isAllowInsecureProtocol = true
+            //  publish в nexus "./gradlew publish" из ноута и Jenkins проходит
+            // export NEXUS_CRED_USR=admin
+            // echo $NEXUS_CRED_USR
+            credentials {
+                username = "admin"
+                password = "pass"
+            }
+        }
+    }
+    publications {
+        create("mavenJava", MavenPublication::class) {
+            from(components["java"])
+//            artifact(sourcesJar.get())
+        }
     }
 }
 ````
