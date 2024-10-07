@@ -209,7 +209,8 @@ publishing {
     publications {
         create<MavenPublication>("maven"){
             artifact(tasks["bootJar"])
-            artifact(tasks["sourcesJar"])
+// Jenkins error not published to nexus?
+//            artifact(tasks["sourcesJar"])
         }
     }
 }
