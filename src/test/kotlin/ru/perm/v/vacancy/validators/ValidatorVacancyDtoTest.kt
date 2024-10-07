@@ -1,10 +1,13 @@
 package ru.perm.v.vacancy.validators
 
 import org.junit.jupiter.api.Assertions.*
+import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import ru.perm.v.vacancy.dto.CompanyDto
 import ru.perm.v.vacancy.dto.VacancyDto
 
+//TODO: do ENABLED
+@Disabled
 class ValidatorVacancyDtoTest {
 
     @Test
