@@ -8,7 +8,7 @@
 [Логгирование](#logging)<br/>
 [Запуск](#run)<br/>
 [Ручное тестирование httpie](#httpie)<br/>
-[Созлание запускаемого файла](#bootJar)<br/>
+[Создание запускаемого файла](#bootJar)<br/>
 [Сборка Jenkins](#jenkins)<br/>
 [Publishing SpringBoot "FAT" jar](#fat)<br/>
 
@@ -577,6 +577,16 @@ class VacancyServiceImpl(
 ````
 
 В CompanyService использована аннотация @Lazy для vacancyService. 
+
+#### Различия @RestController и @Controller
+
+[https://symflower.com/en/company/blog/2024/controller-restcontroller-spring-boot/#:~:text=%40Controller%20%3A%20used%20to%20declare%20common,that%20can%20return%20JSON%20responses](
+https://symflower.com/en/company/blog/2024/controller-restcontroller-spring-boot/#:~:text=%40Controller%20%3A%20used%20to%20declare%20common,that%20can%20return%20JSON%20responses)
+
+Кратко:
+
+Если нужно возвращать не JSON, а например html страницу (или XML и т.п.), то нужно использовать __@Controller__. Если нужно возвращать __JSON__, то нужно использовать __@RestControler__.
+
 
 #### Что это было?
 
