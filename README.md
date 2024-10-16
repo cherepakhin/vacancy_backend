@@ -178,7 +178,7 @@ $ http :8980/vacancy/api/company/
 <a id="querydsl"></a>
 ### QueryDsl
 
-В проекте для работы с базой данных используется интересный инструмент [QueryDsl](http://querydsl.com/). Генерация запросов по названию метода интерфейса. Пример:
+В проекте для работы с базой данных используется интересный инструмент [QueryDsl](https://github.com/querydsl/querydsl). Генерация запросов по названию метода интерфейса. Пример:
 
 ````shell
 @Repository
@@ -187,6 +187,8 @@ interface CompanyRepository: JpaRepository<CompanyEntity, Long>, JpaSpecificatio
     fun findAllByOrderByNAsc(): List<CompanyEntity>
 ...
 ````
+
+[https://www.baeldung.com/intro-to-querydsl](https://www.baeldung.com/intro-to-querydsl)
 
 <a id="unit_test"></a>
 ### Unit тестирование
