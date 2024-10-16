@@ -179,7 +179,6 @@ $ http :8980/vacancy/api/company/
 ### QueryDsl
 
 В проекте для работы с базой данных используется интересный инструмент [QueryDsl](http://querydsl.com/). Генерация запросов по названию метода интерфейса. Пример:
-Пример из CompanyRepository.kt:
 
 ````shell
 @Repository
