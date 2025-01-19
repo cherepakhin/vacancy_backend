@@ -23,8 +23,10 @@ CREATE table if not exists vacancy
     "company_n"   integer not null default 0,
     "name"     varchar(120) not null default '',
     "comment"     varchar(120) not null default '',
+    "contact_n"   integer not null default 0,
     CONSTRAINT vacancy_pkey PRIMARY KEY (n),
-    CONSTRAINT fk_contact_company FOREIGN KEY (company_n) REFERENCES company (n)
+    CONSTRAINT fk_vacancy_company FOREIGN KEY (company_n) REFERENCES company (n),
+    CONSTRAINT fk_vacancy_contact FOREIGN KEY (contact_n) REFERENCES contact (n)
 );
 
 insert into company (n,name) values (-1,'-'), (1,'COMPANY_1'), (2,'COMPANY_2'), (3,'3_COMPANY');
@@ -36,11 +38,11 @@ insert into contact (n, company_n, name, email, phone, comment) values
     (3, 2, 'CONTACT_3_COMPANY_2', 'CONTACT_3_EMAIL','CONTACT_3_PHONE','CONTACT_3_COMMENT'),
     (4, 3, 'CONTACT_4_COMPANY_3','CONTACT_3_EMAIL','CONTACT_3_PHONE','CONTACT_3_COMMENT');
 
-insert into vacancy (n, company_n, name, comment) values
-    (1, 1, 'NAME_VACANCY_1_COMPANY_1', 'COMMENT_VACANCY_1_COMPANY_1'),
-    (2, 1, 'NAME_VACANCY_2_COMPANY_1', 'COMMENT_VACANCY_2_COMPANY_1'),
-    (3, 2, 'NAME_VACANCY_1_COMPANY_2', 'COMMENT_VACANCY_1_COMPANY_2'),
-    (4, 3, 'NAME_VACANCY_1_COMPANY_3', 'COMMENT_VACANCY_1_COMPANY_3');
+insert into vacancy (n, contact_n, company_n, name, comment) values
+    (1, 1, 1, 'NAME_VACANCY_1_COMPANY_1', 'COMMENT_VACANCY_1_COMPANY_1'),
+    (2, 2, 1, 'NAME_VACANCY_2_COMPANY_1', 'COMMENT_VACANCY_2_COMPANY_1'),
+    (3, 3, 2, 'NAME_VACANCY_1_COMPANY_2', 'COMMENT_VACANCY_1_COMPANY_2'),
+    (4, 4, 3, 'NAME_VACANCY_1_COMPANY_3', 'COMMENT_VACANCY_1_COMPANY_3');
 
 COMMIT;
 
