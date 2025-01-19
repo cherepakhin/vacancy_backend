@@ -71,8 +71,6 @@ plugins {
     id("org.flywaydb.flyway") version "9.21.1"
 
     id("org.sonarqube") version "5.1.0.4882"
-
-
 }
 
 //Note that this is a BootJar plugin used in org.springframework.boot

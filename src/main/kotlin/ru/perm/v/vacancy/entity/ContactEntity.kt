@@ -14,10 +14,6 @@ class ContactEntity {  // "open" needed for JPA?
     @Column(name = "name", nullable = false)
     var name: String = ""
     @NotNull
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "company_n", nullable = false)
-    lateinit var companyEntity: CompanyEntity
-    @NotNull
     @Column(name = "email", nullable = false)
     var email: String = ""
     @NotNull
@@ -29,9 +25,8 @@ class ContactEntity {  // "open" needed for JPA?
 
     constructor() // need for JPA
 
-    constructor(name: String, email: String, phone: String, comment: String, companyEntity: CompanyEntity) {
+    constructor(name: String, email: String, phone: String, comment: String) {
         this.name = name
-        this.companyEntity = companyEntity
         this.email = email
         this.phone = phone
         this.comment = comment
@@ -43,7 +38,6 @@ class ContactEntity {  // "open" needed for JPA?
 
         if (n != other.n) return false
         if (name != other.name) return false
-        if (companyEntity != other.companyEntity) return false
         if (email != other.email) return false
         if (phone != other.phone) return false
         if (comment != other.comment) return false
@@ -54,12 +48,9 @@ class ContactEntity {  // "open" needed for JPA?
     override fun hashCode(): Int {
         var result = n.hashCode()
         result = 31 * result + name.hashCode()
-        result = 31 * result + companyEntity.hashCode()
         result = 31 * result + email.hashCode()
         result = 31 * result + phone.hashCode()
         result = 31 * result + comment.hashCode()
         return result
     }
-
-
 }

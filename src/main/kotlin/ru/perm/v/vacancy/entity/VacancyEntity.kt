@@ -14,6 +14,9 @@ class VacancyEntity {
     @ManyToOne
     @JoinColumn(name = "company_n", nullable = false)
     var company: CompanyEntity? = null
+    @ManyToOne
+    @JoinColumn(name = "contact_n", nullable = false)
+    private var contact: ContactEntity? = null
     @NotNull
     @Column(name = "name", nullable = false)
     var name: String = ""
@@ -31,6 +34,14 @@ class VacancyEntity {
 
     constructor(n: Long): this() {
         this.n = n
+    }
+
+    fun setContact(contact: ContactEntity) {
+        this.contact = contact
+    }
+
+    fun getContact(): ContactEntity {
+        return contact!!
     }
 
     override fun equals(other: Any?): Boolean {
