@@ -88,9 +88,9 @@ class VacancyServiceImplIntegrationTest {
             vacancies.contains(
                 VacancyDto(
                     4L,
-                    "NAME_VACANCY",
-                    "COMMENT",
-                    companyDto1
+                    "NAME_VACANCY_1_COMPANY_3",
+                    "COMMENT_VACANCY_1_COMPANY_3",
+                    companyDto3
                 )
             )
         )
@@ -134,9 +134,9 @@ class VacancyServiceImplIntegrationTest {
         assertEquals(
             VacancyDto(
                 4L,
-                "NAME_VACANCY",
-                "COMMENT",
-                companyDto1
+                "NAME_VACANCY_1_COMPANY_3",
+                "COMMENT_VACANCY_1_COMPANY_3",
+                companyDto3
             ), vacancies[3]
         )
     }
@@ -176,9 +176,10 @@ class VacancyServiceImplIntegrationTest {
         }
         println("----------------------")
 
-        assertEquals(2, vacancies.size)
+        assertEquals(3, vacancies.size)
         assertEquals("NAME_VACANCY_1_COMPANY_1", vacancies.get(0).name)
         assertEquals("NAME_VACANCY_1_COMPANY_2", vacancies.get(1).name)
+        assertEquals("NAME_VACANCY_1_COMPANY_3", vacancies.get(2).name)
     }
 
     @Test
