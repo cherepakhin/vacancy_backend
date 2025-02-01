@@ -60,7 +60,6 @@ plugins {
     id("io.qameta.allure") version "2.8.1"
     id("jacoco")
     id("io.spring.dependency-management") version "1.0.9.RELEASE"
-    kotlin("kapt") version "1.7.0"
     kotlin("plugin.serialization") version "2.0.0" //JSON serialization, deserialization
     java
     idea
@@ -71,6 +70,7 @@ plugins {
     id("org.flywaydb.flyway") version "9.21.1"
 
     id("org.sonarqube") version "5.1.0.4882"
+    kotlin("kapt") version "1.8.21"
 }
 
 //Note that this is a BootJar plugin used in org.springframework.boot
@@ -262,3 +262,4 @@ tasks.withType<org.flywaydb.gradle.task.FlywayMigrateTask> {
 //tasks.named<Jar>("jar") {
 //    archiveClassifier.set("")
 //}
+

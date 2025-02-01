@@ -21,6 +21,7 @@ class CompanyServiceImpl(val repository: CompanyRepository, @Lazy val vacancySer
     private val logger = LoggerFactory.getLogger(this.javaClass.name)
 
     override fun getAll(): List<CompanyDto> {
+        logger.info("getAll()")
         return repository.findAll().sortedBy { it.n }.map { CompanyMapper.toDto(it) }
     }
 
