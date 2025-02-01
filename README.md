@@ -615,6 +615,23 @@ https://symflower.com/en/company/blog/2024/controller-restcontroller-spring-boot
 
 java -verbose:class <other args> - вывод загруженных классов
 
+### Lombok
+
+Lombok НЕ используется. В https://habr.com/ru/articles/583850/ указывается на:
+__"Работа с Lombok-методами напрямую из Kotlin из коробки не работает. Для этого требуется использовать Lombok compiler plugin. При этом возникают БОЛЬШИЕ проблемы при совместной работе Kapt и Lombok. "__
+
+### Mockito
+
+Mockito __НЕКОРРЕКТНО__ работает с типами Kotlin из коробки. 
+Поэтому Spring рекомендует использовать Mockk. 
+Также для Mockito появился специальный модуль, добавляющий поддержку Kotlin - __mockito-kotlin__. 
+В проекте используется именно эта библиотека:
+
+````shell
+testImplementation("org.mockito.kotlin:mockito-kotlin:$mockitoKotlinVersion")
+````
+
+
 <a id="todo"></a>
 ### TODO
 Анализ кода SonarCube<br/>
@@ -643,3 +660,4 @@ jxls для отчетов<br/>
 [https://github.com/cherepakhin/shop_kotlin](https://github.com/cherepakhin/shop_kotlin)
 [https://github.com/cherepakhin/shop_kotlin_restassured_test](https://github.com/cherepakhin/shop_kotlin_restassured_test)
 [Kotlin + Hibernate: всё сложно](https://habr.com/ru/companies/haulmont/articles/572574/)
+[Из Java в Kotlin: туда и обратно (2021)](https://habr.com/ru/articles/583850/)
