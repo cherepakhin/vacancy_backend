@@ -49,7 +49,7 @@ class InitCtrl {
         val inputStream: InputStream = this.javaClass.getResourceAsStream(SqlScripts.IMPORT_SQL)
         val initSql: String = readFromInputStream(inputStream)
 
-        val initQuery: Query = entityManager!!.createNativeQuery(initSql);
+        val initQuery: Query = entityManager!!.createNativeQuery(initSql)
         initQuery.executeUpdate()
 
         return "Ok"
@@ -63,7 +63,7 @@ class InitCtrl {
         val inputStream: InputStream = this.javaClass.getResourceAsStream(SqlScripts.EMPTYDB_SQL)
         val emptySql: String = readFromInputStream(inputStream)
         logger.info("empty_db.sql: " + emptySql)
-        val clearQuery: Query = entityManager!!.createNativeQuery(emptySql);
+        val clearQuery: Query = entityManager!!.createNativeQuery(emptySql)
         clearQuery.executeUpdate()
 
         return "Ok"
