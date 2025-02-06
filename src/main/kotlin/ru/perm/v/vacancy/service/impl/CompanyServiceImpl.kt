@@ -26,7 +26,7 @@ class CompanyServiceImpl(val repository: CompanyRepository, @Lazy val vacancySer
     }
 
     override fun getAllSortedByField(field: String): List<CompanyDto> {
-        val sorted = Sort.by(Sort.Direction.ASC, field);
+        val sorted = Sort.by(Sort.Direction.ASC, field)
 
         return repository.findAll(sorted).map { CompanyMapper.toDto(it) }
     }
@@ -38,7 +38,7 @@ class CompanyServiceImpl(val repository: CompanyRepository, @Lazy val vacancySer
 
     override fun createCompany(companyDtoForCreate: CompanyDtoForCreate): CompanyDto {
         val n = getNextN()
-        logger.info(String.format("getNextN(): %s", n))
+        logger.info("getNextN(): %s", n)
         val company = CompanyEntity(n = n, name = companyDtoForCreate.name)
         logger.info(company.toString())
         repository.createNew(company.n, company.name)
@@ -46,7 +46,7 @@ class CompanyServiceImpl(val repository: CompanyRepository, @Lazy val vacancySer
         return CompanyMapper.toDto(company)
     }
 
-    public fun getNextN(): Long {
+    fun getNextN(): Long {
         return repository.getNextN()
     }
 
@@ -100,5 +100,4 @@ class CompanyServiceImpl(val repository: CompanyRepository, @Lazy val vacancySer
         val foundCompanies = repository.findAll(predicate, sort)
         return foundCompanies.map { CompanyMapper.toDto(it) }.toList()
     }
-
 }

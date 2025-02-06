@@ -19,10 +19,10 @@ interface CompanyRepository: JpaRepository<CompanyEntity, Long>,
 
     @Modifying
     @Query(value = "insert into company (n,name) values (:n,:name)", nativeQuery = true)
-    fun createNew(n: Long, name: String): Unit
+    fun createNew(n: Long, name: String)
 
     @Modifying
     @Query(value = "delete from company", nativeQuery = true)
-    fun clear(): Unit
+    fun clear()
 
 }

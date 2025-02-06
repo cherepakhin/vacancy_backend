@@ -30,7 +30,7 @@ class CompanyCtrl(val companyService: CompanyService) {
         )
         @PathVariable mes: String,
     ): String {
-        logger.info(java.lang.String.format("echo %s", mes))
+        logger.info("echo $mes")
         return mes
     }
 
@@ -47,8 +47,8 @@ class CompanyCtrl(val companyService: CompanyService) {
     @ApiOperation("Get all companies sort by column")
     // rewrite with criteria search???
     fun getAllSortByColumn(@PathVariable("column") column: String): List<CompanyDto> {
-        var sortColumn = "n";
-        logger.info("Get all companies")
+        var sortColumn = "n"
+        logger.info("Get all companies sort by column $column")
         if (column.isNotEmpty()) {
             if (validSortColumns.contains(column)) {
                 sortColumn = column
@@ -67,7 +67,7 @@ class CompanyCtrl(val companyService: CompanyService) {
     fun getByExample(
         @RequestBody companyExample: CompanyExample
     ): List<CompanyDto> {
-        logger.info("Get companies by example" + companyExample)
+        logger.info("Get companies by example $companyExample")
         return companyService.getByExample(companyExample)
     }
 

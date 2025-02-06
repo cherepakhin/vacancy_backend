@@ -5,10 +5,10 @@ import ru.perm.v.vacancy.entity.CompanyEntity
 
 object CompanyMapper {
     fun toDto(companyEntity: CompanyEntity): CompanyDto {
-        return CompanyDto(companyEntity.n,companyEntity.name);
+        return CompanyDto(companyEntity.n,companyEntity.name)
     }
 
     fun toEntity(companyDto: CompanyDto): CompanyEntity {
-        return CompanyEntity(companyDto.n,companyDto.name);
+        return CompanyEntity(companyDto.n,companyDto.name)
     }
 }
