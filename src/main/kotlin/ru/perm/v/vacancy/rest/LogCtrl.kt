@@ -24,8 +24,7 @@ class LogCtrl {
     @ApiOperation("Getting log")
     fun getLog(): String {
         val current = File(basedir + File.separator + path)
-        val currentDir = current.getAbsolutePath()
-        logger.info(java.lang.String.format("Log file %s", currentDir))
+        logger.info("Log file $current.absolutePath")
         return String(Files.readAllBytes(current.toPath()))
     }
 

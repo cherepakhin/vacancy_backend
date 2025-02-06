@@ -369,7 +369,7 @@ class VacancyServiceImplTest {
 
     @Test
     fun getByExampleForVacancyId() {
-        val vacancyExample = VacancyExample();
+        val vacancyExample = VacancyExample()
         vacancyExample.nn = listOf(100L, 200L)
         val repository = mock(VacancyRepository::class.java)
         val qVacancy = QVacancyEntity.vacancyEntity

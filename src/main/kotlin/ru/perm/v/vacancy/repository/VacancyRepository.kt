@@ -19,6 +19,6 @@ interface VacancyRepository: JpaRepository<VacancyEntity, Long>,
 
     @Modifying
     @Query(value = "delete from vacancy", nativeQuery = true)
-    fun clear(): Unit
+    fun clear()
 
 }

@@ -74,7 +74,7 @@ class CompanyCtrlTest {
         val companyDTOs = listOf(
             CompanyDto(1L, "test1"),
             CompanyDto(2L, "test2")
-        );
+        )
         val sortColumn = "n"
         `when`(companyService.getAllSortedByField(sortColumn)).thenReturn(companyDTOs)
 
@@ -88,7 +88,7 @@ class CompanyCtrlTest {
         val companyDTOs = listOf(
             CompanyDto(1L, "test1"),
             CompanyDto(2L, "test2")
-        );
+        )
         val SORT_COLUMN = "name"
         `when`(companyService.getAllSortedByField(SORT_COLUMN)).thenReturn(companyDTOs)
 
@@ -108,7 +108,7 @@ class CompanyCtrlTest {
         val companyDTOs = listOf(
             CompanyDto(100L, "COMPANY_100"),
             CompanyDto(200L, "COMPANY_200")
-        );
+        )
         val SORT_COLUMN = "name"
         `when`(companyService.getAllSortedByField(SORT_COLUMN)).thenReturn(companyDTOs)
 
@@ -128,7 +128,7 @@ class CompanyCtrlTest {
         val companyDTOs = listOf(
             CompanyDto(1L, "test1"),
             CompanyDto(2L, "test2")
-        );
+        )
 
         `when`(companyService.getAllSortedByField("n")).thenReturn(companyDTOs)
 

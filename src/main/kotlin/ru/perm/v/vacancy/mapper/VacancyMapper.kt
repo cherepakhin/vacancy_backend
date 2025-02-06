@@ -9,7 +9,7 @@ object VacancyMapper {
     fun toDto(vacancyEntity: VacancyEntity): VacancyDto {
         val companyEntity = vacancyEntity.company ?: CompanyEntity()
         return VacancyDto(vacancyEntity.n,
-            vacancyEntity.name, vacancyEntity.comment, CompanyMapper.toDto(companyEntity));
+            vacancyEntity.name, vacancyEntity.comment, CompanyMapper.toDto(companyEntity))
     }
 
     fun toEntity(vacancyDto: VacancyDto): VacancyEntity {
@@ -18,6 +18,6 @@ object VacancyMapper {
         vacancyEntity.name  = vacancyDto.name
         vacancyEntity.comment  = vacancyDto.comment
         vacancyEntity.company = CompanyMapper.toEntity(vacancyDto.company)
-        return vacancyEntity;
+        return vacancyEntity
     }
 }

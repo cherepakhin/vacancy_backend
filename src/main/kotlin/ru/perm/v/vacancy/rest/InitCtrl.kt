@@ -37,7 +37,7 @@ class InitCtrl {
         @PathVariable("mes")
         @ApiParam(name = "mes", value = "any string") mes: String,
     ): String {
-        logger.info("$mes")
+        logger.info("Echo string: $mes")
         return mes
     }
 
@@ -62,7 +62,7 @@ class InitCtrl {
         logger.info("Clear database")
         val inputStream: InputStream = this.javaClass.getResourceAsStream(SqlScripts.EMPTYDB_SQL)
         val emptySql: String = readFromInputStream(inputStream)
-        logger.info("empty_db.sql: " + emptySql)
+        logger.info("empty_db.sql: $emptySql")
         val clearQuery: Query = entityManager!!.createNativeQuery(emptySql)
         clearQuery.executeUpdate()
 

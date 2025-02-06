@@ -45,7 +45,7 @@ class VacancyCtrl() {
         )
         @PathVariable mes: String,
     ): String {
-        logger.info(java.lang.String.format("echo %s", mes))
+        logger.info("echo $mes")
         return mes
     }
 
@@ -110,7 +110,7 @@ class VacancyCtrl() {
     @Throws(Exception::class)
 //    @CacheEvict(value = ["vacancies"], key = "#id")
     fun delete(@PathVariable n: String): String {
-        logger.info("Delete vacancy id=" + n)
+        logger.info("Delete vacancy id=$n")
         val id = n.toLong()
         requireNotNull(vacancyService.getByN(id)) { format("Vacancy with N=%s not found", n) }
         try {

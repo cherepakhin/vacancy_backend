@@ -17,7 +17,7 @@ import ru.perm.v.vacancy.service.VacancyService
 import ru.perm.v.vacancy.service.CompanyService
 
 @SpringBootTest(
-    classes = arrayOf(VacancyKotlinApplication::class),
+    classes = [VacancyKotlinApplication::class],
     webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT
 )
 class VacancyCtrlCacheTest {

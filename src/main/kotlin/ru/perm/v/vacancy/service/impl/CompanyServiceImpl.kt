@@ -38,7 +38,7 @@ class CompanyServiceImpl(val repository: CompanyRepository, @Lazy val vacancySer
 
     override fun createCompany(companyDtoForCreate: CompanyDtoForCreate): CompanyDto {
         val n = getNextN()
-        logger.info("getNextN(): %s", n)
+        logger.info("getNextN(): $n")
         val company = CompanyEntity(n = n, name = companyDtoForCreate.name)
         logger.info(company.toString())
         repository.createNew(company.n, company.name)

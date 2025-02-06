@@ -30,7 +30,7 @@ class VacancyServiceImpl(
             val vacancyEntity = repository.findById(n).get()
             return VacancyMapper.toDto(vacancyEntity)
         } else {
-            throw Exception(String.format(ErrMessage.VACANCY_NOT_FOUND, n));
+            throw Exception(String.format(ErrMessage.VACANCY_NOT_FOUND, n))
         }
     }
 
