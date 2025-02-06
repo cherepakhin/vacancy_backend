@@ -6,7 +6,7 @@
 [Unit тестирование](#unit_test)<br/>
 [Интеграционное тестирование работы с БД](#integration_test_database)<br/>
 [Покрытие тестами](#coverage)<br/>
-[Логгирование](#logging)<br/>
+[Логирование](#logging)<br/>
 [Запуск](#run)<br/>
 [Ручное тестирование httpie](#httpie)<br/>
 [Создание запускаемого файла](#bootJar)<br/>
@@ -193,14 +193,14 @@ interface CompanyRepository: JpaRepository<CompanyEntity, Long>, JpaSpecificatio
 <a id="unit_test"></a>
 ### Unit тестирование
 
-````java
+````shell
 $ ./gradlew test
 ````
 
 <a id="integration_test_database"></a>
 ### Интеграционное тестирование работы с БД
 
-````java
+````shell
 $ ./gradlew test --tests '*Integration*'
 ````
 в [run_integr_test.sh](./run_integr_test.sh).
@@ -214,7 +214,8 @@ $ ./gradlew test --tests '*Integration*'
 __или__ с использованием [https://www.jacoco.org/jacoco/](https://www.jacoco.org/jacoco/). (подключен плагин в build.gradle.kts: id("jacoco"))
 
 Создание отчета о покрытии тестами:
-````java
+
+````shell
 $ ./gradlew jacocoTestReport
 ````
 
@@ -225,7 +226,7 @@ test coverage для класса:
 ![coverage_class.png](doc/coverage_class.png)
 
 <a id="logging"></a>
-### Логгирование
+### Логирование
 
 Настройка в application.yaml
 
@@ -578,7 +579,8 @@ docker ps
 
 ````java
 @Service
-class CompanyServiceImpl(val repository: CompanyRepository, @Lazy val vacancyService: VacancyServiceImpl) : CompanyService {...}
+class CompanyServiceImpl(val repository: CompanyRepository, 
+                         @Lazy val vacancyService: VacancyServiceImpl) : CompanyService {...}
 ````
 
 Определение VacancyServiceImpl:
