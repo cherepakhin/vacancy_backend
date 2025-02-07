@@ -205,6 +205,23 @@ $ ./gradlew test --tests '*Integration*'
 ````
 в [run_integr_test.sh](./run_integr_test.sh).
 
+Прогон конкретного набора тестов:
+
+````shell
+vacancy_backend$ ./gradlew test --tests '*VacancyServiceImplIntegrationTest'
+
+...
+VacancyServiceImplIntegrationTest > getAllWithEquals() PASSED
+VacancyServiceImplIntegrationTest > getByExample_NAME_VACANCY() PASSED
+VacancyServiceImplIntegrationTest > getAllWithContains() PASSE
+...
+````
+
+Запуск отдельного теста:
+
+````shell
+./gradlew test --tests '*VacancyServiceImplIntegrationTest.getAllWithContains'
+````
 
 <a id="coverage"></a>
 ### Покрытие тестами
