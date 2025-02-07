@@ -48,6 +48,7 @@ class InitCtrl {
         logger.info("Init database")
         val inputStream: InputStream = this.javaClass.getResourceAsStream(SqlScripts.IMPORT_SQL)
         val initSql: String = readFromInputStream(inputStream)
+        logger.info("import.sql: $initSql")
 
         val initQuery: Query = entityManager!!.createNativeQuery(initSql)
         initQuery.executeUpdate()

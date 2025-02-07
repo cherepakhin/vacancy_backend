@@ -12,7 +12,7 @@ CREATE table if not exists contact
     "email"      varchar(120) not null default '',
     "phone"      varchar(120) not null default '',
     "comment"    varchar(120) not null default '',
-    "company_n"  integer not null default 0,
+    "company_n"  integer not null default -1,
     CONSTRAINT contact_pkey PRIMARY KEY (n),
     CONSTRAINT fk_contact_company FOREIGN KEY (company_n) REFERENCES company (n)
 );
@@ -20,10 +20,10 @@ CREATE table if not exists contact
 CREATE table if not exists vacancy
 (
     "n"            serial not null UNIQUE,
-    "company_n"   integer not null default 0,
+    "company_n"   integer not null default -1,
     "name"     varchar(120) not null default '',
     "comment"     varchar(120) not null default '',
-    "contact_n"   integer not null default 0,
+    "contact_n"   integer not null default -1,
     CONSTRAINT vacancy_pkey PRIMARY KEY (n),
     CONSTRAINT fk_vacancy_company FOREIGN KEY (company_n) REFERENCES company (n),
     CONSTRAINT fk_vacancy_contact FOREIGN KEY (contact_n) REFERENCES contact (n)
