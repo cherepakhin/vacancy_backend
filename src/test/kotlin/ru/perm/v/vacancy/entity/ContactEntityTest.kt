@@ -36,7 +36,6 @@ class ContactEntityTest {
 
     @Test
     fun testEquals() {
-
         val contactEntity1 = ContactEntity()
         contactEntity1.n = 1L
         contactEntity1.name = "NAME"

@@ -32,6 +32,10 @@ class ContactEntity {  // "open" needed for JPA?
         this.comment = comment
     }
 
+    constructor(n: Long, name: String, email: String, phone: String, comment: String): this(name, email, phone, comment) {
+        this.n = n
+    }
+
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (other !is ContactEntity) return false
