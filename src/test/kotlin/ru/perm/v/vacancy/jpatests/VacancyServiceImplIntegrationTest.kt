@@ -216,7 +216,12 @@ class VacancyServiceImplIntegrationTest {
     @Test
     fun create() {
         val service = VacancyServiceImpl(vacancyRepository, companyService, contactService)
-        val vacancyDtoForCreate = VacancyDtoForCreate("NAME", "COMMENT", 1L)
+        val vacancyDtoForCreate = VacancyDtoForCreate(
+            name = "NAME",
+            comment = "COMMENT",
+            company_n = 1L,
+            contact_n = 1L
+        )
 
         val vacancy = service.create(vacancyDtoForCreate)
 
