@@ -15,6 +15,11 @@ object ContactMapper {
     }
 
     fun toEntity(contactDto: ContactDto): ContactEntity {
-        return ContactEntity(contactDto.n, contactDto.name, contactDto.email, contactDto.phone, contactDto.comment)
+        return ContactEntity(
+            contactDto.n,
+            contactDto.name,
+            contactDto.email,
+            contactDto.phone,
+            contactDto.comment)
     }
 }

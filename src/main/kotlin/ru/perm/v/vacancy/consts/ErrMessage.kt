@@ -5,5 +5,9 @@ object ErrMessage {
     const val COMPANY_NOT_CREATED = "Company with N=%s not created"
     const val COMPANY_NOT_FOUND = "Company with N=%s not found"
     const val COMPANY_N_DELETED = "Company with N=%s deleted"
+
     const val VACANCY_NOT_FOUND = "Vacancy with N=%s not found"
+
+    const val CONTACT_NOT_FOUND = "Contact with N=%s not found"
+    const val CONTACT_N_DELETED = "Contact with N=%s deleted"
 }
