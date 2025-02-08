@@ -29,9 +29,15 @@ CREATE table if not exists vacancy
     CONSTRAINT fk_vacancy_contact FOREIGN KEY (contact_n) REFERENCES contact (n)
 );
 
-insert into company (n,name) values (-1,'-'), (1,'COMPANY_1'), (2,'COMPANY_2'), (3,'3_COMPANY');
+insert into company (n,name) values
+    (-1,'-'),
+    (1,'COMPANY_1'),
+    (2,'COMPANY_2'),
+    (3,'3_COMPANY')
+;
 
-insert into contact (n, company_n, name, email, phone, comment) values (-1, -1, '-', '-', '-', '-');
+insert into contact (n, company_n, name, email, phone, comment) values
+    (-1, -1, '-', '-', '-', '-');
 insert into contact (n, company_n, name, email, phone, comment) values
     (1, 1, 'CONTACT_1_COMPANY_1', 'CONTACT_1_EMAIL','CONTACT_1_PHONE','CONTACT_1_COMMENT'),
     (2, 1, 'CONTACT_2_COMPANY_1', 'CONTACT_2_COMPANY_1_EMAIL','CONTACT_2_COMPANY_1_PHONE','CONTACT_2_COMPANY_1_COMMENT'),
