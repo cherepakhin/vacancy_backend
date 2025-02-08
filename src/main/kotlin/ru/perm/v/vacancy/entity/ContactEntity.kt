@@ -57,4 +57,8 @@ class ContactEntity {  // "open" needed for JPA?
         result = 31 * result + comment.hashCode()
         return result
     }
+
+    override fun toString(): String {
+        return "ContactEntity(n=$n, name='$name', email='$email', phone='$phone', comment='$comment')"
+    }
 }

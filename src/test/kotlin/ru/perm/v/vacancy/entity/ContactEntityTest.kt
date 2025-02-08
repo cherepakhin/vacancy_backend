@@ -46,4 +46,18 @@ class ContactEntityTest {
 
         assertEquals(contactEntity1, contactEntity2)
     }
+
+    @Test
+    fun testToString() {
+        val contactEntity = ContactEntity()
+        contactEntity.n = 1L
+        contactEntity.name = "NAME"
+        contactEntity.email = "EMAIL"
+        contactEntity.phone = "PHONE"
+        contactEntity.comment = "COMMENT"
+
+        assertEquals(
+            "ContactEntity(n=1, name='NAME', email='EMAIL', phone='PHONE', comment='COMMENT')",
+            contactEntity.toString())
+    }
 }
