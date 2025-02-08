@@ -16,6 +16,7 @@ import org.springframework.test.web.servlet.request.MockMvcRequestBuilders
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers
 import ru.perm.v.vacancy.consts.VacancyColumn
 import ru.perm.v.vacancy.dto.CompanyDto
+import ru.perm.v.vacancy.dto.ContactDto
 import ru.perm.v.vacancy.dto.VacancyDto
 import ru.perm.v.vacancy.filter.VacancyExample
 import ru.perm.v.vacancy.service.VacancyService
@@ -37,7 +38,9 @@ class VacancyCtrlWebMvcTest {
     @Test
     fun vacancy_echo() {
         val companyDto = CompanyDto(1L, "COMPANY_1")
-        val vacancyDto = VacancyDto(1L, "title", "text", companyDto)
+        val contactDto10 = ContactDto()
+        contactDto10.n = 10L
+        val vacancyDto = VacancyDto(1L, "title", "text", companyDto, contactDto10)
         `when`(vacancyService.getByN(1L)).thenReturn(vacancyDto)
 
         mockMvc.perform(
@@ -54,8 +57,10 @@ class VacancyCtrlWebMvcTest {
     @Test
     fun vacancyGetAll() {
         val companyDto = CompanyDto(1L, "COMPANY_1")
-        val vacancyDto1 = VacancyDto(1L, "title", "text", companyDto)
-        val vacancyDto2 = VacancyDto(2L, "title", "text", companyDto)
+        val contactDto10 = ContactDto()
+        contactDto10.n = 10L
+        val vacancyDto1 = VacancyDto(1L, "title", "text", companyDto, contactDto10)
+        val vacancyDto2 = VacancyDto(2L, "title", "text", companyDto, contactDto10)
         `when`(vacancyService.getAll()).thenReturn(listOf(vacancyDto1, vacancyDto2))
 
         mockMvc.get("/vacancy/") {
@@ -71,8 +76,10 @@ class VacancyCtrlWebMvcTest {
     @Test
     fun getAllSortByColumnNAME() {
         val companyDto = CompanyDto(1L, "COMPANY_1")
-        val vacancyDto1 = VacancyDto(1L, "title", "text", companyDto)
-        val vacancyDto2 = VacancyDto(2L, "title", "text", companyDto)
+        val contactDto10 = ContactDto()
+        contactDto10.n = 10L
+        val vacancyDto1 = VacancyDto(1L, "title", "text", companyDto, contactDto10)
+        val vacancyDto2 = VacancyDto(2L, "title", "text", companyDto, contactDto10)
         `when`(vacancyService.getAllSortedByField(VacancyColumn.NAME)).thenReturn(listOf(vacancyDto1, vacancyDto2))
 
         mockMvc.get("/vacancy/sortByColumn/name") {
@@ -89,8 +96,10 @@ class VacancyCtrlWebMvcTest {
     fun getAllSortByColumnCOMPANY_N() {
         val companyDto1 = CompanyDto(1L, "COMPANY_1")
         val companyDto2 = CompanyDto(2L, "COMPANY_2")
-        val vacancyDto1 = VacancyDto(1L, "title", "text", companyDto1)
-        val vacancyDto2 = VacancyDto(2L, "title", "text", companyDto2)
+        val contactDto10 = ContactDto()
+        contactDto10.n = 10L
+        val vacancyDto1 = VacancyDto(1L, "title", "text", companyDto1, contactDto10)
+        val vacancyDto2 = VacancyDto(2L, "title", "text", companyDto2, contactDto10)
         `when`(vacancyService.getAllSortedByField(VacancyColumn.COMPANY_N)).thenReturn(listOf(vacancyDto1, vacancyDto2))
 
         // BAD variant. Compare with string
@@ -120,7 +129,9 @@ class VacancyCtrlWebMvcTest {
     @Test
     fun vacancyGetByN() {
         val companyDto = CompanyDto(1L, "COMPANY_1")
-        val vacancyDto1 = VacancyDto(1L, "title", "text", companyDto)
+        val contactDto10 = ContactDto()
+        contactDto10.n = 10L
+        val vacancyDto1 = VacancyDto(1L, "title", "text", companyDto, contactDto10)
         `when`(vacancyService.getByN(1L)).thenReturn(vacancyDto1)
 
         mockMvc.get("/vacancy/1") {
@@ -136,7 +147,9 @@ class VacancyCtrlWebMvcTest {
     @Test
     fun vacancyGetByExample() {
         val companyDto = CompanyDto(1L, "COMPANY_1")
-        val vacancyDto1 = VacancyDto(1L, "title", "text", companyDto)
+        val contactDto10 = ContactDto()
+        contactDto10.n = 10L
+        val vacancyDto1 = VacancyDto(1L, "title", "text", companyDto, contactDto10)
         val vacancyExample = VacancyExample(listOf(1L))
         val mapper = ObjectMapper()
         `when`(vacancyService.getByExample(vacancyExample)).thenReturn(listOf( vacancyDto1))
