@@ -20,7 +20,6 @@ import ru.perm.v.vacancy.service.ContactService
 import ru.perm.v.vacancy.service.impl.VacancyServiceImpl
 import kotlin.test.BeforeTest
 import kotlin.test.assertEquals
-import kotlin.test.assertTrue
 
 /**
  * Testing integration with VacancyRepository
@@ -36,6 +35,7 @@ class VacancyServiceImplIntegrationTest {
     // но можно замокать нектр. методы. Если не замоканы, то будут работать исходные методы.
     @MockBean
     lateinit var companyService: CompanyService
+
     @MockBean
     lateinit var contactService: ContactService
     private val logger = LoggerFactory.getLogger(this.javaClass.name)
@@ -55,56 +55,75 @@ class VacancyServiceImplIntegrationTest {
         val companyDto1 = CompanyDto(1L, "COMPANY_1")
         val companyDto2 = CompanyDto(2L, "COMPANY_2")
         val companyDto3 = CompanyDto(3L, "3_COMPANY")
-        val contactDto1 = ContactDto(n=1,
-            name="CONTACT_1_COMPANY_1",
-            email="CONTACT_1_EMAIL",
-            phone="CONTACT_1_PHONE",
-            comment="CONTACT_1_COMMENT")
+        val contactDto1 = ContactDto(
+            n = 1,
+            name = "CONTACT_1_COMPANY_1",
+            email = "CONTACT_1_EMAIL",
+            phone = "CONTACT_1_PHONE",
+            comment = "CONTACT_1_COMMENT"
+        )
 
-        assertEquals(VacancyDto(
-            1L,
-            "NAME_VACANCY_1_COMPANY_1",
-            "COMMENT_VACANCY_1_COMPANY_1",
-            companyDto1,
-            contactDto1
-        ), vacancies[0])
+        assertEquals(
+            VacancyDto(
+                1L,
+                "NAME_VACANCY_1_COMPANY_1",
+                "COMMENT_VACANCY_1_COMPANY_1",
+                companyDto1,
+                contactDto1
+            ), vacancies[0]
+        )
 
-        val contactDto2 = ContactDto(n=2,
-            name="CONTACT_2_COMPANY_1",
-            email="CONTACT_2_COMPANY_1_EMAIL",
-            phone="CONTACT_2_COMPANY_1_PHONE",
-            comment="CONTACT_2_COMPANY_1_COMMENT")
-        assertEquals(VacancyDto(
-            2L,
-            "NAME_VACANCY_2_COMPANY_1",
-            "COMMENT_VACANCY_2_COMPANY_1",
-            companyDto1,
-            contactDto2
-        ), vacancies[1])
+        val contactDto2 = ContactDto(
+            n = 2,
+            name = "CONTACT_2_COMPANY_1",
+            email = "CONTACT_2_COMPANY_1_EMAIL",
+            phone = "CONTACT_2_COMPANY_1_PHONE",
+            comment = "CONTACT_2_COMPANY_1_COMMENT"
+        )
+        assertEquals(
+            VacancyDto(
+                2L,
+                "NAME_VACANCY_2_COMPANY_1",
+                "COMMENT_VACANCY_2_COMPANY_1",
+                companyDto1,
+                contactDto2
+            ), vacancies[1]
+        )
 
-        val contactDto3 = ContactDto(n=3,
-            name="CONTACT_3_COMPANY_2", email="CONTACT_3_EMAIL", phone="CONTACT_3_PHONE", comment="CONTACT_3_COMMENT")
+        val contactDto3 = ContactDto(
+            n = 3,
+            name = "CONTACT_3_COMPANY_2",
+            email = "CONTACT_3_EMAIL",
+            phone = "CONTACT_3_PHONE",
+            comment = "CONTACT_3_COMMENT"
+        )
 
-        assertEquals(VacancyDto(
-            3L,
-            "NAME_VACANCY_1_COMPANY_2",
-            "COMMENT_VACANCY_1_COMPANY_2",
-            companyDto2,
-            contactDto3
-        ), vacancies[2])
+        assertEquals(
+            VacancyDto(
+                3L,
+                "NAME_VACANCY_1_COMPANY_2",
+                "COMMENT_VACANCY_1_COMPANY_2",
+                companyDto2,
+                contactDto3
+            ), vacancies[2]
+        )
 
-        val contactDto4 = ContactDto(n=4,
-            name="CONTACT_4_COMPANY_3",
-            email="CONTACT_3_EMAIL",
-            phone="CONTACT_3_PHONE",
-            comment="CONTACT_3_COMMENT")
-        assertEquals(VacancyDto(
-            4L,
-            "NAME_VACANCY_1_COMPANY_3",
-            "COMMENT_VACANCY_1_COMPANY_3",
-            companyDto3,
-            contactDto4
-        ), vacancies[3])
+        val contactDto4 = ContactDto(
+            n = 4,
+            name = "CONTACT_4_COMPANY_3",
+            email = "CONTACT_3_EMAIL",
+            phone = "CONTACT_3_PHONE",
+            comment = "CONTACT_3_COMMENT"
+        )
+        assertEquals(
+            VacancyDto(
+                4L,
+                "NAME_VACANCY_1_COMPANY_3",
+                "COMMENT_VACANCY_1_COMPANY_3",
+                companyDto3,
+                contactDto4
+            ), vacancies[3]
+        )
     }
 
     @Test
@@ -116,11 +135,13 @@ class VacancyServiceImplIntegrationTest {
         assertEquals(4, vacancies.size)
         val companyDto1 = CompanyDto(1L, "COMPANY_1")
         val companyDto2 = CompanyDto(2L, "COMPANY_2")
-        val contactDto1 = ContactDto(n=1,
-            name="CONTACT_1_COMPANY_1",
-            email="CONTACT_1_EMAIL",
-            phone="CONTACT_1_PHONE",
-            comment="CONTACT_1_COMMENT")
+        val contactDto1 = ContactDto(
+            n = 1,
+            name = "CONTACT_1_COMPANY_1",
+            email = "CONTACT_1_EMAIL",
+            phone = "CONTACT_1_PHONE",
+            comment = "CONTACT_1_COMMENT"
+        )
 
         assertEquals(
             VacancyDto(
@@ -131,12 +152,13 @@ class VacancyServiceImplIntegrationTest {
                 contactDto1
             ), vacancies[0]
         )
-        val contactDto2=ContactDto(
-            n=2,
-            name="CONTACT_2_COMPANY_1",
-            email="CONTACT_2_COMPANY_1_EMAIL",
-            phone="CONTACT_2_COMPANY_1_PHONE",
-            comment="CONTACT_2_COMPANY_1_COMMENT")
+        val contactDto2 = ContactDto(
+            n = 2,
+            name = "CONTACT_2_COMPANY_1",
+            email = "CONTACT_2_COMPANY_1_EMAIL",
+            phone = "CONTACT_2_COMPANY_1_PHONE",
+            comment = "CONTACT_2_COMPANY_1_COMMENT"
+        )
 
         assertEquals(
             VacancyDto(
@@ -147,12 +169,13 @@ class VacancyServiceImplIntegrationTest {
                 contactDto2
             ), vacancies[1]
         )
-        val contactDto3=ContactDto(
-            n=3,
-            name="CONTACT_3_COMPANY_2",
-            email="CONTACT_3_EMAIL",
-            phone="CONTACT_3_PHONE",
-            comment="CONTACT_3_COMMENT")
+        val contactDto3 = ContactDto(
+            n = 3,
+            name = "CONTACT_3_COMPANY_2",
+            email = "CONTACT_3_EMAIL",
+            phone = "CONTACT_3_PHONE",
+            comment = "CONTACT_3_COMMENT"
+        )
         assertEquals(
             VacancyDto(
                 3L,
@@ -163,12 +186,13 @@ class VacancyServiceImplIntegrationTest {
             ), vacancies[2]
         )
         val companyDto3 = CompanyDto(3L, "3_COMPANY")
-        val contactDto4=ContactDto(
-            n=4,
-            name="CONTACT_4_COMPANY_3",
-            email="CONTACT_3_EMAIL",
-            phone="CONTACT_3_PHONE",
-            comment="CONTACT_3_COMMENT")
+        val contactDto4 = ContactDto(
+            n = 4,
+            name = "CONTACT_4_COMPANY_3",
+            email = "CONTACT_3_EMAIL",
+            phone = "CONTACT_3_PHONE",
+            comment = "CONTACT_3_COMMENT"
+        )
         assertEquals(
             VacancyDto(
                 4L,
@@ -248,11 +272,11 @@ class VacancyServiceImplIntegrationTest {
         val companyDTO = CompanyDto(1L, "COMPANY_1")
         val contactDto2 = ContactDto()
         with(contactDto2) {
-            n =2
-            name="CONTACT_2_COMPANY_1"
-            email="CONTACT_2_COMPANY_1_EMAIL"
-            phone="CONTACT_2_COMPANY_1_PHONE"
-            comment="CONTACT_2_COMPANY_1_COMMENT"
+            n = 2
+            name = "CONTACT_2_COMPANY_1"
+            email = "CONTACT_2_COMPANY_1_EMAIL"
+            phone = "CONTACT_2_COMPANY_1_PHONE"
+            comment = "CONTACT_2_COMPANY_1_COMMENT"
         }
 
         assertEquals(
@@ -276,14 +300,20 @@ class VacancyServiceImplIntegrationTest {
 
         assertEquals(1, vacanciesBeforeDelete.size)
         val companyDTO = CompanyDto(1L, "COMPANY_1")
-        val contactDto10 = ContactDto()
-        contactDto10.n = 10L
+        val contactDto2 = ContactDto()
+        with(contactDto2) {
+            n = 2L
+            name = "CONTACT_2_COMPANY_1"
+            email = "CONTACT_2_COMPANY_1_EMAIL"
+            phone = "CONTACT_2_COMPANY_1_PHONE"
+            comment = "CONTACT_2_COMPANY_1_COMMENT"
+        }
         // check, what vacancy exist, before delete
         assertEquals(
             VacancyDto(
                 2L, "NAME_VACANCY_2_COMPANY_1", "COMMENT_VACANCY_2_COMPANY_1",
                 companyDTO,
-                contactDto10
+                contactDto2
             ), vacanciesBeforeDelete[0]
         )
 
