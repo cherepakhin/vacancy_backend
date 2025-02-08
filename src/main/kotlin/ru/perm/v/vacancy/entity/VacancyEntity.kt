@@ -11,62 +11,65 @@ class VacancyEntity {
     @Column(name = "n", nullable = false)
 //    @GeneratedValue(strategy = GenerationType.AUTO, generator  = "native")
     var n: Long = -1L
+
     @ManyToOne
     @JoinColumn(name = "company_n", nullable = false)
-    var company: CompanyEntity? = null
+    var company: CompanyEntity = CompanyEntity()
+
     @ManyToOne
     @JoinColumn(name = "contact_n", nullable = false)
-    private var contact: ContactEntity? = null
+    var contact: ContactEntity = ContactEntity()
+
     @NotNull
     @Column(name = "name", nullable = false)
     var name: String = ""
+
     @NotNull
     @Column(name = "comment", nullable = false)
     var comment: String = ""
     // add LIST contacts
 
     constructor() // Empty constructor needed for Hibernate
-    constructor(n: Long, name: String, comment: String , companyEntity: CompanyEntity): this(n) {
+    constructor(
+        n: Long,
+        name: String,
+        comment: String,
+        companyEntity: CompanyEntity,
+        contactEntity: ContactEntity
+    ) : this(n) {
         this.company = companyEntity
         this.name = name
         this.comment = comment
+        this.contact = contactEntity
     }
 
-    constructor(n: Long): this() {
+    constructor(n: Long) : this() {
         this.n = n
-    }
-
-    fun setContact(contact: ContactEntity) {
-        this.contact = contact
-    }
-
-    fun getContact(): ContactEntity {
-        return contact!!
     }
 
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
         if (other !is VacancyEntity) return false
 
-        if (n != other.n) return false
-        if (company != other.company) return false
-        if (name != other.name) return false
-        if (comment != other.comment) return false
-
-        return true
+        if (n.equals(other.n) &&
+            name.equals(other.name) &&
+            company.equals(other.company) &&
+            contact.equals(other.contact) &&
+            comment.equals(other.comment)
+        ) return true
+        return false
     }
 
     override fun hashCode(): Int {
         var result = n.hashCode()
-        result = 31 * result + (company?.hashCode() ?: 0)
         result = 31 * result + name.hashCode()
+        result = 31 * result + company.hashCode()
+        result = 31 * result + contact.hashCode()
         result = 31 * result + comment.hashCode()
         return result
     }
 
     override fun toString(): String {
-        return "VacancyEntity(n=$n, company=$company, name='$name', comment='$comment')"
+        return "VacancyEntity(n=$n, company=$company, contact=$contact, name='$name', comment='$comment')"
     }
-
-
 }

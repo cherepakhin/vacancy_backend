@@ -31,8 +31,8 @@ class CompanyEntity { //"open" needed for JPA??? (open class CompanyEntity)
         if (this === other) return true
         if (other !is CompanyEntity) return false
 
-        if (n != other.n) return false
-        if (name != other.name) return false
+        if (!n.equals(other.n)) return false
+        if (!name.equals(other.name)) return false
 
         return true
     }

@@ -40,11 +40,11 @@ class ContactEntity {  // "open" needed for JPA?
         if (this === other) return true
         if (other !is ContactEntity) return false
 
-        if (n != other.n) return false
-        if (name != other.name) return false
-        if (email != other.email) return false
-        if (phone != other.phone) return false
-        if (comment != other.comment) return false
+        if (!n.equals(other.n)) return false
+        if (!name.equals(other.name)) return false
+        if (!email.equals(other.email)) return false
+        if (!phone.equals(other.phone)) return false
+        if (!comment.equals(other.comment)) return false
 
         return true
     }
