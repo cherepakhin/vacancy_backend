@@ -57,9 +57,9 @@ class VacancyMapperTest {
         val NAME = "name"
         val COMMENT = "comment"
         val COMPANY_DTO = CompanyDto(10L, "COMPANY")
-        val CONTACTDTO10 = ContactDto()
-        CONTACTDTO10.n = 10L
-        val vacancyDTO = VacancyDto(N, NAME, COMMENT, COMPANY_DTO, CONTACTDTO10)
+        val CONTACT_DTO_10 = ContactDto()
+        CONTACT_DTO_10.n = 10L
+        val vacancyDTO = VacancyDto(N, NAME, COMMENT, COMPANY_DTO, CONTACT_DTO_10)
         val vacancyEntity = VacancyMapper.toEntity(vacancyDTO)
 
         val contactEntity10 = ContactEntity()
