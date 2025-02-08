@@ -11,7 +11,10 @@ class VacancyEntityTest {
         companyEntity.n = 10L
         companyEntity.name = "COMPANY"
 
-        val vacancy = VacancyEntity(100L, "NAME", "COMMENT", companyEntity)
+        val contactEntity20 = ContactEntity()
+        contactEntity20.n = 20L
+
+        val vacancy = VacancyEntity(100L, "NAME", "COMMENT", companyEntity, contactEntity20)
 
         assertEquals(100L, vacancy.n)
         assertEquals("NAME", vacancy.name)
@@ -34,8 +37,11 @@ class VacancyEntityTest {
         companyEntity.n = 10L
         companyEntity.name = "COMPANY"
 
-        val vacancy1 = VacancyEntity(100L, "NAME", "COMMENT", companyEntity)
-        val vacancy2 = VacancyEntity(100L, "NAME", "COMMENT", companyEntity)
+        val contactEntity10 = ContactEntity()
+        contactEntity10.n = 10L
+
+        val vacancy1 = VacancyEntity(100L, "NAME", "COMMENT", companyEntity, contactEntity10)
+        val vacancy2 = VacancyEntity(100L, "NAME", "COMMENT", companyEntity, contactEntity10)
 
         assertEquals(vacancy1, vacancy2)
     }
@@ -50,8 +56,11 @@ class VacancyEntityTest {
         companyEntity20.n = 10L
         companyEntity20.name = "COMPANY"
 
-        val vacancy1 = VacancyEntity(100L, "NAME", "COMMENT", companyEntity10)
-        val vacancy2 = VacancyEntity(100L, "NAME", "COMMENT", companyEntity20)
+        val contactEntity10 = ContactEntity()
+        contactEntity10.n = 10L
+
+        val vacancy1 = VacancyEntity(100L, "NAME", "COMMENT", companyEntity10, contactEntity10)
+        val vacancy2 = VacancyEntity(100L, "NAME", "COMMENT", companyEntity20, contactEntity10)
 
         assertEquals(vacancy1, vacancy2)
     }
@@ -62,8 +71,11 @@ class VacancyEntityTest {
         companyEntity.n = 10L
         companyEntity.name = "COMPANY"
 
-        val vacancy1 = VacancyEntity(101L, "NAME", "COMMENT", companyEntity)
-        val vacancy2 = VacancyEntity(102L, "NAME", "COMMENT", companyEntity)
+        val contactEntity10 = ContactEntity()
+        contactEntity10.n = 10L
+
+        val vacancy1 = VacancyEntity(101L, "NAME", "COMMENT", companyEntity, contactEntity10)
+        val vacancy2 = VacancyEntity(102L, "NAME", "COMMENT", companyEntity, contactEntity10)
 
         assertNotEquals(vacancy1, vacancy2)
     }
@@ -74,8 +86,11 @@ class VacancyEntityTest {
         companyEntity.n = 10L
         companyEntity.name = "COMPANY"
 
-        val vacancy1 = VacancyEntity(101L, "NAME1", "COMMENT", companyEntity)
-        val vacancy2 = VacancyEntity(101L, "NAME2", "COMMENT", companyEntity)
+        val contactEntity10 = ContactEntity()
+        contactEntity10.n = 10L
+
+        val vacancy1 = VacancyEntity(101L, "NAME1", "COMMENT", companyEntity, contactEntity10)
+        val vacancy2 = VacancyEntity(101L, "NAME2", "COMMENT", companyEntity, contactEntity10)
 
         assertNotEquals(vacancy1, vacancy2)
     }
@@ -86,8 +101,11 @@ class VacancyEntityTest {
         companyEntity.n = 10L
         companyEntity.name = "COMPANY"
 
-        val vacancy1 = VacancyEntity(101L, "NAME", "COMMENT1", companyEntity)
-        val vacancy2 = VacancyEntity(101L, "NAME", "COMMENT2", companyEntity)
+        val contactEntity10 = ContactEntity()
+        contactEntity10.n = 10L
+
+        val vacancy1 = VacancyEntity(101L, "NAME", "COMMENT1", companyEntity, contactEntity10)
+        val vacancy2 = VacancyEntity(101L, "NAME", "COMMENT2", companyEntity, contactEntity10)
 
         assertNotEquals(vacancy1, vacancy2)
     }
@@ -102,8 +120,11 @@ class VacancyEntityTest {
         companyEntity2.n = 2L
         companyEntity2.name = "COMPANY2"
 
-        val vacancy1 = VacancyEntity(101L, "NAME", "COMMENT1", companyEntity1)
-        val vacancy2 = VacancyEntity(101L, "NAME", "COMMENT1", companyEntity2)
+        val contactEntity10 = ContactEntity()
+        contactEntity10.n = 10L
+
+        val vacancy1 = VacancyEntity(101L, "NAME", "COMMENT1", companyEntity1, contactEntity10)
+        val vacancy2 = VacancyEntity(101L, "NAME", "COMMENT1", companyEntity2, contactEntity10)
 
         assertNotEquals(vacancy1, vacancy2)
     }
@@ -114,8 +135,11 @@ class VacancyEntityTest {
         companyEntity.n = 10L
         companyEntity.name = "COMPANY"
 
-        val vacancy1 = VacancyEntity(100L, "NAME", "COMMENT", companyEntity)
-        val vacancy2 = VacancyEntity(100L, "NAME", "COMMENT", companyEntity)
+        val contactEntity = ContactEntity()
+        contactEntity.n = 10L
+
+        val vacancy1 = VacancyEntity(100L, "NAME", "COMMENT", companyEntity, contactEntity)
+        val vacancy2 = VacancyEntity(100L, "NAME", "COMMENT", companyEntity, contactEntity)
 
         assertEquals(vacancy1.hashCode(), vacancy2.hashCode())
     }
@@ -126,8 +150,11 @@ class VacancyEntityTest {
         companyEntity.n = 10L
         companyEntity.name = "COMPANY"
 
-        val vacancy1 = VacancyEntity(101L, "NAME", "COMMENT", companyEntity)
-        val vacancy2 = VacancyEntity(102L, "NAME", "COMMENT", companyEntity)
+        val contactEntity10 = ContactEntity()
+        contactEntity10.n = 10L
+
+        val vacancy1 = VacancyEntity(101L, "NAME", "COMMENT", companyEntity, contactEntity10)
+        val vacancy2 = VacancyEntity(102L, "NAME", "COMMENT", companyEntity, contactEntity10)
 
         assertNotEquals(vacancy1.hashCode(), vacancy2.hashCode())
     }
@@ -138,8 +165,11 @@ class VacancyEntityTest {
         companyEntity.n = 10L
         companyEntity.name = "COMPANY"
 
-        val vacancy1 = VacancyEntity(101L, "NAME_1", "COMMENT", companyEntity)
-        val vacancy2 = VacancyEntity(101L, "NAME_2", "COMMENT", companyEntity)
+        val contactEntity10 = ContactEntity()
+        contactEntity10.n = 10L
+
+        val vacancy1 = VacancyEntity(101L, "NAME_1", "COMMENT", companyEntity, contactEntity10)
+        val vacancy2 = VacancyEntity(101L, "NAME_2", "COMMENT", companyEntity, contactEntity10)
 
         assertNotEquals(vacancy1.hashCode(), vacancy2.hashCode())
     }
@@ -150,8 +180,11 @@ class VacancyEntityTest {
         companyEntity.n = 10L
         companyEntity.name = "COMPANY"
 
-        val vacancy1 = VacancyEntity(101L, "NAME_1", "COMMENT_1", companyEntity)
-        val vacancy2 = VacancyEntity(101L, "NAME_1", "COMMENT_2", companyEntity)
+        val contactEntity10 = ContactEntity()
+        contactEntity10.n = 10L
+
+        val vacancy1 = VacancyEntity(101L, "NAME_1", "COMMENT_1", companyEntity, contactEntity10)
+        val vacancy2 = VacancyEntity(101L, "NAME_1", "COMMENT_2", companyEntity, contactEntity10)
 
         assertNotEquals(vacancy1.hashCode(), vacancy2.hashCode())
     }
@@ -166,8 +199,11 @@ class VacancyEntityTest {
         companyEntity20.n = 20L
         companyEntity20.name = "COMPANY"
 
-        val vacancy1 = VacancyEntity(101L, "NAME_1", "COMMENT_1", companyEntity10)
-        val vacancy2 = VacancyEntity(101L, "NAME_1", "COMMENT_1", companyEntity20)
+        val contactEntity10 = ContactEntity()
+        contactEntity10.n = 10L
+
+        val vacancy1 = VacancyEntity(101L, "NAME_1", "COMMENT_1", companyEntity10, contactEntity10)
+        val vacancy2 = VacancyEntity(101L, "NAME_1", "COMMENT_1", companyEntity20, contactEntity10)
 
         assertNotEquals(vacancy1.hashCode(), vacancy2.hashCode())
     }
