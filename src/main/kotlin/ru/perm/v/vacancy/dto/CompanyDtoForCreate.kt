@@ -21,7 +21,7 @@ class CompanyDtoForCreate {
         if (this === other) return true
         if (other !is CompanyDtoForCreate) return false
 
-        if (name != other.name) return false
+        if (!name.equals(other.name)) return false
 
         return true
     }

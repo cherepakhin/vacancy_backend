@@ -5,9 +5,8 @@ import javax.validation.constraints.Size
 class ContactDto {
     var n: Long = -1L
 
-    @field:Size(min=5, max=50)
+    @field:Size(min = 5, max = 50)
     var name: String = ""
-
     var email: String = ""
     var phone: String = ""
     var comment: String = ""
@@ -15,7 +14,7 @@ class ContactDto {
     constructor() {
     }
 
-    constructor(n: Long, name: String, email: String, phone: String, comment: String): this() {
+    constructor(n: Long, name: String, email: String, phone: String, comment: String) : this() {
         this.n = n
         this.name = name
         this.email = email
@@ -23,16 +22,24 @@ class ContactDto {
         this.comment = comment
     }
 
-    fun equals(other: ContactDto): Boolean {
-        return this.n == other.n
-        && this.name == other.name
-        && this.email == other.email
-        && this.phone == other.phone
-        && this.comment == other.comment
+    override fun equals(other: Any?): Boolean {
+        if (this === other) return true
+        if (other !is ContactDto) return false
+
+        val result = this.n.equals(other.n)
+                && this.name.equals(other.name)
+                && this.email.equals(other.email)
+                && this.phone.equals(other.phone)
+                && this.comment.equals(other.comment)
+        return result
     }
 
     override fun hashCode(): Int {
-        return this.n.hashCode() + this.name.hashCode() + this.email.hashCode() + this.phone.hashCode() + this.comment.hashCode()
+        return this.n.hashCode() +
+                this.name.hashCode() +
+                this.email.hashCode() +
+                this.phone.hashCode() +
+                this.comment.hashCode()
     }
 
     override fun toString(): String {

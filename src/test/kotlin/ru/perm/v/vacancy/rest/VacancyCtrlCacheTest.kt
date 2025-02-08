@@ -12,6 +12,7 @@ import org.springframework.boot.test.web.client.TestRestTemplate
 import ru.perm.v.vacancy.VacancyKotlinApplication
 import ru.perm.v.vacancy.consts.VacancyColumn
 import ru.perm.v.vacancy.dto.CompanyDto
+import ru.perm.v.vacancy.dto.ContactDto
 import ru.perm.v.vacancy.dto.VacancyDto
 import ru.perm.v.vacancy.service.VacancyService
 import ru.perm.v.vacancy.service.CompanyService
@@ -27,6 +28,7 @@ class VacancyCtrlCacheTest {
     @MockBean
     private lateinit var vacancyService: VacancyService
 
+    // need for SpringBootTest
     @MockBean
     private lateinit var companyService: CompanyService
 
@@ -34,7 +36,9 @@ class VacancyCtrlCacheTest {
     fun vacancyGetAllCheckWorkCache() {
 
         val companyDto = CompanyDto(1L, "COMPANY_1")
-        val vacancyDto = VacancyDto(1L, "title", "text", companyDto)
+        val contactDto10 = ContactDto()
+        contactDto10.n = 10L
+        val vacancyDto = VacancyDto(1L, "title", "text", companyDto, contactDto10)
         Mockito.`when`(vacancyService.getAllSortedByField(VacancyColumn.NAME)).thenReturn(listOf(vacancyDto))
 
         val URL = "/vacancy/sortByColumn/name"
@@ -56,7 +60,9 @@ class VacancyCtrlCacheTest {
     fun getByN() {
         val companyDto = CompanyDto(1L, "COMPANY_1")
         val N = 1L
-        val vacancyDto = VacancyDto(N, "title", "text", companyDto)
+        val contactDto10 = ContactDto()
+        contactDto10.n = 10L
+        val vacancyDto = VacancyDto(N, "title", "text", companyDto, contactDto10)
         Mockito.`when`(vacancyService.getByN(N)).thenReturn(vacancyDto)
 
         val URL = "/vacancy/" + N
