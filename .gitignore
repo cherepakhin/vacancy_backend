@@ -44,3 +44,4 @@ htmlReport/
 .kotlin/
 tmp/
 .idea/
+.gigaide/
