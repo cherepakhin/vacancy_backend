@@ -246,13 +246,20 @@ class VacancyServiceImplIntegrationTest {
 
         assertEquals(1, vacancies.size)
         val companyDTO = CompanyDto(1L, "COMPANY_1")
-        val contactDto10 = ContactDto()
-        contactDto10.n = 10L
+        val contactDto2 = ContactDto()
+        with(contactDto2) {
+            n =2
+            name="CONTACT_2_COMPANY_1"
+            email="CONTACT_2_COMPANY_1_EMAIL"
+            phone="CONTACT_2_COMPANY_1_PHONE"
+            comment="CONTACT_2_COMPANY_1_COMMENT"
+        }
+
         assertEquals(
             VacancyDto(
                 2L, "NAME_VACANCY_2_COMPANY_1", "COMMENT_VACANCY_2_COMPANY_1",
                 companyDTO,
-                contactDto10
+                contactDto2
             ), vacancies[0]
         )
     }
