@@ -42,3 +42,5 @@ gradle.zip
 /start_gradle/
 htmlReport/
 .kotlin/
+tmp/
+.idea/
