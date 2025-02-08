@@ -1,5 +1,12 @@
 rootProject.name = "vacancy_backend"
 
+buildCache {
+    local {
+        directory = File("tmp", "build-cache")
+        removeUnusedEntriesAfterDays = 30
+    }
+}
+
 pluginManagement {
     repositories {
         gradlePluginPortal()

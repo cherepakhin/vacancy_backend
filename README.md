@@ -673,6 +673,18 @@ jxls для отчетов<br/>
 
 [https://github.com/cherepakhin/vacancy_backend_rest_test/commits](https://github.com/cherepakhin/vacancy_backend_rest_test/commits)
 
+### Cache Gradle
+
+Настроено в settings.gradle.kts
+
+````shell
+buildCache {
+    local {
+        directory = File("tmp", "build-cache")
+        removeUnusedEntriesAfterDays = 30
+    }
+}
+````
 <a id="links"></a>
 ### Ссылки
 
