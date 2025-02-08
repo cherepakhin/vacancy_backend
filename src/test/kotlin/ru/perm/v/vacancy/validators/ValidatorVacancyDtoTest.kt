@@ -4,6 +4,7 @@ import org.junit.jupiter.api.Assertions.*
 import org.junit.jupiter.api.Disabled
 import org.junit.jupiter.api.Test
 import ru.perm.v.vacancy.dto.CompanyDto
+import ru.perm.v.vacancy.dto.ContactDto
 import ru.perm.v.vacancy.dto.VacancyDto
 
 //TODO: do ENABLED
@@ -13,7 +14,9 @@ class ValidatorVacancyDtoTest {
     @Test
     fun validateOk() {
         val companyDto = CompanyDto(100L, "testCompany")
-        val vacancyDto = VacancyDto(1L, "test1", "comment", companyDto)
+        val contactDto10 = ContactDto()
+        contactDto10.n = 10
+        val vacancyDto = VacancyDto(1L, "test1", "comment", companyDto, contactDto10)
 
         assertDoesNotThrow {
             ValidatorVacancyDto.validate(vacancyDto)
@@ -25,7 +28,9 @@ class ValidatorVacancyDtoTest {
     @Test
     fun checkValidateMessageFor_EmptyName() {
         val companyDto = CompanyDto(100L, "testCompany")
-        val vacancyDto = VacancyDto(1L, "", "comment", companyDto)
+        val contactDto10 = ContactDto()
+        contactDto10.n = 10
+        val vacancyDto = VacancyDto(1L, "", "comment", companyDto, contactDto10)
 
         val excpt = assertThrows(Exception::class.java) {
             ValidatorVacancyDto.validate(vacancyDto)
