@@ -23,6 +23,7 @@ import kotlin.reflect.full.declaredMemberProperties
 import kotlin.test.assertTrue
 
 class VacancyServiceImplTest {
+
     @Test
     fun getByN() {
         val N = 100L
@@ -73,8 +74,10 @@ class VacancyServiceImplTest {
         val companyEntity_100 = CompanyEntity(N_COMPANY_100, NAME_COMPANY_100)
         val contactEntity_10 = ContactEntity()
         contactEntity_10.n = 10L
-        val vacancyEntity100 = VacancyEntity(N_100, NAME_VACANCY_100, COMMENT_100,
-            companyEntity_100, contactEntity_10)
+        val vacancyEntity100 = VacancyEntity(
+            N_100, NAME_VACANCY_100, COMMENT_100,
+            companyEntity_100, contactEntity_10
+        )
 
         val N_200 = 200L
         val NAME_VACANCY_200 = "vacancy_200"
@@ -84,12 +87,15 @@ class VacancyServiceImplTest {
         val companyEntity200 = CompanyEntity(N_COMPANY_200, NAME_COMPANY_200)
         val contactEntity20 = ContactEntity()
         contactEntity20.n = 20L
-        val vacancyEntity200 = VacancyEntity(N_200, NAME_VACANCY_200, COMMENT_200,
-            companyEntity200, contactEntity20)
+        val vacancyEntity200 = VacancyEntity(
+            N_200, NAME_VACANCY_200, COMMENT_200,
+            companyEntity200, contactEntity20
+        )
 
         val repository = mock(VacancyRepository::class.java)
         `when`(repository.findAll(Sort.by("n"))).thenReturn(
-            listOf(vacancyEntity100, vacancyEntity200))
+            listOf(vacancyEntity100, vacancyEntity200)
+        )
 
         val companyService = mock(CompanyService::class.java)
         val contactService = mock(ContactService::class.java)
@@ -112,13 +118,17 @@ class VacancyServiceImplTest {
         assertEquals(contactDto10, vacancyDtos[0].contact)
         assertEquals(CompanyDto(N_COMPANY_100, NAME_COMPANY_100), vacancyDtos[0].company)
         assertEquals(
-            VacancyDto(N_100, NAME_VACANCY_100, COMMENT_100,
-                CompanyDto(N_COMPANY_100, NAME_COMPANY_100), contactDto10),
+            VacancyDto(
+                N_100, NAME_VACANCY_100, COMMENT_100,
+                CompanyDto(N_COMPANY_100, NAME_COMPANY_100), contactDto10
+            ),
             vacancyDtos[0]
         )
         assertEquals(
-            VacancyDto(N_200, NAME_VACANCY_200, COMMENT_200,
-                CompanyDto(N_COMPANY_200, NAME_COMPANY_200), contactDto20),
+            VacancyDto(
+                N_200, NAME_VACANCY_200, COMMENT_200,
+                CompanyDto(N_COMPANY_200, NAME_COMPANY_200), contactDto20
+            ),
             vacancyDtos[1]
         )
     }
@@ -188,7 +198,8 @@ class VacancyServiceImplTest {
         val contactDto10 = ContactDto()
         contactDto10.n = 10
         assertEquals(
-            VacancyDto(VACANCY_NEXT_N, NAME_VACANCY, COMMENT, CompanyDto(N_COMPANY, NAME_COMPANY), contactDto10), createdVacancyDto
+            VacancyDto(VACANCY_NEXT_N, NAME_VACANCY, COMMENT, CompanyDto(N_COMPANY, NAME_COMPANY), contactDto10),
+            createdVacancyDto
         )
     }
 
@@ -208,7 +219,8 @@ class VacancyServiceImplTest {
 
         val thrown = assertThrows<Exception> {
             vacancyService.update(
-                VACANCY_N, VacancyDto(VACANCY_N, "NAME_VACANCY", "COMMENT", CompanyDto(100L, "NAME_COMPANY"), contactDto10)
+                VACANCY_N,
+                VacancyDto(VACANCY_N, "NAME_VACANCY", "COMMENT", CompanyDto(100L, "NAME_COMPANY"), contactDto10)
             )
         }
 
@@ -246,7 +258,8 @@ class VacancyServiceImplTest {
         )
 
         assertEquals(
-            VacancyDto(VACANCY_N, NAME_VACANCY, COMMENT, CompanyDto(N_COMPANY, NAME_COMPANY), contactDto10), updatedVacancyDto
+            VacancyDto(VACANCY_N, NAME_VACANCY, COMMENT, CompanyDto(N_COMPANY, NAME_COMPANY), contactDto10),
+            updatedVacancyDto
         )
 
         verify(mockCompanyService, times(1)).getCompanyByN(N_COMPANY)
@@ -268,7 +281,8 @@ class VacancyServiceImplTest {
         contactEntity10.n = 10L
         `when`(mockVacancyRepository.findById(VACANCY_N)).thenReturn(
             Optional.of(
-                VacancyEntity(VACANCY_N, NAME_VACANCY, COMMENT,
+                VacancyEntity(
+                    VACANCY_N, NAME_VACANCY, COMMENT,
                     CompanyEntity(N_COMPANY, NAME_COMPANY),
                     contactEntity10
                 )
@@ -305,7 +319,8 @@ class VacancyServiceImplTest {
         contactEntity10.n = 10L
         `when`(mockVacancyRepository.findById(VACANCY_N)).thenReturn(
             Optional.of(
-                VacancyEntity(VACANCY_N, NAME_VACANCY, COMMENT,
+                VacancyEntity(
+                    VACANCY_N, NAME_VACANCY, COMMENT,
                     CompanyEntity(N_COMPANY, NAME_COMPANY),
                     contactEntity10
                 )
@@ -367,8 +382,10 @@ class VacancyServiceImplTest {
         val companyEntity_100 = CompanyEntity(N_COMPANY_100, NAME_COMPANY_100)
         val contactEntity10 = ContactEntity()
         contactEntity10.n = 10L
-        val vacancyEntity100 = VacancyEntity(N_100, NAME_VACANCY_100, COMMENT_100,
-            companyEntity_100, contactEntity10)
+        val vacancyEntity100 = VacancyEntity(
+            N_100, NAME_VACANCY_100, COMMENT_100,
+            companyEntity_100, contactEntity10
+        )
 
         val N_200 = 200L
         val NAME_VACANCY_200 = "vacancy_200"
@@ -378,8 +395,10 @@ class VacancyServiceImplTest {
         val companyEntity200 = CompanyEntity(N_COMPANY_200, NAME_COMPANY_200)
         val contactEntity20 = ContactEntity()
         contactEntity20.n = 20L
-        val vacancyEntity200 = VacancyEntity(N_200, NAME_VACANCY_200, COMMENT_200,
-            companyEntity200, contactEntity20)
+        val vacancyEntity200 = VacancyEntity(
+            N_200, NAME_VACANCY_200, COMMENT_200,
+            companyEntity200, contactEntity20
+        )
 
         val repository = mock(VacancyRepository::class.java)
         `when`(repository.findAll(Sort.by("n"))).thenReturn(listOf(vacancyEntity100, vacancyEntity200))
@@ -396,15 +415,19 @@ class VacancyServiceImplTest {
 
         assertEquals(2, vacancyDtos.size)
         assertEquals(
-            VacancyDto(N_100, NAME_VACANCY_100, COMMENT_100,
+            VacancyDto(
+                N_100, NAME_VACANCY_100, COMMENT_100,
                 CompanyDto(N_COMPANY_100, NAME_COMPANY_100),
-                contactDto10),
+                contactDto10
+            ),
             vacancyDtos[0]
         )
         assertEquals(
-            VacancyDto(N_200, NAME_VACANCY_200, COMMENT_200,
+            VacancyDto(
+                N_200, NAME_VACANCY_200, COMMENT_200,
                 CompanyDto(N_COMPANY_200, NAME_COMPANY_200),
-                contactDto20),
+                contactDto20
+            ),
             vacancyDtos[1]
         )
     }
@@ -419,8 +442,10 @@ class VacancyServiceImplTest {
         val companyEntity_100 = CompanyEntity(N_COMPANY_100, NAME_COMPANY_100)
         val contactEntity10 = ContactEntity()
         contactEntity10.n = 10L
-        val vacancyEntity100 = VacancyEntity(N_100, NAME_VACANCY_100, COMMENT_100,
-            companyEntity_100, contactEntity10)
+        val vacancyEntity100 = VacancyEntity(
+            N_100, NAME_VACANCY_100, COMMENT_100,
+            companyEntity_100, contactEntity10
+        )
 
         val N_200 = 200L
         val NAME_VACANCY_200 = "vacancy_200"
@@ -430,8 +455,10 @@ class VacancyServiceImplTest {
         val companyEntity200 = CompanyEntity(N_COMPANY_200, NAME_COMPANY_200)
         val contactEntity20 = ContactEntity()
         contactEntity20.n = 20L
-        val vacancyEntity200 = VacancyEntity(N_200, NAME_VACANCY_200, COMMENT_200,
-            companyEntity200, contactEntity20)
+        val vacancyEntity200 = VacancyEntity(
+            N_200, NAME_VACANCY_200, COMMENT_200,
+            companyEntity200, contactEntity20
+        )
 
         val repository = mock(VacancyRepository::class.java)
         `when`(repository.findAll(Sort.by("name"))).thenReturn(listOf(vacancyEntity100, vacancyEntity200))
@@ -448,15 +475,19 @@ class VacancyServiceImplTest {
 
         assertEquals(2, vacancyDtos.size)
         assertEquals(
-            VacancyDto(N_100, NAME_VACANCY_100, COMMENT_100,
+            VacancyDto(
+                N_100, NAME_VACANCY_100, COMMENT_100,
                 CompanyDto(N_COMPANY_100, NAME_COMPANY_100),
-                contactDto10),
+                contactDto10
+            ),
             vacancyDtos[0]
         )
         assertEquals(
-            VacancyDto(N_200, NAME_VACANCY_200, COMMENT_200,
+            VacancyDto(
+                N_200, NAME_VACANCY_200, COMMENT_200,
                 CompanyDto(N_COMPANY_200, NAME_COMPANY_200),
-                contactDto20),
+                contactDto20
+            ),
             vacancyDtos[1]
         )
         verify(repository, times(1)).findAll(Sort.by("name"))
@@ -505,4 +536,27 @@ class VacancyServiceImplTest {
         assertEquals(VacancyDto(200L, "", "", CompanyDto(-1L, ""), contactDto10), vacancies.get(1))
     }
 
+    @Test
+    fun createVacancyForNotExistContact() {
+        val companyService = mock(CompanyService::class.java)
+        val contactService = mock(ContactServiceImpl::class.java)
+        val vacancyRepository = mock(VacancyRepository::class.java)
+        val vacancyService = VacancyServiceImpl(vacancyRepository, companyService, contactService)
+
+        val COMPANY_N = 10L
+        val CONTACT_N = 100L
+        `when`(companyService.getCompanyByN(COMPANY_N)).thenReturn(CompanyDto(COMPANY_N, "COMPANY_NAME"))
+        val VACANCY_N = 200L
+        `when`(vacancyRepository.getNextN()).thenReturn(VACANCY_N)
+        val excpt = Exception("NOT FOUND")
+        `when`(contactService.getByN(CONTACT_N)).thenThrow(excpt);
+
+        val vacancyDtoForCreate = VacancyDtoForCreate("NAME", "COMMENT", COMPANY_N, CONTACT_N)
+
+        val receivedExcpt = assertThrows<Exception> {
+            vacancyService.create(vacancyDtoForCreate)
+        }
+
+        assertEquals("NOT FOUND", receivedExcpt.message)
+    }
 }

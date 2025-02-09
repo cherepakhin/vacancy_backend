@@ -216,18 +216,51 @@ class CompanyServiceImplTest {
     }
 
     @Test
-    fun getByExample() {
+    fun getByExampleWithN() {
         val companyEntites = listOf(
             CompanyEntity(1L, "NAME_1"),
             CompanyEntity(2L, "NAME_2"),
         )
+
         val companyExample = CompanyExample()
         val N = 1L
         companyExample.n = N
+
         val companyRepository = mock(CompanyRepository::class.java)
+
+        // vacancyService не используется в ТЕСТЕ, но нужен для создания CompanyServiceImpl
         val vacancyService = mock(VacancyServiceImpl::class.java)
+
         `when`(companyRepository.findAll(any<BooleanExpression>(), any<Sort>())).thenReturn(companyEntites)
+
         val service = CompanyServiceImpl(companyRepository, vacancyService)
+        val received = service.getByExample(companyExample)
+
+        assertEquals(2, received.size)
+
+        val companyDtos = listOf(
+            CompanyDto(1L, "NAME_1"),
+            CompanyDto(2L, "NAME_2"),
+        )
+        assertEquals(companyDtos, received)
+    }
+
+    @Test
+    fun getByExampleWithName() {
+        val companyEntities = listOf(
+            CompanyEntity(1L, "NAME_1"),
+            CompanyEntity(2L, "NAME_2"),
+        )
+
+        val companyExample = CompanyExample()
+        companyExample.name = "NAME"
+
+        val mockCompanyRepository = mock(CompanyRepository::class.java)
+
+        `when`(mockCompanyRepository.findAll(any<BooleanExpression>(), any<Sort>())).thenReturn(companyEntities)
+
+        val service =
+            CompanyServiceImpl(mockCompanyRepository, mock(VacancyServiceImpl::class.java))
         val received = service.getByExample(companyExample)
 
         assertEquals(2, received.size)
