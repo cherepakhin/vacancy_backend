@@ -271,4 +271,59 @@ class CompanyServiceImplTest {
         )
         assertEquals(companyDtos, received)
     }
+
+    @Test
+    fun getByExampleWithEmptyName() {
+        val companyEntities = listOf(
+            CompanyEntity(1L, "NAME_1")
+        )
+
+        val companyExample = CompanyExample()
+        companyExample.n = 1L
+        companyExample.name = ""
+
+        val mockCompanyRepository = mock(CompanyRepository::class.java)
+
+        `when`(mockCompanyRepository.findAll(any<BooleanExpression>(), any<Sort>())).thenReturn(companyEntities)
+
+        val service =
+            CompanyServiceImpl(mockCompanyRepository, mock(VacancyServiceImpl::class.java))
+        val received = service.getByExample(companyExample)
+
+        assertEquals(1, received.size)
+
+        assertEquals(listOf(
+            CompanyDto(1L, "NAME_1")
+        ), received)
+    }
+
+    @Test
+    fun getByExampleWith_N_and_Name() {
+        val companyEntities = listOf(
+            CompanyEntity(1L, "NAME_1")
+        )
+
+        val companyExample = CompanyExample()
+        companyExample.n = 1L
+        companyExample.name = "NAME_1"
+
+        val mockCompanyRepository = mock(CompanyRepository::class.java)
+
+        val qCompany = QCompanyEntity.companyEntity
+        var predicate = qCompany.n.goe(-1)
+        predicate = predicate.and(qCompany.n.eq(companyExample.n))
+        predicate = predicate.and(qCompany.name.like("%" + companyExample.name + "%"))
+        var sort = Sort.by(Sort.Direction.ASC, "n")
+        `when`(mockCompanyRepository.findAll(eq(predicate),eq(sort))).thenReturn(companyEntities)
+
+        val service =
+            CompanyServiceImpl(mockCompanyRepository, mock(VacancyServiceImpl::class.java))
+        val received = service.getByExample(companyExample)
+
+        assertEquals(1, received.size)
+
+        assertEquals(listOf(
+            CompanyDto(1L, "NAME_1")
+        ), received)
+    }
 }
