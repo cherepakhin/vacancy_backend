@@ -37,7 +37,7 @@ class CompanyServiceImplTest {
     }
 
     @Test
-    fun getCompanyByN() {
+    fun getByN() {
         val N = 100L
         val NAME_COMPANY = "company"
         val companyEntity = CompanyEntity(N, NAME_COMPANY)
@@ -65,7 +65,7 @@ class CompanyServiceImplTest {
     }
 
     @Test
-    fun getCompanies() {
+    fun getAll() {
         val repository = mock(CompanyRepository::class.java)
         val company1 = CompanyEntity(1L, "company1")
         val company2 = CompanyEntity(2L, "company2")
@@ -74,7 +74,11 @@ class CompanyServiceImplTest {
         val vacancyService = mock(VacancyServiceImpl::class.java)
         val service = CompanyServiceImpl(repository, vacancyService)
 
-        assertEquals(2, service.getAll().size)
+        val companies = service.getAll()
+
+        assertEquals(2, companies.size)
+        assertEquals(CompanyDto(n = 1, name = "company1"), companies.get(0))
+        assertEquals(CompanyDto(2,"company2"), companies.get(1))
     }
 
     @Test
@@ -185,7 +189,7 @@ class CompanyServiceImplTest {
 
     @Test
     fun getByExampleAndSort_CheckFilterByN() {
-        val companyExample= CompanyExample()
+        val companyExample = CompanyExample()
         val N = 1L
         companyExample.n = N
         val repository = mock(CompanyRepository::class.java)
@@ -198,11 +202,11 @@ class CompanyServiceImplTest {
         val companyEntites = listOf(
             CompanyEntity(1L, "NAME_1"),
             CompanyEntity(2L, "NAME_2"),
-            )
-        `when`(repository.findAll(predicate, Sort.by(Sort.Direction.ASC,"n"))).thenReturn(companyEntites)
+        )
+        `when`(repository.findAll(predicate, Sort.by(Sort.Direction.ASC, "n"))).thenReturn(companyEntites)
 
-        val companies=
-            service.getByExampleAndSort(companyExample, Sort.by(Sort.Direction.ASC,"n"))
+        val companies =
+            service.getByExampleAndSort(companyExample, Sort.by(Sort.Direction.ASC, "n"))
 
         assertEquals(2, companies.size)
         assertEquals(CompanyDto(1L, "NAME_1"), companies[0])
