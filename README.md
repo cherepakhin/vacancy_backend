@@ -233,7 +233,7 @@ __или__ с использованием [https://www.jacoco.org/jacoco/](http
 Создание отчета о покрытии тестами:
 
 ````shell
-$ ./gradlew jacocoTestReport
+$ ./gradlew test jacocoTestReport
 ````
 
 Результат в build/reports/jacoco/test/html/index.html: 
