@@ -1,9 +1,11 @@
 package ru.perm.v.vacancy.service.impl
 
+import com.querydsl.core.types.dsl.BooleanExpression
 import org.junit.jupiter.api.Assertions.assertEquals
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 import org.mockito.Mockito.*
+import org.mockito.kotlin.any
 import org.mockito.kotlin.doAnswer
 import org.mockito.kotlin.doNothing
 import org.springframework.data.domain.Sort
@@ -211,5 +213,29 @@ class CompanyServiceImplTest {
         assertEquals(2, companies.size)
         assertEquals(CompanyDto(1L, "NAME_1"), companies[0])
         assertEquals(CompanyDto(2L, "NAME_2"), companies[1])
+    }
+
+    @Test
+    fun getByExample() {
+        val companyEntites = listOf(
+            CompanyEntity(1L, "NAME_1"),
+            CompanyEntity(2L, "NAME_2"),
+        )
+        val companyExample = CompanyExample()
+        val N = 1L
+        companyExample.n = N
+        val companyRepository = mock(CompanyRepository::class.java)
+        val vacancyService = mock(VacancyServiceImpl::class.java)
+        `when`(companyRepository.findAll(any<BooleanExpression>(), any<Sort>())).thenReturn(companyEntites)
+        val service = CompanyServiceImpl(companyRepository, vacancyService)
+        val received = service.getByExample(companyExample)
+
+        assertEquals(2, received.size)
+
+        val companyDtos = listOf(
+            CompanyDto(1L, "NAME_1"),
+            CompanyDto(2L, "NAME_2"),
+        )
+        assertEquals(companyDtos, received)
     }
 }
