@@ -17,7 +17,7 @@ import ru.perm.v.vacancy.filter.CompanyExample
 import ru.perm.v.vacancy.repository.CompanyRepository
 import java.util.*
 
-@Suppress("UNREACHABLE_CODE")
+//@Suppress("UNREACHABLE_CODE")
 class CompanyServiceImplTest {
 
     @Test
@@ -29,13 +29,15 @@ class CompanyServiceImplTest {
         val vacancyService = mock(VacancyServiceImpl::class.java)
         `when`(repository.getNextN()).thenReturn(N)
         `when`(repository.save(companyEntity)).thenReturn(companyEntity)
-
+        `when`(repository.createByParams(N, NAME_COMPANY)).thenAnswer { companyEntity }
         val service = CompanyServiceImpl(repository, vacancyService)
 
         val savedCompany = service.createCompany(CompanyDtoForCreate(NAME_COMPANY))
 
         assertEquals(N, savedCompany.n)
         assertEquals(NAME_COMPANY, savedCompany.name)
+
+        verify(repository, times(1)).createByParams(N, NAME_COMPANY)
     }
 
     @Test
@@ -154,7 +156,7 @@ class CompanyServiceImplTest {
         val NAME_COMPANY = "company"
         val repository = mock(CompanyRepository::class.java)
         `when`(repository.getNextN()).thenReturn(N)
-        `when`(repository.createNew(N, NAME_COMPANY)).doAnswer { throw Exception("Company with N=100 not created") }
+        `when`(repository.createByParams(N, NAME_COMPANY)).doAnswer { throw Exception("Company with N=100 not created") }
 
         val vacancyService = mock(VacancyServiceImpl::class.java)
         val service = CompanyServiceImpl(repository, vacancyService)

@@ -36,16 +36,6 @@ class CompanyServiceImpl(val repository: CompanyRepository, @Lazy val vacancySer
         return companies.map { CompanyMapper.toDto(it) }.toList()
     }
 
-    override fun createCompany(companyDtoForCreate: CompanyDtoForCreate): CompanyDto {
-        val n = getNextN()
-        logger.info("getNextN(): $n")
-        val company = CompanyEntity(n = n, name = companyDtoForCreate.name)
-        logger.info(company.toString())
-        repository.createNew(company.n, company.name)
-
-        return CompanyMapper.toDto(company)
-    }
-
     fun getNextN(): Long {
         return repository.getNextN()
     }
@@ -58,6 +48,16 @@ class CompanyServiceImpl(val repository: CompanyRepository, @Lazy val vacancySer
         } else {
             throw Exception(String.format(ErrMessage.COMPANY_NOT_FOUND, n))
         }
+    }
+
+    override fun createCompany(companyDtoForCreate: CompanyDtoForCreate): CompanyDto {
+        val n = getNextN()
+        logger.info("getNextN(): $n")
+        val company = CompanyEntity(n = n, name = companyDtoForCreate.name)
+        logger.info(company.toString())
+        repository.createByParams(company.n, company.name)
+
+        return CompanyMapper.toDto(company)
     }
 
     override fun updateCompany(n: Long, name: String): CompanyDto {
