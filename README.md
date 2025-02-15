@@ -94,7 +94,7 @@ psql -h192.168.1.20 -Uvasi --dbname=vacancy
 ````
 
 
-Для версионирования БД используется [flyway](https://flywaydb.org/). Автообновление БД отключено. В application.yaml установлен флаг:
+Для версионирования БД используется [flyway](https://flywaydb.org/). Автообновление (migration) БД при запуске отключено, обновления делать вручную (ниже). В application.yaml установлен флаг:
 
 ````yaml
 flyway:
@@ -113,7 +113,7 @@ flyway:
 $ ./gradlew flywayMigrate -Dflyway.user=postgres -Dflyway.password=postgres -Dflyway.url=jdbc:postgresql://127.0.0.1:5432/vacancy
 ````
 
-Для полной очистки (на пример при полной переинизиализации) выполнить:
+Для полной очистки (например при полной инизиализации базы данных]) выполнить:
 
 ````sql
 delete from vacancy;
