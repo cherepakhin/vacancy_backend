@@ -332,6 +332,7 @@ $ http POST :8980/vacancy/api/company/ < src/test/test_jsons/company_10.json
 <a id="bootJar"></a>
 ### Создание запускаемого файла и его запуск
 
+````
  ./gradlew bootJar
 ````
 Собранный jar будет в build/libs/vacancy_backend-<version>.jar
@@ -574,17 +575,30 @@ Transfer-Encoding: chunked
 <a id="docker"></a>
 ### Docker
 
-Создание Docker
-[./docker_build.sh](./docker_build.sh)
+Создание Docker и публикация в Docker Hub [./docker_build.sh](./docker_build.sh):
+
+````shell
+./gradlew bootJar
+# $ ./gradlew buildDockerImage
+# через wifi push сработал
+# Предварительно создать репозиторий cherepakhin/vacancy_backend
+docker build --build-arg JAR_FILE=build/libs/vacancy_backend-0.24.1016.1.jar -t cherepakhin/vacancy_backend:0.24.1016.1 .
+docker push cherepakhin/vacancy_backend:0.24.1016.1
+````
+
+Проверить в Docker Hub
+https://hub.docker.com/repository/docker/cherepakhin/vacancy_backend/tags
+
+![doc/docker_hub.png](doc/docker_hub.png)
 
 Запуск образа:
 
 ````shell
 $ docker run -p 8980:8980 v/vacancy_backend
+$ docker ps
 ````
 
 
-docker ps
 
 <a id="tose"></a>
 ### Примечания
