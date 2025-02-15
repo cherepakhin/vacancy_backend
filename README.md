@@ -75,8 +75,9 @@ jdbc:postgresql://192.168.1.20:5432/vacancy
 настройка user/password для базы данных:
 
 ````shell
-$ export PG_USER=vasi
-$ export PG_PASSWORD=pass
+$ export VACANCY_PG_URL=jdbc:postgresql://192.168.1.20:5432/vacancy
+$ export VACANCY_PG_USER=vasi
+$ export VACANCY_PG_PASSWORD=pass
 ````
 
 Подключение с psql:
