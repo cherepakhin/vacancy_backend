@@ -591,14 +591,12 @@ https://hub.docker.com/repository/docker/cherepakhin/vacancy_backend/tags
 
 ![doc/docker_hub.png](doc/docker_hub.png)
 
-Запуск образа:
+Запуск Docker образа:
 
 ````shell
-$ docker run -p 8980:8980 v/vacancy_backend
+$ docker run -p 8980:8980 cherepakhin/vacancy_backend:0.24.1016.1
 $ docker ps
 ````
-
-
 
 <a id="tose"></a>
 ### Примечания

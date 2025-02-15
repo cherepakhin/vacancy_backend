@@ -1,0 +1,1 @@
+docker run -p 8980:8980 cherepakhin/vacancy_backend:0.24.1016.1
