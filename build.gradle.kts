@@ -163,16 +163,13 @@ tasks.withType<Test> {
     useJUnitPlatform()
     // Show test log
     testLogging {
-//        events("standardOut", "started", "passed", "skipped", "failed")
+        // events("standardOut", "started", "passed", "skipped", "failed")
         events("passed", "skipped", "failed")
     }
-//    if (project.hasProperty('excludeTests')) {
-//        exclude project.property('excludeTests')
-//    }
-    filter {
-        exclude("*IntegrationTest*")
+    // for run Integration test: ./gradlew test -Dtest.profile=integration
+    if (System.getProperty("test.profile") != "integration") {
+        exclude("**/*IntegrationTest*")
     }
-
 }
 
 //// remove suffix 'plain' in sonar repository

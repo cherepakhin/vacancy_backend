@@ -197,6 +197,7 @@ interface CompanyRepository: JpaRepository<CompanyEntity, Long>, JpaSpecificatio
 ````shell
 $ ./gradlew test
 ````
+Интеграционные тесты будут пропущены.
 
 <a id="integration_test_database"></a>
 ### Интеграционное тестирование работы с БД
@@ -205,6 +206,12 @@ $ ./gradlew test
 $ ./gradlew test --tests '*Integration*'
 ````
 в [run_integr_test.sh](./run_integr_test.sh).
+
+или
+
+````shell
+$ ./gradlew test -Dtest.profile=integration
+````
 
 Прогон конкретного набора тестов:
 
