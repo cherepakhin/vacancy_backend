@@ -35,7 +35,7 @@ class ValidatorVacancyDtoTest {
         val excpt = assertThrows(Exception::class.java) {
             ValidatorVacancyDto.validate(vacancyDto)
         }
-        println(excpt.message)
+
         assertEquals(
             "VacancyDto(n=1, name='', comment='comment', company=CompanyDto(n=100, name='testCompany'), contact=ContactDto(n=10, name=, email=, phone=, comment=)) has errors: размер должен находиться в диапазоне от 5 до 50\n",
             excpt.message
