@@ -8,7 +8,7 @@ import ru.perm.v.vacancy.dto.ContactDto
 import ru.perm.v.vacancy.dto.VacancyDto
 
 //TODO: do ENABLED
-@Disabled
+//@Disabled
 class ValidatorVacancyDtoTest {
 
     @Test
@@ -24,7 +24,7 @@ class ValidatorVacancyDtoTest {
     }
 
     //TODO: fail on v.perm.ru
-    @Disabled
+//    @Disabled
     @Test
     fun checkValidateMessageFor_EmptyName() {
         val companyDto = CompanyDto(100L, "testCompany")
@@ -35,9 +35,9 @@ class ValidatorVacancyDtoTest {
         val excpt = assertThrows(Exception::class.java) {
             ValidatorVacancyDto.validate(vacancyDto)
         }
-
+        println(excpt.message)
         assertEquals(
-            "VacancyDto(n=1, name='', comment='comment', company=CompanyDto(n=100, name='testCompany')) has errors: размер должен находиться в диапазоне от 5 до 50\n",
+            "VacancyDto(n=1, name='', comment='comment', company=CompanyDto(n=100, name='testCompany'), contact=ContactDto(n=10, name=, email=, phone=, comment=)) has errors: размер должен находиться в диапазоне от 5 до 50\n",
             excpt.message
         )
     }
