@@ -23,7 +23,6 @@ import ru.perm.v.vacancy.service.VacancyService
 import ru.perm.v.vacancy.service.CompanyService
 import kotlin.test.assertEquals
 
-
 @WebMvcTest(controllers = [VacancyCtrl::class])
 class VacancyCtrlWebMvcTest {
     @Autowired

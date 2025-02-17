@@ -34,6 +34,19 @@ class CompanyCtrl(val companyService: CompanyService) {
         return mes
     }
 
+    @GetMapping("/{n}")
+    @ApiOperation("Get Product by N")
+    @Cacheable("companies")
+    fun getByN(
+        @Parameter(
+            description = "N(ID) Product."
+        )
+        @PathVariable
+        n: Long,
+    ): CompanyDto {
+        return companyService.getCompanyByN(n)
+    }
+
     @GetMapping("/")
     @ApiOperation("Get all companies")
     fun getAll(): List<CompanyDto> {
@@ -69,19 +82,6 @@ class CompanyCtrl(val companyService: CompanyService) {
     ): List<CompanyDto> {
         logger.info("Get companies by example $companyExample")
         return companyService.getByExample(companyExample)
-    }
-
-    @GetMapping("/{n}")
-    @ApiOperation("Get Product by N")
-    @Cacheable("companies")
-    fun getByN(
-        @Parameter(
-            description = "N(ID) Product."
-        )
-        @PathVariable
-        n: Long,
-    ): CompanyDto {
-        return companyService.getCompanyByN(n)
     }
 
     @PostMapping
