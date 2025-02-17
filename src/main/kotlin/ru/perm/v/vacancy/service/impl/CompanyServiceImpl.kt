@@ -2,7 +2,6 @@ package ru.perm.v.vacancy.service.impl
 
 import com.querydsl.core.types.Predicate
 import org.slf4j.LoggerFactory
-import org.springframework.context.annotation.Lazy
 import org.springframework.data.domain.Sort
 import org.springframework.stereotype.Service
 import ru.perm.v.vacancy.consts.ErrMessage
@@ -16,7 +15,7 @@ import ru.perm.v.vacancy.repository.CompanyRepository
 import ru.perm.v.vacancy.service.CompanyService
 
 @Service
-class CompanyServiceImpl(val repository: CompanyRepository, @Lazy val vacancyService: VacancyServiceImpl) :
+class CompanyServiceImpl(val repository: CompanyRepository) :
     CompanyService {
     private val logger = LoggerFactory.getLogger(this.javaClass.name)
 

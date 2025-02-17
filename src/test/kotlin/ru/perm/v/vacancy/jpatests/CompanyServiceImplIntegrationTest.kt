@@ -5,7 +5,6 @@ import org.junit.jupiter.api.assertThrows
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase
 import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest
-import org.springframework.boot.test.mock.mockito.MockBean
 import org.springframework.data.domain.Sort
 import ru.perm.v.vacancy.dto.CompanyDto
 import ru.perm.v.vacancy.dto.CompanyDtoForCreate
@@ -13,7 +12,6 @@ import ru.perm.v.vacancy.entity.QCompanyEntity
 import ru.perm.v.vacancy.filter.CompanyExample
 import ru.perm.v.vacancy.repository.CompanyRepository
 import ru.perm.v.vacancy.service.impl.CompanyServiceImpl
-import ru.perm.v.vacancy.service.impl.VacancyServiceImpl
 import kotlin.test.assertEquals
 
 /**
@@ -25,12 +23,9 @@ class CompanyServiceImplIntegrationTest {
     @Autowired
     lateinit var companyRepository: CompanyRepository
 
-    @MockBean
-    lateinit var vacancyService: VacancyServiceImpl
-
     @Test
     fun getAll() {
-        val service = CompanyServiceImpl(companyRepository, vacancyService)
+        val service = CompanyServiceImpl(companyRepository)
 
         val companies = service.getAll()
 
@@ -43,7 +38,7 @@ class CompanyServiceImplIntegrationTest {
 
     @Test
     fun getAllSortedByName() {
-        val service = CompanyServiceImpl(companyRepository, vacancyService)
+        val service = CompanyServiceImpl(companyRepository)
 
         val companies = service.getAllSortedByField("name")
 
@@ -56,7 +51,7 @@ class CompanyServiceImplIntegrationTest {
 
     @Test
     fun getAllSortedByN() {
-        val service = CompanyServiceImpl(companyRepository, vacancyService)
+        val service = CompanyServiceImpl(companyRepository)
 
         val companies = service.getAllSortedByField("n")
 
@@ -69,16 +64,16 @@ class CompanyServiceImplIntegrationTest {
 
     @Test
     fun create() {
-        val service = CompanyServiceImpl(companyRepository, vacancyService)
+        val service = CompanyServiceImpl(companyRepository)
 
-        val company = service.createCompany(CompanyDtoForCreate( "COMPANY_4"))
+        val company = service.createCompany(CompanyDtoForCreate("COMPANY_4"))
 
         assertEquals("COMPANY_4", company.name)
     }
 
     @Test
     fun getNextN() {
-        val service = CompanyServiceImpl(companyRepository, vacancyService)
+        val service = CompanyServiceImpl(companyRepository)
 
         assertEquals(4, service.getNextN())
     }
@@ -87,7 +82,7 @@ class CompanyServiceImplIntegrationTest {
     fun getByExampleEq() {
         val qbe: QCompanyEntity = QCompanyEntity.companyEntity
         val preicate = qbe.name.eq("COMPANY_1")
-        val service = CompanyServiceImpl(companyRepository, vacancyService)
+        val service = CompanyServiceImpl(companyRepository)
 
         val companies = service.findAll(preicate)
 
@@ -98,7 +93,7 @@ class CompanyServiceImplIntegrationTest {
     fun getByExampleLikeIgnoreCase() {
         val qbe: QCompanyEntity = QCompanyEntity.companyEntity
         val preicate = qbe.name.likeIgnoreCase("%company%")
-        val service = CompanyServiceImpl(companyRepository, vacancyService)
+        val service = CompanyServiceImpl(companyRepository)
 
         val companies = service.findAll(preicate)
 
@@ -107,7 +102,7 @@ class CompanyServiceImplIntegrationTest {
 
     @Test
     fun getByExampleNameIgnoreCaseAndSort() {
-        val service = CompanyServiceImpl(companyRepository, vacancyService)
+        val service = CompanyServiceImpl(companyRepository)
         val example = CompanyExample()
         example.name = "COMPANY_1"
         val companies = service.getByExampleAndSort(
@@ -120,7 +115,7 @@ class CompanyServiceImplIntegrationTest {
 
     @Test
     fun getByExampleNIgnoreCaseAndSort() {
-        val service = CompanyServiceImpl(companyRepository, vacancyService)
+        val service = CompanyServiceImpl(companyRepository)
         val example = CompanyExample()
         example.n = 1L
         val companies = service.getByExampleAndSort(
@@ -132,7 +127,7 @@ class CompanyServiceImplIntegrationTest {
 
     @Test
     fun getNotExistCompany() {
-        val service = CompanyServiceImpl(companyRepository, vacancyService)
+        val service = CompanyServiceImpl(companyRepository)
         val N = 10000L
 
         val err = assertThrows<Exception> { service.getCompanyByN(N) }
