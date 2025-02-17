@@ -4,7 +4,7 @@
 [Цель](#target)<br/>
 [QueryDsl](#querydsl)<br/>
 [Unit тестирование](#unit_test)<br/>
-[Интеграционное тестирование работы с БД](#integration_test_database)<br/>
+[Интеграционное тестирование](#integration_test)<br/>
 [Покрытие тестами](#coverage)<br/>
 [Логирование](#logging)<br/>
 [Запуск](#run)<br/>
@@ -199,8 +199,8 @@ $ ./gradlew test
 ````
 Интеграционные тесты будут пропущены.
 
-<a id="integration_test_database"></a>
-### Интеграционное тестирование работы с БД
+<a id="integration_test"></a>
+### Интеграционное тестирование
 
 ````shell
 $ ./gradlew test --tests '*Integration*'
