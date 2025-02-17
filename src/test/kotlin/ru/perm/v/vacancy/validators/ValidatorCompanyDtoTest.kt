@@ -25,7 +25,6 @@ class ValidatorCompanyDtoTest {
             ValidatorCompanyDto.validate(companyDto)
         }
         // размер должен находиться в диапазоне от 5 до 50
-        //должно быть не меньше 0
         assertEquals(
             "CompanyDto(n=1, name='') has errors: размер должен находиться в диапазоне от 5 до 50\n",
             excpt.message

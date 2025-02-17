@@ -7,8 +7,6 @@ import ru.perm.v.vacancy.dto.CompanyDto
 import ru.perm.v.vacancy.dto.ContactDto
 import ru.perm.v.vacancy.dto.VacancyDto
 
-//TODO: do ENABLED
-//@Disabled
 class ValidatorVacancyDtoTest {
 
     @Test
@@ -23,8 +21,6 @@ class ValidatorVacancyDtoTest {
         }
     }
 
-    //TODO: fail on v.perm.ru
-//    @Disabled
     @Test
     fun checkValidateMessageFor_EmptyName() {
         val companyDto = CompanyDto(100L, "testCompany")

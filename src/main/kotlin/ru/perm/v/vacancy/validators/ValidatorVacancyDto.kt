@@ -25,7 +25,7 @@ object ValidatorVacancyDto {
         }
     }
 
-// Don`t delete comment
+// Don`t delete comment!!! Compare OLD style and use stream
 //    fun validateForCreate(vacancyDto: VacancyDtoForCreate) {
 //        val violations: MutableSet<ConstraintViolation<VacancyDto>> = validator.validate(vacancyDto)
 //
