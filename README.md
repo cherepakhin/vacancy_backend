@@ -203,7 +203,7 @@ $ ./gradlew test
 ### Интеграционное тестирование
 
 ````shell
-$ ./gradlew test --tests '*Integration*'
+$ ./gradlew test -Dtest.profile=integration
 ````
 в [run_integr_test.sh](./run_integr_test.sh).
 
@@ -229,6 +229,11 @@ VacancyServiceImplIntegrationTest > getAllWithContains() PASSE
 
 ````shell
 ./gradlew test --tests '*VacancyServiceImplIntegrationTest.getAllWithContains'
+````
+Прогон тестов в __offline__:
+
+````shell
+$ ./gradlew --offline test
 ````
 
 <a id="coverage"></a>
@@ -286,6 +291,12 @@ $ ./gradlew bootRun
 ````shell
 $ export VACANCY_KOTLIN_IP=127.0.0.1:8980
 $ ./gradlew --offline bootRun
+````
+
+или
+
+````shell
+$ ./gradlew --offline build
 ````
 
 Запуск jar (./run_jar.sh):
