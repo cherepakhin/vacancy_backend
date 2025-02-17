@@ -1,8 +1,10 @@
 package ru.perm.v.vacancy.dto
 
+import javax.validation.constraints.Min
 import javax.validation.constraints.Size
 
 class CompanyDto {
+    @field:Min(1)
     val n: Long
 
     @field:Size(min=5, max=50)

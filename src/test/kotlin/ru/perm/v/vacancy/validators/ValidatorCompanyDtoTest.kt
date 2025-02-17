@@ -17,17 +17,30 @@ class ValidatorCompanyDtoTest {
     }
 
 
-    //TODO: fail on v.perm.ru
-    @Disabled
     @Test
     fun checkValidateMessageFor_EmptyName() {
-        val companyDto = CompanyDto(-1L, "")
+        val companyDto = CompanyDto(1L, "")
+
+        val excpt = assertThrows(Exception::class.java) {
+            ValidatorCompanyDto.validate(companyDto)
+        }
+        // размер должен находиться в диапазоне от 5 до 50
+        //должно быть не меньше 0
+        assertEquals(
+            "CompanyDto(n=1, name='') has errors: размер должен находиться в диапазоне от 5 до 50\n",
+            excpt.message
+        )
+    }
+
+    @Test
+    fun checkValidateMessageFor_n_0() {
+        val companyDto = CompanyDto(0L, "NAME_NAME")
 
         val excpt = assertThrows(Exception::class.java) {
             ValidatorCompanyDto.validate(companyDto)
         }
         assertEquals(
-            "CompanyDto(n=-1, name='') has errors: размер должен находиться в диапазоне от 5 до 50\n",
+            "CompanyDto(n=0, name='NAME_NAME') has errors: должно быть не меньше 1\n",
             excpt.message
         )
     }
