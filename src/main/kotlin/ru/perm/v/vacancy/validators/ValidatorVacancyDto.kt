@@ -21,7 +21,7 @@ object ValidatorVacancyDto {
             violations.forEach { violation ->
                 messageError = messageError.plus(violation.message + "\n")
             }
-            throw Exception("$vacancyDto has errors: $messageError")
+            throw Exception("$vacancyDto содержит ошибки: $messageError")
         }
     }
 

@@ -6,12 +6,17 @@ import io.swagger.v3.oas.annotations.Parameter
 import org.slf4j.LoggerFactory
 import org.springframework.cache.annotation.CacheEvict
 import org.springframework.cache.annotation.Cacheable
+import org.springframework.http.HttpStatus
+import org.springframework.http.ResponseEntity
 import org.springframework.web.bind.annotation.*
+import org.springframework.web.server.ResponseStatusException
 import ru.perm.v.vacancy.dto.CompanyDto
 import ru.perm.v.vacancy.dto.CompanyDtoForCreate
 import ru.perm.v.vacancy.filter.CompanyExample
 import ru.perm.v.vacancy.service.CompanyService
+import ru.perm.v.vacancy.validators.ValidatorCompanyDto
 import ru.perm.v.vacancy.validators.ValidatorCompanyDtoForCreate
+import kotlin.collections.isNotEmpty
 
 @RestController
 @RequestMapping("/company")
@@ -92,9 +97,15 @@ class CompanyCtrl(val companyService: CompanyService) {
             description = "DTO of Company."
         )
         @RequestBody companyDtoForCreate: CompanyDtoForCreate
-    ): CompanyDto {
-        ValidatorCompanyDtoForCreate.validate(companyDtoForCreate)
-        return companyService.createCompany(companyDtoForCreate)
+    ): ResponseEntity<CompanyDto> {
+        try {
+            ValidatorCompanyDtoForCreate.validate(companyDtoForCreate)
+        } catch (excp: Exception) {
+            logger.error(excp.message)
+            throw ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, excp.message, excp)
+        }
+        val resultDto = companyService.createCompany(companyDtoForCreate)
+        return ResponseEntity.ok(resultDto)
     }
 
     @DeleteMapping("/{n}")
@@ -120,6 +131,7 @@ class CompanyCtrl(val companyService: CompanyService) {
         @Parameter(description = "DTO of Company.")
         @RequestBody changedCompanyDto: CompanyDto,
     ): CompanyDto {
+        ValidatorCompanyDto.validate(changedCompanyDto)
         return companyService.updateCompany(n, changedCompanyDto.name)
     }
 }

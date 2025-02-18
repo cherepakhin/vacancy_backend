@@ -81,7 +81,7 @@ class InitCtrl {
             ->
             var line: String?
             while ((br.readLine().also { line = it }) != null) {
-                resultStringBuilder.append(line).append("\n")
+                resultStringBuilder.append(line).append("")
             }
         }
         return resultStringBuilder.toString()

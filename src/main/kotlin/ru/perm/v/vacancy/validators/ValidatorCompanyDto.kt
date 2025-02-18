@@ -14,14 +14,14 @@ object ValidatorCompanyDto {
             var messageError = ""
 // OLD STYLE
 //            for(violation in violations) {
-//                messageError = messageError.plus(violation.message + "\n")
+//                messageError = messageError.plus(violation.message)
 //            }
 
 // USED STREAM
             violations.forEach { violation ->
-                messageError = messageError.plus(violation.message + "\n")
+                messageError = messageError.plus(violation.message + ".")
             }
-            throw Exception("$companyDto has errors: $messageError")
+            throw Exception("$companyDto содержит ошибки: $messageError")
         }
     }
 }

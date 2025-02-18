@@ -16,7 +16,6 @@ class ValidatorCompanyDtoTest {
         }
     }
 
-
     @Test
     fun checkValidateMessageFor_EmptyName() {
         val companyDto = CompanyDto(1L, "")
@@ -24,9 +23,8 @@ class ValidatorCompanyDtoTest {
         val excpt = assertThrows(Exception::class.java) {
             ValidatorCompanyDto.validate(companyDto)
         }
-        // размер должен находиться в диапазоне от 5 до 50
         assertEquals(
-            "CompanyDto(n=1, name='') has errors: размер должен находиться в диапазоне от 5 до 50\n",
+            "CompanyDto(n=1, name='') содержит ошибки: размер должен находиться в диапазоне от 5 до 50.",
             excpt.message
         )
     }
