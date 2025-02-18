@@ -37,7 +37,7 @@ class ValidatorCompanyDtoTest {
             ValidatorCompanyDto.validate(companyDto)
         }
         assertEquals(
-            "CompanyDto(n=0, name='NAME_NAME') has errors: должно быть не меньше 1\n",
+            "CompanyDto(n=0, name='NAME_NAME') содержит ошибки: должно быть не меньше 1.",
             excpt.message
         )
     }

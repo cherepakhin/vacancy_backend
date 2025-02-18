@@ -8,6 +8,7 @@ import org.mockito.InjectMocks
 import org.mockito.Mock
 import org.mockito.Mockito.*
 import org.mockito.junit.jupiter.MockitoExtension
+import org.springframework.http.HttpStatus
 import ru.perm.v.vacancy.dto.CompanyDto
 import ru.perm.v.vacancy.dto.CompanyDtoForCreate
 import ru.perm.v.vacancy.filter.CompanyExample
@@ -183,9 +184,9 @@ class CompanyCtrlTest {
         val createdCompanyDto = CompanyDto(N, NEW_NAME)
         `when`(companyService.createCompany(companyDtoForCreate)).thenReturn(createdCompanyDto)
 
-        val receivedDto = companyCtrl.create(companyDtoForCreate)
-
-        assertEquals(createdCompanyDto, receivedDto)
+        val answer = companyCtrl.create(companyDtoForCreate)
+        assertEquals(HttpStatus.OK, answer.statusCode)
+        assertEquals(createdCompanyDto, answer.body)
         verify(companyService, times(1)).createCompany(companyDtoForCreate)
     }
 }
