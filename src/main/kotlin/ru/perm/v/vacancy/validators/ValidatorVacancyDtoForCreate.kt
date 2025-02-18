@@ -17,7 +17,7 @@ object ValidatorVacancyDtoForCreate {
 
 // USED STREAM
             violations.forEach { violation ->
-                messageError = messageError.plus(violation.message + "\n")
+                messageError = messageError.plus(violation.message)
             }
             throw Exception("$vacancyDtoForCreate has errors: $messageError")
         }

@@ -83,7 +83,7 @@ class VacancyCtrlTest {
     }
 
     //TODO: fail on v.perm.ru
-    @Disabled
+//    @Disabled
     @Test
     fun createForNotValidDto() {
         val COMPANY_N = 1L
@@ -92,7 +92,7 @@ class VacancyCtrlTest {
         val err = assertThrows<Exception> { vacancyCtrl.create(vacancy1) }
 
         assertEquals(
-            "VacancyDto(name='', comment='', company_n=1) has errors: размер должен находиться в диапазоне от 5 до 50\n",
+            "VacancyDto(name='', comment='', company_n=1, contact_n=0) has errors: размер должен находиться в диапазоне от 5 до 50",
             err.message
         )
     }
