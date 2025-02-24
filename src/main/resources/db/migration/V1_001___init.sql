@@ -1,4 +1,7 @@
-CREATE table if not exists company
+drop table if exists vacancy;
+drop table if exists contact;
+drop table if exists company;
+CREATE table company
 (
     "n"            serial not null UNIQUE,
     "name"     varchar(120) not null default '',
@@ -36,8 +39,6 @@ insert into company (n,name) values
     (3,'3_COMPANY')
 ;
 
-insert into contact (n, company_n, name, email, phone, comment) values
-    (-1, -1, '-', '-', '-', '-');
 insert into contact (n, company_n, name, email, phone, comment) values
     (-1, -1, '1', '','',''),
     (1, 1, 'CONTACT_1_COMPANY_1', 'CONTACT_1_EMAIL','CONTACT_1_PHONE','CONTACT_1_COMMENT'),

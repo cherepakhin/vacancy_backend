@@ -119,7 +119,7 @@ $ ./gradlew flywayMigrate -Dflyway.user=postgres -Dflyway.password=postgres -Dfl
 delete from vacancy;
 delete from contact;
 delete from company;
-delete from flyway_schema_history fsh
+delete from flyway_schema_history;
 ````
 и 
 

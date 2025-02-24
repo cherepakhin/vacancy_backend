@@ -16,13 +16,13 @@ class VacancyEntity {
     @JoinColumn(name = "company_n", nullable = false)
     var company: CompanyEntity = CompanyEntity()
 
-    @ManyToOne
-    @JoinColumn(name = "contact_n", nullable = false)
-    var contact: ContactEntity = ContactEntity()
-
     @NotNull
     @Column(name = "name", nullable = false)
     var name: String = ""
+
+    @ManyToOne
+    @JoinColumn(name = "contact_n", nullable = false)
+    var contact: ContactEntity = ContactEntity()
 
     @NotNull
     @Column(name = "comment", nullable = false)
