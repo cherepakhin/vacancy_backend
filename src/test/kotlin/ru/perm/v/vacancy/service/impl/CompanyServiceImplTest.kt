@@ -17,7 +17,6 @@ import ru.perm.v.vacancy.filter.CompanyExample
 import ru.perm.v.vacancy.repository.CompanyRepository
 import java.util.*
 
-//@Suppress("UNREACHABLE_CODE")
 class CompanyServiceImplTest {
 
     @Test
