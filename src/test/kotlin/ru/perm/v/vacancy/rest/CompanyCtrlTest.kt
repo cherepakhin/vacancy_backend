@@ -146,7 +146,7 @@ class CompanyCtrlTest {
     @Test
     fun sortByErrorColumn() {
         val err = assertThrows<Exception> { companyCtrl.getAllSortByColumn("1") }
-        assertEquals("Invalid SORT column name", err.message)
+        assertEquals("500 INTERNAL_SERVER_ERROR \"Invalid SORT column name. Valid values are: 'n', 'name'\"", err.message)
     }
 
     @Test

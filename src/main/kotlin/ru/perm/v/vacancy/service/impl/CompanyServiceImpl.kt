@@ -88,8 +88,8 @@ class CompanyServiceImpl(val repository: CompanyRepository) :
     override fun getByExampleAndSort(companyExample: CompanyExample, sort: Sort): List<CompanyDto> {
         logger.info(companyExample.toString())
         val qCompany = QCompanyEntity.companyEntity
-        var predicate = qCompany.n.goe(-1)
-        if (companyExample.n != null) {
+        var predicate = qCompany.n.goe(-1) // start predicate
+        if (companyExample.n != null && companyExample.n!! >= -1) {
             predicate = predicate.and(qCompany.n.eq(companyExample.n))
         }
         if (!companyExample.name.isNullOrEmpty()) {

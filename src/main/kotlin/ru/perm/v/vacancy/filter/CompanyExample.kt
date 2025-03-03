@@ -10,7 +10,7 @@ class CompanyExample {
 
     constructor()
 
-    constructor(n: Long, name: String) {
+    constructor(n: Long = -1, name: String) {
         this.n = n
         this.name = name
     }

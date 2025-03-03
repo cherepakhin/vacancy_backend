@@ -71,8 +71,9 @@ class CompanyCtrl(val companyService: CompanyService) {
             if (validSortColumns.contains(column)) {
                 sortColumn = column
             } else {
-                logger.info("Invalid SORT column name")
-                throw Exception("Invalid SORT column name")
+                val errorMessage = "Invalid SORT column name. Valid values are: 'n', 'name'"
+                logger.error(errorMessage)
+                throw ResponseStatusException(HttpStatus.INTERNAL_SERVER_ERROR, errorMessage)
             }
         }
         val companies = companyService.getAllSortedByField(sortColumn)

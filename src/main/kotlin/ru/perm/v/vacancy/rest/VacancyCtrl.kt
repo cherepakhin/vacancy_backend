@@ -49,6 +49,7 @@ class VacancyCtrl() {
         return mes
     }
 
+//TODO: 24.02 19:56    ERROR: column vacancyent0_.contact_n does not exist
     @GetMapping("/{n}")
     @ApiOperation("Get Vacancy by N")
     @Cacheable("vacancies")
