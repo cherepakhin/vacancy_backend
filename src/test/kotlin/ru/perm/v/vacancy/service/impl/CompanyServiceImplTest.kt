@@ -361,6 +361,7 @@ class CompanyServiceImplTest {
             )
         )
         val companyService = CompanyServiceImpl(mockCompanyRepository)
+
         val result =companyService.findAll(preicate)
 
         assertEquals(2, result.size)
