@@ -350,22 +350,22 @@ class CompanyServiceImplTest {
     }
 
     @Test
-    fun findAllByPredicate() {
+    fun findAllByEqPredicate() {
         val qbe: QCompanyEntity = QCompanyEntity.companyEntity
         val preicate = qbe.name.eq("COMPANY_1")
         val mockCompanyRepository = mock(CompanyRepository::class.java)
         `when`(mockCompanyRepository.findAll(preicate)).thenReturn(
             listOf(
-                CompanyEntity(1L, "Test Company 1"),
-                CompanyEntity(2L, "Test Company 2")
+                CompanyEntity(1L, "COMPANY_1"),
+                CompanyEntity(2L, "COMPANY_1")
             )
         )
         val companyService = CompanyServiceImpl(mockCompanyRepository)
         val result =companyService.findAll(preicate)
 
         assertEquals(2, result.size)
-        assertEquals(CompanyDto(1L, "Test Company 1"), result[0])
-        assertEquals(CompanyDto(2L, "Test Company 2"), result[1])
+        assertEquals(CompanyDto(1L, "COMPANY_1"), result[0])
+        assertEquals(CompanyDto(2L, "COMPANY_1"), result[1])
         verify(mockCompanyRepository, times(1)).findAll(preicate)
     }
 
