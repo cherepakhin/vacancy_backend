@@ -78,7 +78,7 @@ class CompanyServiceImplTest {
 
         assertEquals(2, companies.size)
         assertEquals(CompanyDto(n = 1, name = "company1"), companies.get(0))
-        assertEquals(CompanyDto(2,"company2"), companies.get(1))
+        assertEquals(CompanyDto(2, "company2"), companies.get(1))
     }
 
     @Test
@@ -148,7 +148,12 @@ class CompanyServiceImplTest {
         val NAME_COMPANY = "company"
         val repository = mock(CompanyRepository::class.java)
         `when`(repository.getNextN()).thenReturn(N)
-        `when`(repository.createByParams(N, NAME_COMPANY)).doAnswer { throw Exception("Company with N=100 not created") }
+        `when`(
+            repository.createByParams(
+                N,
+                NAME_COMPANY
+            )
+        ).doAnswer { throw Exception("Company with N=100 not created") }
 
         val service = CompanyServiceImpl(repository)
         val companyDto = CompanyDtoForCreate(NAME_COMPANY)
@@ -280,9 +285,11 @@ class CompanyServiceImplTest {
 
         assertEquals(1, received.size)
 
-        assertEquals(listOf(
-            CompanyDto(1L, "NAME_1")
-        ), received)
+        assertEquals(
+            listOf(
+                CompanyDto(1L, "NAME_1")
+            ), received
+        )
     }
 
     @Test
@@ -302,7 +309,7 @@ class CompanyServiceImplTest {
         predicate = predicate.and(qCompany.n.eq(companyExample.n))
         predicate = predicate.and(qCompany.name.like("%" + companyExample.name + "%"))
         var sort = Sort.by(Sort.Direction.ASC, "n")
-        `when`(mockCompanyRepository.findAll(eq(predicate),eq(sort))).thenReturn(companyEntities)
+        `when`(mockCompanyRepository.findAll(eq(predicate), eq(sort))).thenReturn(companyEntities)
 
         val service =
             CompanyServiceImpl(mockCompanyRepository)
@@ -310,8 +317,35 @@ class CompanyServiceImplTest {
 
         assertEquals(1, received.size)
 
-        assertEquals(listOf(
-            CompanyDto(1L, "NAME_1")
-        ), received)
+        assertEquals(
+            listOf(
+                CompanyDto(1L, "NAME_1")
+            ), received
+        )
+    }
+
+    @Test
+    fun testGetAllSortedByField() {
+        val mockCompanyRepository = mock(CompanyRepository::class.java)
+        val companyService = CompanyServiceImpl(mockCompanyRepository)
+        val sortBy = Sort.by(Sort.Direction.ASC, "name")
+        `when`(mockCompanyRepository.findAll(sortBy)).thenReturn(
+            listOf(
+                CompanyEntity(1L, "Test Company 1"),
+                CompanyEntity(2L, "Test Company 2"),
+                CompanyEntity(3L, "Test Company 3")
+            )
+        )
+
+        val sortedCompanies = companyService.getAllSortedByField("name")
+
+        assertEquals(
+            listOf(
+                CompanyDto(1L, "Test Company 1"),
+                CompanyDto(2L, "Test Company 2"),
+                CompanyDto(3L, "Test Company 3")
+            ), sortedCompanies
+        )
+        verify(mockCompanyRepository, times(1)).findAll(sortBy)
     }
 }
