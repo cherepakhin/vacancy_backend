@@ -16,6 +16,22 @@ import ru.perm.v.vacancy.service.ContactService
 class ContactServiceImpl(val repository: ContactRepository) : ContactService {
     private val logger = LoggerFactory.getLogger(this.javaClass.name)
 
+    override fun createContact(contactDtoForCreate: ContactDto): ContactDto {
+        val n = getNextN()
+        logger.info("getNextN(): $n")
+        val contact = ContactEntity(
+            n = contactDtoForCreate.n,
+            name = contactDtoForCreate.name,
+            email = contactDtoForCreate.email,
+            phone = contactDtoForCreate.phone,
+            comment = contactDtoForCreate.comment
+        )
+        logger.info(contact.toString())
+        repository.save<ContactEntity>(contact)
+
+        return ContactMapper.toDto(contact)
+    }
+
     override fun getAll(): List<ContactDto> {
         logger.info("getAll()")
         return repository.findAll().sortedBy { it.n }.map { ContactMapper.toDto(it) }
@@ -30,21 +46,6 @@ class ContactServiceImpl(val repository: ContactRepository) : ContactService {
     override fun findAll(predicate: Predicate): List<ContactDto> {
         val contacts = repository.findAll(predicate)
         return contacts.map { ContactMapper.toDto(it) }.toList()
-    }
-
-    override fun createContact(companyDtoForCreate: ContactDto): ContactDto {
-        val n = getNextN()
-        logger.info("getNextN(): $n")
-        val contact = ContactEntity(
-            name = companyDtoForCreate.name,
-            email = companyDtoForCreate.email,
-            phone = companyDtoForCreate.phone,
-            comment = companyDtoForCreate.comment
-        )
-        logger.info(contact.toString())
-        repository.save<ContactEntity>(contact)
-
-        return ContactMapper.toDto(contact)
     }
 
     fun getNextN(): Long {

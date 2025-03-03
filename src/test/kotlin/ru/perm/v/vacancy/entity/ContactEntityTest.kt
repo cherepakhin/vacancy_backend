@@ -19,12 +19,13 @@ class ContactEntityTest {
 
     @Test
     fun secondaryConstructor() {
+        val N = 100L
         val NAME = "NAME"
         val EMAIL = "EMAIL"
         val PHONE = "PHONE"
         val COMMENT = "COMMENT"
 
-        val contact = ContactEntity(NAME, EMAIL, PHONE, COMMENT)
+        val contact = ContactEntity(N, NAME, EMAIL, PHONE, COMMENT)
 
         assertNotNull(contact)
         assertNotNull(contact.n)
