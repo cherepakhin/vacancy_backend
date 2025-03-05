@@ -77,6 +77,7 @@ class InitCtrl {
 
     @GetMapping("/empty_db")
     @ApiOperation("Clear database WITHOUT import.sql. All tables will be cleared.")
+    @Transactional
     fun clearDB(): String {
         logger.info("Clear database")
         val inputStream: InputStream = this.javaClass.getResourceAsStream(SqlScripts.EMPTYDB_SQL)
