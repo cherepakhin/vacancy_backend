@@ -6,6 +6,7 @@
 [Unit тестирование](#unit_test)<br/>
 [Интеграционное тестирование](#integration_test)<br/>
 [Покрытие тестами](#coverage)<br/>
+[Интеграционное тестирование RestAssured](#rest_assured_tests)<br/>
 [Логирование](#logging)<br/>
 [Запуск](#run)<br/>
 [Ручное тестирование httpie](#httpie)<br/>
@@ -14,7 +15,6 @@
 [Publishing SpringBoot "FAT" jar](#fat)<br/>
 
 [Анализ кода Idea Analize](#idea_analizer)<br/>
-[Интеграционное тестирование RestAssured](#rest_assured_tests)<br/>
 
 [Swagger](#swagger)<br/>
 [Spring Actuator](#actuator)<br/>
@@ -255,6 +255,12 @@ $ ./gradlew test jacocoTestReport
 test coverage для класса:
 ![coverage_class.png](doc/coverage_class.png)
 
+
+<a id="rest_assured_tests"></a>
+### Интеграционное тестирование с RestAssured tests<br/>
+
+[https://github.com/cherepakhin/vacancy_backend_rest_test](https://github.com/cherepakhin/vacancy_backend_rest_test)
+
 <a id="logging"></a>
 ### Логирование
 
@@ -465,11 +471,6 @@ publishing {
 ### Анализ кода Idea Analize
 
 В Idea вызывается из Code ->  Inspect Code.
-
-<a id="rest_assured_tests"></a>
-### RestAssured tests<br/>
-
-[https://github.com/cherepakhin/vacancy_backend_rest_test](https://github.com/cherepakhin/vacancy_backend_rest_test)
 
 <a id="swagger"></a>
 ### Swagger
