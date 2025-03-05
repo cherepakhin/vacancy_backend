@@ -1,7 +1,7 @@
--- This script need for reinit database
 drop table if exists vacancy;
 drop table if exists contact;
 drop table if exists company;
+
 CREATE table company
 (
     "n"            serial not null UNIQUE,
@@ -46,6 +46,7 @@ insert into contact (n, company_n, name, email, phone, comment) values
     (2, 1, 'CONTACT_2_COMPANY_1', 'CONTACT_2_COMPANY_1_EMAIL','CONTACT_2_COMPANY_1_PHONE','CONTACT_2_COMPANY_1_COMMENT'),
     (3, 2, 'CONTACT_3_COMPANY_2', 'CONTACT_3_EMAIL','CONTACT_3_PHONE','CONTACT_3_COMMENT'),
     (4, 3, 'CONTACT_4_COMPANY_3','CONTACT_3_EMAIL','CONTACT_3_PHONE','CONTACT_3_COMMENT');
+COMMIT;
 
 insert into vacancy (n, contact_n, company_n, name, comment) values
     (1, 1, 1, 'NAME_VACANCY_1_COMPANY_1', 'COMMENT_VACANCY_1_COMPANY_1'),

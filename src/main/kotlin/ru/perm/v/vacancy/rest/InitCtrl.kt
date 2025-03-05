@@ -18,6 +18,11 @@ import javax.persistence.EntityManager
 import javax.persistence.Query
 
 import ru.perm.v.vacancy.consts.SqlScripts
+import javax.persistence.EntityManagerFactory
+import javax.persistence.FlushModeType
+import javax.persistence.Persistence
+import javax.persistence.PersistenceContext
+import javax.persistence.PersistenceUnit
 
 /**
  * Controller for use with integration tests
@@ -28,7 +33,7 @@ import ru.perm.v.vacancy.consts.SqlScripts
 class InitCtrl {
     private val logger = LoggerFactory.getLogger(this.javaClass.name)
 
-    @Autowired
+    @PersistenceContext
     var entityManager: EntityManager? = null
 
     @GetMapping("/echo/{mes}")
@@ -50,15 +55,28 @@ class InitCtrl {
         val initSql: String = readFromInputStream(inputStream)
         logger.info("import.sql: $initSql")
 
+        if(entityManager == null) {
+            logger.error("Entity manager is null.")
+        }
+// Не нужен. Метод помечен @Transactional
+//        entityManager!!.transaction.begin()
         val initQuery: Query = entityManager!!.createNativeQuery(initSql)
-        initQuery.executeUpdate()
+
+// Не нужен. Метод помечен @Transactional
+//        initQuery.setFlushMode(FlushModeType.COMMIT)
+        logger.info("initQuery.toString():")
+
+        val result = initQuery.executeUpdate()
+        logger.info("Init result: $result") // Init result: 0
+// Не нужен. Метод помечен @Transactional
+//        entityManager!!.flush()
+//        entityManager!!.transaction.commit()
 
         return "Ok"
     }
 
     @GetMapping("/empty_db")
     @ApiOperation("Clear database WITHOUT import.sql. All tables will be cleared.")
-    @Transactional
     fun clearDB(): String {
         logger.info("Clear database")
         val inputStream: InputStream = this.javaClass.getResourceAsStream(SqlScripts.EMPTYDB_SQL)
