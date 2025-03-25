@@ -34,7 +34,7 @@ class InitCtrl {
     private val logger = LoggerFactory.getLogger(this.javaClass.name)
 
     @PersistenceContext
-    var entityManager: EntityManager? = null
+    lateinit var entityManager: EntityManager
 
     @GetMapping("/echo/{mes}")
     @ApiOperation("Simple echo test")
@@ -46,6 +46,7 @@ class InitCtrl {
         return mes
     }
 
+    // http :8980/vacancy/api/init/reimport_db -OK
     @GetMapping("/reimport_db")
     @ApiOperation("Clear database and load test data with import.sql")
     @Transactional
@@ -55,12 +56,12 @@ class InitCtrl {
         val initSql: String = readFromInputStream(inputStream)
         logger.info("import.sql: $initSql")
 
-        if(entityManager == null) {
+        if(entityManager == null) { // entityManager может быть null
             logger.error("Entity manager is null.")
+            return "Entity manager is null."
         }
-// Не нужен. Метод помечен @Transactional
-//        entityManager!!.transaction.begin()
-        val initQuery: Query = entityManager!!.createNativeQuery(initSql)
+//      entityManager!!.transaction.begin() - Не нужен. Метод помечен @Transactional
+        val initQuery: Query = entityManager.createNativeQuery(initSql)
 
 // Не нужен. Метод помечен @Transactional
 //        initQuery.setFlushMode(FlushModeType.COMMIT)

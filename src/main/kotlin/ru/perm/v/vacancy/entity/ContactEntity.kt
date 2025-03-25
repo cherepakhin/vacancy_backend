@@ -2,6 +2,7 @@ package ru.perm.v.vacancy.entity
 
 import javax.persistence.*
 import javax.validation.constraints.NotNull
+import javax.validation.constraints.Size
 
 @Entity
 @Table(name = "contact")
@@ -12,6 +13,7 @@ class ContactEntity {  // "open" needed for JPA?
     var n: Long = -1L
     @NotNull
     @Column(name = "name", nullable = false)
+    @Size(min = 5)
     var name: String = ""
     @NotNull
     @Column(name = "email", nullable = false)
